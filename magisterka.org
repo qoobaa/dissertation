@@ -54,7 +54,7 @@ przyznawanych za:
 ** Solito Server
 *** oprogramowanie własnościowe
 *** wymaga Adobe Flash
-** MSN Games, Play Catan
+** MSN Games, PlayCatan.com
 *** oprogramowanie własnościowe
 *** płatne
 *** wymaga instalacji i systemu Microsoft Windows

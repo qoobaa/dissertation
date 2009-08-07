@@ -2,4 +2,7 @@
 *.pdf
 *.dvi
 *.log
+*.bbl
+*.blg
+*.out
 *.ps

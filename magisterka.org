@@ -1,0 +1,45 @@
+Pioneers - internetowa implementacja gry "Osadnicy z Catanu" w oparciu o framework Ruby on Rails
+* analiza zagadnienia
+** Settlers of Catan
+*** opis
+Wieloosobowa gra planszowa wymyślona przez Klausa Teubera, wydana po raz pierwszy w 1995.
+*** elementy gry
+- 37 sześciokątów z przypisanymi wartościami
+  - las - drewno
+  - pole uprawne - zboże
+  - łąka - wełna
+  - góra - kamień
+  - wzgórze - cegły
+  - pustynia
+  - morze (szlaki handlowe)
+- drogi, osady, miasta
+- karty surowców
+- karty rozwoju
+- karty specjalne - najdłuższa droga, największa armia
+- rozbójnik (robber)
+- dwie sześciościenne kości
+**** prawdopodobieństwo
+**** handel
+**** walka
+**** karty rozwoju
+**** cel gry
+
+* analiza istniejących rozwiązań
+** JSettlers
+*** GNU GPL
+*** wymaga Javy
+** Solito Server
+*** oprogramowanie własnościowe
+*** wymaga Adobe Flash
+** MSN Games, Play Catan
+*** oprogramowanie własnościowe
+*** płatne
+*** wymaga instalacji i systemu Microsoft Windows
+** Catan - The First Island
+*** oprogramowanie własnościowe
+*** płatne
+*** gra z przeciwnikiem komputerowym lub przez Bluetooth
+* określenie funkcji aplikacji
+* projektowanie aplikacji
+* implementacja
+* uruchomienie i przeprowadzenie testów

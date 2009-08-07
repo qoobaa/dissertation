@@ -1,8 +1,12 @@
 Pioneers - internetowa implementacja gry "Osadnicy z Catanu" w oparciu o framework Ruby on Rails
 * analiza zagadnienia
+
 ** Settlers of Catan
 *** opis
 Wieloosobowa gra planszowa wymyślona przez Klausa Teubera, wydana po raz pierwszy w 1995.
+http://pl.wikipedia.org/wiki/Osadnicy_z_Catanu
+Podstawowa wersja gry jest przeznaczona dla 3-4 graczy, ale istnieją rozszerzenia pozwalające zagrać w 5 lub 6 osób, a gracze opracowali własne zasady dla gry dwuosobowej.
+Organizowane są mistrzostwa świata (w 2010 organizowane po raz 10), mistrzostwa Polski, turnieje w całej polsce.
 *** elementy gry
 - 37 sześciokątów z przypisanymi wartościami
   - las - drewno
@@ -20,11 +24,30 @@ Wieloosobowa gra planszowa wymyślona przez Klausa Teubera, wydana po raz pierws
 - dwie sześciościenne kości
 **** prawdopodobieństwo
 **** handel
-**** walka
+- z bankiem
+  - 4:1 - domyślny przelicznik
+  - 3:1 - port ogólny
+  - 2:1 - port specjalny
+- z innymi graczami
 **** karty rozwoju
+karty armii
+karty postępu („monopol”, „urodzaj”)
+karty „punkt zwycięstwa”
+**** walka
+Rozbójnik, karty armii.
 **** cel gry
-
+Celem gry jest zdobycie 10 punktów zwycięstwa,
+przyznawanych za:
+- osadę - 1 punkt
+- miasto - 2 punkty
+- najdłuższą drogę - 2 punkty
+- największą armię - 2 punkty
+- kartę rozwoju „punkt zwycięstwa” - 1 punkt (ukryty)
 * analiza istniejących rozwiązań
+** Pioneers
+*** GNU GPL
+*** napisany w C
+*** wymaga instalacji
 ** JSettlers
 *** GNU GPL
 *** wymaga Javy
@@ -39,7 +62,108 @@ Wieloosobowa gra planszowa wymyślona przez Klausa Teubera, wydana po raz pierws
 *** oprogramowanie własnościowe
 *** płatne
 *** gra z przeciwnikiem komputerowym lub przez Bluetooth
-* określenie funkcji aplikacji
+* określenie funkcji aplikacji, technologii
+- serwer napisany w oparciu Ruby on Rails
+- zaprojektowany przy użyciu REST
+- aplikacja typu RIA
+- wymagana jedynie współczesna przeglądarka internetowa
+(CSS 2.0, JavaScript wraz z XMLHttpRequest)
+- wolne oprogramowanie
+- podstawowa wersja „Osadników”, z możliwością
+- zaimplementowania dodatków („Żeglarze”, itp.)
+- zmienne rozmiary i kształt planszy
+- możliwość modyfikacji niektórych zasad gry
+** Licencja
+Affero General Public License wersja 3
+http://en.wikipedia.org/wiki/Affero_General_Public_License
+Potrzebny duży nakład pracy, w szczególności na część kliencką. Wolne oprogramowanie powinno pomóc w rozwoju.
+** Ruby
+- 1995 rok, Yukihiro Matsumoto aka Matz
+- inspirowany przez CLU, Eiffel, Lisp, Perl, Python, Smalltalk
+- interpretowany
+- wieloparadygmatowy
+- bardzo wysokiego poziomu (VHLL)
+- w pełni obiektowy
+- uniwersalny (bogata biblioteka standardowa)
+- wiele implementacji na wiele różnych platform
+- dziedziczenie jednobazowe
+- moduły (pełnią dwie role)
+- duck typing
+- otwarte klasy
+- monkey patching
+- metaprogramowanie (wraz z method missing)
+- system paczek RubyGems
+- zależności pomiędzy gemami
+- łatwa aktualizacja gemów
+- ponad 7700 gemów w repozytorium (poprzednia prezentacja 4000)
+- „pseudo-code that runs” - skupianie się na rozwiązaniu
+- problemu, nie na języku
+- język zaprojektowany dla ludzi
+- radość z programowania
+- TIMTOWTDI - wolność wyboru (jak w Perlu, przeciwnie niż w Pythonie)
+- zasada najmniejszego zaskoczenia - Ruby jest intuicyjny
+** Ruby on Rails
+- David Heinemeier Hansson, 2004 r.
+- kompletny framework do tworzenia aplikacji
+- internetowych opartych o bazy danych
+- wzorzec MVC
+- licencja MIT
+- nie ma oficjalnego środowiska pracy ani systemu operacyjnego
+- wspaniała społeczność, darmowe Railscasty, podcasty, Rails Magazine, podręczniki, fora, grupy dyskusyjne
+- użycie Gita jako systemu kontroli wersji (545 forków repozytorium na samym Githubie)
+- wpływ na rozwój frameworka (Lighthouse), możliwość
+- dodawania łat
+** Merb
+- Ezra Zygmuntowicz, Yehuda Katz, początek 2008 r.
+- powstał dzięki doświadczeniu zdobytemu po 4 latach
+- rozwoju Ruby on Rails
+- wszystkie najlepsze cechy frameworka Ruby on Rails
+- lepiej zaprojektowany
+- większa wydajność
+- wolność wyboru (ORM, biblioteki JavaScript, systemu szablonów)
+- Merb 2.0 == Ruby on Rails 3.0
+- pierwsza wersja jeszcze w tym roku
+- prace trwają!
+** JavaScript
+- obiektowy, funkcyjny, intepretowany
+- wyrażenia lambda, domknięcia
+- spore możliwości
+- dostępny w każdej współczesnej przeglądarce
+- najbardziej niezrozumiany język świata
+- czasem określany jako dialekt Lispa (dokładniej Scheme)
+- XMLHttpRequest
+*** XMLHTTPRequest
+http://en.wikipedia.org/wiki/XMLHttpRequest
+*** HTTP Push (aka Comet)
+http://en.wikipedia.org/wiki/Comet_%28programming%29
+** YUI3
 * projektowanie aplikacji
+** schemat bazy danych
+** przechowywanie planszy w bazie danych
+** maszyna stanowa
+** komunikacja
+*** JSON
+*** przesyłanie całego stanu gry
 * implementacja
+** akcje
+*** tworzenie gry
+*** wyświetlenie gry
+*** lista gier
+*** kończenie tury
+*** tworzenie karty rozwoju
+*** używanie karty rozwoju
+*** tworzenie rzutu kością
+*** tworzenie discarda
+*** tworzenie krawędzi (drogi)
+*** tworzenie wierzchołka (osady)
+*** rozwój osady do miasta
+*** tworzenie wymiany z bankiem
+*** tworzenie oferty
+*** akceptowanie/odrzucenie oferty
+*** tworzenie odpowiedzi na ofertę
+*** tworzenie gracza
+*** zmiana stanu gracza (ready)
+*** usuwanie gracza
+*** tworzenie rabunku (robbery)
 * uruchomienie i przeprowadzenie testów
+** testy jednostkowe

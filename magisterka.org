@@ -136,6 +136,12 @@ Potrzebny duży nakład pracy, w szczególności na część kliencką. Wolne op
 http://en.wikipedia.org/wiki/XMLHttpRequest
 *** HTTP Push (aka Comet)
 http://en.wikipedia.org/wiki/Comet_%28programming%29
+Protokół Bayeux rozwijany przez DOJO Foundation
+http://svn.cometd.com/trunk/bayeux/bayeux.html
+**** Orbited http://orbited.org/
+**** Meteor Server http://meteorserver.org/
+**** Kaazing http://www.kaazing.com/
+**** http://cometdaily.com/maturity.html
 ** YUI3
 * projektowanie aplikacji
 ** schemat bazy danych
@@ -152,8 +158,8 @@ http://en.wikipedia.org/wiki/Comet_%28programming%29
 *** kończenie tury
 *** tworzenie karty rozwoju
 *** używanie karty rozwoju
-*** tworzenie rzutu kością
-*** tworzenie discarda
+*** rzut kością
+*** odrzucanie kart zasobów
 *** tworzenie krawędzi (drogi)
 *** tworzenie wierzchołka (osady)
 *** rozwój osady do miasta
@@ -167,3 +173,5 @@ http://en.wikipedia.org/wiki/Comet_%28programming%29
 *** tworzenie rabunku (robbery)
 * uruchomienie i przeprowadzenie testów
 ** testy jednostkowe
+* dalszy rozwój aplikacji
+** możliwość rozgrywania turniejów z takimi samymi rzutami

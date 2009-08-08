@@ -95,7 +95,7 @@ Potrzebny duży nakład pracy, w szczególności na część kliencką. Wolne op
 - system paczek RubyGems
 - zależności pomiędzy gemami
 - łatwa aktualizacja gemów
-- ponad 7700 gemów w repozytorium (poprzednia prezentacja 4000)
+- ponad 7700 gemów w repozytorium (poprzednia prezentacja 4000), 11500 (8.08.2009)
 - „pseudo-code that runs” - skupianie się na rozwiązaniu
 - problemu, nie na języku
 - język zaprojektowany dla ludzi

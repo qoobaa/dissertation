@@ -174,7 +174,7 @@ koniecznością stworzenia zupełnie nowej aplikacji.
 \subsection{Pioneers}
 Pierwotna nazwa tej aplikacji brzmiała \emph{gnocatan}. Aplikacja
 została udostępniona w 2000 roku na licencji GNU GPL. Gra została
-napisana całości w języku C, podzielona jest na serwer i część
+napisana całości w języku \emph{C}, podzielona jest na serwer i część
 kliencką. Na stronie projektu \cite{pioneers} możemy znaleźć kod
 źródłowy i wersje binarne, skompilowane na wszystkie popularne
 platformy sprzętowe. Zrzut ekranu z gry \emph{Pioneers} został
@@ -285,8 +285,8 @@ najbardziej dojrzałe są:
 
 \begin{itemize}
 \item \emph{Matz's Ruby Interpreter} (\emph{MRI}) - intepreter
-  stworzony w języku C, uznawany \emph{de facto} za implementację
-  referencyjną\cite{mri}
+  stworzony w języku \emph{C}, uznawany \emph{de facto} za
+  implementację referencyjną\cite{mri}
 \item \emph{JRuby} - interpreter stworzony w języku Java,
   uruchamiany w \emph{wirtualnej maszynie Javy}\cite{jruby}
 \end{itemize}
@@ -327,7 +327,7 @@ Heinemeier Hansson. Framework powstał w wyniku prac nad aplikacją
 popularności \emph{Ruby on Rails} nastąpił po ogłoszeniu przez firmę
 \emph{Apple Inc.}, że będzie on dostarczany wraz z systemem \emph{Mac
   OS X v10.5 ''Leopard''} \cite{rubyonrails}. Swoje ogromne możliwości
-framework zawdzięcza wykorzystaniu cech języka takich, jak
+framework zawdzięcza wykorzystaniu cech takich języka, jak:
 metaprogramowanie, kacze typowanie czy możliwość otwierania klas.
 
 Framework \emph{Ruby on Rails} umożliwia tworzenie aplikacji
@@ -337,14 +337,40 @@ wszystkie popularne silniki bazodanowe poprzez bibliotekę mapowania
 obiektowo-relacyjnego \emph{ActiveRecord} \cite{orm}. Aplikacje
 napisane przy użyciu frameworka mogą być uruchamiane na serwerach
 webowych, takich jak \emph{Apache}, \emph{Lighttpd}, \emph{Abyss},
-\emph{Mongrel}. W przypadku zastosowania \emph{JRuby}, mogą być to
-m.in. serwery aplikacji \emph{JBoss}, \emph{GlassFish} lub
+\emph{Thin}, \emph{Mongrel}. W przypadku zastosowania \emph{JRuby},
+mogą być to m.in. serwery aplikacji \emph{JBoss}, \emph{GlassFish} lub
 \emph{Apache Geronimo}.
 
 Cały framework jest udostępniony na zasadach licencji \emph{MIT}
 \cite{mit}.
 
 \subsubsection{Architektura Ruby on Rails}
+Framework \emph{Ruby on Rails} składa się z komponentów, z których
+główne to:
+
+\begin{itemize}
+\item \emph{ActiveRecord} - biblioteka mapowania
+  obiektowo-relacyjnego, stworzona na podstawie wzorca projektowego o
+  tej samej nazwie \cite{activerecord}. Biblioteka ta oferuje znacznie
+  więcej, niż wynika z implementowanego wzorca, m.in. różne rodzaje
+  asocjacji, asocjacje polimorficzne \cite{polymorphic}, mechanizm
+  dziedziczenia jednotabelowego (\emph{STI} \footnote{STI - Single
+    Table Inheritance \cite{sti}}) oraz walidatory
+\item \emph{ActionPack} - biblioteka umożliwiająca tworzenie
+  kontrolerów i widoków
+\item \emph{ActiveSupport} - biblioteka dodająca wiele użytecznych
+  funkcji do klas biblioteki standardowej, ułatwiających tworzenie
+  aplikacji webowych (i nie tylko)
+\item \emph{ActionMailer} - biblioteka służąca do wysyłania wiadomości
+  e-mail bezpośrednio z aplikacji
+\item \emph{ActiveResource} - biblioteka umożliwiająca mapowanie
+  odległych zasobów sieciowych i wykorzystywanie ich w podobny sposób
+  do modeli pochodzących z bazy danych
+\end{itemize}
+
+Uproszczony diagram przedstawiający interakcje pomiędzy poszczególnymi
+elementami frameworka został przedstawiony na
+\imref{railsarchitecture}.
 
 \begin{figure}[ht]
   \begin{center}
@@ -353,6 +379,53 @@ Cały framework jest udostępniony na zasadach licencji \emph{MIT}
   \caption{Architektura Ruby on Rails}
   \label{railsarchitecture}
 \end{figure}
+
+\subsubsection{Rozwój Ruby on Rails}
+Na początku roku 2008 światło dzienne ujrzał nowy framework do
+tworzenia aplikacji webowych o nazwie \emph{Merb}, silnie inspirowany
+przez \emph{Ruby on Rails}. Został on stworzony z inicjatywy Ezry
+Zygmuntowicza, założyciela firmy \emph{Engine Yard}. W założeniach
+oprogramowanie miało być szybsze i bardziej modularne niż jego
+pierwowzór. Spory pomiędzy zwolennikami nowopowstałego frameworka a
+dotychczasową społecznością spowodowały powstanie w niej pewnego
+rodzaju rozłamu. Przy narastającej fali krytyki z obu stron, niedługo
+po wydaniu \emph{Merba 1.0}, David Heinemeier Hansson ogłosił
+połączenie obu grup programistów \cite{merge}. Utworzony zespół miał
+się zająć połączeniem powstającego \emph{Merba 2} i \emph{Ruby on
+  Rails 3}. Zgodnie z ustaleniami, pierwsze wydania \emph{Ruby on
+  Rails 3} mają się pojawić pod koniec 2009 roku.
+
+\subsection{JavaScript}
+Język \emph{JavaScript} powstał pod koniec 1995 roku w firmie
+\emph{Netscape}, jako język zastępujący wbudowaną w przeglądarki
+\emph{Javę}. Jego twórcą jest amerykański programista Brendan Eich.
+Począwszy od 1996 roku język jest standaryzowany przez \emph{ECMA
+  International}\footnote{ECMA (ang. European association for
+  standardizing information and communication systems) - Europejskie
+  Stowarzyszenie na rzecz Standaryzacji Systemów Informacyjnych i
+  Komunikacyjnych, organizacja członkowska zajmująca się standaryzacją
+  systemów informatycznych w Europie \cite{ecma}} jako
+\emph{ECMAScript}.
+
+Pomimo swojej nazwy jasno kojarzącej się z językiem \emph{Java}, język
+\emph{JavaScript} jest (z wyjątkiem kilku elementów) językiem
+diametralnie od \emph{Javy} różnym. Największy wpływ na jego rozwój
+miały języki takie jak: \emph{Self}, \emph{C}, \emph{Scheme},
+\emph{Perl} oraz \emph{Python} \cite{javascript}. Aby upodobnić język
+do błyskawicznie zyskującej wówczas popularność \emph{Javy},
+zapożyczył od niej zestaw słów kluczowych i w niewielkim stopniu
+składnię. Ta prosta marketingowa sztuczka zaowocowała całkowitym
+niezrozumieniem tego języka przez programistów, którzy przez wiele lat
+traktowali go jako pewien podzbiór języka \emph{Java}. W
+rzeczywistości, język \emph{JavaScript} jest dużo bardziej
+spokrewniony z językami funkcyjnymi, takimi jak \emph{Lisp}.
+
+Interpreter \emph{JavaScriptu} jest wbudowany w niemal każdą
+współczesną przeglądarkę internetową, co czyni go jednym z najbardziej
+rozpowszechnionych języków programowania na świecie.
+
+\subsubsection{XMLHttpRequest}
+
 
 \clearpage
 

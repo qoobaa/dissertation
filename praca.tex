@@ -235,13 +235,12 @@ grafiki. Aby umożliwić rozwój aplikacji, zdecydowałem się udostępnić
 całość kodu jako wolne oprogramowanie na zasadach Powszechnej Licencji
 Publicznej GNU Affero w wersji 3 \cite{affero}.
 
-\subsection{Serwer}
-Do zaimplementowania tej części aplikacji zostanie wykorzystany język
-\emph{Ruby} i framework \emph{Ruby on Rails}. Wybór można uzasadnić
-bardzo dobrym wsparciem frameworka dla architektury \emph{REST}, która
-zostanie wykorzystana do stworzenia \emph{API}.
+Do zaimplementowania części serwerowej aplikacji zostanie wykorzystany
+język \emph{Ruby} i framework \emph{Ruby on Rails}. Wybór można
+uzasadnić bardzo dobrym wsparciem frameworka dla architektury
+\emph{REST}, która zostanie wykorzystana do stworzenia \emph{API}.
 
-\subsubsection{Ruby}
+\subsection{Ruby}
 Język \emph{Ruby} został stworzony w 1995 roku przez Yukihiro
 Matsumoto. Za bazę do jego stworzenia posłużyły języki takie jak
 \emph{Lisp}, \emph{Perl}, \emph{Python}, \emph{Smalltalk}, a także
@@ -520,9 +519,35 @@ przykładem takiej aplikacji jest czat. W klasycznym rozwiązaniu każdy
 klient musi co pewien czas odpytywać serwer o to, czy pojawiły się na
 nim jakieś nowe wiadomości. Im mniejszy jest czas pomiędzy
 poszczególnymi zapytaniami, tym większa jest ilość wykonywanych
-zapytań i co za tym idzie, tym większe jest obciążenie serwera.
+zapytań i co za tym idzie, tym większe jest obciążenie
+serwera. Technika ta jest także nazywana \emph{HTTP
+  Pull}\footnote{ang. Pull technology, client pull - styl komunikacji
+  sieciowej, w którym wszystkie połączenia są inicjowane przez stronę
+  kliencką\cite{pull}}.
 
-Jeśli przyjrzeć się aplikacji takiej jak \emph{Gmail} okazuje się, że
+Jeśli przyjrzeć się bliżej aplikacji takiej jak \emph{Gmail} okazuje
+się, że nie wykonuje ona cyklicznego odpytywania serwera, a wszystkie
+dane przesyłane są do klienta niemalże bez opóźnień. Najprostszym
+sposobem na uniknięcie częstego odpytywania serwera jest zastosowanie
+mechanizmu wydłużonego odpytywania (ang. long polling). Polega on na
+wydłużaniu czasu trwania zapytań
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[width=\linewidth]{longpolling.pdf}
+  \end{center}
+  \caption{Schemat działania mechanizmu wydłużonego odpytywania}
+  \label{longpolling}
+\end{figure}
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[width=\linewidth]{streaming.pdf}
+  \end{center}
+  \caption{Schemat mechanizmu strumieniowania danych}
+  \label{streaming}
+\end{figure}
+
 
 \clearpage
 

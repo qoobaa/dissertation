@@ -3,10 +3,11 @@ require "rake/clean"
 task :default => [:evince]
 
 SRC = "praca.tex"
+IMG_SRC = FileList["*.dia"]
 RUBY_SRC = FileList["*.rb"]
 SVG_IMG =  FileList["*.svg"]
 
-CLEAN.include(%w(*.toc *.aux *.log *.lof *.bbl *.blg *.out *.snm *.vrb *.nav),
+CLEAN.include(%w(*.toc *.aux *.log *.lof *.bbl *.blg *.out *.snm *.vrb *.nav *.eps),
               RUBY_SRC.ext("tex"),
               SVG_IMG.ext("png"))
 
@@ -17,7 +18,15 @@ def pdflatex(source)
 end
 
 def bibtex(source)
-  sh "bibtex #{source.ext('')}"
+  sh "bibtex #{source.ext("")}"
+end
+
+rule '.pdf' => '.eps' do |t|
+  sh "epstopdf -outfile=#{t.name} #{t.source}"
+end
+
+rule '.eps' => '.dia' do |t|
+  sh "dia -e #{t.name} #{t.source}"
 end
 
 rule ".png" => ".svg" do |t|
@@ -35,7 +44,7 @@ rule ".pdf" => ".tex" do |t|
   pdflatex(t.source)
 end
 
-file SRC.ext("pdf") => [SRC] + RUBY_SRC.ext("tex") + SVG_IMG.ext("png")
+file SRC.ext("pdf") => [SRC] + RUBY_SRC.ext("tex") + SVG_IMG.ext("png") + IMG_SRC.ext("pdf")
 
 desc "Compile PDF"
 task :pdf => SRC.ext("pdf")

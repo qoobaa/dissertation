@@ -397,10 +397,10 @@ się zająć połączeniem powstającego \emph{Merba 2} i \emph{Ruby on
 
 \subsection{JavaScript}
 Język \emph{JavaScript} powstał pod koniec 1995 roku w firmie
-\emph{Netscape}, jako język zastępujący wbudowaną w przeglądarki
-\emph{Javę}. Jego twórcą jest amerykański programista Brendan Eich.
-Począwszy od 1996 roku język jest standaryzowany przez \emph{ECMA
-  International}\footnote{ECMA (ang. European association for
+\emph{Netscape}, jako alternatywa dla uruchamianych w przeglądarce
+apletów \emph{Javy}. Jego twórcą jest amerykański programista Brendan
+Eich.  Począwszy od 1996 roku język jest standaryzowany przez
+\emph{ECMA International}\footnote{ECMA (ang. European association for
   standardizing information and communication systems) - Europejskie
   Stowarzyszenie na rzecz Standaryzacji Systemów Informacyjnych i
   Komunikacyjnych, organizacja członkowska zajmująca się standaryzacją
@@ -413,19 +413,116 @@ diametralnie od \emph{Javy} różnym. Największy wpływ na jego rozwój
 miały języki takie jak: \emph{Self}, \emph{C}, \emph{Scheme},
 \emph{Perl} oraz \emph{Python} \cite{javascript}. Aby upodobnić język
 do błyskawicznie zyskującej wówczas popularność \emph{Javy},
-zapożyczył od niej zestaw słów kluczowych i w niewielkim stopniu
-składnię. Ta prosta marketingowa sztuczka zaowocowała całkowitym
-niezrozumieniem tego języka przez programistów, którzy przez wiele lat
-traktowali go jako pewien podzbiór języka \emph{Java}. W
-rzeczywistości, język \emph{JavaScript} jest dużo bardziej
-spokrewniony z językami funkcyjnymi, takimi jak \emph{Lisp}.
+zapożyczony został zestaw słów kluczowych i składnia. Ta prosta
+marketingowa sztuczka zaowocowała całkowitym niezrozumieniem tego
+języka przez programistów, którzy przez wiele lat traktowali go jako
+pewien podzbiór języka \emph{Java}. W rzeczywistości, język
+\emph{JavaScript} jest znacznie bliżej spokrewniony z językami
+funkcyjnymi, takimi jak \emph{Lisp}.
 
 Interpreter \emph{JavaScriptu} jest wbudowany w niemal każdą
 współczesną przeglądarkę internetową, co czyni go jednym z najbardziej
 rozpowszechnionych języków programowania na świecie.
 
-\subsubsection{XMLHttpRequest}
+Najważniejszymi cechami języka, wyróżniającymi go od języków
+,,c-pochodnych'' (w tym od \emph{Javy}) są:
 
+\begin{itemize}
+\item dynamiczne typowanie
+\item domknięcia
+\item prawie całkowita obiektowość - występuje podział na typy proste
+  i obiekty. Obiekty są tablicami asocjacyjnymi, ich właściwości można
+  dowolnie modyfikować podczas wykonania programu (w praktyce
+  mechanizm ten jest bardzo podobny do ,,otwierania klas'' w języku
+  \emph{Ruby}).
+\item dziedziczenie prototypowe - mechanizm dziedziczenia
+  bezklasowego. Jedyną cechą umożliwiającą stwierdzenie pokrewieństwa
+  obiektów jest posiadanie wspólnego prototypu
+\end{itemize}
+
+Główne implementacje \emph{JavaScriptu} to \cite{javascript}:
+
+\begin{itemize}
+\item \emph{SpiderMonkey} - pierwszy interpreter, napisany przez
+  twórcę języka w \emph{C}, wykorzystywany m.in. w przeglądarce \emph{Mozilla
+    Firefox}.
+\item \emph{Rhino} - interpreter napisany w \emph{Javie}, pozwala na
+  uruchamianie \emph{JavaScriptu} na wirtualnej maszynie \emph{Javy}
+\item \emph{KDE's JavaScript engine} - wykorzystywany w przeglądarce
+  \emph{Konqueror}
+\item \emph{WebKit} - napisany w \emph{C++} interpreter używany
+  m.in. w przeglądarce \emph{Safari} firmy \emph{Apple Inc.}
+\item \emph{V8} - zaimplementowany w \emph{C++} interpreter używany w
+  przeglądarce \emph{Google Chrome}
+\end{itemize}
+
+Rozmaite dialekty \emph{JavaScriptu} (a dokładniej standardu
+\emph{ECMAScript}) znalazły się także poza przeglądarkami
+internetowymi. Wśród nich wyróżnić można m.in.:
+
+\begin{itemize}
+\item \emph{JScript} - dialekt stworzony i rozwijany przez firmę
+  \emph{Microsoft}. Oprócz wbudowania w przeglądarkę \emph{Microsoft
+    Internet Explorer} interpreter tego dialektu jest również częścią
+  środowiska \emph{Microsoft Windows Scripting Host}, jest to także
+  jeden z podstawowych języków środowiska \emph{.NET}
+\item \emph{ActionScript} - dialekt rozwijany przez firmę \emph{Adobe
+    Systems}, wykorzystywany w środowisku \emph{Adobe Flash}
+\end{itemize}
+
+\subsubsection{XMLHttpRequest (Ajax)}
+Po rozpowszechnieniu się \emph{JavaScriptu} w przeglądarkach
+internetowych, był on używany głównie do ,,upiększania'' stron
+\emph{HTML} i dodawania do nich dynamicznych elementów. Stał się swego
+rodzaju dodatkiem, ułatwiającym korzystanie i przeglądanie
+stron.
+
+Sytuacja zaczęła się zmieniać po wprowadzeniu przez firmę
+\emph{Microsoft} obiektu \emph{ActiveX} nazwanego \emph{XMLHTTP} w
+przeglądarce \emph{Microsoft Internet Explorer 5}. Najważniejszą cechą
+tego mechanizmu była możliwość komunikacji z serwerem bez konieczności
+przeładowywania całego dokumenty. W krótkim czasie podobne rozwiązania
+zostały zaimplementowane w konkurencyjnych przeglądarkach
+\emph{Mozilla} i \emph{Safari}. Pomimo tego, że funkcje te były
+dostępne w przeglądarkach od końca 1999 roku, pierwsze duże aplikacje
+zaczęły z nich korzystać dopiero w 2004 roku. Najważniejszymi
+aplikacjami, które spopularyzowały opisywany mechanizm były
+\emph{Gmail} i \emph{Google Maps}, stworzone przez firmę \emph{Google
+  Inc.} W 2005 roku wprowadzony został termin \emph{Ajax}
+(ang. asynchronous JavaScript and XML), oznaczający wykorzystanie
+języków \emph{JavaScript} i \emph{XML} do asynchronicznej komunikacji
+z serwerem\footnote{W rzeczywistości jednak, żaden z wymienionych
+  elementów nie jest wymagany - w niektórych przeglądarkach zamiast
+  \emph{JavaScriptu} można użyć innego języka (np. \emph{VBScript}),
+  zamiast \emph{XML}-a często jest używany \emph{JSON} lub zwykły
+  tekst, a zapytania wcale nie muszą być asynchroniczne\cite{ajax}}.
+
+W związku z ograniczeniami narzucanymi przez przeglądarki internetowe,
+wszystkie zapytania wykonywane przy pomocy skryptów muszą odwoływać
+się do domeny, z której pobrany został dokument \emph{HTML} (ang. same
+origin policy\cite{origin}). Dla aplikacji wymagających komunikacji z
+różnymi domenami (np. ściągającymi dane z innych aplikacji) powstało
+rozwiązanie nazwane \emph{JSONP}. W uproszczeniu polega ono na
+dodawaniu do kodu dokumentu \emph{HTML} tagu \texttt{<script>}. Tag
+ten może zostać dodany z wnętrza działającego w przeglądarce skryptu,
+spowoduje on załadowanie i zinterpretowanie przez przeglądarkę kodu
+pochodzącego z dowolnej domeny\cite{json}. Rozwiązanie to jest używane
+również do tzw. leniwego ładowania kodu aplikacji (dynamiczne
+ładowanie zależności). Ładowanie kodu z innych domen jest potencjalnie
+niebezpiecznym działaniem i powinno być wykorzystywane z dużą rozwagą.
+
+\subsubsection{HTTP Push (Comet)}
+W przypadku standardowego wykorzystania technologii \emph{Ajax},
+przesyłanie danych odbywa się na żądanie przeglądarki internetowej. W
+niektórych rozwiązaniach taki mechanizm jest zbyt mało wydajny i
+wprowadza w komunikacji niepożądane opóźnienia. Najprostszym
+przykładem takiej aplikacji jest czat. W klasycznym rozwiązaniu każdy
+klient musi co pewien czas odpytywać serwer o to, czy pojawiły się na
+nim jakieś nowe wiadomości. Im mniejszy jest czas pomiędzy
+poszczególnymi zapytaniami, tym większa jest ilość wykonywanych
+zapytań i co za tym idzie, tym większe jest obciążenie serwera.
+
+Jeśli przyjrzeć się aplikacji takiej jak \emph{Gmail} okazuje się, że
 
 \clearpage
 

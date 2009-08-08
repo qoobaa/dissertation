@@ -2,7 +2,7 @@ Pioneers - internetowa implementacja gry "Osadnicy z Catanu" w oparciu o framewo
 * analiza zagadnienia
 
 ** Settlers of Catan
-*** opis
+p*** opis
 Wieloosobowa gra planszowa wymyślona przez Klausa Teubera, wydana po raz pierwszy w 1995.
 http://pl.wikipedia.org/wiki/Osadnicy_z_Catanu
 Podstawowa wersja gry jest przeznaczona dla 3-4 graczy, ale istnieją rozszerzenia pozwalające zagrać w 5 lub 6 osób, a gracze opracowali własne zasady dla gry dwuosobowej.
@@ -111,8 +111,7 @@ Potrzebny duży nakład pracy, w szczególności na część kliencką. Wolne op
 - nie ma oficjalnego środowiska pracy ani systemu operacyjnego
 - wspaniała społeczność, darmowe Railscasty, podcasty, Rails Magazine, podręczniki, fora, grupy dyskusyjne
 - użycie Gita jako systemu kontroli wersji (545 forków repozytorium na samym Githubie)
-- wpływ na rozwój frameworka (Lighthouse), możliwość
-- dodawania łat
+- wpływ na rozwój frameworka (Lighthouse), możliwość dodawania łat
 ** Merb
 - Ezra Zygmuntowicz, Yehuda Katz, początek 2008 r.
 - powstał dzięki doświadczeniu zdobytemu po 4 latach

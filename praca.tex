@@ -159,6 +159,8 @@ za:
 \item kartę rozwoju ,,punkt zwycięstwa'' - 1 punkt
 \end{itemize}
 
+\clearpage
+
 \section{Analiza istniejących rozwiązań}
 W tym rozdziale przedstawiłem kilka powszechnie dostępnych,
 działających rozwiązań. Wszystkie przedstawione implementacje gry
@@ -222,6 +224,135 @@ roku pojawiła się także wersja przeznaczona dla konsoli \emph{Nintendo
 \emph{WiFi}. Nie posiadają one niestety żadnego centralnego
 serwera. Obie opisywane wersje są płatnym oprogramowaniem
 własnościowym.
+
+\clearpage
+
+\section{Określenie funkcji aplikacji i wybór technologii}
+Projektowana aplikacja składać się będzie z dwóch części: serwera i
+klienta. Aplikacja w założeniu będzie wymagać bardzo dużego nakładu
+pracy, w tym zaprojektowania interfejsu graficznego i stworzenia
+grafiki. Aby umożliwić rozwój aplikacji, zdecydowałem się udostępnić
+całość kodu jako wolne oprogramowanie na zasadach Powszechnej Licencji
+Publicznej GNU Affero w wersji 3 \cite{affero}.
+
+\subsection{Serwer}
+Do zaimplementowania tej części aplikacji zostanie wykorzystany język
+\emph{Ruby} i framework \emph{Ruby on Rails}. Wybór można uzasadnić
+bardzo dobrym wsparciem frameworka dla architektury \emph{REST}, która
+zostanie wykorzystana do stworzenia \emph{API}.
+
+\subsubsection{Ruby}
+Język \emph{Ruby} został stworzony w 1995 roku przez Yukihiro
+Matsumoto. Za bazę do jego stworzenia posłużyły języki takie jak
+\emph{Lisp}, \emph{Perl}, \emph{Python}, \emph{Smalltalk}, a także
+\emph{CLU} i \emph{Eiffel}. Jest to wieloparadygmatowy, dynamicznie
+typowany, interpretowany język programowania bardzo wysokiego poziomu
+(ang. \emph{VHLL} \footnote{VHLL - very high-level programming language
+  \cite{vhll} }) \cite{ruby}. Najważniejszymi cechami języka są:
+
+\begin{itemize}
+\item pełna obiektowość - nie ma podziału na typy proste (wbudowane) i
+  złożone. Pełnoprawnymi obiektami są także klasy, metody, wyrażenia
+  lambda, itp.
+\item pseudoklasyczny mechanizm dziedziczenia jednobazowego
+\item moduły oferujące mechanizm zastępujący dziedziczenie wielobazowe
+  (ang. \emph{mixin} \cite{mixin})
+\item otwarte klasy, pozwalające na zmianę w dowolnym momencie
+  wykonywania programu właściwości zdefiniowanych już klas (włącznie z
+  klasami pochodzącymi z biblioteki standardowej języka)
+\item \emph{monkey patching} - wykorzystanie mechanizmu otwartych klas
+  do zmiany działania już istniejącego kodu w czasie wykonywania
+  programu \cite{monkeypatch}
+\item metaprogramowanie - mechanizm ten umożliwia tworzenie kodu,
+  który generuje kod w czasie wykonywania programu
+  \cite{metaprogramming}
+\item ,,kacze typowanie'' - typy obiektów przekazywanych jako
+  argumenty funkcji nie są w żaden sposób sprawdzane. Dzięki temu nie
+  jest konieczne tworzenie skomplikowanych hierarchii dziedziczenia
+  klas, wystarczy jedynie zaimplementować w klasach pewien wspólny
+  podzbiór właściwości wymaganych przez wywoływaną na nich funkcję
+  \cite{ducktyping}
+\item domknięcia - mechanizm wiązania tworzonych funkcji z ich
+  otoczeniem. Podczas wywołania funkcji ma ona dostęp do zmiennych,
+  które zostały dowiązane do niej podczas jej tworzenia (nawet jeśli
+  są one niedostępne podczas jej wywołania) \cite{closures}
+\item przejrzysta, czytelna składnia
+\item bogata biblioteka standardowa
+\end{itemize}
+
+Język \emph{Ruby} doczekał się wielu różnych implementacji, z których
+najbardziej dojrzałe są:
+
+\begin{itemize}
+\item \emph{Matz's Ruby Interpreter} (\emph{MRI}) - intepreter
+  stworzony w języku C, uznawany \emph{de facto} za implementację
+  referencyjną\cite{mri}
+\item \emph{JRuby} - interpreter stworzony w języku Java,
+  uruchamiany w \emph{wirtualnej maszynie Javy}\cite{jruby}
+\end{itemize}
+
+Głównym wskaźnikiem świadczącym o dojrzałości interpretera jest
+możliwość uruchomienia na nim frameworka \emph{Ruby on
+  Rails}. Wymienione wyżej implementacje najczęściej wykorzystywane są
+do budowy środowisk produkcyjnych. Pozostałe implementacje są w
+większości w fazie rozwoju, zaliczają się do nich
+m.in. \emph{Cardinal}, \emph{IronRuby}, \emph{MacRuby}, \emph{MagLev},
+\emph{Rubinius}, \emph{Ruby.NET} oraz \emph{XRuby}.
+
+Ogromną zaletą języka \emph{Ruby} jest fakt, iż wszystkie wyżej
+wymienione implementacje, za wyjątkiem \emph{MagLev}, to wolne
+oprogramowanie. Rozwojem języka kieruje społeczność, tworząca kod
+\emph{MRI}, nie jest on uzależniony od żadnych zewnętrznych firm (jak
+ma to miejsce w przypadku języka \emph{Java} i firmy \emph{Sun
+  Microsystems}).
+
+W związku z tym, że język \emph{Ruby} utożsamiany jest głównie z
+technologiami \emph{webowymi}, należałoby nadmienić fakt, iż jest to
+język uniwersalny. Zamierzeniem Yukihiro Matsumoto było stworzenie
+języka, który byłby ,,skuteczniejszy niż \emph{Perl}, oraz bardziej
+zorientowany obiektowo niż \emph{Python}''
+\cite{matzinterview}. Tworzenie aplikacji internetowych nie miało
+wpływu na rozwój tego języka, tak jak ma to miejsce w przypadku języka
+\emph{PHP}. Język \emph{Ruby} posiada bardzo bogatą bibliotekę
+standardową, a także dużą ilość bibliotek zewnętrznych
+(tzw. \emph{gemów}). Równie dobrze nadaje się do tworzenia aplikacji
+okienkowych, serwerów sieciowych, jak i skryptów systemowych. Nie
+zmienia to jednak faktu, że popularność języka wiąże się nierozłącznie
+z frameworkiem \emph{Ruby on Rails}.
+
+\subsection{Ruby on Rails}
+Twórcą frameworka \emph{Ruby on Rails} jest duński programista David
+Heinemeier Hansson. Framework powstał w wyniku prac nad aplikacją
+\emph{Basecamp}, został udostępniony w połowie 2004 roku. Wzrost
+popularności \emph{Ruby on Rails} nastąpił po ogłoszeniu przez firmę
+\emph{Apple Inc.}, że będzie on dostarczany wraz z systemem \emph{Mac
+  OS X v10.5 ''Leopard''} \cite{rubyonrails}. Swoje ogromne możliwości
+framework zawdzięcza wykorzystaniu cech języka takich, jak
+metaprogramowanie, kacze typowanie czy możliwość otwierania klas.
+
+Framework \emph{Ruby on Rails} umożliwia tworzenie aplikacji
+internetowych w oparciu o wzorzec \emph{MVC} \footnote{MVC -
+  Model-View-Controller\cite{mvc}}. \emph{Ruby on Rails} obsługuje
+wszystkie popularne silniki bazodanowe poprzez bibliotekę mapowania
+obiektowo-relacyjnego \emph{ActiveRecord} \cite{orm}. Aplikacje
+napisane przy użyciu frameworka mogą być uruchamiane na serwerach
+webowych, takich jak \emph{Apache}, \emph{Lighttpd}, \emph{Abyss},
+\emph{Mongrel}. W przypadku zastosowania \emph{JRuby}, mogą być to
+m.in. serwery aplikacji \emph{JBoss}, \emph{GlassFish} lub
+\emph{Apache Geronimo}.
+
+Cały framework jest udostępniony na zasadach licencji \emph{MIT}
+\cite{mit}.
+
+\subsubsection{Architektura Ruby on Rails}
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[width=\linewidth]{railsarchitecture.png}
+  \end{center}
+  \caption{Architektura Ruby on Rails}
+  \label{railsarchitecture}
+\end{figure}
 
 \clearpage
 

@@ -399,10 +399,10 @@ Język \emph{JavaScript} powstał pod koniec 1995 roku w firmie
 \emph{Netscape}, jako alternatywa dla uruchamianych w przeglądarce
 apletów \emph{Javy}. Jego twórcą jest amerykański programista Brendan
 Eich.  Począwszy od 1996 roku język jest standaryzowany przez
-\emph{ECMA International}\footnote{ECMA (ang. European association for
-  standardizing information and communication systems) - Europejskie
-  Stowarzyszenie na rzecz Standaryzacji Systemów Informacyjnych i
-  Komunikacyjnych, organizacja członkowska zajmująca się standaryzacją
+\emph{ECMA International}\footnote{ECMA - Europejskie Stowarzyszenie
+  na rzecz Standaryzacji Systemów Informacyjnych i Komunikacyjnych
+  (ang. European association for standardizing information and
+  communication systems), organizacja zajmująca się standaryzacją
   systemów informatycznych w Europie \cite{ecma}} jako
 \emph{ECMAScript}.
 
@@ -419,7 +419,7 @@ pewien podzbiór języka \emph{Java}. W rzeczywistości, język
 \emph{JavaScript} jest znacznie bliżej spokrewniony z językami
 funkcyjnymi, takimi jak \emph{Lisp}.
 
-Interpreter \emph{JavaScriptu} jest wbudowany w niemal każdą
+Interpreter \emph{JavaScriptu} wbudowany jest w niemal każdą
 współczesną przeglądarkę internetową, co czyni go jednym z najbardziej
 rozpowszechnionych języków programowania na świecie.
 
@@ -436,7 +436,7 @@ Najważniejszymi cechami języka, wyróżniającymi go od języków
   \emph{Ruby}).
 \item dziedziczenie prototypowe - mechanizm dziedziczenia
   bezklasowego. Jedyną cechą umożliwiającą stwierdzenie pokrewieństwa
-  obiektów jest posiadanie wspólnego prototypu
+  obiektów jest posiadanie przez nie wspólnego prototypu
 \end{itemize}
 
 Główne implementacje \emph{JavaScriptu} to \cite{javascript}:
@@ -473,16 +473,15 @@ internetowymi. Wśród nich wyróżnić można m.in.:
 Po rozpowszechnieniu się \emph{JavaScriptu} w przeglądarkach
 internetowych, był on używany głównie do ,,upiększania'' stron
 \emph{HTML} i dodawania do nich dynamicznych elementów. Stał się swego
-rodzaju dodatkiem, ułatwiającym korzystanie i przeglądanie
-stron.
+rodzaju dodatkiem, ułatwiającym korzystanie ze stron.
 
 Sytuacja zaczęła się zmieniać po wprowadzeniu przez firmę
 \emph{Microsoft} obiektu \emph{ActiveX} nazwanego \emph{XMLHTTP} w
 przeglądarce \emph{Microsoft Internet Explorer 5}. Najważniejszą cechą
 tego mechanizmu była możliwość komunikacji z serwerem bez konieczności
-przeładowywania całego dokumenty. W krótkim czasie podobne rozwiązania
-zostały zaimplementowane w konkurencyjnych przeglądarkach
-\emph{Mozilla} i \emph{Safari}. Pomimo tego, że funkcje te były
+przeładowywania całego dokumentu. W krótkim czasie podobne rozwiązania
+zostały zaimplementowane w konkurencyjnych przeglądarkach, m.in.w
+\emph{Mozilli} i \emph{Safari}. Pomimo tego, że funkcje te były
 dostępne w przeglądarkach od końca 1999 roku, pierwsze duże aplikacje
 zaczęły z nich korzystać dopiero w 2004 roku. Najważniejszymi
 aplikacjami, które spopularyzowały opisywany mechanizm były
@@ -490,8 +489,8 @@ aplikacjami, które spopularyzowały opisywany mechanizm były
   Inc.} W 2005 roku wprowadzony został termin \emph{Ajax}
 (ang. asynchronous JavaScript and XML), oznaczający wykorzystanie
 języków \emph{JavaScript} i \emph{XML} do asynchronicznej komunikacji
-z serwerem\footnote{W rzeczywistości jednak, żaden z wymienionych
-  elementów nie jest wymagany - w niektórych przeglądarkach zamiast
+z serwerem\footnote{w rzeczywistości jednak, żaden z wymienionych
+  elementów nie jest wymagany. W niektórych przeglądarkach zamiast
   \emph{JavaScriptu} można użyć innego języka (np. \emph{VBScript}),
   zamiast \emph{XML}-a często jest używany \emph{JSON} lub zwykły
   tekst, a zapytania wcale nie muszą być asynchroniczne\cite{ajax}}.
@@ -506,9 +505,13 @@ dodawaniu do kodu dokumentu \emph{HTML} tagu \texttt{<script>}. Tag
 ten może zostać dodany z wnętrza działającego w przeglądarce skryptu,
 spowoduje on załadowanie i zinterpretowanie przez przeglądarkę kodu
 pochodzącego z dowolnej domeny\cite{json}. Rozwiązanie to jest używane
-również do tzw. leniwego ładowania kodu aplikacji (dynamiczne
-ładowanie zależności). Ładowanie kodu z innych domen jest potencjalnie
-niebezpiecznym działaniem i powinno być wykorzystywane z dużą rozwagą.
+do przesyłania danych w formacie \emph{JSON}. Przesyłany obiekt musi
+być otoczony wywołaniem funkcji zwrotnej (ang. callback), w celu
+poinformowania skryptu o otrzymaniu danych. Podobne rozwiązanie jest
+używane również do tzw. leniwego ładowania kodu aplikacji (dynamiczne
+ładowanie zależności). Należy zaznaczyć, że ładowanie kodu z innych
+domen jest potencjalnie niebezpiecznym działaniem i powinno być
+wykorzystywane z dużą rozwagą.
 
 \subsubsection{HTTP Push (Comet)}
 W przypadku standardowego wykorzystania technologii \emph{Ajax},
@@ -521,16 +524,35 @@ nim jakieś nowe wiadomości. Im mniejszy jest czas pomiędzy
 poszczególnymi zapytaniami, tym większa jest ilość wykonywanych
 zapytań i co za tym idzie, tym większe jest obciążenie
 serwera. Technika ta jest także nazywana \emph{HTTP
-  Pull}\footnote{ang. Pull technology, client pull - styl komunikacji
-  sieciowej, w którym wszystkie połączenia są inicjowane przez stronę
-  kliencką\cite{pull}}.
+  Pull}\footnote{ang. pull technology, client pull - styl komunikacji
+  sieciowej, w którym wszystkie połączenia są inicjowane przez
+  klienta\cite{pull}}, schemat jej działania został przedstawiony na
+\imref{pull}.
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[width=\linewidth]{pull.pdf}
+  \end{center}
+  \caption{Schemat działania mechanizmu odpytywania (\emph{HTTP
+      Pull})}
+  \label{pull}
+\end{figure}
 
 Jeśli przyjrzeć się bliżej aplikacji takiej jak \emph{Gmail} okazuje
 się, że nie wykonuje ona cyklicznego odpytywania serwera, a wszystkie
 dane przesyłane są do klienta niemalże bez opóźnień. Najprostszym
 sposobem na uniknięcie częstego odpytywania serwera jest zastosowanie
 mechanizmu wydłużonego odpytywania (ang. long polling). Polega on na
-wydłużaniu czasu trwania zapytań
+wydłużaniu czasu trwania zapytań poprzez opóźnianie reakcji
+serwera. Jeśli po otrzymaniu zapytania na serwerze nie ma żadnych
+danych do pobrania, zamiast wysyłać informację o braku danych serwer
+wstrzymuje się z odpowiedzią do czasu ich nadejścia. W przypadku, gdy
+na serwerze pojawią się dane, są one natychmiast wysyłane do klienta
+poprzez otwarte połączenie. W przypadku, gdy zostanie przekroczony
+maksymalny czas trwania połączenia (ang. timeout) jest ono zamykane. W
+obu przypadkach klient natychmiastowo wywołuje kolejne zapytanie,
+które ponownie oczekuje na pojawienie się danych. Schemat działania
+takiego mechanizmu został przedstawiony na \imref{longpolling}.
 
 \begin{figure}[ht]
   \begin{center}
@@ -540,6 +562,37 @@ wydłużaniu czasu trwania zapytań
   \label{longpolling}
 \end{figure}
 
+Niewątpliwą wadą przedstawionego rozwiązania jest fakt, iż w
+przypadku, gdy dane pojawiają się na serwerze z dużą częstotliwością,
+wywoływanych jest dużo pojedynczych zapytań. Skutkuje to oczywiście
+wzrostem obciążenia serwera. W mechanizmie wydłużonego odpytywania
+wykorzystywane są asynchroniczne zapytania \emph{XMLHttpRequest}. W
+przypadku pobierania danych z domen innych wykorzystywany jest
+mechanizm \emph{JSONP}.
+
+Innym, bardziej wyrafinowanym sposobem komunikacji poprzez \emph{HTTP
+  Push} jest strumieniowanie danych. Do strumieniowania danych
+wykorzystywany jest fakt, iż wszystkie współczesne przeglądarki
+internetowe renderują strony progresywnie.
+% potrzebne źródło
+W związku z tym, możliwe staje się stworzenie ,,nieskończonego''
+zapytania, które będzie interpretowane przez silnik na bieżąco, w
+chwili pojawiania się nowych elementów. Do stworzenia takiego
+zapytania wykorzystywany jest ukryty znacznik
+\texttt{<iframe>}. Znacznik ten umożliwia zagnieżdżenie w dokumencie
+innego dokumentu, pochodzącego z innego adresu
+internetowego\footnote{w tym przypadku również nie jest możliwe
+  załadowanie dokumentu z innej domeny, zgodnie z polityką
+  bezpieczeństwa przeglądarek}. Podobnie jak w przypadku \emph{JSONP}
+przesyłane dane muszą być otoczone wywołaniem funkcji, która ma je
+odebrać. Dodatkowo całość musi zostać otoczona znacznikiem
+\texttt{<script>}. Każdy taki znacznik jest renderowany
+(interpretowany) przez przeglądarkę zaraz po jego otrzymaniu. W
+przypadku, gdy na serwerze nie ma żadnych danych, wysyłany jest co
+pewien czas pusty znacznik, w celu utrzymania połączenia. Schemat
+działania mechanizmu strumieniowania został przedstawiony na
+\imref{streaming}.
+
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[width=\linewidth]{streaming.pdf}
@@ -548,6 +601,37 @@ wydłużaniu czasu trwania zapytań
   \label{streaming}
 \end{figure}
 
+W związku z tym, że opisywane mechanizmy wykorzystują techniki
+nieobjęte żadną specyfikacją, ich działanie jest w dużej mierze
+zależne od implementacji poszczególnych przeglądarek
+internetowych. Największym wyzwaniem jest przystosowanie w.w. technik
+do przeglądarek w urządzeniach mobilnych. Okazuje się również, że
+użycie \emph{HTTP Push} na powszechnie używanych serwerach \emph{HTTP}
+jest wysoce nieefektywne lub wręcz niemożliwe. Niemal wszystkie
+dostępne rozwiązania wymagają uruchomienia dodatkowych serwerów,
+odpowiedzialnych wyłącznie za obsługę \emph{HTTP Push}. Są to serwery
+takie jak: \emph{Caplin Liberator}, \emph{Cometd}, \emph{ErlyComet},
+\emph{GlassFish}, \emph{Jetty}, \emph{Lightstreamer}, \emph{Meteor},
+\emph{Orbited}, \emph{Persevere} i \emph{RMDS2Web
+  Server}\cite{cometmaturity}. Dodatkową przeszkodą w komunikacji
+przeglądarki z dodatkowym serwerem jest wspominany już wcześniej
+mechanizm \emph{same origin policy}. Całość komplikuje również fakt,
+że przeglądarki internetowe realizują te zabezpieczenia w różny
+sposób\cite{xssinfo}.
+
+Wszystkie opisywane w tym rozdziale techniki noszą wspólną nazwę
+\emph{Comet}\cite{comet}. W 2007 roku organizacja \emph{DOJO
+  Foundation}\footnote{DOJO Foundation - niedochodowa
+  (ang. non-profit) organizacja zajmująca się promocją biblioteki
+  \emph{Dojo Toolkit}\cite{dojo}} podjęła się również próby
+ustandaryzowania tych rozwiązań pod nazwą \emph{protokołu
+  Bayeux}\cite{bayeux}. Alternatywą dla \emph{Cometa} jest stosowanie
+rozwiązań pochodzących z apletów \emph{Javy} lub aplikacji \emph{Adobe
+  Flash}, które mogą samodzielnie nawiązywać połączenia \emph{TCP}
+(bez udziału przeglądarki internetowej). Powstająca specyfikacja
+języka \emph{HTML 5} zawiera również rozwiązanie nazwane \emph{Web
+  Sockets API}, które umożliwia dwustronną komunikację z serwerem
+\emph{HTTP}\cite{websockets}.
 
 \clearpage
 

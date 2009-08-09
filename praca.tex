@@ -396,15 +396,15 @@ się zająć połączeniem powstającego \emph{Merba 2} i \emph{Ruby on
 
 \subsection{JavaScript}
 Język \emph{JavaScript} powstał pod koniec 1995 roku w firmie
-\emph{Netscape}, jako alternatywa dla uruchamianych w przeglądarce
-apletów \emph{Javy}. Jego twórcą jest amerykański programista Brendan
-Eich.  Począwszy od 1996 roku język jest standaryzowany przez
-\emph{ECMA International}\footnote{ECMA - Europejskie Stowarzyszenie
-  na rzecz Standaryzacji Systemów Informacyjnych i Komunikacyjnych
-  (ang. European association for standardizing information and
-  communication systems), organizacja zajmująca się standaryzacją
-  systemów informatycznych w Europie \cite{ecma}} jako
-\emph{ECMAScript}.
+\emph{Netscape Communications Corporation}, jako alternatywa dla
+uruchamianych w przeglądarce apletów \emph{Javy}. Jego twórcą jest
+amerykański programista Brendan Eich.  Począwszy od 1996 roku język
+jest standaryzowany przez \emph{ECMA International}\footnote{ECMA -
+  Europejskie Stowarzyszenie na rzecz Standaryzacji Systemów
+  Informacyjnych i Komunikacyjnych (ang. European association for
+  standardizing information and communication systems), organizacja
+  zajmująca się standaryzacją systemów informatycznych w Europie
+  \cite{ecma}} jako \emph{ECMAScript}.
 
 Pomimo swojej nazwy jasno kojarzącej się z językiem \emph{Java}, język
 \emph{JavaScript} jest (z wyjątkiem kilku elementów) językiem
@@ -633,11 +633,227 @@ języka \emph{HTML 5} zawiera również rozwiązanie nazwane \emph{Web
   Sockets API}, które umożliwia dwustronną komunikację z serwerem
 \emph{HTTP}\cite{websockets}.
 
+\subsubsection{DOM}
+Obiektowy model dokumentu(ang. Document Object Model) jest konwencją
+reprezentacji dokumentów \emph{XML}, \emph{XHTML} i \emph{XML} w
+postaci modelu obiektowego. Jest on wymagany przez język
+\emph{JavaScript} do odczytywania i modyfikowania struktury dokumentu
+z poziomu kodu\cite{dom}. Jest to zdecydowanie najbardziej niespójny
+element współczesnych przeglądarek. Jest to związane m.in. z tym, że
+pierwsze próby ustandaryzowania tego rozwiązania odbyły się w 1997
+roku, a standard wszedł w powszechne użycie dopiero około roku
+2000. Niespójności te są na tyle duże, że pisząc nawet prosty skrypt
+odwołujący się bezpośrednio do \emph{DOM-u} przeglądarki, możemy
+spodziewać się, że nie będzie on przenośny. Dostosowywanie kodu do
+różnic występujących w poszczególnych przeglądarkach jest wyjątkowo
+żmudnym i czasochłonnym zadaniem. W praktyce okazuje się, że pisanie
+kodu operującego bezpośrednio na dokumencie jest zjawiskiem stosunkowo
+rzadkim. W większości przypadków wykorzystuje się do tego celu gotowe
+biblioteki, zapewniające pewien poziom abstrakcji w dostępie do
+\emph{DOM-u}, przenośność kodu pomiędzy różnymi przeglądarkami oraz
+poprawiające użyteczność samego
+\emph{JavaScriptu}. Najpopularniejszymi bibliotekami tego typu są:
+\emph{jQuery}, \emph{Prototype}, \emph{DOJO Toolkit}, \emph{Yahoo!
+  User Interface Library} oraz \emph{Google Web Toolkit}.
+
 \clearpage
 
 \section{Projektowanie aplikacji}
 
+\subsection{Przechowywanie planszy w bazie danych}
+Jednym z podstawowych problemów, jakie należy rozwiązać projektując
+aplikację, jest przechowywanie planszy w relacyjnej bazie
+danych. Naturalnie pierwszym pomysłem było wykorzystanie mechanizmu z
+działającego rozwiązania, mianowicie z gry \emph{Pioneers}.
 
+Plansza do gry w ,,Osadników'' składa się w pierwotnej wersji z 37
+połączonych ze sobą sześciokątów. Niektóre ich wierzchołki i krawędzie
+przeznaczone są pod budowę dróg i osad. Sytuację najbardziej
+komplikuje fakt, iż większość wierzchołków i krawędzi jest wspólna dla
+kilku połączonych sześciokątów. Rozwiązanie zastosowane w grze
+\emph{Pioneers} polega na ułożeniu wszystkich sześciokątów na planszy
+w dwuwymiarowej tablicy. Dodatkowo każdy z nich posiada dwie
+sześcioelementowe tablice wskaźników, wskazujących na odpowiednie
+wierzchołki i krawędzie. Przy tworzeniu wierzchołka lub krawędzi
+planszy ustawiane są odpowiednie wskaźniki w sąsiadujących
+sześciokątach. To stosunkowo proste rozwiązanie okazuje się być trudne
+w realizacji w relacyjnej bazie danych. Przykładowe połączenie
+sześciokąta z wierzchołkami, wymagałoby użycia sześciu kluczy obcych
+lub utworzenia dodatkowej tabeli łączącej. Rozwiązanie takie wprowadza
+do bazy dużo niepotrzebnych połączeń i jest mało wydajne.
+
+Jednym z działań, które gracz może wykonać podczas gry, jest zbudowanie
+przez niego osady. Do sprawdzenia poprawności pozycji budowanej osady
+niezbędnych jest wykonanie kilku czynności:
+
+\begin{itemize}
+\item sprawdzenie, czy na jednym z sąsiadujących wierzchołków nie
+  znajduje się już inna osada. Minimalna odległość pomiędzy osadami
+  wynosi dwie drogi (dwie krawędzie)
+\item sprawdzenie, czy na jednej z sąsiadujących krawędzi wybudowana
+  jest droga należąca do gracza. Budowane osady muszą być ze sobą
+  połączone drogami
+\item sprawdzenie, czy jeden z sąsiadujących sześciokątów jest
+  lądem. Osady nie mogą być budowane na brzegach planszy (na morzu)
+\end{itemize}
+
+Bardzo podobne czynności musimy wykonać, aby stwierdzić poprawność
+pozycji budowanej przez gracza drogi. Okazuje się więc, że najczęstszą
+operacją jest pobranie sąsiadujących (dołączonych) elementów planszy.
+
+\subsubsection{Sześciokąty}
+\begin{equation}
+  HEX_{adj}=\{
+  (x-1; y+1),
+  (x-1; y),
+  (x; y-1),
+  (x+1; y-1),
+  (x+1; y),
+  (x; y+1)
+  \}
+  \label{hexhexes}
+\end{equation}
+\begin{equation}
+  NODE_{adj}=\{
+  (x; 2y+3),
+  (x; 2y+2),
+  (x; 2y+1),
+  (x+1; 2y),
+  (x+1; 2y+1),
+  (x+1; 2y+2)
+  \}
+  \label{nodehexes}
+\end{equation}
+\begin{equation}
+  EDGE_{adj}=\{
+  (x; 3y+5),
+  (x; 3y+4),
+  (x; 3y+3),
+  (x+1; 3y+2),
+  (x+1; 3y+4),
+  (x; 3y+6)
+  \}
+  \label{edgehexes}
+\end{equation}
+
+\subsubsection{Wierzchołki}
+\begin{equation}
+  HEX_{adj}=
+  \left\{
+    \begin{array}{l l}
+      \{
+      (x-1; \lfloor\frac{y}{2}\rfloor),
+      (x; \lfloor\frac{y}{2}\rfloor-1),
+      (x; \lfloor\frac{y}{2}\rfloor)
+      \} & \mbox{ dla nieparzystych $y$} \\
+      \{
+      (x-1; \lfloor\frac{y}{2}\rfloor),
+      (x-1; \lfloor\frac{y}{2}\rfloor-1),
+      (x; \lfloor\frac{y}{2}\rfloor-1)
+      \} & \mbox{ dla parzystych $y$} \\
+    \end{array} \right.
+  \label{nodehexes}
+\end{equation}
+\begin{equation}
+  NODE_{adj}=
+  \left\{
+    \begin{array}{l l}
+      \{
+      (x; y+1),
+      (x; y-1),
+      (x+1; y-1)
+      \} & \mbox{ dla nieparzystych $y$} \\
+      \{
+      (x-1; 3\lfloor\frac{y}{2}\rfloor+3),
+      (x; 3\lfloor\frac{y}{2}\rfloor+3),
+      (x; 3\lfloor\frac{y}{2}\rfloor+2)
+      \} & \mbox{ dla parzystych $y$} \\
+    \end{array} \right.
+  \label{nodenodes}
+\end{equation}
+\begin{equation}
+  EDGE_{adj}=
+  \left\{
+    \begin{array}{l l}
+      \{
+      (x; 3\lfloor\frac{y}{2}\rfloor+4),
+      (x; 3\lfloor\frac{y}{2}\rfloor+2),
+      (x; 3\lfloor\frac{y}{2}\rfloor+3)
+      \} & \mbox{ dla nieparzystych $y$} \\
+      \{
+      (x-1; 3\lfloor\frac{y}{2}\rfloor+3),
+      (x; 3\lfloor\frac{y}{2}\rfloor+3),
+      (x; 3\lfloor\frac{y}{2}\rfloor+2)
+      \} & \mbox{ dla parzystych $y$} \\
+    \end{array} \right.
+  \label{nodenodes}
+\end{equation}
+
+\subsubsection{Krawędzie}
+
+\begin{equation}
+  HEX_{adj}=
+  \left\{
+    \begin{array}{l l}
+      \{
+      (x; \lfloor\frac{y}{3}\rfloor-1),
+      (x; \lfloor\frac{y}{3}\rfloor-2)
+      \} & \mbox{ jeśli y\%3==0} \\
+      \{
+      (x-1; \lfloor\frac{y}{3}\rfloor-1),
+      (x; \lfloor\frac{y}{3}\rfloor-1)
+      \} & \mbox{ jeśli y\%3==1} \\
+      \{
+      (x-1; \lfloor\frac{y}{3}\rfloor),
+      (x; \lfloor\frac{y}{3}\rfloor-1)
+      \} & \mbox{ jeśli y\%3==2} \\
+    \end{array} \right.
+  \label{edgehexes}
+\end{equation}
+\begin{equation}
+  NODE_{adj}=
+  \left\{
+    \begin{array}{l l}
+      \{
+      (x; 2\lfloor\frac{y}{3}\rfloor-1),
+      (x+1; 2\lfloor\frac{y}{3}\rfloor-2)
+      \} & \mbox{ jeśli y\%3==0} \\
+      \{
+      (x; 2\lfloor\frac{y}{3}\rfloor),
+      (x; 2\lfloor\frac{y}{3}\rfloor-1)
+      \} & \mbox{ jeśli y\%3==1} \\
+      \{
+      (x; 2\lfloor\frac{y}{3}\rfloor+1),
+      (x; 2\lfloor\frac{y}{3}\rfloor)
+      \} & \mbox{ jeśli y\%3==2} \\
+    \end{array} \right.
+  \label{edgenodes}
+\end{equation}
+\begin{equation}
+  EDGE_{adj}=
+  \left\{
+    \begin{array}{l l}
+      \{
+      (x+1; y-2),
+      (x+1; y-1),
+      (x; y+1),
+      (x; y-1),
+      \} & \mbox{ jeśli y\%3==0} \\
+      \{
+      (x; y-2),
+      (x; y-1),
+      (x-1; y+2),
+      (x; y+1),
+      \} & \mbox{ jeśli y\%3==1} \\
+      \{
+      (x-1; y+1),
+      (x; y-1),
+      (x; y+2),
+      (x; y+1),
+      \} & \mbox{ jeśli y\%3==2} \\
+    \end{array} \right.
+  \label{edgenodes}
+\end{equation}
 
 \begin{figure}[ht]
   \begin{center}

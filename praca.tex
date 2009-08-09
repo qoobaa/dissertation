@@ -675,16 +675,16 @@ kilku połączonych sześciokątów. Rozwiązanie zastosowane w grze
 w dwuwymiarowej tablicy. Dodatkowo każdy z nich posiada dwie
 sześcioelementowe tablice wskaźników, wskazujących na odpowiednie
 wierzchołki i krawędzie. Przy tworzeniu wierzchołka lub krawędzi
-planszy ustawiane są odpowiednie wskaźniki w sąsiadujących
-sześciokątach. To stosunkowo proste rozwiązanie okazuje się być trudne
-w realizacji w relacyjnej bazie danych. Przykładowe połączenie
-sześciokąta z wierzchołkami, wymagałoby użycia sześciu kluczy obcych
-lub utworzenia dodatkowej tabeli łączącej. Rozwiązanie takie wprowadza
-do bazy dużo niepotrzebnych połączeń i jest mało wydajne.
+ustawiane są odpowiednie wskaźniki w sąsiadujących sześciokątach. To
+stosunkowo proste rozwiązanie okazuje się być trudne w realizacji w
+relacyjnej bazie danych. Przykładowe połączenie sześciokąta z
+wierzchołkami, wymagałoby użycia sześciu kluczy obcych lub utworzenia
+dodatkowej tabeli łączącej. Rozwiązanie takie wprowadza do bazy dużo
+niepotrzebnych połączeń i jest mało wydajne.
 
-Jednym z działań, które gracz może wykonać podczas gry, jest zbudowanie
-przez niego osady. Do sprawdzenia poprawności pozycji budowanej osady
-niezbędnych jest wykonanie kilku czynności:
+Jednym z działań, które gracz może wykonać podczas gry, jest
+zbudowanie przez niego osady. Do sprawdzenia poprawności współrzędnych
+budowanej osady niezbędnych jest wykonanie kilku czynności:
 
 \begin{itemize}
 \item sprawdzenie, czy na jednym z sąsiadujących wierzchołków nie
@@ -698,10 +698,27 @@ niezbędnych jest wykonanie kilku czynności:
 \end{itemize}
 
 Bardzo podobne czynności musimy wykonać, aby stwierdzić poprawność
-pozycji budowanej przez gracza drogi. Okazuje się więc, że najczęstszą
-operacją jest pobranie sąsiadujących (dołączonych) elementów planszy.
+współrzędnych budowanej przez gracza drogi. Okazuje się więc, że
+najczęściej wykonywaną operacją jest pobranie sąsiadujących
+(dołączonych) elementów planszy. Najlepiej więc, gdyby na podstawie
+współrzędnych budowanej osady można było łatwo wyliczyć zbiór
+współrzędnych dołączonych do wierzchołka sześciokątów, wierzchołków i
+krawędzi. Aby ułatwić przekształcenia, wszystkie elementy planszy
+muszą być jednoznacznie identyfikowane na podstawie dwóch
+współrzędnych.
 
 \subsubsection{Sześciokąty}
+
+
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[width=\linewidth]{board.pdf}
+  \end{center}
+  \caption{Zasada numerowania sześciokątów na planszy}
+  \label{board}
+\end{figure}
+
 \begin{equation}
   HEX_{adj}=\{
   (x-1; y+1),
@@ -854,14 +871,6 @@ operacją jest pobranie sąsiadujących (dołączonych) elementów planszy.
     \end{array} \right.
   \label{edgenodes}
 \end{equation}
-
-\begin{figure}[ht]
-  \begin{center}
-    \includegraphics[width=\linewidth]{board.pdf}
-  \end{center}
-  \caption{Zasada numerowania sześciokątów na planszy}
-  \label{board}
-\end{figure}
 
 \begin{figure}[ht]
   \begin{center}

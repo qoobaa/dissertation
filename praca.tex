@@ -5,6 +5,8 @@
 \usepackage[polish]{babel}
 \usepackage{graphicx}
 \usepackage{url}
+\usepackage{amsfonts}
+\usepackage{amsmath}
 
 \providecommand{\imref}[1]{Rys. \ref{#1}} % referencja do obrazka
 
@@ -52,7 +54,7 @@ zostać uwzględnione przy implementacji.
 
 \subsubsection{Plansza}
 Rozgrywka toczy się na planszy złożonej z 37 sześciokątów
-oznaczających różne rodzaje terenu, oraz przypisanych do nich wartości
+oznaczających różne rodzaje terenu oraz przypisanych do nich wartości
 liczbowych. Poszczególne rodzaje pól mogą mieć także określony rodzaj
 surowca, który może być z nich czerpany:
 
@@ -68,7 +70,7 @@ surowca, który może być z nich czerpany:
 
 Elementami planszy są również krawędzie i wierzchołki połączonych
 sześciokątów. Na wierzchołkach (skrzyżowaniach) gracze mogą budować
-osady i miasta. Przynoszą one dochody w postaci w.w. surowców z
+osady i miasta. Przynoszą one dochód w postaci surowców z
 sąsiadujących z nimi sześciokątów. Krawędzie natomiast przeznaczone są
 pod budowę dróg, które łączą osady i miasta. Drogi nie przynoszą
 żadnych dochodów, umożliwiają natomiast ekspansję terytorialną
@@ -210,9 +212,9 @@ dwóch ostatnich tytułów, płatnym. \emph{Solito Server} napisany został
 przy użyciu technologii \emph{Adobe Flash}, dlatego jest w pewnym
 stopniu uniezależniony od platformy sprzętowej (można go używać na
 wszystkich platformach, na których dostępny jest \emph{Adobe
-  Flash}). Pozostałe tytuły to oprogramowanie działające tylko i
-wyłącznie pod kontrolą systemu operacyjnego \emph{Microsoft Windows},
-wymagające instalacji.
+  Flash}). Pozostałe tytuły to oprogramowanie działające wyłącznie pod
+kontrolą systemu operacyjnego \emph{Microsoft Windows}, wymagające
+dodatkowo instalacji.
 
 \subsection{Catan - The First Island}
 Jest to prawdopodobnie jedyna implementacja gry dedykowana urządzeniom
@@ -220,7 +222,7 @@ mobilnym. Pierwotnie aplikacja napisana została w Javie dla urządzeń
 mobilnych, przez niemiecką firmę \emph{Exozet Games}. W połowie 2009
 roku pojawiła się także wersja przeznaczona dla konsoli \emph{Nintendo
   DS}. Oba rozwiązania umożliwiają rozgrywkę z graczem komputerowym
-(\emph{AI}), oraz z innymi graczami poprzez \emph{Bluetooth} lub
+(\emph{AI}) oraz z innymi graczami poprzez \emph{Bluetooth} lub
 \emph{WiFi}. Nie posiadają one niestety żadnego centralnego
 serwera. Obie opisywane wersje są płatnym oprogramowaniem
 własnościowym.
@@ -233,7 +235,7 @@ klienta. Aplikacja w założeniu będzie wymagać bardzo dużego nakładu
 pracy, w tym zaprojektowania interfejsu graficznego i stworzenia
 grafiki. Aby umożliwić rozwój aplikacji, zdecydowałem się udostępnić
 całość kodu jako wolne oprogramowanie na zasadach Powszechnej Licencji
-Publicznej GNU Affero w wersji 3 \cite{affero}.
+Publicznej GNU Affero w wersji 3\cite{affero}.
 
 Do zaimplementowania części serwerowej aplikacji zostanie wykorzystany
 język \emph{Ruby} i framework \emph{Ruby on Rails}. Wybór można
@@ -306,18 +308,17 @@ ma to miejsce w przypadku języka \emph{Java} i firmy \emph{Sun
   Microsystems}).
 
 W związku z tym, że język \emph{Ruby} utożsamiany jest głównie z
-technologiami \emph{webowymi}, należałoby nadmienić fakt, iż jest to
-język uniwersalny. Zamierzeniem Yukihiro Matsumoto było stworzenie
-języka, który byłby ,,skuteczniejszy niż \emph{Perl}, oraz bardziej
-zorientowany obiektowo niż \emph{Python}''
-\cite{matzinterview}. Tworzenie aplikacji internetowych nie miało
-wpływu na rozwój tego języka, tak jak ma to miejsce w przypadku języka
-\emph{PHP}. Język \emph{Ruby} posiada bardzo bogatą bibliotekę
-standardową, a także dużą ilość bibliotek zewnętrznych
-(tzw. \emph{gemów}). Równie dobrze nadaje się do tworzenia aplikacji
-okienkowych, serwerów sieciowych, jak i skryptów systemowych. Nie
-zmienia to jednak faktu, że popularność języka wiąże się nierozłącznie
-z frameworkiem \emph{Ruby on Rails}.
+technologiami webowymi, należałoby nadmienić fakt, iż tworzenie
+aplikacji internetowych nie miało wpływu na rozwój tego języka (tak
+jak ma to miejsce w przypadku języka \emph{PHP}). Zamierzeniem
+Yukihiro Matsumoto było stworzenie języka, który byłby
+,,skuteczniejszy niż \emph{Perl} oraz bardziej zorientowany obiektowo
+niż \emph{Python}''\cite{matzinterview}. Język \emph{Ruby} posiada
+bardzo bogatą bibliotekę standardową, a także dużą ilość bibliotek
+zewnętrznych (tzw. \emph{gemów}). Równie dobrze nadaje się do
+tworzenia aplikacji okienkowych, serwerów sieciowych, jak i skryptów
+systemowych. Nie zmienia to jednak faktu, że popularność języka wiąże
+się nierozłącznie z frameworkiem \emph{Ruby on Rails}.
 
 \subsection{Ruby on Rails}
 Twórcą frameworka \emph{Ruby on Rails} jest duński programista David
@@ -325,13 +326,17 @@ Heinemeier Hansson. Framework powstał w wyniku prac nad aplikacją
 \emph{Basecamp}, został udostępniony w połowie 2004 roku. Wzrost
 popularności \emph{Ruby on Rails} nastąpił po ogłoszeniu przez firmę
 \emph{Apple Inc.}, że będzie on dostarczany wraz z systemem \emph{Mac
-  OS X v10.5 ''Leopard''} \cite{rubyonrails}. Swoje ogromne możliwości
+  OS X v10.5 ''Leopard''}\cite{rubyonrails}. Swoje ogromne możliwości
 framework zawdzięcza wykorzystaniu cech takich języka, jak:
 metaprogramowanie, kacze typowanie czy możliwość otwierania klas.
 
 Framework \emph{Ruby on Rails} umożliwia tworzenie aplikacji
-internetowych w oparciu o wzorzec \emph{MVC} \footnote{MVC -
-  Model-View-Controller\cite{mvc}}. \emph{Ruby on Rails} obsługuje
+internetowych w oparciu o wzorzec \emph{MVC}\footnote{MVC -
+  model-widok-kontroler (ang. Model-View-Controller), wzorzec
+  projektowy, którego założeniem jest podział aplikacji na modele,
+  widoki i kontrolery. Podział jest realizowany w taki sposób, aby
+  modyfikacja jednego elementu miała jak najmniejszy wpływ na
+  działanie pozostałych\cite{mvc}}. \emph{Ruby on Rails} obsługuje
 wszystkie popularne silniki bazodanowe poprzez bibliotekę mapowania
 obiektowo-relacyjnego \emph{ActiveRecord} \cite{orm}. Aplikacje
 napisane przy użyciu frameworka mogą być uruchamiane na serwerach
@@ -350,21 +355,29 @@ główne to:
 \begin{itemize}
 \item \emph{ActiveRecord} - biblioteka mapowania
   obiektowo-relacyjnego, stworzona na podstawie wzorca projektowego o
-  tej samej nazwie \cite{activerecord}. Biblioteka ta oferuje znacznie
+  tej samej nazwie\cite{activerecord}. Biblioteka ta oferuje znacznie
   więcej, niż wynika z implementowanego wzorca, m.in. różne rodzaje
-  asocjacji, asocjacje polimorficzne \cite{polymorphic}, mechanizm
-  dziedziczenia jednotabelowego (\emph{STI} \footnote{STI - Single
-    Table Inheritance \cite{sti}}) oraz walidatory
+  asocjacji (w tym asocjacje polimorficzne\cite{polymorphic}),
+  mechanizm dziedziczenia jednotabelowego (\emph{STI}\footnote{STI -
+    dziedziczenie jednotabelowe (ang. Single Table Inheritance) -
+    technika umożliwiająca odzwierciedlenie w jednej tabeli relacyjnej
+    bazy danych obiektów wielu dziedziczących po sobie
+    klas\cite{sti}}) oraz walidatory
 \item \emph{ActionPack} - biblioteka umożliwiająca tworzenie
-  kontrolerów i widoków
+  kontrolerów i widoków, odpowiada również za kierowanie zapytań do
+  odpowiednich akcji kontrolerów (tzw. \emph{routing})
 \item \emph{ActiveSupport} - biblioteka dodająca wiele użytecznych
   funkcji do klas biblioteki standardowej, ułatwiających tworzenie
   aplikacji webowych (i nie tylko)
 \item \emph{ActionMailer} - biblioteka służąca do wysyłania wiadomości
-  e-mail bezpośrednio z aplikacji
+  e-mail, np. poprzez zewnętrzne serwery \emph{SMTP}
 \item \emph{ActiveResource} - biblioteka umożliwiająca mapowanie
-  odległych zasobów sieciowych i wykorzystywanie ich w podobny sposób
-  do modeli pochodzących z bazy danych
+  zasobów \emph{REST}\footnote{REST - ang. Representational State
+    Transfer, styl architektury zakładający traktowanie informacji
+    udostępnianych przez aplikacje webowe jako zasoby, na których
+    wywoływane są działania takie jak: tworzenie zasobu, odczyt,
+    aktualizacja i usuwanie (ang. create, read, update,
+    delete)\cite{rest}} na modele w aplikacji
 \end{itemize}
 
 Uproszczony diagram przedstawiający interakcje pomiędzy poszczególnymi
@@ -389,7 +402,7 @@ pierwowzór. Spory pomiędzy zwolennikami nowopowstałego frameworka a
 dotychczasową społecznością spowodowały powstanie w niej pewnego
 rodzaju rozłamu. Przy narastającej fali krytyki z obu stron, niedługo
 po wydaniu \emph{Merba 1.0}, David Heinemeier Hansson ogłosił
-połączenie obu grup programistów \cite{merge}. Utworzony zespół miał
+połączenie obu grup programistów\cite{merge}. Utworzony zespół miał
 się zająć połączeniem powstającego \emph{Merba 2} i \emph{Ruby on
   Rails 3}. Zgodnie z ustaleniami, pierwsze wydania \emph{Ruby on
   Rails 3} mają się pojawić pod koniec 2009 roku.
@@ -398,19 +411,19 @@ się zająć połączeniem powstającego \emph{Merba 2} i \emph{Ruby on
 Język \emph{JavaScript} powstał pod koniec 1995 roku w firmie
 \emph{Netscape Communications Corporation}, jako alternatywa dla
 uruchamianych w przeglądarce apletów \emph{Javy}. Jego twórcą jest
-amerykański programista Brendan Eich.  Począwszy od 1996 roku język
+amerykański programista Brendan Eich. Począwszy od 1996 roku język
 jest standaryzowany przez \emph{ECMA International}\footnote{ECMA -
   Europejskie Stowarzyszenie na rzecz Standaryzacji Systemów
   Informacyjnych i Komunikacyjnych (ang. European association for
   standardizing information and communication systems), organizacja
-  zajmująca się standaryzacją systemów informatycznych w Europie
-  \cite{ecma}} jako \emph{ECMAScript}.
+  zajmująca się standaryzacją systemów informatycznych w
+  Europie\cite{ecma}} jako \emph{ECMAScript}.
 
 Pomimo swojej nazwy jasno kojarzącej się z językiem \emph{Java}, język
 \emph{JavaScript} jest (z wyjątkiem kilku elementów) językiem
 diametralnie od \emph{Javy} różnym. Największy wpływ na jego rozwój
 miały języki takie jak: \emph{Self}, \emph{C}, \emph{Scheme},
-\emph{Perl} oraz \emph{Python} \cite{javascript}. Aby upodobnić język
+\emph{Perl} oraz \emph{Python}\cite{javascript}. Aby upodobnić język
 do błyskawicznie zyskującej wówczas popularność \emph{Javy},
 zapożyczony został zestaw słów kluczowych i składnia. Ta prosta
 marketingowa sztuczka zaowocowała całkowitym niezrozumieniem tego
@@ -439,7 +452,7 @@ Najważniejszymi cechami języka, wyróżniającymi go od języków
   obiektów jest posiadanie przez nie wspólnego prototypu
 \end{itemize}
 
-Główne implementacje \emph{JavaScriptu} to \cite{javascript}:
+Główne implementacje \emph{JavaScriptu} to\cite{javascript}:
 
 \begin{itemize}
 \item \emph{SpiderMonkey} - pierwszy interpreter, napisany przez
@@ -604,20 +617,20 @@ działania mechanizmu strumieniowania został przedstawiony na
 W związku z tym, że opisywane mechanizmy wykorzystują techniki
 nieobjęte żadną specyfikacją, ich działanie jest w dużej mierze
 zależne od implementacji poszczególnych przeglądarek
-internetowych. Największym wyzwaniem jest przystosowanie w.w. technik
-do przeglądarek w urządzeniach mobilnych. Okazuje się również, że
-użycie \emph{HTTP Push} na powszechnie używanych serwerach \emph{HTTP}
-jest wysoce nieefektywne lub wręcz niemożliwe. Niemal wszystkie
-dostępne rozwiązania wymagają uruchomienia dodatkowych serwerów,
-odpowiedzialnych wyłącznie za obsługę \emph{HTTP Push}. Są to serwery
-takie jak: \emph{Caplin Liberator}, \emph{Cometd}, \emph{ErlyComet},
-\emph{GlassFish}, \emph{Jetty}, \emph{Lightstreamer}, \emph{Meteor},
-\emph{Orbited}, \emph{Persevere} i \emph{RMDS2Web
-  Server}\cite{cometmaturity}. Dodatkową przeszkodą w komunikacji
-przeglądarki z dodatkowym serwerem jest opisywane już wcześniej
-zabezpieczenie \emph{same origin policy}. Całość komplikuje również
-fakt, że przeglądarki internetowe realizują te zabezpieczenia w różny
-sposób\cite{xssinfo}.
+internetowych. Największym wyzwaniem jest przystosowanie wymienionych
+technik do przeglądarek w urządzeniach mobilnych. Okazuje się również,
+że użycie \emph{HTTP Push} na powszechnie używanych serwerach
+\emph{HTTP} jest wysoce nieefektywne lub wręcz niemożliwe. Niemal
+wszystkie dostępne rozwiązania wymagają uruchomienia dodatkowych
+serwerów, odpowiedzialnych wyłącznie za obsługę \emph{HTTP Push}. Są
+to serwery takie jak: \emph{Caplin Liberator}, \emph{Cometd},
+\emph{ErlyComet}, \emph{GlassFish}, \emph{Jetty},
+\emph{Lightstreamer}, \emph{Meteor}, \emph{Orbited}, \emph{Persevere}
+i \emph{RMDS2Web Server}\cite{cometmaturity}. Dodatkową przeszkodą w
+komunikacji przeglądarki z dodatkowym serwerem jest opisywane już
+wcześniej zabezpieczenie \emph{same origin policy}. Całość komplikuje
+również fakt, że przeglądarki internetowe realizują te zabezpieczenia
+w różny sposób\cite{xssinfo}.
 
 Wszystkie opisywane w tym rozdziale techniki noszą wspólną nazwę
 \emph{Comet}\cite{comet}. W 2007 roku organizacja \emph{DOJO
@@ -704,12 +717,14 @@ najczęściej wykonywaną operacją jest pobranie sąsiadujących
 współrzędnych budowanej osady można było łatwo wyliczyć zbiór
 współrzędnych dołączonych do wierzchołka sześciokątów, wierzchołków i
 krawędzi. Aby ułatwić przekształcenia, wszystkie elementy planszy
-muszą być jednoznacznie identyfikowane na podstawie dwóch
+muszą być jednoznacznie identyfikowalne na podstawie dwóch
 współrzędnych.
 
 \subsubsection{Sześciokąty}
-
-
+Podobnie jak w implementacji gry \emph{Pioneers}, sześciokąty zostały
+ułożone w dwuwymiarową tablicę. Każdy z nich ma przypisaną pozycję,
+składającą się z numeru wiersza $x$ i kolumny $y$. Sposób numeracji
+sześciokątów został przedstawiony na \imref{board}.
 
 \begin{figure}[ht]
   \begin{center}
@@ -719,55 +734,103 @@ współrzędnych.
   \label{board}
 \end{figure}
 
+\subsubsection{Wierzchołki}
+Numerowanie wierzchołków jest nieco bardziej skomplikowanym
+zadaniem. Wykorzystany został tutaj fakt, iż przy numeracji
+sześciokątów przedstawionej na \imref{board}, w każdym z nich można
+wyróżnić wierzchołki ,,górne'' (posiadające numer wiersza taki jak
+numer wiersza sześciokąta) i ,,dolne'' (posiadające numer wiersza o
+jeden większy niż numer wiersza sześciokąta). Dla ujednolicenia
+schematu numeracji, konieczne stało się ponumerowanie dodatkowych
+pozycji, w których nie występują wierzchołki. Omawiany sposób
+numeracji został przedstawiony na \imref{nodes}. Dla planszy o
+rozmiarach $x$ wierszy i $y$ kolumn, otrzymujemy tablicę wierzchołków
+posiadającą wysokość $x+1$ wierszy i szerokość $2y+2$ kolumn.
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[width=\linewidth]{nodes.pdf}
+  \end{center}
+  \caption{Zasada numerowania wierzchołków na planszy}
+  \label{nodes}
+\end{figure}
+
+\subsubsection{Krawędzie}
+Krawędzie numerowane są na podobnej zasadzie co wierzchołki. Również
+niezbędne okazało się wprowadzenie niepowiązanych z sześciokątami
+pozycji. Sposób numeracji krawędzi został przedstawiony na
+\imref{edges}. Plansza o rozmiarach $x$ wierszy i $y$ kolumn, posiada
+tablicę krawędzi o wysokości $x+1$ wierszy i szerokości $3y+4$ kolumn.
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[width=\linewidth]{edges.pdf}
+  \end{center}
+  \caption{Zasada numerowania krawędzi na planszy}
+  \label{edges}
+\end{figure}
+
+\subsubsection{}
+
 \begin{equation}
-  HEX_{adj}=\{
-  (x-1; y+1),
-  (x-1; y),
-  (x; y-1),
-  (x+1; y-1),
-  (x+1; y),
-  (x; y+1)
-  \}
+  \begin{split}
+    HEX_{adj}=
+    \{
+    (x-1; y+1),
+    (x-1; y),
+    (x; y-1),\\
+    (x+1; y-1),
+    (x+1; y),
+    (x; y+1)
+    \}
+  \end{split}
   \label{hexhexes}
 \end{equation}
 \begin{equation}
-  NODE_{adj}=\{
-  (x; 2y+3),
-  (x; 2y+2),
-  (x; 2y+1),
-  (x+1; 2y),
-  (x+1; 2y+1),
-  (x+1; 2y+2)
-  \}
+  \begin{split}
+    NODE_{adj}=\{
+    (x+1; 2y),
+    (x+1; 2y+1),
+    (x+1; 2y+2),\\
+    (x; 2y+3),
+    (x; 2y+2),
+    (x; 2y+1)
+    \}
+  \end{split}
   \label{nodehexes}
 \end{equation}
 \begin{equation}
-  EDGE_{adj}=\{
-  (x; 3y+5),
-  (x; 3y+4),
-  (x; 3y+3),
-  (x+1; 3y+2),
-  (x+1; 3y+4),
-  (x; 3y+6)
-  \}
+  \begin{split}
+    EDGE_{adj}=\{
+    (x+1; 3y+2),
+    (x+1; 3y+4),
+    (x; 3y+6),\\
+    (x; 3y+5),
+    (x; 3y+4),
+    (x; 3y+3)
+    \}
+  \end{split}
   \label{edgehexes}
 \end{equation}
 
-\subsubsection{Wierzchołki}
 \begin{equation}
   HEX_{adj}=
   \left\{
-    \begin{array}{l l}
+    \begin{array}{l l l l}
+      \begin{split}
       \{
-      (x-1; \lfloor\frac{y}{2}\rfloor),
-      (x; \lfloor\frac{y}{2}\rfloor-1),
-      (x; \lfloor\frac{y}{2}\rfloor)
-      \} & \mbox{ dla nieparzystych $y$} \\
-      \{
-      (x-1; \lfloor\frac{y}{2}\rfloor),
-      (x-1; \lfloor\frac{y}{2}\rfloor-1),
+      (x-1; \lfloor\frac{y}{2}\rfloor-1),\\
+      (x-1; \lfloor\frac{y}{2}\rfloor), \\
       (x; \lfloor\frac{y}{2}\rfloor-1)
-      \} & \mbox{ dla parzystych $y$} \\
+      \}
+      \end{split} & \mbox{dla} & \mbox{$y=2n$,} & \mbox{$n\in\mathbb{Z}$} \\[40pt]
+      \begin{split}
+        \{
+        (x-1; \lfloor\frac{y}{2}\rfloor), \\
+        (x; \lfloor\frac{y}{2}\rfloor-1), \\
+        (x; \lfloor\frac{y}{2}\rfloor)
+        \}
+      \end{split} & & \mbox{$y=2n+1$,} & \mbox{$n\in\mathbb{Z}$} \\
     \end{array} \right.
   \label{nodehexes}
 \end{equation}
@@ -776,15 +839,15 @@ współrzędnych.
   \left\{
     \begin{array}{l l}
       \{
-      (x; y+1),
-      (x; y-1),
-      (x+1; y-1)
-      \} & \mbox{ dla nieparzystych $y$} \\
-      \{
       (x-1; 3\lfloor\frac{y}{2}\rfloor+3),
       (x; 3\lfloor\frac{y}{2}\rfloor+3),
       (x; 3\lfloor\frac{y}{2}\rfloor+2)
-      \} & \mbox{ dla parzystych $y$} \\
+      \} & \mbox{dla $y=2n$, $n\in\mathbb{Z}$} \\
+      \{
+      (x; y+1),
+      (x; y-1),
+      (x+1; y-1)
+      \} & \mbox{dla $y=2n+1$, $n\in\mathbb{Z}$} \\
     \end{array} \right.
   \label{nodenodes}
 \end{equation}
@@ -793,20 +856,18 @@ współrzędnych.
   \left\{
     \begin{array}{l l}
       \{
-      (x; 3\lfloor\frac{y}{2}\rfloor+4),
-      (x; 3\lfloor\frac{y}{2}\rfloor+2),
-      (x; 3\lfloor\frac{y}{2}\rfloor+3)
-      \} & \mbox{ dla nieparzystych $y$} \\
-      \{
       (x-1; 3\lfloor\frac{y}{2}\rfloor+3),
       (x; 3\lfloor\frac{y}{2}\rfloor+3),
       (x; 3\lfloor\frac{y}{2}\rfloor+2)
-      \} & \mbox{ dla parzystych $y$} \\
+      \} & \mbox{dla $y=2n$, $n\in\mathbb{Z}$} \\
+      \{
+      (x; 3\lfloor\frac{y}{2}\rfloor+4),
+      (x; 3\lfloor\frac{y}{2}\rfloor+2),
+      (x; 3\lfloor\frac{y}{2}\rfloor+3)
+      \} & \mbox{dla $y=2n+1$, $n\in\mathbb{Z}$} \\
     \end{array} \right.
   \label{nodenodes}
 \end{equation}
-
-\subsubsection{Krawędzie}
 
 \begin{equation}
   HEX_{adj}=
@@ -815,15 +876,15 @@ współrzędnych.
       \{
       (x; \lfloor\frac{y}{3}\rfloor-1),
       (x; \lfloor\frac{y}{3}\rfloor-2)
-      \} & \mbox{ jeśli y\%3==0} \\
+      \} & \mbox{dla $y=3n$, $n\in\mathbb{Z}$} \\
       \{
       (x-1; \lfloor\frac{y}{3}\rfloor-1),
       (x; \lfloor\frac{y}{3}\rfloor-1)
-      \} & \mbox{ jeśli y\%3==1} \\
+      \} & \mbox{dla $y=3n+1$, $n\in\mathbb{Z}$} \\
       \{
       (x-1; \lfloor\frac{y}{3}\rfloor),
       (x; \lfloor\frac{y}{3}\rfloor-1)
-      \} & \mbox{ jeśli y\%3==2} \\
+      \} & \mbox{dla $y=3n+2$, $n\in\mathbb{Z}$} \\
     \end{array} \right.
   \label{edgehexes}
 \end{equation}
@@ -834,15 +895,15 @@ współrzędnych.
       \{
       (x; 2\lfloor\frac{y}{3}\rfloor-1),
       (x+1; 2\lfloor\frac{y}{3}\rfloor-2)
-      \} & \mbox{ jeśli y\%3==0} \\
+      \} & \mbox{dla $y=3n$, $n\in\mathbb{Z}$} \\
       \{
       (x; 2\lfloor\frac{y}{3}\rfloor),
       (x; 2\lfloor\frac{y}{3}\rfloor-1)
-      \} & \mbox{ jeśli y\%3==1} \\
+      \} & \mbox{dla $y=3n+1$, $n\in\mathbb{Z}$} \\
       \{
       (x; 2\lfloor\frac{y}{3}\rfloor+1),
       (x; 2\lfloor\frac{y}{3}\rfloor)
-      \} & \mbox{ jeśli y\%3==2} \\
+      \} & \mbox{dla $y=3n+2$, $n\in\mathbb{Z}$} \\
     \end{array} \right.
   \label{edgenodes}
 \end{equation}
@@ -850,42 +911,40 @@ współrzędnych.
   EDGE_{adj}=
   \left\{
     \begin{array}{l l}
-      \{
-      (x+1; y-2),
-      (x+1; y-1),
-      (x; y+1),
-      (x; y-1),
-      \} & \mbox{ jeśli y\%3==0} \\
-      \{
-      (x; y-2),
-      (x; y-1),
-      (x-1; y+2),
-      (x; y+1),
-      \} & \mbox{ jeśli y\%3==1} \\
-      \{
-      (x-1; y+1),
-      (x; y-1),
-      (x; y+2),
-      (x; y+1),
-      \} & \mbox{ jeśli y\%3==2} \\
+      \begin{split}
+        \{
+        (x+1; y-2),
+        (x+1; y-1), \\
+        (x; y+1),
+        (x; y-1)
+        \}
+      \end{split} & \mbox{dla $y=3n$, $n\in\mathbb{Z}$} \\[18pt]
+      \begin{split}
+        \{
+        (x-1; y+2),
+        (x; y-2), \\
+        (x; y-1),
+        (x; y+1)
+        \}
+      \end{split} & \mbox{dla $y=3n+1$, $n\in\mathbb{Z}$} \\[18pt]
+      \begin{split}
+        \{
+        (x-1; y+1),
+        (x; y-1), \\
+        (x; y+2),
+        (x; y+1)
+        \}
+      \end{split} & \mbox{dla $y=3n+2$, $n\in\mathbb{Z}$} \\
     \end{array} \right.
   \label{edgenodes}
 \end{equation}
 
 \begin{figure}[ht]
   \begin{center}
-    \includegraphics[width=\linewidth]{nodes.pdf}
+    \includegraphics[width=\linewidth]{erd.pdf}
   \end{center}
-  \caption{Zasada numerowania wierzchołków na planszy}
-  \label{nodes}
-\end{figure}
-
-\begin{figure}[ht]
-  \begin{center}
-    \includegraphics[width=\linewidth]{edges.pdf}
-  \end{center}
-  \caption{Zasada numerowania krawędzi na planszy}
-  \label{edges}
+  \caption{Diagram związków encji}
+  \label{erd}
 \end{figure}
 
 \clearpage

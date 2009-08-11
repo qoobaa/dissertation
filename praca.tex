@@ -770,174 +770,230 @@ tablicę krawędzi o wysokości $x+1$ wierszy i szerokości $3y+4$ kolumn.
   \label{edges}
 \end{figure}
 
-\subsubsection{}
+\subsubsection{Obliczanie pozycji elementów dołączonych}
+Po wprowadzeniu przedstawionych schematów numeracji, możliwe staje się
+wyznaczenie pozycji elementów sąsiadujących z ponumerowanymi
+sześciokątami, wierzchołkami i krawędziami. Zbiory dołączonych
+sześciokątów $hexes_{adj}$, wierzchołków $nodes_{adj}$ i krawędzi
+$edges_{adj}$ do danego sześciokąta o współrzędnych $(x, y)$ zostały
+przedstawione kolejno w równaniach \ref{hexhexes}, \ref{hexnodes} i
+\ref{hexedges}. Każdy sześciokąt posiada po sześć sąsiadujących
+pozycji elementów każdego typu.
 
 \begin{equation}
   \begin{split}
-    HEX_{adj}=
+    \text{hexes}_{adj}(\text{hex}_{x,y})=
     \{
-    (x-1; y+1),
-    (x-1; y),
-    (x; y-1),\\
-    (x+1; y-1),
-    (x+1; y),
-    (x; y+1)
+    (x-1, y+1),
+    (x-1, y),
+    (x, y-1),\\
+    (x+1, y-1),
+    (x+1, y),
+    (x, y+1)
     \}
   \end{split}
   \label{hexhexes}
 \end{equation}
 \begin{equation}
   \begin{split}
-    NODE_{adj}=\{
-    (x+1; 2y),
-    (x+1; 2y+1),
-    (x+1; 2y+2),\\
-    (x; 2y+3),
-    (x; 2y+2),
-    (x; 2y+1)
+    \text{nodes}_{adj}(hex_{x,y})=\{
+    (x+1, 2y),
+    (x+1, 2y+1),
+    (x+1, 2y+2),\\
+    (x, 2y+3),
+    (x, 2y+2),
+    (x, 2y+1)
     \}
   \end{split}
-  \label{nodehexes}
+  \label{hexnodes}
 \end{equation}
 \begin{equation}
   \begin{split}
-    EDGE_{adj}=\{
-    (x+1; 3y+2),
-    (x+1; 3y+4),
-    (x; 3y+6),\\
-    (x; 3y+5),
-    (x; 3y+4),
-    (x; 3y+3)
+    \text{edges}_{adj}(hex_{x,y})=\{
+    (x+1, 3y+2),
+    (x+1, 3y+4),
+    (x, 3y+6),\\
+    (x, 3y+5),
+    (x, 3y+4),
+    (x, 3y+3)
     \}
   \end{split}
-  \label{edgehexes}
-\end{equation}
+  \label{hexedges}
+\end{equation} \\
+
+W przypadku wyznaczania elementów sąsiadujących z wierzchołkiem
+sytuacja jest nieco bardziej skomplikowana. Zbiory elementów
+dołączonych do danego wierzchołka są różne dla wierzchołków
+znajdujących się w kolumnach parzystych i nieparzystych. Każdy ze
+zbiorów składa się z trzech elementów. Zbiór sąsiadujących:
+sześciokątów $hexes_{adj}$, wierzchołków $nodes_{adj}$ i krawędzi
+$edges_{adj}$, z danym wierzchołkiem o współrzędnych $(x, y)$, zostały
+przedstawione w równaniach \ref{nodehexes}, \ref{nodenodes} i
+\ref{nodeedges}.
 
 \begin{equation}
-  HEX_{adj}=
+  \text{hexes}_{adj}(\text{node}_{x,y})=
   \left\{
-    \begin{array}{l l l l}
+    \begin{array}{l r l}
       \begin{split}
       \{
-      (x-1; \lfloor\frac{y}{2}\rfloor-1),\\
-      (x-1; \lfloor\frac{y}{2}\rfloor), \\
-      (x; \lfloor\frac{y}{2}\rfloor-1)
+      (x-1, \lfloor\frac{y}{2}\rfloor-1), \\
+      (x-1, \lfloor\frac{y}{2}\rfloor), \\
+      (x, \lfloor\frac{y}{2}\rfloor-1)
       \}
-      \end{split} & \mbox{dla} & \mbox{$y=2n$,} & \mbox{$n\in\mathbb{Z}$} \\[40pt]
+      \end{split} & \mbox{dla } y=2n, & n\in\mathbb{Z} \\[40pt]
       \begin{split}
         \{
-        (x-1; \lfloor\frac{y}{2}\rfloor), \\
-        (x; \lfloor\frac{y}{2}\rfloor-1), \\
-        (x; \lfloor\frac{y}{2}\rfloor)
+        (x-1, \lfloor\frac{y}{2}\rfloor), \\
+        (x, \lfloor\frac{y}{2}\rfloor-1), \\
+        (x, \lfloor\frac{y}{2}\rfloor)
         \}
-      \end{split} & & \mbox{$y=2n+1$,} & \mbox{$n\in\mathbb{Z}$} \\
+      \end{split} & y=2n+1, & n\in\mathbb{Z} \\
     \end{array} \right.
   \label{nodehexes}
 \end{equation}
 \begin{equation}
-  NODE_{adj}=
+  \text{nodes}_{adj}(\text{node}_{x,y})=
   \left\{
-    \begin{array}{l l}
-      \{
-      (x-1; 3\lfloor\frac{y}{2}\rfloor+3),
-      (x; 3\lfloor\frac{y}{2}\rfloor+3),
-      (x; 3\lfloor\frac{y}{2}\rfloor+2)
-      \} & \mbox{dla $y=2n$, $n\in\mathbb{Z}$} \\
-      \{
-      (x; y+1),
-      (x; y-1),
-      (x+1; y-1)
-      \} & \mbox{dla $y=2n+1$, $n\in\mathbb{Z}$} \\
+    \begin{array}{l r l}
+      \begin{split}
+        \{
+        (x-1, 3\lfloor\frac{y}{2}\rfloor+3), \\
+        (x, 3\lfloor\frac{y}{2}\rfloor+3), \\
+        (x, 3\lfloor\frac{y}{2}\rfloor+2)
+        \}
+      \end{split} & \mbox{dla } y=2n, & n\in\mathbb{Z} \\[40pt]
+      \begin{split}
+        \{
+        (x, y+1), \\
+        (x, y-1), \\
+        (x+1, y-1)
+        \}
+      \end{split} & y=2n+1, & n\in\mathbb{Z} \\
     \end{array} \right.
   \label{nodenodes}
 \end{equation}
 \begin{equation}
-  EDGE_{adj}=
+  \text{edges}_{adj}(\text{node}_{x,y})=
   \left\{
-    \begin{array}{l l}
+    \begin{array}{l r l}
+      \begin{split}
       \{
-      (x-1; 3\lfloor\frac{y}{2}\rfloor+3),
-      (x; 3\lfloor\frac{y}{2}\rfloor+3),
-      (x; 3\lfloor\frac{y}{2}\rfloor+2)
-      \} & \mbox{dla $y=2n$, $n\in\mathbb{Z}$} \\
+      (x-1, 3\lfloor\frac{y}{2}\rfloor+3), \\
+      (x, 3\lfloor\frac{y}{2}\rfloor+3), \\
+      (x, 3\lfloor\frac{y}{2}\rfloor+2)
+      \}
+      \end{split} & \mbox{dla } y=2n, & n\in\mathbb{Z} \\[40pt]
+      \begin{split}
       \{
-      (x; 3\lfloor\frac{y}{2}\rfloor+4),
-      (x; 3\lfloor\frac{y}{2}\rfloor+2),
-      (x; 3\lfloor\frac{y}{2}\rfloor+3)
-      \} & \mbox{dla $y=2n+1$, $n\in\mathbb{Z}$} \\
+      (x, 3\lfloor\frac{y}{2}\rfloor+4), \\
+      (x, 3\lfloor\frac{y}{2}\rfloor+2), \\
+      (x, 3\lfloor\frac{y}{2}\rfloor+3)
+      \}
+      \end{split} & y=2n+1, & n\in\mathbb{Z} \\
     \end{array} \right.
-  \label{nodenodes}
-\end{equation}
+  \label{nodeedges}
+\end{equation} \\
+
+Podobna sytuacja ma miejsce w przypadku wyliczania współrzędnych
+elementów dołączonych do krawędzi. W tym przypadku dla trzech
+następujących po sobie kolumn otrzymujemy trzy różne zbiory. Zbiory te
+w przypadku dołączonych sześciokątów i wierzchołków składają się z
+dwóch elementów, natomiast w przypadku krawędzi -- z czterech. Zbiory
+sześciokątów $hexes_{adj}$, wierzchołków $nodes_{adj}$ i krawędzi
+$edges_{adj}$, dla krawędzi o współrzędnych $(x,y)$, zostały
+przedstawione w równaniach \ref{edgehexes}, \ref{edgenodes} i
+\ref{edgeedges}.
 
 \begin{equation}
-  HEX_{adj}=
+  \text{hexes}_{adj}(\text{edge}_{x,y})=
   \left\{
-    \begin{array}{l l}
+    \begin{array}{l r l}
+      \begin{split}
+        \{
+        (x, \lfloor\frac{y}{3}\rfloor-2), \\
+        (x, \lfloor\frac{y}{3}\rfloor-1)
+        \}
+      \end{split} & \mbox{dla } y=3n, & n\in\mathbb{Z} \\[30pt]
+      \begin{split}
+        \{
+        (x-1, \lfloor\frac{y}{3}\rfloor-1), \\
+        (x, \lfloor\frac{y}{3}\rfloor-1)
+        \}
+      \end{split} & y=3n+1, & n\in\mathbb{Z} \\[30pt]
+      \begin{split}
       \{
-      (x; \lfloor\frac{y}{3}\rfloor-1),
-      (x; \lfloor\frac{y}{3}\rfloor-2)
-      \} & \mbox{dla $y=3n$, $n\in\mathbb{Z}$} \\
-      \{
-      (x-1; \lfloor\frac{y}{3}\rfloor-1),
-      (x; \lfloor\frac{y}{3}\rfloor-1)
-      \} & \mbox{dla $y=3n+1$, $n\in\mathbb{Z}$} \\
-      \{
-      (x-1; \lfloor\frac{y}{3}\rfloor),
-      (x; \lfloor\frac{y}{3}\rfloor-1)
-      \} & \mbox{dla $y=3n+2$, $n\in\mathbb{Z}$} \\
+      (x-1, \lfloor\frac{y}{3}\rfloor), \\
+      (x, \lfloor\frac{y}{3}\rfloor-1)
+      \}
+      \end{split} & y=3n+2, & n\in\mathbb{Z} \\
     \end{array} \right.
   \label{edgehexes}
 \end{equation}
 \begin{equation}
-  NODE_{adj}=
+  \text{nodes}_{adj}(\text{edge}_{x,y})=
   \left\{
-    \begin{array}{l l}
+    \begin{array}{l r l}
+      \begin{split}
       \{
-      (x; 2\lfloor\frac{y}{3}\rfloor-1),
-      (x+1; 2\lfloor\frac{y}{3}\rfloor-2)
-      \} & \mbox{dla $y=3n$, $n\in\mathbb{Z}$} \\
+      (x+1, 2\lfloor\frac{y}{3}\rfloor-2), \\
+      (x, 2\lfloor\frac{y}{3}\rfloor-1)
+      \}
+      \end{split} & \mbox{dla } y=3n, & n\in\mathbb{Z} \\[30pt]
+      \begin{split}
+        \{
+        (x, 2\lfloor\frac{y}{3}\rfloor-1), \\
+        (x, 2\lfloor\frac{y}{3}\rfloor)
+        \}
+      \end{split} & y=3n+1, & n\in\mathbb{Z} \\[30pt]
+      \begin{split}
       \{
-      (x; 2\lfloor\frac{y}{3}\rfloor),
-      (x; 2\lfloor\frac{y}{3}\rfloor-1)
-      \} & \mbox{dla $y=3n+1$, $n\in\mathbb{Z}$} \\
-      \{
-      (x; 2\lfloor\frac{y}{3}\rfloor+1),
-      (x; 2\lfloor\frac{y}{3}\rfloor)
-      \} & \mbox{dla $y=3n+2$, $n\in\mathbb{Z}$} \\
+      (x, 2\lfloor\frac{y}{3}\rfloor+1), \\
+      (x, 2\lfloor\frac{y}{3}\rfloor)
+      \}
+      \end{split} & y=3n+2, & n\in\mathbb{Z} \\
     \end{array} \right.
   \label{edgenodes}
 \end{equation}
 \begin{equation}
-  EDGE_{adj}=
+  \text{edges}_{adj}(\text{edge}_{x,y})=
   \left\{
-    \begin{array}{l l}
+    \begin{array}{l r l}
       \begin{split}
         \{
-        (x+1; y-2),
-        (x+1; y-1), \\
-        (x; y+1),
-        (x; y-1)
+        (x+1, y-2), \\
+        (x+1, y-1), \\
+        (x, y+1), \\
+        (x, y-1)
         \}
-      \end{split} & \mbox{dla $y=3n$, $n\in\mathbb{Z}$} \\[18pt]
+      \end{split} & \mbox{dla } y=3n, & n\in\mathbb{Z} \\[40pt]
       \begin{split}
         \{
-        (x-1; y+2),
-        (x; y-2), \\
-        (x; y-1),
-        (x; y+1)
+        (x-1, y+2), \\
+        (x, y-2), \\
+        (x, y-1), \\
+        (x, y+1)
         \}
-      \end{split} & \mbox{dla $y=3n+1$, $n\in\mathbb{Z}$} \\[18pt]
+      \end{split} & y=3n+1, & n\in\mathbb{Z} \\[40pt]
       \begin{split}
         \{
-        (x-1; y+1),
-        (x; y-1), \\
-        (x; y+2),
-        (x; y+1)
+        (x-1, y+1), \\
+        (x, y-1), \\
+        (x, y+2), \\
+        (x, y+1)
         \}
-      \end{split} & \mbox{dla $y=3n+2$, $n\in\mathbb{Z}$} \\
+      \end{split} & y=3n+2, & n\in\mathbb{Z} \\
     \end{array} \right.
-  \label{edgenodes}
+  \label{edgeedges}
 \end{equation}
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[width=\linewidth]{statemachine.pdf}
+  \end{center}
+  \caption{Maszyna stanowa gry}
+  \label{statemachine}
+\end{figure}
 
 \begin{figure}[ht]
   \begin{center}

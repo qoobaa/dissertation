@@ -29,6 +29,10 @@
 \maketitle
 \end{titlepage}
 
+\tableofcontents
+
+\clearpage
+
 \section{Analiza zagadnienia}
 
 \subsection{Osadnicy z Catanu}
@@ -958,7 +962,7 @@ przedstawione w równaniach \ref{edgehexes}, \ref{edgenodes} i
 \begin{equation}
   \text{edges}_{adj}(\text{edge}_{x,y})=
   \left\{
-    \begin{array}{l r l}
+    \begin{array}{l r@{,~} l}
       \begin{split}
         \{
         (x+1, y-2), \\
@@ -966,7 +970,7 @@ przedstawione w równaniach \ref{edgehexes}, \ref{edgenodes} i
         (x, y+1), \\
         (x, y-1)
         \}
-      \end{split} & \mbox{dla } y=3n, & n\in\mathbb{Z} \\[40pt]
+      \end{split} & \mbox{dla } y=3n & n\in\mathbb{Z} \\[40pt]
       \begin{split}
         \{
         (x-1, y+2), \\
@@ -974,7 +978,7 @@ przedstawione w równaniach \ref{edgehexes}, \ref{edgenodes} i
         (x, y-1), \\
         (x, y+1)
         \}
-      \end{split} & y=3n+1, & n\in\mathbb{Z} \\[40pt]
+      \end{split} & y=3n+1 & n\in\mathbb{Z} \\[40pt]
       \begin{split}
         \{
         (x-1, y+1), \\
@@ -982,14 +986,16 @@ przedstawione w równaniach \ref{edgehexes}, \ref{edgenodes} i
         (x, y+2), \\
         (x, y+1)
         \}
-      \end{split} & y=3n+2, & n\in\mathbb{Z} \\
+      \end{split} & y=3n+2 & n\in\mathbb{Z} \\
     \end{array} \right.
   \label{edgeedges}
 \end{equation}
 
+\subsubsection{Maszyna stanowa}
+
 \begin{figure}[ht]
   \begin{center}
-    \includegraphics[width=\linewidth]{statemachine.pdf}
+    \includegraphics[width=0.5\linewidth]{statemachine.pdf}
   \end{center}
   \caption{Maszyna stanowa gry}
   \label{statemachine}

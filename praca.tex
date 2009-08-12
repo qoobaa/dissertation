@@ -677,7 +677,7 @@ poprawiające użyteczność samego
 
 \section{Projektowanie aplikacji}
 
-\subsection{Przechowywanie planszy w bazie danych}
+\subsection{Plansza}
 Jednym z podstawowych problemów, jakie należy rozwiązać projektując
 aplikację, jest przechowywanie planszy w relacyjnej bazie
 danych. Naturalnie pierwszym pomysłem było wykorzystanie mechanizmu z
@@ -708,8 +708,8 @@ budowanej osady niezbędnych jest wykonanie kilku czynności:
   znajduje się już inna osada. Minimalna odległość pomiędzy osadami
   wynosi dwie drogi (dwie krawędzie)
 \item sprawdzenie, czy na jednej z sąsiadujących krawędzi wybudowana
-  jest droga należąca do gracza. Budowane osady muszą być ze sobą
-  połączone drogami
+  jest droga należąca do gracza. Budowane osady muszą być połączone
+  drogami
 \item sprawdzenie, czy jeden z sąsiadujących sześciokątów jest
   lądem. Osady nie mogą być budowane na brzegach planszy (na morzu)
 \end{itemize}
@@ -724,11 +724,26 @@ krawędzi. Aby ułatwić przekształcenia, wszystkie elementy planszy
 muszą być jednoznacznie identyfikowalne na podstawie dwóch
 współrzędnych.
 
+Oprócz zbioru sześciokątów, wierzchołków i krawędzi, plansza do gry
+powinna zawierać informacje o jej rozmiarze (ilości wierszy i kolumn)
+oraz o aktualnym położeniu rozbójnika.
+
 \subsubsection{Sześciokąty}
 Podobnie jak w implementacji gry \emph{Pioneers}, sześciokąty zostały
 ułożone w dwuwymiarową tablicę. Każdy z nich ma przypisaną pozycję,
 składającą się z numeru wiersza $x$ i kolumny $y$. Sposób numeracji
-sześciokątów został przedstawiony na \imref{board}.
+sześciokątów został przedstawiony na \imref{board}. Dodatkowo każdy
+sześciokąt powinien zawierać następujące informacje:
+
+\begin{itemize}
+\item typ - sześciokąt może reprezentować wzgórze, pole uprawne, las,
+  pastwisko, górę, pustynię lub morze
+\item wynik rzutu kością, po wyrzuceniu którego pole przynosi
+  dochód. Sześciokąty reprezentujące morze i pustynię nie posiadają
+  żadnej wartości
+\item pozycję (kierunek) i rodzaj szlaku handlowego. Cecha ta dotyczy
+  wyłącznie niektórych sześciokątów reprezentujących morze
+\end{itemize}
 
 \begin{figure}[ht]
   \begin{center}
@@ -749,7 +764,9 @@ schematu numeracji, konieczne stało się ponumerowanie dodatkowych
 pozycji, w których nie występują wierzchołki. Omawiany sposób
 numeracji został przedstawiony na \imref{nodes}. Dla planszy o
 rozmiarach $x$ wierszy i $y$ kolumn, otrzymujemy tablicę wierzchołków
-posiadającą wysokość $x+1$ wierszy i szerokość $2y+2$ kolumn.
+posiadającą wysokość $x+1$ wierszy i szerokość $2y+2$ kolumn. Każdy
+zasiedlony wierzchołek musi należeć do któregoś z graczy oraz posiadać
+dodatkową informację o tym, czy jest osadą, czy miastem.
 
 \begin{figure}[ht]
   \begin{center}
@@ -764,7 +781,9 @@ Krawędzie numerowane są na podobnej zasadzie co wierzchołki. Również
 niezbędne okazało się wprowadzenie niepowiązanych z sześciokątami
 pozycji. Sposób numeracji krawędzi został przedstawiony na
 \imref{edges}. Plansza o rozmiarach $x$ wierszy i $y$ kolumn, posiada
-tablicę krawędzi o wysokości $x+1$ wierszy i szerokości $3y+4$ kolumn.
+tablicę krawędzi o wysokości $x+1$ wierszy i szerokości $3y+4$
+kolumn. Podobnie jak w przypadku wierzchołka -- zasiedlona krawędź
+musi należeć do jednego z graczy.
 
 \begin{figure}[ht]
   \begin{center}
@@ -778,11 +797,11 @@ tablicę krawędzi o wysokości $x+1$ wierszy i szerokości $3y+4$ kolumn.
 Po wprowadzeniu przedstawionych schematów numeracji, możliwe staje się
 wyznaczenie pozycji elementów sąsiadujących z ponumerowanymi
 sześciokątami, wierzchołkami i krawędziami. Zbiory dołączonych
-sześciokątów $hexes_{adj}$, wierzchołków $nodes_{adj}$ i krawędzi
-$edges_{adj}$ do danego sześciokąta o współrzędnych $(x, y)$ zostały
-przedstawione kolejno w równaniach \ref{hexhexes}, \ref{hexnodes} i
-\ref{hexedges}. Każdy sześciokąt posiada po sześć sąsiadujących
-pozycji elementów każdego typu.
+sześciokątów $\text{hexes}_{adj}$, wierzchołków $\text{nodes}_{adj}$ i
+krawędzi $\text{edges}_{adj}$ do danego sześciokąta o współrzędnych
+$(x, y)$ zostały przedstawione kolejno w równaniach \ref{hexhexes},
+\ref{hexnodes} i \ref{hexedges}. Każdy sześciokąt posiada po sześć
+sąsiadujących pozycji elementów każdego typu.
 
 \begin{equation}
   \begin{split}
@@ -830,10 +849,10 @@ sytuacja jest nieco bardziej skomplikowana. Zbiory elementów
 dołączonych do danego wierzchołka są różne dla wierzchołków
 znajdujących się w kolumnach parzystych i nieparzystych. Każdy ze
 zbiorów składa się z trzech elementów. Zbiór sąsiadujących:
-sześciokątów $hexes_{adj}$, wierzchołków $nodes_{adj}$ i krawędzi
-$edges_{adj}$, z danym wierzchołkiem o współrzędnych $(x, y)$, zostały
-przedstawione w równaniach \ref{nodehexes}, \ref{nodenodes} i
-\ref{nodeedges}.
+sześciokątów $\text{hexes}_{adj}$, wierzchołków $\text{nodes}_{adj}$ i
+krawędzi $\text{edges}_{adj}$, z danym wierzchołkiem o współrzędnych
+$(x, y)$, zostały przedstawione w równaniach \ref{nodehexes},
+\ref{nodenodes} i \ref{nodeedges}.
 
 \begin{equation}
   \text{hexes}_{adj}(\text{node}_{x,y})=
@@ -904,9 +923,9 @@ elementów dołączonych do krawędzi. W tym przypadku dla trzech
 następujących po sobie kolumn otrzymujemy trzy różne zbiory. Zbiory te
 w przypadku dołączonych sześciokątów i wierzchołków składają się z
 dwóch elementów, natomiast w przypadku krawędzi -- z czterech. Zbiory
-sześciokątów $hexes_{adj}$, wierzchołków $nodes_{adj}$ i krawędzi
-$edges_{adj}$, dla krawędzi o współrzędnych $(x,y)$, zostały
-przedstawione w równaniach \ref{edgehexes}, \ref{edgenodes} i
+sześciokątów $\text{hexes}_{adj}$, wierzchołków $\text{nodes}_{adj}$ i
+krawędzi $\text{edges}_{adj}$, dla krawędzi o współrzędnych $(x,y)$,
+zostały przedstawione w równaniach \ref{edgehexes}, \ref{edgenodes} i
 \ref{edgeedges}.
 
 \begin{equation}
@@ -991,15 +1010,110 @@ przedstawione w równaniach \ref{edgehexes}, \ref{edgenodes} i
   \label{edgeedges}
 \end{equation}
 
-\subsubsection{Maszyna stanowa}
+\subsection{Gra}
+Głównym zadaniem obiektów tej klasy będzie przechowywanie informacji o
+stanie gry. Każda gra musi posiadać trzech lub czterech graczy oraz
+planszę, na której toczy się rozgrywka. Ze względu na to, że przebieg
+gry podzielony jest na etapy, a każdy z etapów składa się z wielu faz,
+konieczne będzie zaimplementowanie maszyny stanowej. Dzięki maszynie
+stanowej ,,fazy gry'', możliwe będzie sprawdzanie poprawności ruchów
+wykonywanych przez graczy, oraz sterowanie przebiegiem gry.
+
+\subsubsection{Maszyna stanowa fazy gry}
+Gra ,,Osadnicy z Catanu'' podzielona jest na dwa etapy. Pierwszym
+etapem gry jest etap zasiedlenia wyspy, podczas którego gracze kolejno
+stawiają na planszy po jednej osadzie i drodze. Następnie każdy z
+graczy stawia drugą osadę wraz z drogą, przy czym odbywa się to w
+odwrotnej kolejności, tj. gracz który jako ostatni postawił swoją
+pierwszą osadę, stawia drugą osadę jako pierwszy, itd.
+
+Po etapie zasiedlenia wyspy następuje właściwy etap rozgrywki. Składa
+się on z dwóch głównych faz - fazy przed rzutem kością oraz fazy po
+rzucie.
+
+\begin{itemize}
+\item \emph{first settlement} - faza budowania pierwszej osady, po
+  wybudowaniu osady przechodzimy do fazy \emph{first road}
+\item \emph{first road} - faza budowania pierwszej drogi. Jeśli
+  istnieje gracz o numerze wyższym niż numer aktualnego gracza, to po
+  wybudowaniu drogi przechodzimy do fazy \emph{first settlement} W
+  przeciwnym wypadku przechodzimy do \emph{second settlement}
+\item \emph{second settlement} - faza budowania drugiej osady, po
+  wybudowaniu osady przechodzimy do \emph{second road}
+\item \emph{second road} - budowanie drugiej drogi. Jeśli istnieje
+  gracz o numerze niższym niż numer aktualnego gracza, to po
+  wybudowaniu drogi przechodzimy do fazy \emph{second road}. W
+  przeciwnym wypadku następuje przejście do fazy \emph{before roll}
+\item \emph{before roll} - faza przed rzutem kością. Wykonując rzut
+  kością, przenosimy się do fazy \emph{after roll}. Jeśli wynik rzutu
+  kością to 7, to przejście odbywa się poprzez fazy pośrednie - fazę
+  \emph{discard} oraz fazę \emph{robber}. Przejście do fazy
+  \emph{discard} następuje wówczas, gdy jeden z graczy posiada więcej
+  niż 7 kart surowców. Jeśli nie ma takiego gracza, to przechodzimy do
+  fazy \emph{robber}. Bezpośrednie przejście do fazy \emph{robber}
+  następuje również po zagraniu karty armii
+\item \emph{discard} - faza odrzucania nadmiarowych zasobów, w czasie
+  której gracz ma obowiązek zredukować ilość posiadanych przez siebie
+  kart zasobów do połowy. Faza ta jest powtarzana, dopóki wszyscy
+  gracze nie pozbędą się nadmiarowych kart, po czym następuje
+  przejście do fazy \emph{robber}
+\item \emph{robber} - podczas tej fazy gry, należy przesunąć pionek
+  rozbójnika. Po przesunięciu pionka następuje przejście do fazy
+  \emph{before roll} lub \emph{after roll}, w zależności od tego, czy
+  w aktualnej turze dokonano już rzutu kością
+\item \emph{after roll} - główna faza gry, podczas której gracz ma
+  możliwość m.in. budowania osad, miast i dróg, kupowania kart rozwoju
+  oraz zagrywania ich. Zagranie karty budowy drogi powoduje przejście
+  do fazy \emph{road building first road}. Możliwe jest także
+  tworzenie ofert handlu z innymi graczami. Po stworzeniu oferty
+  następuje przejście do fazy \emph{offer}. Gracz w dowolnym momencie
+  może zakończyć fazę \emph{after roll}, co powoduje przejście do fazy
+  \emph{before roll}
+\item \emph{offer} - faza oferty handlu, podczas której gracz
+  składający ofertę oczekuje na odpowiedzi innych. W każdej chwili
+  może on zakończyć tę fazę powodując powrót do \emph{after roll}
+\item \emph{road building first road} oraz \emph{road building second
+    road} - w każdej z faz gracz może wybudować po jednej darmowej
+  drodze. Po wybudowaniu przynajmniej jednej z dróg następuje
+  przejście do fazy \emph{after roll}
+\end{itemize}
+
+Schemat przejść w maszynie stanowej fazy gry został przedstawiony na
+\imref{statemachine-phase}. Dodatkowo, gra może znajdować się w jednym
+z następujących stanów:
+
+\begin{itemize}
+\item \emph{preparing} - początkowy stan, pozwalający na
+  dołączanie się do gry nowych graczy. Przejście do stanu
+  emph{playing} następuje po dołączeniu się przynajmniej trzech
+  graczy, jeśli wszyscy z nich są gotowi do gry
+\item \emph{playing} - gra znajdująca się w tym stanie została już
+  rozpoczęta. Przejście do stanu \emph{ended} następuje po uzyskaniu
+  przez jednego z graczy minimum 10 punktów zwycięstwa
+\item \emph{ended} - końcowy stan oznaczający grę zakończoną
+\end{itemize}
+
+Do kontrolowania przejść pomiędzy powyższymi stanami gry, niezbędne
+jest zaimplementowanie maszyny stanowej, której schemat został
+przedstawiony na \imref{statemachine-state}.
 
 \begin{figure}[ht]
   \begin{center}
-    \includegraphics[width=0.5\linewidth]{statemachine.pdf}
+    \includegraphics[width=0.5\linewidth]{statemachine-phase.pdf}
   \end{center}
-  \caption{Maszyna stanowa gry}
-  \label{statemachine}
+  \caption{Maszyna stanowa fazy gry}
+  \label{statemachine-phase}
 \end{figure}
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[width=\linewidth]{statemachine-state.pdf}
+  \end{center}
+  \caption{Maszyna stanowa stanu gry}
+  \label{statemachine-state}
+\end{figure}
+
+\subsection{Komunikacja}
 
 \begin{figure}[ht]
   \begin{center}

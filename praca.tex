@@ -12,7 +12,7 @@
 
 %% Define a new 'leo' style for the package that will use a smaller font.
 \makeatletter
-\def\url@leostyle{%
+\def\url@leostyle{
   \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\ttfamily}}}
 \makeatother
 %% Now actually use the newly defined style.
@@ -422,6 +422,7 @@ jest standaryzowany przez \emph{ECMA International}\footnote{ECMA -
   standardizing information and communication systems), organizacja
   zajmująca się standaryzacją systemów informatycznych w
   Europie\cite{ecma}} jako \emph{ECMAScript}.
+\label{javascript}
 
 Pomimo swojej nazwy jasno kojarzącej się z językiem \emph{Java}, język
 \emph{JavaScript} jest (z wyjątkiem kilku elementów) językiem
@@ -677,7 +678,7 @@ poprawiające użyteczność samego
 
 \section{Projektowanie aplikacji}
 
-\subsection{Plansza}
+\subsection{Plansza}\label{sec:board}
 Jednym z podstawowych problemów, jakie należy rozwiązać projektując
 aplikację, jest przechowywanie planszy w relacyjnej bazie
 danych. Naturalnie pierwszym pomysłem było wykorzystanie mechanizmu z
@@ -1032,50 +1033,50 @@ się on z dwóch głównych faz - fazy przed rzutem kością oraz fazy po
 rzucie.
 
 \begin{itemize}
-\item \emph{first settlement} - faza budowania pierwszej osady, po
-  wybudowaniu osady przechodzimy do fazy \emph{first road}
-\item \emph{first road} - faza budowania pierwszej drogi. Jeśli
+\item \texttt{first settlement} - faza budowania pierwszej osady, po
+  wybudowaniu osady przechodzimy do fazy \texttt{first road}
+\item \texttt{first road} - faza budowania pierwszej drogi. Jeśli
   istnieje gracz o numerze wyższym niż numer aktualnego gracza, to po
-  wybudowaniu drogi przechodzimy do fazy \emph{first settlement} W
-  przeciwnym wypadku przechodzimy do \emph{second settlement}
-\item \emph{second settlement} - faza budowania drugiej osady, po
-  wybudowaniu osady przechodzimy do \emph{second road}
-\item \emph{second road} - budowanie drugiej drogi. Jeśli istnieje
+  wybudowaniu drogi przechodzimy do fazy \texttt{first settlement} W
+  przeciwnym wypadku przechodzimy do \texttt{second settlement}
+\item \texttt{second settlement} - faza budowania drugiej osady, po
+  wybudowaniu osady przechodzimy do \texttt{second road}
+\item \texttt{second road} - budowanie drugiej drogi. Jeśli istnieje
   gracz o numerze niższym niż numer aktualnego gracza, to po
-  wybudowaniu drogi przechodzimy do fazy \emph{second road}. W
-  przeciwnym wypadku następuje przejście do fazy \emph{before roll}
-\item \emph{before roll} - faza przed rzutem kością. Wykonując rzut
-  kością, przenosimy się do fazy \emph{after roll}. Jeśli wynik rzutu
+  wybudowaniu drogi przechodzimy do fazy \texttt{second road}. W
+  przeciwnym wypadku następuje przejście do fazy \texttt{before roll}
+\item \texttt{before roll} - faza przed rzutem kością. Wykonując rzut
+  kością, przenosimy się do fazy \texttt{after roll}. Jeśli wynik rzutu
   kością to 7, to przejście odbywa się poprzez fazy pośrednie - fazę
-  \emph{discard} oraz fazę \emph{robber}. Przejście do fazy
-  \emph{discard} następuje wówczas, gdy jeden z graczy posiada więcej
+  \texttt{discard} oraz fazę \texttt{robber}. Przejście do fazy
+  \texttt{discard} następuje wówczas, gdy jeden z graczy posiada więcej
   niż 7 kart surowców. Jeśli nie ma takiego gracza, to przechodzimy do
-  fazy \emph{robber}. Bezpośrednie przejście do fazy \emph{robber}
+  fazy \texttt{robber}. Bezpośrednie przejście do fazy \texttt{robber}
   następuje również po zagraniu karty armii
-\item \emph{discard} - faza odrzucania nadmiarowych zasobów, w czasie
+\item \texttt{discard} - faza odrzucania nadmiarowych zasobów, w czasie
   której gracz ma obowiązek zredukować ilość posiadanych przez siebie
   kart zasobów do połowy. Faza ta jest powtarzana, dopóki wszyscy
   gracze nie pozbędą się nadmiarowych kart, po czym następuje
-  przejście do fazy \emph{robber}
-\item \emph{robber} - podczas tej fazy gry, należy przesunąć pionek
+  przejście do fazy \texttt{robber}
+\item \texttt{robber} - podczas tej fazy gry, należy przesunąć pionek
   rozbójnika. Po przesunięciu pionka następuje przejście do fazy
-  \emph{before roll} lub \emph{after roll}, w zależności od tego, czy
+  \texttt{before roll} lub \texttt{after roll}, w zależności od tego, czy
   w aktualnej turze dokonano już rzutu kością
-\item \emph{after roll} - główna faza gry, podczas której gracz ma
+\item \texttt{after roll} - główna faza gry, podczas której gracz ma
   możliwość m.in. budowania osad, miast i dróg, kupowania kart rozwoju
   oraz zagrywania ich. Zagranie karty budowy drogi powoduje przejście
-  do fazy \emph{road building first road}. Możliwe jest także
+  do fazy \texttt{road building first road}. Możliwe jest także
   tworzenie ofert handlu z innymi graczami. Po stworzeniu oferty
-  następuje przejście do fazy \emph{offer}. Gracz w dowolnym momencie
-  może zakończyć fazę \emph{after roll}, co powoduje przejście do fazy
-  \emph{before roll}
-\item \emph{offer} - faza oferty handlu, podczas której gracz
+  następuje przejście do fazy \texttt{offer}. Gracz w dowolnym momencie
+  może zakończyć fazę \texttt{after roll}, co powoduje przejście do fazy
+  \texttt{before roll}
+\item \texttt{offer} - faza oferty handlu, podczas której gracz
   składający ofertę oczekuje na odpowiedzi innych. W każdej chwili
-  może on zakończyć tę fazę powodując powrót do \emph{after roll}
-\item \emph{road building first road} oraz \emph{road building second
+  może on zakończyć tę fazę powodując powrót do \texttt{after roll}
+\item \texttt{road building first road} oraz \texttt{road building second
     road} - w każdej z faz gracz może wybudować po jednej darmowej
   drodze. Po wybudowaniu przynajmniej jednej z dróg następuje
-  przejście do fazy \emph{after roll}
+  przejście do fazy \texttt{after roll}
 \end{itemize}
 
 Schemat przejść w maszynie stanowej fazy gry został przedstawiony na
@@ -1115,11 +1116,42 @@ przedstawiony na \imref{statemachine-state}.
 
 \subsection{Komunikacja}
 
+Po przeanalizowaniu dostępnych rozwiązań, opisanych w rozdziale
+\ref{javascript}, do komunikacji wybrany został \emph{HTTP
+  Pull}. Opóźnienia, wynikające z zastosowania tego mechanizmu nie
+mają większego wpływu na rozgrywkę. Istotnym elementem przemawiającym
+za wykorzystaniem \emph{HTTP Pull} jest prostota użytkowania. Nie
+wymusza on posiadania dodatkowych serwerów i domen. Ponadto większość
+dostępnych bibliotek \emph{JavaScriptowych} udostępnia wygodne
+mechanizmy umożliwiające proste tworzenie wywołań \emph{Ajax}.
+
+Jako format wymiany danych wybrany został \emph{JSON}. Główną zaletą
+tego formatu jest fakt, że do parsowania zapisanych w nim danych, w
+języku \emph{JavaScript} nie potrzeba żadnych dodatkowych
+narzędzi\footnote{JSON (ang. JavaScript Object Notation) - prosty
+  format wymiany danych. W związku z tym, że jego składnia opiera się
+  o podzbiór języka \emph{JavaScript}, parsowanie go w tym języku
+  ogranicza się do wykorzystania funkcji \texttt{eval}.}. \emph{JSON}
+jest również jednym z głównych formatów serializacji danych, używanych
+we frameworku \emph{Ruby on Rails}.
+
+\subsection{Baza danych}
+Główną tabelą w bazie danych, z którą w różnej liczebności łączą się
+wszystkie pozostałe, jest tabela \texttt{games}. Oprócz opisywanej już
+w \ref{sec:board} planszy (tabele \texttt{board}, \texttt{hexes},
+\texttt{nodes} oraz \texttt{edges}), posiada ona kilka dodatkowych,
+połączonych z nią tabel:
+
+\begin{itemize}
+\item \texttt{players} - przechowuje informacje o graczach -
+  posiadanych przez nich surowców, ilości punktów zwycięstwa, itp.
+\end{itemize}
+
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[width=\linewidth]{erd.pdf}
   \end{center}
-  \caption{Diagram związków encji}
+  \caption{Uproszczony diagram związków encji}
   \label{erd}
 \end{figure}
 

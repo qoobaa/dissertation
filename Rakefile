@@ -34,7 +34,7 @@ rule ".png" => ".svg" do |t|
 end
 
 rule ".tex" => ".rb" do |t|
-  sh "pygmentize -f latex -o #{t.name} #{t.source}"
+  sh "pygmentize -f latex -O linenos=True -o #{t.name} #{t.source}"
 end
 
 rule ".pdf" => ".tex" do |t|

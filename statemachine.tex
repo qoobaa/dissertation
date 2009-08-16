@@ -1,0 +1,32 @@
+\begin{Verbatim}[commandchars=@\[\],numbers=left,firstnumber=1,stepnumber=1]
+state_machine @PYau[:initial] @PYbd[=]@PYbd[>] @PYau[:preparing] @PYay[do]
+  event @PYau[:start_game] @PYay[do]
+    transition @PYau[:preparing] @PYbd[=]@PYbd[>] @PYau[:playing]
+  @PYay[end]
+
+  event @PYau[:end_game] @PYay[do]
+    transition @PYau[:playing] @PYbd[=]@PYbd[>] @PYau[:ended], @PYau[:if] @PYbd[=]@PYbd[>] @PYau[:winner?]
+  @PYay[end]
+
+  state @PYau[:playing] @PYay[do]
+    validates_length_of @PYau[:players], @PYau[:in] @PYbd[=]@PYbd[>] @PYag[3]@PYbd[.].@PYag[4]
+    validates_presence_of @PYau[:board]
+    validate @PYau[:players_ready]
+  @PYay[end]
+
+  before_transition @PYau[:on] @PYbd[=]@PYbd[>] @PYau[:start_game] @PYay[do] @PYbd[|]game@PYbd[|]
+    game@PYbd[.]reset_robber
+    game@PYbd[.]reset_card
+    game@PYbd[.]deal_resources
+    game@PYbd[.]largest_army_size @PYbd[=] @PYag[2]
+    game@PYbd[.]longest_road_length @PYbd[=] @PYag[4]
+    game@PYbd[.]current_turn @PYbd[=] @PYag[1]
+    game@PYbd[.]current_player @PYbd[=] game@PYbd[.]players@PYbd[.]first
+    game@PYbd[.]army_cards @PYbd[=] @PYag[14]
+    game@PYbd[.]monopoly_cards @PYbd[=] @PYag[2]
+    game@PYbd[.]year_of_plenty_cards @PYbd[=] @PYag[2]
+    game@PYbd[.]road_building_cards @PYbd[=] @PYag[2]
+    game@PYbd[.]victory_point_cards @PYbd[=] @PYag[5]
+  @PYay[end]
+@PYay[end]
+\end{Verbatim}

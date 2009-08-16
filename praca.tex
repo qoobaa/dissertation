@@ -43,19 +43,20 @@ wydana w 1995 roku w Niemczech pod nazwą \emph{Die Siedler von
   Catan}. O ogromnej popularności gry na całym świecie może świadczyć
 fakt, iż została ona przetłumaczona na ponad 20 języków, w tym język
 polski. Na całym świecie organizowane są turnieje gry, a począwszy od
-roku 2000 organizowane są coroczne mistrzostwa świata. Pierwsze
-polskie wydanie gry przypada na rok 2005. Od tego czasu organizowane
-są corocznie Oficjalne Mistrzostwa Polski w ,,Osadników z Catanu'',
-które w 2009 roku odbędą się w Gliwicach.
+roku 2000 organizowane są corocznie mistrzostwa świata. Pierwsze
+polskie wydanie gry przypada na rok 2005. Od tego czasu każdego roku
+organizowane są Mistrzostwa Polski w grze ,,Osadnicy z Catanu'', które
+w 2009 roku odbędą się w Gliwicach.
 
 \subsection{Elementy gry}
-Pierwotna wersja gry jest przeznaczona dla 3-4 graczy. Słowo pierwotna
-jest tutaj szczególnie warte podkreślenia, gdyż ze względu na swą
-ogromną popularność, gra doczekała się bardzo dużej ilości dodatków i
-modyfikacji zasad. W tym podrozdziale postaram się omówić wszystkie
-elementy wchodzące w skład gry. Moim celem nie jest omawianie zasad
-gry, a jedynie ukazanie najważniejszych jej aspektów, które musiały
-zostać uwzględnione przy implementacji.
+Pierwotna wersja gry jest przeznaczona dla 3-4 graczy. Słowo
+,,pierwotna'' jest tutaj szczególnie warte podkreślenia, gdyż, ze
+względu na swą ogromną popularność, gra doczekała się bardzo dużej
+ilości dodatków i modyfikacji zasad. W tym podrozdziale postaram się
+omówić wszystkie elementy wchodzące w skład podstawowej wersji
+gry. Jednakże, moim celem nie jest tłumaczenie zasad gry, a jedynie
+ukazanie najważniejszych jej aspektów, które musiały zostać
+uwzględnione przy implementacji.
 
 \subsubsection{Plansza}
 Rozgrywka toczy się na planszy złożonej z 37 sześciokątów
@@ -69,7 +70,7 @@ surowca, który może być z nich czerpany:
 \item pole uprawne - zboże
 \item wzgórze - glina
 \item góry - ruda żelaza
-\item pustynia - brak surowca (początkowe położenie rozbójnika)
+\item pustynia - brak surowca (początkowe położenie ,,rozbójnika'')
 \item morze - brak surowca (może posiadać szlak handlowy)
 \end{itemize}
 
@@ -81,24 +82,22 @@ pod budowę dróg, które łączą osady i miasta. Drogi nie przynoszą
 żadnych dochodów, umożliwiają natomiast ekspansję terytorialną
 (budowanie nowych osad).
 
-Wszystkie surowce znajdujące się w posiadaniu poszczególnych graczy są
-zakryte dla pozostałych uczestników gry. Zapamiętywanie surowców
-otrzymanych przez pozostałych graczy jest bardzo istotnym elementem,
-mającym duży wpływ na obraną strategię (m.in. na handel).
+Wszystkie karty surowców znajdujące się w posiadaniu poszczególnych
+graczy są zakryte dla pozostałych uczestników gry.
 
 \subsubsection{Element losowy - kości do gry}
 Gra ,,Osadnicy z Catanu'' jest grą umysłowo-losową. Głównym elementem
-wprowadzającym do gry losowość, są dwie sześciościenne kości do
+wprowadzającym do gry losowość są dwie sześciościenne kości do
 gry. Dla sumy dwóch rzutów kością prawdopodobieństwo uzyskania
 poszczególnych wyników jest różne (zostało to przedstawione na
 \imref{dice}). Sześciokąty na planszy (lasy, pastwiska, pola uprawne,
 wzgórza i góry) mają przypisane wartości z przedziału 2-12, z
 pominięciem liczby 7. Wszyscy gracze przed rozpoczęciem swojej tury
 wykonują rzut kośćmi. Wynik rzutu oznacza, które sześciokąty przynoszą
-w tej turze dochód. Surowce otrzymują tylko ci gracze, którzy są
+w danej turze dochód. Surowce otrzymują tylko ci gracze, którzy są
 posiadaczami osady lub miasta, które sąsiaduje z wylosowanym
 sześciokątem. Przypisana wartość i rodzaj pola mają bezpośredni wpływ
-na jego ,,atrakcyjność'' i co za tym idzie - na wybór strategii w
+na jego ,,atrakcyjność'' i, co za tym idzie - na wybór strategii w
 grze.
 
 \begin{figure}[ht]
@@ -126,7 +125,7 @@ Karta rycerza stanowi element walki, element ten zostanie omówiony
 później. Karty postępu w różny sposób przyspieszają rozwój
 gracza. Ciekawym elementem jest jednak karta ,,punkt zwycięstwa'',
 która stanowi istotny element zaskoczenia w grze. W związku z tym, że
-po ,,zakupie'' karty rozwoju, jest ona zakryta dla pozostałych graczy,
+po ,,zakupie'' karty rozwoju jest ona zakryta dla pozostałych graczy,
 nie znają oni rodzaju karty dopóki ta nie zostanie zagrana. Karty
 ,,punkt zwycięstwa'' ujawniane są bezpośrednio przed końcem gry. W
 rezultacie gracz posiadający np. trzy karty rozwoju, może potencjalnie
@@ -149,7 +148,7 @@ musi to być wymiana - zabronione jest pozbywanie się surowców.
 \subsubsection{Walka}
 Ostatnim istotnym elementem gry jest ,,walka''. Zagranie karty armii
 oraz wyrzucenie siódemki daje możliwość przesunięcia pionka,
-tzw. ,,rozbójnika''. Pole zajmowane przez rozbójnika nie przynosi
+tzw. ,,rozbójnika''. Pole zajmowane przez ,,rozbójnika'' nie przynosi
 graczom żadnego dochodu. Dodatkowo, po przesunięciu pionka, gracz ma
 możliwość ,,obrabowania'' jednej z sąsiadujących z nim osad lub miast,
 zabierając losowo wybraną kartę surowca od ich właściciela.
@@ -169,11 +168,11 @@ za:
 \clearpage
 
 \section{Analiza istniejących rozwiązań}
-W tym rozdziale przedstawiłem kilka powszechnie dostępnych,
-działających rozwiązań. Wszystkie przedstawione implementacje gry
-wymagają od użytkownika posiadania jakiegoś dodatkowego oprogramowania
-(poza przeglądarką internetową). Większość z nich jest przystosowana
-do jednej konkretnej platformy (np. PC z systemem Microsoft
+W tym rozdziale przedstawionych zostało kilka powszechnie dostępnych,
+działających rozwiązań. Wszystkie zaprezentowane implementacje gry
+wymagają od użytkownika posiadania dodatkowego oprogramowania (poza
+przeglądarką internetową). Większość z nich jest przystosowana do
+jednej konkretnej platformy (np. PC z systemem Microsoft
 Windows). Wadą tego typu rozwiązań jest to, że stworzenie wersji na
 inną platformę (np. urządzenia mobilne) często wiąże się z
 koniecznością stworzenia zupełnie nowej aplikacji.
@@ -332,8 +331,8 @@ Heinemeier Hansson. Framework powstał w wyniku prac nad aplikacją
 popularności \emph{Ruby on Rails} nastąpił po ogłoszeniu przez firmę
 \emph{Apple Inc.}, że będzie on dostarczany wraz z systemem \emph{Mac
   OS X v10.5 ''Leopard''}\cite{rubyonrails}. Swoje ogromne możliwości
-framework zawdzięcza wykorzystaniu cech takich języka, jak:
-metaprogramowanie, kacze typowanie czy możliwość otwierania klas.
+framework zawdzięcza wykorzystaniu takich cech języka, jak
+metaprogramowanie, kacze typowanie, czy możliwość otwierania klas.
 
 Framework \emph{Ruby on Rails} umożliwia tworzenie aplikacji
 internetowych w oparciu o wzorzec \emph{MVC}\footnote{MVC -
@@ -414,9 +413,9 @@ się zająć połączeniem powstającego \emph{Merba 2} i \emph{Ruby on
 
 \subsection{JavaScript}
 Język \emph{JavaScript} powstał pod koniec 1995 roku w firmie
-\emph{Netscape Communications Corporation}, jako alternatywa dla
+\emph{Netscape Communications Corporation} jako alternatywa dla
 uruchamianych w przeglądarce apletów \emph{Javy}. Jego twórcą jest
-amerykański programista Brendan Eich. Począwszy od 1996 roku język
+amerykański programista Brendan Eich. Począwszy od 1996 roku, język
 jest standaryzowany przez \emph{ECMA International}\footnote{ECMA -
   Europejskie Stowarzyszenie na rzecz Standaryzacji Systemów
   Informacyjnych i Komunikacyjnych (ang. European association for
@@ -442,7 +441,7 @@ Interpreter \emph{JavaScriptu} wbudowany jest w niemal każdą
 współczesną przeglądarkę internetową, co czyni go jednym z najbardziej
 rozpowszechnionych języków programowania na świecie.
 
-Najważniejszymi cechami języka, wyróżniającymi go od języków
+Najważniejszymi cechami języka, odróżniającymi go od języków
 ,,c-pochodnych'' (w tym od \emph{Javy}) są:
 
 \begin{itemize}
@@ -557,7 +556,7 @@ serwera. Technika ta jest także nazywana \emph{HTTP
   \label{pull}
 \end{figure}
 
-Jeśli przyjrzeć się bliżej aplikacji takiej jak \emph{Gmail} okazuje
+Jeśli przyjrzeć się bliżej aplikacji takiej jak \emph{Gmail}, okazuje
 się, że nie wykonuje ona cyklicznego odpytywania serwera, a wszystkie
 dane przesyłane są do klienta niemalże bez opóźnień. Najprostszym
 sposobem na uniknięcie częstego odpytywania serwera jest zastosowanie
@@ -586,20 +585,18 @@ przypadku, gdy dane pojawiają się na serwerze z dużą częstotliwością,
 wywoływanych jest dużo pojedynczych zapytań. Skutkuje to oczywiście
 wzrostem obciążenia serwera. W mechanizmie wydłużonego odpytywania
 wykorzystywane są asynchroniczne zapytania \emph{XMLHttpRequest}. W
-przypadku pobierania danych z domen innych wykorzystywany jest
+przypadku pobierania danych z innych domen wykorzystywany jest
 mechanizm \emph{JSONP}.
 
 Innym, bardziej wyrafinowanym sposobem komunikacji poprzez \emph{HTTP
   Push} jest strumieniowanie danych. Do strumieniowania danych
 wykorzystywany jest fakt, iż wszystkie współczesne przeglądarki
-internetowe renderują strony progresywnie.
-% potrzebne źródło
-W związku z tym, możliwe staje się stworzenie ,,nieskończonego''
-zapytania, które będzie interpretowane przez silnik na bieżąco, w
-chwili pojawiania się nowych elementów. Do stworzenia takiego
-zapytania wykorzystywany jest ukryty znacznik
-\texttt{<iframe>}. Znacznik ten umożliwia zagnieżdżenie w dokumencie
-innego dokumentu, pochodzącego z innego adresu
+internetowe renderują strony progresywnie. W związku z tym, możliwe
+staje się stworzenie ,,nieskończonego'' zapytania, które będzie
+interpretowane przez silnik na bieżąco, w chwili pojawiania się nowych
+elementów. Do stworzenia takiego zapytania wykorzystywany jest ukryty
+znacznik \texttt{<iframe>}. Znacznik ten umożliwia zagnieżdżenie w
+dokumencie innego dokumentu, pochodzącego z innego adresu
 internetowego\footnote{w tym przypadku również nie jest możliwe
   załadowanie dokumentu z innej domeny, zgodnie z polityką
   bezpieczeństwa przeglądarek}. Podobnie jak w przypadku \emph{JSONP}
@@ -658,7 +655,7 @@ reprezentacji dokumentów \emph{XML}, \emph{XHTML} i \emph{XML} w
 postaci modelu obiektowego. Jest on wymagany przez język
 \emph{JavaScript} do odczytywania i modyfikowania struktury dokumentu
 z poziomu kodu\cite{dom}. Jest to zdecydowanie najbardziej niespójny
-element współczesnych przeglądarek. Jest to związane m.in. z tym, że
+element współczesnych przeglądarek. Ma to związek m.in. z tym, że
 pierwsze próby ustandaryzowania tego rozwiązania odbyły się w 1997
 roku, a standard wszedł w powszechne użycie dopiero około roku
 2000. Niespójności te są na tyle duże, że pisząc nawet prosty skrypt
@@ -682,8 +679,8 @@ poprawiające użyteczność samego
 \subsection{Plansza}\label{sec:board}
 Jednym z podstawowych problemów, jakie należy rozwiązać projektując
 aplikację, jest przechowywanie planszy w relacyjnej bazie
-danych. Naturalnie pierwszym pomysłem było wykorzystanie mechanizmu z
-działającego rozwiązania, mianowicie z gry \emph{Pioneers}.
+danych. Naturalnie, pierwszym pomysłem było wykorzystanie mechanizmu z
+działającego rozwiązania, a mianowicie z gry \emph{Pioneers}.
 
 Plansza do gry w ,,Osadników'' składa się w pierwotnej wersji z 37
 połączonych ze sobą sześciokątów. Niektóre ich wierzchołki i krawędzie
@@ -697,7 +694,7 @@ wierzchołki i krawędzie. Przy tworzeniu wierzchołka lub krawędzi
 ustawiane są odpowiednie wskaźniki w sąsiadujących sześciokątach. To
 stosunkowo proste rozwiązanie okazuje się być trudne w realizacji w
 relacyjnej bazie danych. Przykładowe połączenie sześciokąta z
-wierzchołkami, wymagałoby użycia sześciu kluczy obcych lub utworzenia
+wierzchołkami wymagałoby użycia sześciu kluczy obcych lub utworzenia
 dodatkowej tabeli łączącej. Rozwiązanie takie wprowadza do bazy dużo
 niepotrzebnych połączeń i jest mało wydajne.
 
@@ -707,13 +704,14 @@ budowanej osady niezbędnych jest wykonanie kilku czynności:
 
 \begin{itemize}
 \item sprawdzenie, czy na jednym z sąsiadujących wierzchołków nie
-  znajduje się już inna osada. Minimalna odległość pomiędzy osadami
+  znajduje się już inna osada - minimalna odległość pomiędzy osadami
   wynosi dwie drogi (dwie krawędzie)
 \item sprawdzenie, czy na jednej z sąsiadujących krawędzi wybudowana
-  jest droga należąca do gracza. Budowane osady muszą być połączone
+  jest droga należąca do gracza - budowane osady muszą być połączone
   drogami
 \item sprawdzenie, czy jeden z sąsiadujących sześciokątów jest
-  lądem. Osady nie mogą być budowane na brzegach planszy (na morzu)
+  lądem. Osady nie mogą być budowane na brzegach planszy (na
+  ,,morzu'')
 \end{itemize}
 
 Bardzo podobne czynności musimy wykonać, aby stwierdzić poprawność
@@ -728,22 +726,22 @@ współrzędnych.
 
 Oprócz zbioru sześciokątów, wierzchołków i krawędzi, plansza do gry
 powinna zawierać informacje o jej rozmiarze (ilości wierszy i kolumn)
-oraz o aktualnym położeniu rozbójnika.
+oraz o aktualnym położeniu ,,rozbójnika''.
 
 \subsubsection{Sześciokąty}
 Podobnie jak w implementacji gry \emph{Pioneers}, sześciokąty zostały
 ułożone w dwuwymiarową tablicę. Każdy z nich ma przypisaną pozycję,
 składającą się z numeru wiersza $x$ i kolumny $y$. Sposób numeracji
-sześciokątów został przedstawiony na \imref{board}. Dodatkowo każdy
+sześciokątów został przedstawiony na \imref{board}. Dodatkowo, każdy
 sześciokąt powinien zawierać następujące informacje:
 
 \begin{itemize}
 \item typ - sześciokąt może reprezentować wzgórze, pole uprawne, las,
   pastwisko, górę, pustynię lub morze
 \item wynik rzutu kością, po wyrzuceniu którego pole przynosi
-  dochód. Sześciokąty reprezentujące morze i pustynię nie posiadają
+  dochód; sześciokąty reprezentujące morze i pustynię nie posiadają
   żadnej wartości
-\item pozycję (kierunek) i rodzaj szlaku handlowego. Cecha ta dotyczy
+\item pozycję (kierunek) i rodzaj szlaku handlowego - cecha ta dotyczy
   wyłącznie niektórych sześciokątów reprezentujących morze
 \end{itemize}
 
@@ -757,7 +755,7 @@ sześciokąt powinien zawierać następujące informacje:
 
 \subsubsection{Wierzchołki}
 Numerowanie wierzchołków jest nieco bardziej skomplikowanym
-zadaniem. Wykorzystany został tutaj fakt, iż przy numeracji
+zadaniem. Wykorzystany został tutaj fakt, iż, przy numeracji
 sześciokątów przedstawionej na \imref{board}, w każdym z nich można
 wyróżnić wierzchołki ,,górne'' (posiadające numer wiersza taki jak
 numer wiersza sześciokąta) i ,,dolne'' (posiadające numer wiersza o
@@ -1053,16 +1051,18 @@ rzucie.
   \texttt{discard} następuje wówczas, gdy jeden z graczy posiada więcej
   niż 7 kart surowców. Jeśli nie ma takiego gracza, to przechodzimy do
   fazy \texttt{robber}. Bezpośrednie przejście do fazy \texttt{robber}
-  następuje również po zagraniu karty armii
-\item \texttt{discard} - faza odrzucania nadmiarowych zasobów, w czasie
-  której gracz ma obowiązek zredukować ilość posiadanych przez siebie
-  kart zasobów do połowy. Faza ta jest powtarzana, dopóki wszyscy
-  gracze nie pozbędą się nadmiarowych kart, po czym następuje
-  przejście do fazy \texttt{robber}
+  następuje również po zagraniu karty ,,rycerza''
+\item \texttt{discard} - faza odrzucania nadmiarowych zasobów, w
+  czasie której gracz ma obowiązek zredukować ilość posiadanych przez
+  siebie kart zasobów do połowy, jeśli posiada ich więcej niż 7
+  (nieparzysta ilość kart wymaga ,,zaokrąglenia'' na korzyść
+  gracza). Faza ta jest powtarzana, dopóki wszyscy gracze nie pozbędą
+  się nadmiarowych kart, po czym następuje przejście do fazy
+  \texttt{robber}
 \item \texttt{robber} - podczas tej fazy gry, należy przesunąć pionek
-  rozbójnika. Po przesunięciu pionka następuje przejście do fazy
-  \texttt{before roll} lub \texttt{after roll}, w zależności od tego, czy
-  w aktualnej turze dokonano już rzutu kością
+  ,,rozbójnika''. Po przesunięciu pionka następuje przejście do fazy
+  \texttt{before roll} lub \texttt{after roll}, w zależności od tego,
+  czy w aktualnej turze dokonano już rzutu kością
 \item \texttt{after roll} - główna faza gry, podczas której gracz ma
   możliwość m.in. budowania osad, miast i dróg, kupowania kart rozwoju
   oraz zagrywania ich. Zagranie karty budowy drogi powoduje przejście
@@ -1125,7 +1125,7 @@ Po przeanalizowaniu dostępnych rozwiązań, opisanych w rozdziale
   Pull}. Opóźnienia, wynikające z zastosowania tego mechanizmu nie
 mają większego wpływu na rozgrywkę. Istotnym elementem przemawiającym
 za wykorzystaniem \emph{HTTP Pull} jest prostota użytkowania. Nie
-wymusza on posiadania dodatkowych serwerów i domen. Ponadto większość
+wymusza on posiadania dodatkowych serwerów i domen. Ponadto, większość
 dostępnych bibliotek \emph{JavaScriptowych} udostępnia wygodne
 mechanizmy umożliwiające proste tworzenie wywołań \emph{Ajax}.
 
@@ -1157,7 +1157,7 @@ połączonych z nią tabel:
 \item \texttt{offer\_responses} - informacje o odpowiedziach na oferty
 \item \texttt{discards} - informacje o odrzuconych kartach zasobów
 \item \texttt{robberies} - informacja o pozycji, na którą został
-  przesunięty pionek rozbójnika, a także o zagrabionych zasobach
+  przesunięty pionek ,,rozbójnika'', a także o zagrabionych zasobach
 \item \texttt{exchanges} - zawiera informacje o handlu graczy z
   bankiem
 \end{itemize}

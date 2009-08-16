@@ -150,26 +150,131 @@ http://svn.cometd.com/trunk/bayeux/bayeux.html
 *** JSON
 *** przesyłanie całego stanu gry
 * implementacja
-** akcje
-*** tworzenie gry
-*** wyświetlenie gry
-*** lista gier
-*** kończenie tury
-*** tworzenie karty rozwoju
-*** używanie karty rozwoju
-*** rzut kością
-*** odrzucanie kart zasobów
-*** tworzenie krawędzi (drogi)
-*** tworzenie wierzchołka (osady)
-*** rozwój osady do miasta
-*** tworzenie wymiany z bankiem
-*** tworzenie oferty
-*** akceptowanie/odrzucenie oferty
-*** tworzenie odpowiedzi na ofertę
-*** tworzenie gracza
-*** zmiana stanu gracza (ready)
-*** usuwanie gracza
-*** tworzenie rabunku (robbery)
+** modele
+*** game
+**** atrybuty
+id, state, created_at, updated_at, current_turn, phase,
+current_discard_resource_limit, army_cards, monopoly_cards,
+year_of_plenty_cards, road_building_cards, victory_point_cards,
+largest_army_size, largest_army_player_id, longest_road_length,
+longest_road_player_id, cards_count(?), card_id,
+current_discard_player_id, current_player_id
+**** maszyna stanowa stanu
+- po każdym zapisie wywoływana jest metoda end_game (zwykle nie
+  następuje przejście)
+**** maszyna stanowa fazy
+- każdy event przyjmuje użytkownika, sprawdza, czy może on wywołać
+  dany event w tym momencie - dodane ,,puste'' eventy
+**** liczenie najdłuższej drogi
+*** board
+**** atrybuty
+id, game_id, height, width, robber_col, robber_rol
+*** edge
+**** atrybuty
+id, row, col, player_id, board_id
+*** hex
+**** atrybuty
+id, row, col, hex_type, roll, board_id, harbor_position, harbor_type
+*** node
+**** atrybuty
+id, row, col, player_id, board_id, state
+*** player
+**** atrybuty
+id, bricks, grain, ore, wool, lumber, settlements, cities, roads,
+number, user_id, game_id, points, state, resources(?), visible_points,
+hidden_points, bricks_exchange_rage, grain_exchange_rate,
+lumber_exchange_rate, ore_exchange_rate, wool_exchange_rate, army_size
+*** card
+**** atrybuty
+id, game_id, player_id, type, state, bricks, grain, lumber, ore, wool,
+created_at, updated_at, resource_type
+**** STI
+Card::Army, Card::Monopoly, Card::RoadBuilding
+Card::VictoryPoint, Card::YearOfPlenty
+*** dice_roll
+**** atrybuty
+id, game_id, value, turn, created_at, updated_at, player_id
+*** discard
+**** atrybuty
+id, lumber, grain, bricks, wool, ore, player_id, game_id, created_at,
+updated_at
+*** exchange
+**** atrybuty
+id, lumber, grain, bricks, wool, ore, player_id, game_id, created_at,
+updated_at
+*** offer
+**** atrybuty
+id, lumber, grain, bricks, wool, ore, sender_id, recipient_id,
+game_id, created_at, updated_at, state
+*** offer_response
+**** atrybuty
+id, player_id, offer_id, agreed, created_at, updated_at
+*** robbery
+**** atrybuty
+id, created_at, updated_at, row, col, bricks, grain, lumber, ore,
+wool, game_id, sender_id, recipient_id
+*** user
+**** atrybuty
+id, login, crypted_password, password_salt, persistence_token,
+login_count, last_request_at, last_login_at, current_login_at,
+last_login_ip, current_login_ip, created_at, updated_at
+*** user_session
+** kontrolery, akcje, routing
+*** routing
+ActionController::Routing::Routes.draw do |map|
+  map.resource :user
+  map.resource :user_session
+  map.resources :messages
+  map.resources :games do |games|
+    games.resource :offer
+    games.resource :offer_response
+    games.resource :player
+    games.resources :cards
+    games.resources :dice_rolls
+    games.resources :discards
+    games.resources :edges
+    games.resources :exchanges
+    games.resources :hexes
+    games.resources :nodes
+    games.resources :robberies
+  end
+  map.root :controller => "games", :action => "index"
+end
+*** games
+**** tworzenie gry
+**** wyświetlenie gry
+**** lista gier
+**** kończenie tury
+*** cards
+**** tworzenie karty rozwoju
+**** używanie karty rozwoju
+*** dice_rolls
+**** rzut kością
+*** discards
+**** odrzucanie kart zasobów
+*** edges
+**** tworzenie krawędzi (drogi)
+*** nodes
+**** tworzenie wierzchołka (osady)
+**** rozwój osady do miasta
+*** exchanges
+**** tworzenie wymiany z bankiem
+*** offers
+**** tworzenie oferty
+**** akceptowanie/odrzucenie oferty
+*** offer_responses
+**** tworzenie odpowiedzi na ofertę
+*** players
+**** tworzenie gracza
+**** zmiana stanu gracza (ready)
+**** usuwanie gracza
+*** robberies
+**** tworzenie rabunku (robbery)
+** widoki
+*** HAML
+*** SASS
+**** wyświetlanie planszy
+* implementacja klienta
 * uruchomienie i przeprowadzenie testów
 ** testy jednostkowe
 * dalszy rozwój aplikacji

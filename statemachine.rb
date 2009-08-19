@@ -14,17 +14,6 @@ state_machine :initial => :preparing do
   end
 
   before_transition :on => :start_game do |game|
-    game.reset_robber
-    game.reset_card
-    game.deal_resources
-    game.largest_army_size = 2
-    game.longest_road_length = 4
-    game.current_turn = 1
-    game.current_player = game.players.first
-    game.army_cards = 14
-    game.monopoly_cards = 2
-    game.year_of_plenty_cards = 2
-    game.road_building_cards = 2
-    game.victory_point_cards = 5
+    # ...
   end
 end

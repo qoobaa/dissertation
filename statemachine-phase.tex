@@ -1,0 +1,17 @@
+\begin{Verbatim}[commandchars=@\[\],numbers=left,firstnumber=1,stepnumber=1]
+state_machine @PYau[:phase], @PYau[:initial] @PYbd[=]@PYbd[>] @PYau[:first_settlement] @PYay[do]
+  event @PYau[:settlement_built] @PYay[do]
+    transition @PYau[:first_settlement] @PYbd[=]@PYbd[>] @PYau[:first_road]
+    transition @PYau[:second_settlement] @PYbd[=]@PYbd[>] @PYau[:second_road]
+    transition @PYau[:after_roll] @PYbd[=]@PYbd[>] @PYau[:after_roll]
+  @PYay[end]
+
+  before_transition @PYau[:on] @PYbd[=]@PYbd[>] @PYau[:settlement_built] @PYay[do] @PYbd[|]game, transition@PYbd[|]
+    game@PYbd[.]playing? @PYav[and] game@PYbd[.]current_user_turn?(@PYbd[*]transition@PYbd[.]args)
+  @PYay[end]
+
+  before_transition @PYau[:on] @PYbd[=]@PYbd[>] @PYau[:settlement_built], @PYau[:do] @PYbd[=]@PYbd[>] @PYau[:longest_road]
+
+  @PYaf[# ...]
+@PYay[end]
+\end{Verbatim}

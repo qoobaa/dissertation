@@ -7,6 +7,8 @@
 \usepackage{url}
 \usepackage{amsfonts}
 \usepackage{amsmath}
+\usepackage{float}
+
 \input{pygments}
 
 \providecommand{\imref}[1]{Rys. \ref{#1}} % referencja do obrazka
@@ -18,6 +20,9 @@
 \makeatother
 %% Now actually use the newly defined style.
 \urlstyle{leo}
+
+\newfloat{listing}{thp}{lol}
+\floatname{listing}{Listing}
 
 \begin{document}
 
@@ -1193,9 +1198,46 @@ rozgrywki. Posiada on implementację dwóch maszyn stanowych
 przedstawionych na \imref{statemachine-state} i
 \imref{statemachine-phase}. Do implementacji maszyn stanowych
 wykorzystana została biblioteka \texttt{state\_machine}, stworzona
-przez Aarona Pfeifera.
+przez Aarona Pfeifera. Udostępnia ona bardzo prosty
+\emph{DSL}\footnote{DSL (ang. Domain-specific language) - język
+  dziedzinowy, przystosowany do rozwiązywania określonej dziedziny
+  problemów} służący do opisu stanów i przejść pomiędzy nimi. Kod
+maszyny stanowej stanu gry został przedstawiony na listingu
+\ref{listing:statemachine}.
 
-\input{statemachine}
+\begin{listing}
+  \input{statemachine}
+  \caption{Maszyna stanowa stanu gry}
+  \label{listing:statemachine}
+\end{listing}
+
+Początkowym stanem maszyny stanowej jest stan \texttt{preparing}.
+Maszyna ta posiada dwa zdarzenia: \texttt{start\_game} i
+\texttt{end\_game}, powodujące przejścia do stanów \texttt{playing}
+oraz \texttt{ended}. Każde przejście może posiadać także proste
+warunki, które muszą zostać spełnione aby możliwa była zmiana stanu. W
+przypadku zdarzenia \texttt{end\_game} i przejścia z \texttt{playing}
+do \texttt{ended}, metoda \texttt{winner?} musi zwrócić prawdę (dzieje
+się tak w przypadku, gdy zwycięzca gry jest już znany). Dodatkowo
+każdy z wymienionych stanów może posiadać własne zestawy
+walidatorów. Aby można było zapisać obiekt w stanie \texttt{playing},
+spełnione muszą zostać trzy warunki:
+
+\begin{itemize}
+\item gra musi posiadać 3-4 graczy
+\item gra musi posiadać wygenerowaną planszę do gry
+\item wszyscy gracze muszą być gotowi do gry
+\end{itemize}
+
+Każde zdarzenie może posiadać również zestaw funkcji, które należy
+wywołać przed lub po zmianie stanów (\texttt{before\_transition} i
+\texttt{after\_transition}).
+
+\begin{listing}
+  \input{statemachine-phase}
+  \caption{Maszyna stanowa fazy gry}
+  \label{listing:statemachine-phase}
+\end{listing}
 
 \subsection{Kontrolery}
 

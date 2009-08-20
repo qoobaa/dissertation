@@ -1233,11 +1233,73 @@ Każde zdarzenie może posiadać również zestaw funkcji, które należy
 wywołać przed lub po zmianie stanów (\texttt{before\_transition} i
 \texttt{after\_transition}).
 
+Implementacja maszyny stanowej ,,fazy gry'', przedstawionej na
+\imref{statemachine-phase}, jest nieco bardziej
+skomplikowana. Sytuacja ta wynika z faktu, iż w przypadku wielu
+zdarzeń mamy zdefiniowane wiele różnych przejść. Wybór konkretnej
+ścieżki zależny jest zarówno od fazy gry, jak i pozostałych atrybutów
+określających jej stan (np. numer aktualnego gracza). W przypadku
+zbudowania przez gracza drogi (zdarzenie \texttt{road\_built}) mamy do
+dyspozycji następujące przejścia:
+
+\begin{itemize}
+\item z \texttt{first\_road} do \texttt{first\_settlement} - przejście
+  możliwe tylko wówczas, gdy istnieje gracz o numerze wyższym od
+  numeru aktualnego gracza. Jeśli warunek nie jest spełniony,
+  wybierane jest bezwarunkowe przejście do \texttt{second\_settlement}
+\item z \texttt{second\_road} do \texttt{second\_settlement} -
+  analogicznie jak w poprzednim przypadku, przejście jest możliwe tylko
+  jeśli istnieje gracz o numerze niższym od numeru aktualnego
+  gracza. W przeciwnym wypadku wybierane jest bezwarunkowe przejście
+  do \texttt{before\_roll}
+\item z \texttt{road\_building\_first\_road} do
+  \texttt{road\_building\_second\_road} - bezwarunkowo
+\item z \texttt{road\_building\_second\_road} do \texttt{after\_roll}
+  - bezwarunkowo
+\item z \texttt{after\_roll} do \texttt{after\_roll} - bezwarunkowo
+\end{itemize}
+
+Gdyby nie fakt, iż obiekt gry jest odpowiedzialny za sprawdzanie
+poprawności wywoływanych zdarzeń, to ostatnie z opisywanych przejść
+nie miałoby większego sensu. W większości przypadków weryfikacja
+zdarzenia polega na sprawdzeniu, czy aktualna tura jest turą
+użytkownika, który wywołał zdarzenie (lub czy dany użytkownik w ogóle
+uczestniczy w rozgrywce). Dodatkowo sprawdzany jest stan gry - jeśli
+gra się jeszcze nie rozpoczęła (stan \texttt{preparing}) lub została
+już zakończona (stan \texttt{ended}), to nie jest możliwa zmiana fazy
+gry. Fragment kodu źródłowego maszyny stanowej ,,fazy gry'' został
+przedstawiony na listingu \ref{listing:statemachine-phase}.
+
 \begin{listing}
   \input{statemachine-phase}
   \caption{Maszyna stanowa fazy gry}
   \label{listing:statemachine-phase}
 \end{listing}
+
+Uproszczony algorytm wyboru przejść w maszynie stanowej opartej na
+bibliotece \texttt{state\_machine} jest następujący:
+
+\begin{enumerate}
+\item wybieramy z listy przejść pierwsze, które rozpoczyna się w
+  aktualnym stanie (jeśli w danym zdarzeniu nie ma przejść
+  rozpoczynających się w aktualnym stanie - kończymy
+  algorytm) \label{selectfirst}
+\item sprawdzamy, czy warunki przejścia (parametry \texttt{:if} i
+  \texttt{:unless}) są spełnione \label {checkconditions}.  Jeśli tak,
+  to próbujemy wykonać przejście zgodnie z punktem \ref{callbacks}.  W
+  przeciwnym wypadku wybieramy kolejne przejście, które rozpoczyna się
+  w aktualnym stanie i wykonujemy ponownie punkt \ref{checkconditions}
+  (jeśli nie ma przejścia, to kończymy algorytm)
+\item sprawdzamy rezultaty wywołań zwrotnych (ang. callbacks)
+  przypisanych przez \texttt{before\_transition}. Jeśli którekolwiek z
+  nich zwróci wartość \texttt{false}, to nie dokonujemy zmiany stanu i
+  kończymy algorytm. W przeciwnym wypadku wykonujemy zmianę stanu
+  wynikającą z wybranego przejścia, zapisujemy zmieniony obiekt w
+  bazie danych i wywołujemy funkcje przypisane przez
+  \texttt{after\_transition} \label{callbacks}
+\end{enumerate}
+
+
 
 \subsection{Kontrolery}
 

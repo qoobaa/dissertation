@@ -6,11 +6,29 @@ state_machine @PYau[:phase], @PYau[:initial] @PYbd[=]@PYbd[>] @PYau[:first_settl
     transition @PYau[:after_roll] @PYbd[=]@PYbd[>] @PYau[:after_roll]
   @PYay[end]
 
-  before_transition @PYau[:on] @PYbd[=]@PYbd[>] @PYau[:settlement_built] @PYay[do] @PYbd[|]game, transition@PYbd[|]
-    game@PYbd[.]playing? @PYav[and] game@PYbd[.]current_user_turn?(@PYbd[*]transition@PYbd[.]args)
+  before_transition @PYau[:on] @PYbd[=]@PYbd[>] @PYau[:settlement_built] @PYay[do] @PYbd[|]game, trans@PYbd[|]
+    game@PYbd[.]playing? @PYav[and] game@PYbd[.]current_user_turn?(@PYbd[*]trans@PYbd[.]args)
   @PYay[end]
 
-  before_transition @PYau[:on] @PYbd[=]@PYbd[>] @PYau[:settlement_built], @PYau[:do] @PYbd[=]@PYbd[>] @PYau[:longest_road]
+  @PYaf[# ...]
+
+  event @PYau[:road_built] @PYay[do]
+    transition @PYau[:first_road] @PYbd[=]@PYbd[>]
+      @PYau[:first_settlement], @PYau[:if] @PYbd[=]@PYbd[>] @PYau[:next_player?]
+
+    transition @PYau[:first_road] @PYbd[=]@PYbd[>] @PYau[:second_settlement]
+    transition @PYau[:second_road] @PYbd[=]@PYbd[>]
+      @PYau[:second_settlement], @PYau[:if] @PYbd[=]@PYbd[>] @PYau[:previous_player?]
+
+    transition @PYau[:second_road] @PYbd[=]@PYbd[>] @PYau[:before_roll]
+    transition @PYau[:road_building_first_road] @PYbd[=]@PYbd[>]
+      @PYau[:road_building_second_road]
+
+    transition @PYau[:road_building_second_road] @PYbd[=]@PYbd[>]
+      @PYau[:after_roll]
+
+    transition @PYau[:after_roll] @PYbd[=]@PYbd[>] @PYau[:after_roll]
+  @PYay[end]
 
   @PYaf[# ...]
 @PYay[end]

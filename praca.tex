@@ -1192,7 +1192,7 @@ kośćmi).
 
 \subsection{Modele}
 
-\subsubsection{Model Game}
+\subsubsection{Gra}
 Model \texttt{Game} jest głównym elementem kontrolującym przebieg
 rozgrywki. Posiada on implementację dwóch maszyn stanowych
 przedstawionych na \imref{statemachine-state} i
@@ -1211,17 +1211,17 @@ maszyny stanowej stanu gry został przedstawiony na listingu
   \label{listing:statemachine}
 \end{listing}
 
-Początkowym stanem maszyny stanowej jest stan \texttt{preparing}.
-Maszyna ta posiada dwa zdarzenia: \texttt{start\_game} i
-\texttt{end\_game}, powodujące przejścia do stanów \texttt{playing}
-oraz \texttt{ended}. Każde przejście może posiadać także proste
-warunki, które muszą zostać spełnione aby możliwa była zmiana stanu. W
-przypadku zdarzenia \texttt{end\_game} i przejścia z \texttt{playing}
-do \texttt{ended}, metoda \texttt{winner?} musi zwrócić prawdę (dzieje
-się tak w przypadku, gdy zwycięzca gry jest już znany). Dodatkowo
-każdy z wymienionych stanów może posiadać własne zestawy
-walidatorów. Aby można było zapisać obiekt w stanie \texttt{playing},
-spełnione muszą zostać trzy warunki:
+Początkowym stanem jest stan \texttt{preparing}.  Maszyna ta posiada
+dwa zdarzenia: \texttt{start\_game} i \texttt{end\_game}, powodujące
+przejścia do stanów \texttt{playing} oraz \texttt{ended}. Każde
+przejście może posiadać także proste warunki, które muszą zostać
+spełnione aby możliwa była zmiana stanu. W przypadku zdarzenia
+\texttt{end\_game} i przejścia z \texttt{playing} do \texttt{ended},
+metoda \texttt{winner?} musi zwrócić prawdę (dzieje się tak w
+przypadku, gdy zwycięzca gry jest już znany). Dodatkowo każdy z
+wymienionych stanów może posiadać własne zestawy walidatorów. Aby
+można było zapisać obiekt w stanie \texttt{playing}, spełnione muszą
+zostać trzy warunki:
 
 \begin{itemize}
 \item gra musi posiadać 3-4 graczy
@@ -1285,8 +1285,8 @@ bibliotece \texttt{state\_machine} jest następujący:
   rozpoczynających się w aktualnym stanie - kończymy
   algorytm) \label{selectfirst}
 \item sprawdzamy, czy warunki przejścia (parametry \texttt{:if} i
-  \texttt{:unless}) są spełnione \label {checkconditions}.  Jeśli tak,
-  to próbujemy wykonać przejście zgodnie z punktem \ref{callbacks}.  W
+  \texttt{:unless}) są spełnione\label{checkconditions}. Jeśli tak, to
+  próbujemy wykonać przejście zgodnie z punktem \ref{callbacks}. W
   przeciwnym wypadku wybieramy kolejne przejście, które rozpoczyna się
   w aktualnym stanie i wykonujemy ponownie punkt \ref{checkconditions}
   (jeśli nie ma przejścia, to kończymy algorytm)
@@ -1299,7 +1299,75 @@ bibliotece \texttt{state\_machine} jest następujący:
   \texttt{after\_transition} \label{callbacks}
 \end{enumerate}
 
+Maszyna stanowa ,,fazy gry'' posiada zdefiniowany zestaw zdarzeń,
+wywoływanych w następujących sytuacjach:
 
+\begin{itemize}
+\item \texttt{settlement\_built} - wybudowana została osada (lub miasto)
+\item \texttt{road\_built} - wybudowana została droga
+\item \texttt{dice\_rolled} - wykonano rzut kośćmi
+\item \texttt{discarded} - odrzucono nadmiarowe karty surowców
+\item \texttt{robbed} - pionek ,,rozbójnika'' został przesunięty
+\item \texttt{end\_turn} - tura została zakończona
+\item \texttt{card\_bought} - została zakupiona karta rozwoju
+\item \texttt{army\_card\_played} - zagrano kartę ,,rycerza'' (armii)
+\item \texttt{road\_building\_card\_played} - zagrano kartę ,,budowy
+  dróg''
+\item \texttt{card\_played} - zagrano kartę rozwoju ,,monopol'' lub
+  ,,wynalazek''
+\item \texttt{end\_road\_building} - zakończono budowę dróg po
+  zagraniu karty
+\item \texttt{offer\_created} - stworzono ofertę handlu
+\item \texttt{offer\_expired} - oferta handlu wygasła (została
+  zaakceptowana lub odwołana)
+\item \texttt{exchanged} - dokonano wymiany surowców z bankiem
+\end{itemize}
+
+Do przechowywania stanu opisywanych maszyn stanowych, służą kolumny
+\texttt{state} i \texttt{phase}. W kolumnach tych zapisywane są nazwy
+stanów w postaci ciągu znaków\footnote{nic nie stoi na przeszkodzie,
+  aby w razie problemów wydajnościowych, stany były przechowywane w
+  postaci liczbowej. Do tego celu można wykorzystać bibliotekę
+  \emph{enumerate\_by}, stworzoną przez Aarona Pfeifera}. Oprócz
+stanów, konieczne jest przechowanie szeregu dodatkowych informacji o
+rozgrywce, m.in.:
+
+\begin{itemize}
+\item aktualnym graczu (kolumna \texttt{current\_player\_id})
+\item aktualnym graczu, który musi odrzucić surowce. Przechowanie tej
+  informacji jest konieczne, gdyż faza odrzucenia surowców przez
+  gracza o numerze 1 może nastąpić po wyrzuceniu 7 oczek przez gracza
+  o numerze 2, podczas trwania jego tury (kolumna
+  \texttt{current\_discard\_player\_id})
+\item najdłuższej drodze i największej armii, oraz graczach, które są
+  w ich posiadaniu (kolumny \texttt{longest\_road\_length},
+  \texttt{longest\_road\_player\_id}, \texttt{largest\_army\_size}
+  oraz \texttt{largest\_army\_player\_id})
+\item pozostałej ilości i rodzaju kart, które mogą zostać zakupione
+  przez graczy (\texttt{army\_cards}, \texttt{monopoly\_cards},
+  \texttt{year\_of\_plenty\_cards}, \texttt{road\_building\_cards},
+  \texttt{victory\_point\_cards})
+\item karcie, która została zagrana w bieżącej turze (\texttt{card\_id})
+\item numerze tury (\texttt{current\_turn})
+\end{itemize}
+
+\subsubsection{Plansza}
+
+
+
+\subsubsection{Sześciokąt}
+\subsubsection{Wierzchołek}
+\subsubsection{Krawędź}
+\subsubsection{Gracz}
+\subsubsection{Karta rozwoju}
+\subsubsection{Rzut kością}
+\subsubsection{Odrzucenie zasobów}
+\subsubsection{Wymiana z bankiem}
+\subsubsection{Oferta handlu}
+\subsubsection{Odpowiedź na ofertę handlu}
+\subsubsection{Rabunek}
+\subsubsection{Użytkownik}
+\subsubsection{Sesja użytkownika}
 
 \subsection{Kontrolery}
 

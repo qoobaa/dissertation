@@ -799,6 +799,7 @@ musi należeć do jednego z graczy.
 \end{figure}
 
 \subsubsection{Obliczanie pozycji elementów dołączonych}
+\label{sec:calculations}
 Po wprowadzeniu przedstawionych schematów numeracji, możliwe staje się
 wyznaczenie pozycji elementów sąsiadujących z ponumerowanymi
 sześciokątami, wierzchołkami i krawędziami. Zbiory dołączonych
@@ -1353,11 +1354,155 @@ rozgrywce, m.in.:
 
 \subsubsection{Plansza}
 
+Model \texttt{Board} odpowiedzialny jest za tworzenie i walidację
+powiązanych z nim sześciokątów. Przed zapisaniem obiektu planszy do
+bazy danych, tworzone są powiązane z nią sześciokąty, na podstawie
+informacji zawartych w atrybucie
+\texttt{hexes\_attributes}. Dodatkowymi atrybutami obiektu
+\texttt{board} są rozmiar (\texttt{size}) i początkowa pozycja
+,,rozbójnika'' (\texttt{robber\_position}). Sposób tworzenia
+przykładowej planszy do gry został przedstawiony na listingu
+\ref{listing:board}.
 
+\begin{listing}
+  \input{board}
+  \caption{Tworzenie przykładowej planszy do gry}
+  \label{listing:board}
+\end{listing}
+
+Rozmiar planszy jest przechowywany w kolumnach \texttt{height} i
+\texttt{width}, pozycja ,,rozbójnika'' w \texttt{robber\_row} i
+\texttt{robber\_col}. Każda plansza posiada identyfikator gry, do
+której należy, przechowywany w kolumnie \texttt{game\_id}.
 
 \subsubsection{Sześciokąt}
+Zadaniem modelu \texttt{Hex} jest przechowywanie informacji o
+sześciokątach znajdujących się na planszy do gry. Każdy z nich posiada
+określony typ (\texttt{hex\_type}), tj. \texttt{hill}, \texttt{field},
+\texttt{mountain}, \texttt{pasture}, \texttt{forest}, \texttt{desert}
+lub \texttt{sea}. W zależności od typu, może on także posiadać
+atrybuty takie jak:
+
+\begin{itemize}
+\item \texttt{roll} - przyporządkowany wynik rzutu kośćmi, będący
+  liczbą z zakresu 2-12, z wyłączeniem liczby 7
+\item \texttt{harbor\_position} - numer krawędzi, przy której
+  wybudowane osady stają się portami, liczba z zakresu 0-5
+\item \texttt{harbor\_type} - rodzaj szlaku handlowego, znajdującego
+  się na sześciokącie. Atrybut jest wymagany, jeśli sześciokąt posiada
+  zdefiniowaną pozycję portu, musi to być jedna z wartości:
+  \texttt{bricks}, \texttt{grain}, \texttt{lumber}, \texttt{ore},
+  \texttt{wool} lub \texttt{generic}
+\end{itemize}
+
+Każdy sześciokąt posiada zdefiniowaną pozycję, przechowywaną w
+kolumnach \texttt{row} i \texttt{col}, oraz identyfikator planszy, do
+której należy (kolumna \texttt{board\_id}). Na podstawie wzorów
+przedstawionych w rozdziale \ref{sec:calculations} i pozycji
+sześciokąta, możliwe stało się zdefiniowanie metody
+\texttt{hex\_positions}, przedstawionej na listingu
+\ref{listing:hex}. Metoda ta zwraca tablicę pozycji sześciokątów
+sąsiadujących z sześciokątem, na którym została wywołana. Dzięki
+metodzie klasowej \texttt{find\_by\_positions} możliwe jest
+przekształcenie listy pozycji, na listę odpowiadających im
+sześciokątów. Obiekty te wyciągane są z bazy danych pojedynczym
+zapytaniem, którego przykład został przedstawiony na listingu
+\ref{listing:find}. Analogicznie zaimplementowane zostały metody,
+wyciągające z bazy danych sąsiadujące z sześciokątem wierzchołki i
+krawędzie.
+
+\begin{listing}
+  \input{hex}
+  \caption{Wyciąganie sąsiadujących sześciokątów}
+  \label{listing:hex}
+\end{listing}
+
+\begin{listing}
+  \input{find}
+  \caption{Przykładowe zapytanie \emph{SQL}}
+  \label{listing:find}
+\end{listing}
+
 \subsubsection{Wierzchołek}
+
+Wierzchołki reprezentowane są przez obiekty klasy \texttt{Node}. Są
+one tworzone dopiero wówczas, gdy jeden z graczy buduje osadę na
+wybranej przez siebie pozycji. Nie ma potrzeby tworzenia
+,,niezasiedlonych'' wierzchołków, co znacznie przyspiesza generowanie
+planszy oraz ogranicza ilość koniecznych do przechowania
+informacji. Każdy wierzchołek musi posiadać właściciela,
+tj. identyfikator gracza, do którego należy (kolumna
+\texttt{player\_id}), identyfikator planszy na której się znajduje
+(\texttt{board\_id}) oraz pozycję (kolumny \texttt{row} i
+\texttt{col}). W związku z tym, że zasiedlony wierzchołek może być
+,,osadą'' lub ,,miastem'', konieczne jest przechowanie stanu, w jakim
+się znajduje. W tym celu zaimplementowana została prosta maszyna
+stanowa przedstawiona na listingu \ref{listing:node}.
+
+\begin{listing}
+  \input{node}
+  \caption{Maszyna stanowa wierzchołka}
+  \label{listing:node}
+\end{listing}
+
+Początkowy stan maszyny stanowej wierzchołka to \texttt{nil}. Możemy z
+niego przejść wyłącznie do stanu \texttt{settlement}. Taka konstrukcja
+uniemożliwia stworzenie nowego wierzchołka w stanie \texttt{city}, co
+byłoby możliwe przy stanie początkowym \texttt{settlement}
+odpowiedniej manipulacji atrybutem
+\texttt{state\_event}\footnote{atrybut \texttt{state\_event} służy do
+  wywoływania zdarzenia maszyny stanowej przy aktualizacji innych
+  atrybutów, np. z poziomu formularza na stronie. Element ten zostanie
+  dokładniej omówiony przy opisywaniu zasobów \emph{REST}}.
+
+Przy tworzeniu ,,osady'' przez gracza, sprawdzane są następujące
+elementy:
+
+\begin{itemize}
+\item obecność planszy - nie można stworzyć wierzchołka niepowiązanego
+  z planszą
+\item obecność gracza - każdy wierzchołek musi posiadać właściciela
+\item obecność stanu - wierzchołek musi znajdować się w jednym ze
+  stanów: \texttt{settlement} lub \texttt{city}
+\item unikalność pozycji w obrębie planszy - na jednej planszy nie
+  mogą znajdować się dwa wierzchołki o tej samej pozycji
+\item obecność ,,lądu'' w sąsiadujących sześciokątach - każdy
+  wierzchołek musi sąsiadować co najmniej z jednym sześciokątem, który
+  nie jest ,,morzem''
+\item obecność innych wierzchołków w sąsiedztwie - jeśli jeden z
+  sąsiadujących wierzchołków został już zasiedlony, to pozycja
+  budowanej osady nie jest prawidłowa
+\item obecność drogi - przynajmniej jedna sąsiadująca krawędź musi być
+  ,,zasiedlona'' przez gracza, który buduje osadę\footnote{ten warunek
+    nie musi być spełniony w pierwszym etapie gry, tzn. podczas
+    zasiedlania wyspy}
+\end{itemize}
+
+W przypadku rozbudowy ,,osady'' sprawdzane jest także, czy nie został
+zmieniony właściciel wierzchołka. Konieczne jest również sprawdzenie,
+czy gracz posiada wystarczającą ilość kart surowców, osad i
+miast. Odbywa się to poprzez modyfikację obiektu gracza i sprawdzenie,
+czy w dalszym ciągu spełnia on warunki walidacji (gracz nie może
+posiadać np. ujemnej ilości ,,cegieł''). Jeśli osada jest ,,portem'',
+tzn. wybudowana została przy szlaku handlowym, to zmieniane są również
+odpowiednie kursy wymian w obiekcie gracza. Jeżeli wszystkie
+wymienione warunki zostały spełnione, to obiekt jest zapisywany w
+bazie danych i wywoływane jest zdarzenie \texttt{settlement\_built!} w
+maszynie stanowej ,,fazy gry''. Jako parametr tego wywołania
+przekazywany jest obiekt użytkownika, właściciela wierzchołka. W
+przypadku, gdy wywołane zdarzenie jest nieprawidłowe rzucany jest
+wyjątek. Dzięki temu, że wszystkie operacje bazodanowe, wykonywane
+przed lub po zapisie właściwego obiektu, są objęte jedną transakcją,
+to po rzuceniu wyjątku baza danych nie jest w żaden sposób
+modyfikowana, a transakcja zostaje wycofana
+(ang. \emph{rollback}). Taki mechanizm zapewnia, że wszystkie akcje
+graczy muszą być wywoływane wyłącznie w przeznaczonych dla nich fazach
+gry.
+
 \subsubsection{Krawędź}
+
+
+
 \subsubsection{Gracz}
 \subsubsection{Karta rozwoju}
 \subsubsection{Rzut kością}

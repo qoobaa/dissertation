@@ -1474,7 +1474,7 @@ elementy:
   budowanej osady nie jest prawidłowa
 \item obecność drogi - przynajmniej jedna sąsiadująca krawędź musi być
   ,,zasiedlona'' przez gracza, który buduje osadę\footnote{ten warunek
-    nie musi być spełniony w pierwszym etapie gry, tzn. podczas
+    nie musi być spełniony w pierwszym etapie gry, podczas
     zasiedlania wyspy}
 \end{itemize}
 
@@ -1501,7 +1501,54 @@ gry.
 
 \subsubsection{Krawędź}
 
+Podobnie jak w przypadku wierzchołków, obiekty klasy \texttt{Edge}
+tworzone są tylko wówczas, gdy jeden z graczy buduje drogę. Przy
+tworzeniu krawędzi sprawdzane są następujące elementy:
 
+\begin{itemize}
+\item obecność planszy - nie można wybudować drogi niepowiązanej z
+  planszą
+\item obecność gracza - każda droga musi mieć właściciela
+\item unikalność pozycji w obrębie planszy
+\item obecność ,,lądu'' w sąsiadujących z krawędzią sześciokątach
+\item obecność drogi lub osady (miasta) w sąsiedztwie - muszą one
+  należeć do tego samego gracza. W pierwszym etapie gry do zbudowania
+  drogi konieczne jest sąsiedztwo osady, która nie posiada jeszcze
+  drogi
+\end{itemize}
+
+Analogicznie jak w przypadku sześciokątów i wierzchołków, model
+\texttt{Edge} posiada zbiór metod służących do wyciągania z bazy
+danych sąsiadujących z krawędzią elementów. W tym przypadku jednak
+niezbędne okazało się rozdzielenie zbioru sąsiadujących krawędzi na
+\texttt{left\_edges} i \texttt{right\_edges}. Na bazie tych metod
+zdefiniowane zostały \texttt{left\_roads} i \texttt{right\_roads},
+zwracające kolejno drogi sąsiadujące z lewej i prawej strony. Przez
+drogi rozumiane są krawędzie należące do tego samego właściciela, co
+krawędź na którym wywoływane są opisywane metody. Dodatkowo, jeśli
+pomiędzy sąsiadującymi krawędziami znajduje się osada wybudowana przez
+innego gracza, to nie one są uznawane za sąsiadujące drogi. Dzięki tym
+metodom, stosunkowo proste staje się obliczenie najdłuższej drogi
+znajdującej się na planszy.
+
+Najprostszym sposobem wyjaśnienia mechanizmu obliczania najdłuższej
+drogi będzie rozpatrzenie go na konkretnym przykładzie. Na
+\imref{road} został przedstawiony wycinek planszy do gry, na którym
+znajdują się osady i drogi należące do dwóch graczy. Gracz
+o kolorze pomarańczowym posiada dwie osady oraz dwie drogi.
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[width=0.5\linewidth]{road.pdf}
+  \end{center}
+  \caption{Obliczanie długości najdłuższej drogi}
+  \label{road}
+\end{figure}
+
+
+
+% algorytm liczenia najdłuższej drogi
+% wywołanie road_built!
 
 \subsubsection{Gracz}
 \subsubsection{Karta rozwoju}

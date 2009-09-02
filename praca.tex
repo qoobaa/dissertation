@@ -42,7 +42,7 @@
 \section{Analiza zagadnienia}
 
 \subsection{Osadnicy z Catanu}
-Gra planszowa ,,Osadnicy z Catanu'' została stworzona przez
+Gra planszowa ,,Osadnicy z Catanu'' została opracowana przez
 niemieckiego matematyka Klausa Teubera. Po raz pierwszy została ona
 wydana w 1995 roku w Niemczech pod nazwą \emph{Die Siedler von
   Catan}. O ogromnej popularności gry na całym świecie może świadczyć
@@ -178,9 +178,9 @@ działających rozwiązań. Wszystkie zaprezentowane implementacje gry
 wymagają od użytkownika posiadania dodatkowego oprogramowania (poza
 przeglądarką internetową). Większość z nich jest przystosowana do
 jednej konkretnej platformy (np. PC z systemem Microsoft
-Windows). Wadą tego typu rozwiązań jest to, że stworzenie wersji na
-inną platformę (np. urządzenia mobilne) często wiąże się z
-koniecznością stworzenia zupełnie nowej aplikacji.
+Windows). Wadą tego typu rozwiązań jest to, że przystosowanie ich dla
+innych platform (np. dla urządzeń mobilnych) często wiąże się z
+koniecznością przepisania całej aplikacji.
 
 \subsection{Pioneers}
 Pierwotna nazwa tej aplikacji brzmiała \emph{gnocatan}. Aplikacja
@@ -241,24 +241,24 @@ własnościowym.
 \section{Określenie funkcji aplikacji i wybór technologii}
 Projektowana aplikacja składać się będzie z dwóch części: serwera i
 klienta. Aplikacja w założeniu będzie wymagać bardzo dużego nakładu
-pracy, w tym zaprojektowania interfejsu graficznego i stworzenia
-grafiki. Aby umożliwić rozwój aplikacji, zdecydowałem się udostępnić
-całość kodu jako wolne oprogramowanie na zasadach Powszechnej Licencji
-Publicznej GNU Affero w wersji 3\cite{affero}.
+pracy, w tym zaprojektowania interfejsu graficznego. Aby umożliwić
+rozwój aplikacji, zdecydowałem się udostępnić całość kodu jako wolne
+oprogramowanie na zasadach Powszechnej Licencji Publicznej GNU Affero
+w wersji 3\cite{affero}.
 
 Do zaimplementowania części serwerowej aplikacji zostanie wykorzystany
 język \emph{Ruby} i framework \emph{Ruby on Rails}. Wybór można
 uzasadnić bardzo dobrym wsparciem frameworka dla architektury
-\emph{REST}, która zostanie wykorzystana do stworzenia \emph{API}.
+\emph{REST}, która zostanie wykorzystana do utworzenia \emph{API}.
 
 \subsection{Ruby}
 Język \emph{Ruby} został stworzony w 1995 roku przez Yukihiro
-Matsumoto. Za bazę do jego stworzenia posłużyły języki takie jak
+Matsumoto. Inspirowany jest on w głównej mierze językami, takimi jak:
 \emph{Lisp}, \emph{Perl}, \emph{Python}, \emph{Smalltalk}, a także
 \emph{CLU} i \emph{Eiffel}. Jest to wieloparadygmatowy, dynamicznie
 typowany, interpretowany język programowania bardzo wysokiego poziomu
-(ang. \emph{VHLL} \footnote{VHLL - very high-level programming language
-  \cite{vhll} }) \cite{ruby}. Najważniejszymi cechami języka są:
+(ang. \emph{VHLL}\footnote{VHLL - very high-level programming language
+  \cite{vhll}})\cite{ruby}. Najważniejszymi cechami języka są:
 
 \begin{itemize}
 \item pełna obiektowość - nie ma podziału na typy proste (wbudowane) i
@@ -295,10 +295,10 @@ najbardziej dojrzałe są:
 
 \begin{itemize}
 \item \emph{Matz's Ruby Interpreter} (\emph{MRI}) - intepreter
-  stworzony w języku \emph{C}, uznawany \emph{de facto} za
+  napisany w języku \emph{C}, uznawany \emph{de facto} za
   implementację referencyjną\cite{mri}
-\item \emph{JRuby} - interpreter stworzony w języku Java,
-  uruchamiany w \emph{wirtualnej maszynie Javy}\cite{jruby}
+\item \emph{JRuby} - interpreter napisany w języku Java, uruchamiany w
+  \emph{wirtualnej maszynie Javy}\cite{jruby}
 \end{itemize}
 
 Głównym wskaźnikiem świadczącym o dojrzałości interpretera jest
@@ -363,15 +363,16 @@ główne to:
 
 \begin{itemize}
 \item \emph{ActiveRecord} - biblioteka mapowania
-  obiektowo-relacyjnego, stworzona na podstawie wzorca projektowego o
-  tej samej nazwie\cite{activerecord}. Biblioteka ta oferuje znacznie
-  więcej, niż wynika z implementowanego wzorca, m.in. różne rodzaje
-  asocjacji (w tym asocjacje polimorficzne\cite{polymorphic}),
-  mechanizm dziedziczenia jednotabelowego (\emph{STI}\footnote{STI -
-    dziedziczenie jednotabelowe (ang. Single Table Inheritance) -
-    technika umożliwiająca odzwierciedlenie w jednej tabeli relacyjnej
-    bazy danych obiektów wielu dziedziczących po sobie
-    klas\cite{sti}}) oraz walidatory
+  obiektowo-relacyjnego, która powstała na podstawie wzorca
+  projektowego o tej samej nazwie\cite{activerecord}. Biblioteka ta
+  oferuje znacznie więcej, niż wynika z implementowanego wzorca,
+  m.in. różne rodzaje asocjacji (w tym asocjacje
+  polimorficzne\cite{polymorphic}), mechanizm dziedziczenia
+  jednotabelowego (\emph{STI}\footnote{STI - dziedziczenie
+    jednotabelowe (ang. Single Table Inheritance) - technika
+    umożliwiająca odzwierciedlenie w jednej tabeli relacyjnej bazy
+    danych obiektów wielu dziedziczących po sobie klas\cite{sti}})
+  oraz walidatory
 \item \emph{ActionPack} - biblioteka umożliwiająca tworzenie
   kontrolerów i widoków, odpowiada również za kierowanie zapytań do
   odpowiednich akcji kontrolerów (tzw. \emph{routing})
@@ -508,7 +509,7 @@ zostały zaimplementowane w konkurencyjnych przeglądarkach, m.in.w
 dostępne w przeglądarkach od końca 1999 roku, pierwsze duże aplikacje
 zaczęły z nich korzystać dopiero w 2004 roku. Najważniejszymi
 aplikacjami, które spopularyzowały opisywany mechanizm były
-\emph{Gmail} i \emph{Google Maps}, stworzone przez firmę \emph{Google
+\emph{Gmail} i \emph{Google Maps}, należące do firmy \emph{Google
   Inc.} W 2005 roku wprowadzony został termin \emph{Ajax}
 (ang. asynchronous JavaScript and XML), oznaczający wykorzystanie
 języków \emph{JavaScript} i \emph{XML} do asynchronicznej komunikacji
@@ -597,9 +598,9 @@ Innym, bardziej wyrafinowanym sposobem komunikacji poprzez \emph{HTTP
   Push} jest strumieniowanie danych. Do strumieniowania danych
 wykorzystywany jest fakt, iż wszystkie współczesne przeglądarki
 internetowe renderują strony progresywnie. W związku z tym, możliwe
-staje się stworzenie ,,nieskończonego'' zapytania, które będzie
+staje się wywołanie ,,nieskończonego'' zapytania, które będzie
 interpretowane przez silnik na bieżąco, w chwili pojawiania się nowych
-elementów. Do stworzenia takiego zapytania wykorzystywany jest ukryty
+elementów. Do wykonania takiego zapytania wykorzystywany jest ukryty
 znacznik \texttt{<iframe>}. Znacznik ten umożliwia zagnieżdżenie w
 dokumencie innego dokumentu, pochodzącego z innego adresu
 internetowego\footnote{w tym przypadku również nie jest możliwe
@@ -1073,10 +1074,10 @@ rzucie.
   możliwość m.in. budowania osad, miast i dróg, kupowania kart rozwoju
   oraz zagrywania ich. Zagranie karty budowy drogi powoduje przejście
   do fazy \texttt{road building first road}. Możliwe jest także
-  tworzenie ofert handlu z innymi graczami. Po stworzeniu oferty
-  następuje przejście do fazy \texttt{offer}. Gracz w dowolnym momencie
-  może zakończyć fazę \texttt{after roll}, co powoduje przejście do fazy
-  \texttt{before roll}
+  tworzenie ofert handlu z innymi graczami. Po utworzeniu oferty
+  następuje przejście do fazy \texttt{offer}. Gracz w dowolnym
+  momencie może zakończyć fazę \texttt{after roll}, co powoduje
+  przejście do fazy \texttt{before roll}
 \item \texttt{offer} - faza oferty handlu, podczas której gracz
   składający ofertę oczekuje na odpowiedzi innych. W każdej chwili
   może on zakończyć tę fazę powodując powrót do \texttt{after roll}
@@ -1198,13 +1199,12 @@ Model \texttt{Game} jest głównym elementem kontrolującym przebieg
 rozgrywki. Posiada on implementację dwóch maszyn stanowych
 przedstawionych na \imref{statemachine-state} i
 \imref{statemachine-phase}. Do implementacji maszyn stanowych
-wykorzystana została biblioteka \texttt{state\_machine}, stworzona
-przez Aarona Pfeifera. Udostępnia ona bardzo prosty
-\emph{DSL}\footnote{DSL (ang. Domain-specific language) - język
-  dziedzinowy, przystosowany do rozwiązywania określonej dziedziny
-  problemów} służący do opisu stanów i przejść pomiędzy nimi. Kod
-maszyny stanowej stanu gry został przedstawiony na listingu
-\ref{listing:statemachine}.
+wykorzystana została biblioteka \texttt{state\_machine}, autorstwa
+Aarona Pfeifera. Udostępnia ona bardzo prosty \emph{DSL}\footnote{DSL
+  (ang. Domain-specific language) - język dziedzinowy, przystosowany
+  do rozwiązywania określonej dziedziny problemów} służący do opisu
+stanów i przejść pomiędzy nimi. Kod maszyny stanowej stanu gry został
+przedstawiony na listingu \ref{listing:statemachine}.
 
 \begin{listing}
   \input{statemachine}
@@ -1318,7 +1318,7 @@ wywoływanych w następujących sytuacjach:
   ,,wynalazek''
 \item \texttt{end\_road\_building} - zakończono budowę dróg po
   zagraniu karty
-\item \texttt{offer\_created} - stworzono ofertę handlu
+\item \texttt{offer\_created} - utworzono ofertę handlu
 \item \texttt{offer\_expired} - oferta handlu wygasła (została
   zaakceptowana lub odwołana)
 \item \texttt{exchanged} - dokonano wymiany surowców z bankiem
@@ -1329,7 +1329,7 @@ Do przechowywania stanu opisywanych maszyn stanowych, służą kolumny
 stanów w postaci ciągu znaków\footnote{nic nie stoi na przeszkodzie,
   aby w razie problemów wydajnościowych, stany były przechowywane w
   postaci liczbowej. Do tego celu można wykorzystać bibliotekę
-  \emph{enumerate\_by}, stworzoną przez Aarona Pfeifera}. Oprócz
+  \emph{enumerate\_by}, autorstwa Aarona Pfeifera}. Oprócz
 stanów, konieczne jest przechowanie szeregu dodatkowych informacji o
 rozgrywce, m.in.:
 
@@ -1447,7 +1447,7 @@ stanowa przedstawiona na listingu \ref{listing:node}.
 
 Początkowy stan maszyny stanowej wierzchołka to \texttt{nil}. Możemy z
 niego przejść wyłącznie do stanu \texttt{settlement}. Taka konstrukcja
-uniemożliwia stworzenie nowego wierzchołka w stanie \texttt{city}, co
+uniemożliwia utworzenie nowego wierzchołka w stanie \texttt{city}, co
 byłoby możliwe przy stanie początkowym \texttt{settlement}
 odpowiedniej manipulacji atrybutem
 \texttt{state\_event}\footnote{atrybut \texttt{state\_event} służy do
@@ -1459,7 +1459,7 @@ Przy tworzeniu ,,osady'' przez gracza, sprawdzane są następujące
 elementy:
 
 \begin{itemize}
-\item obecność planszy - nie można stworzyć wierzchołka niepowiązanego
+\item obecność planszy - nie można utworzyć wierzchołka niepowiązanego
   z planszą
 \item obecność gracza - każdy wierzchołek musi posiadać właściciela
 \item obecność stanu - wierzchołek musi znajdować się w jednym ze
@@ -1531,14 +1531,6 @@ innego gracza, to nie one są uznawane za sąsiadujące drogi. Dzięki tym
 metodom, stosunkowo proste staje się obliczenie najdłuższej drogi
 znajdującej się na planszy.
 
-\begin{figure}[ht]
-  \begin{center}
-    \includegraphics[width=0.5\linewidth]{road.pdf}
-  \end{center}
-  \caption{Obliczanie długości najdłuższej drogi}
-  \label{road}
-\end{figure}
-
 Najprostszym sposobem wyjaśnienia mechanizmu obliczania najdłuższej
 drogi będzie rozpatrzenie go na konkretnym przykładzie. Na
 \imref{road} został przedstawiony wycinek planszy do gry, na którym
@@ -1557,6 +1549,37 @@ pomarańczowego gracza dzieli ścieżkę o długości 7 na dwie o
 długościach 2 i 5, a ścieżkę o długości 6 na 2 i 4. W rezultacie
 otrzymujemy ścieżki o długościach: 2, 3, 4 oraz 5.
 
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[width=0.5\linewidth]{road.pdf}
+  \end{center}
+  \caption{Obliczanie długości najdłuższej drogi}
+  \label{road}
+\end{figure}
+
+Algorytm obliczania najdłuższej drogi został zaimplementowany w
+metodzie \texttt{longest\_road}, klasy \texttt{Edge}. Pierwszym jej
+parametrem jest \texttt{visited\_roads} - lista odwiedzonych już
+wierzchołków, których nie należy brać pod uwagę przy
+obliczeniach. Rezultatem jej wywołania jest para elementów: najdłuższa
+znaleziona droga oraz uzupełniona lista odwiedzonych
+wierzchołków. Każda droga może posiadać maksymalnie cztery
+sąsiadujące drogi - dwie lewe i dwie prawe. W pierwszej kolejności
+liczone są długości dróg znajdujących się po lewej stronie, z
+pominięciem krawędzi już odwiedzonych.
+
+%%
+
+%% skip_roads służy do pominięcia drugiej drogi jedynie w pierwszym
+%% wywołaniu metody. Gwarantuje to, że droga ta nie zostanie pominięta
+%% w przypadku wystąpienia cyklu.
+
+
+\begin{listing}
+  \input{edge}
+  \caption{Implementacja algorytmu liczenia najdłuższej drogi}
+  \label{listing:edge}
+\end{listing}
 
 
 % algorytm liczenia najdłuższej drogi

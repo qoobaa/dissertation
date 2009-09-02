@@ -1531,12 +1531,6 @@ innego gracza, to nie one są uznawane za sąsiadujące drogi. Dzięki tym
 metodom, stosunkowo proste staje się obliczenie najdłuższej drogi
 znajdującej się na planszy.
 
-Najprostszym sposobem wyjaśnienia mechanizmu obliczania najdłuższej
-drogi będzie rozpatrzenie go na konkretnym przykładzie. Na
-\imref{road} został przedstawiony wycinek planszy do gry, na którym
-znajdują się osady i drogi należące do dwóch graczy. Gracz
-o kolorze pomarańczowym posiada dwie osady oraz dwie drogi.
-
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[width=0.5\linewidth]{road.pdf}
@@ -1544,6 +1538,24 @@ o kolorze pomarańczowym posiada dwie osady oraz dwie drogi.
   \caption{Obliczanie długości najdłuższej drogi}
   \label{road}
 \end{figure}
+
+Najprostszym sposobem wyjaśnienia mechanizmu obliczania najdłuższej
+drogi będzie rozpatrzenie go na konkretnym przykładzie. Na
+\imref{road} został przedstawiony wycinek planszy do gry, na którym
+znajdują się osady i drogi należące do dwóch graczy. Gracz o kolorze
+pomarańczowym posiada dwie osady oraz dwie drogi, połączone w jedną
+ścieżkę o długości 2. W przypadku gracza niebieskiego sytuacja jest
+nieco bardziej skomplikowana. Gracz ten posiada 8 dróg, wraz z
+osadą. Jeśli nie brać pod uwagę obiektów należących do pomarańczowego
+gracza, to drogi łączą się w ścieżki, których długości to odpowiednio
+3, 6 i 7. Długość ścieżki to maksymalna ilość dróg, przez które możemy
+przejść, odwiedzając każdą z nich najwyżej raz. Przejście do
+sąsiadującej drogi nie jest jednak możliwe, jeśli musi się odbyć
+,,przez'' osadę lub miasto innego gracza. Z taką sytuacją mamy do
+czynienia w rozpatrywanym na \imref{road} przypadku. Osada
+pomarańczowego gracza dzieli ścieżkę o długości 7 na dwie o
+długościach 2 i 5, a ścieżkę o długości 6 na 2 i 4. W rezultacie
+otrzymujemy ścieżki o długościach: 2, 3, 4 oraz 5.
 
 
 

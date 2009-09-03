@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=@\[\],numbers=left,firstnumber=1,stepnumber=1]
+@PYaq[Board]@PYbd[.]first@PYbd[.]hexes@PYbd[.]find_by_positions(@PYbd[@lb[]]@PYbd[@lb[]]@PYag[1], @PYag[1]@PYbd[@rb[]], @PYbd[@lb[]]@PYag[2], @PYag[2]@PYbd[@rb[]]@PYbd[@rb[]])
+
+@PYaf[# SELECT *]
+@PYaf[# FROM "hexes"]
+@PYaf[# WHERE (("hexes".row = 1 AND "hexes".col = 1) OR]
+@PYaf[#        ("hexes".row = 2 AND "hexes".col = 2) OR]
+@PYaf[#         0 = 1) AND]
+@PYaf[#        ("hexes".board_id = 1)]
+
+@PYaf[#=> @lb[]#<Hex id: 11, row: 2, col: 2, ...@rb[]]
+\end{Verbatim}

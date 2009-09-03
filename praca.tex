@@ -1559,21 +1559,25 @@ otrzymujemy ścieżki o długościach: 2, 3, 4 oraz 5.
 \end{figure}
 
 Algorytm obliczania najdłuższej drogi został zaimplementowany w
-metodzie \texttt{longest\_road}, klasy \texttt{Edge}. Pierwszym jej
-parametrem jest \texttt{visited\_roads} - lista odwiedzonych już
-wierzchołków, których nie należy brać pod uwagę przy
-obliczeniach. Rezultatem jej wywołania jest para elementów: najdłuższa
-znaleziona droga oraz uzupełniona lista odwiedzonych
-wierzchołków. Każda droga może posiadać maksymalnie cztery
-sąsiadujące drogi - dwie lewe i dwie prawe. W pierwszej kolejności
-liczone są długości dróg znajdujących się po lewej stronie, z
-pominięciem krawędzi już odwiedzonych.
+metodzie \texttt{longest\_road}, klasy \texttt{Edge}. Jest to
+zmodyfikowany algorytm przeszukiwania grafu w głąb w wersji
+rekurencyjnej. Pierwszym parametrem metody jest
+\texttt{visited\_roads} - zbiór odwiedzonych już wierzchołków, których
+nie należy brać pod uwagę przy przeszukiwaniu. Rezultatem wywołania
+metody jest para elementów: najdłuższa znaleziona droga oraz
+uzupełniony zbiór odwiedzonych wierzchołków. Dodatkowy parametr
+\texttt{skip\_roads} służy do ...
+
+Każda droga może posiadać maksymalnie cztery sąsiadujące drogi - dwie
+lewe i dwie prawe. W pierwszej kolejności liczone są długości dróg
+znajdujących się po lewej stronie, z pominięciem krawędzi już
+odwiedzonych.
 
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[width=0.5\linewidth]{longest-road.pdf}
   \end{center}
-  \caption{Przykładowa droga o długości 8}
+  \caption{Przykładowa kolejność odwiedzania krawędzi}
   \label{road}
 \end{figure}
 

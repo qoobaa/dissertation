@@ -1531,9 +1531,7 @@ innego gracza, to nie one są uznawane za sąsiadujące drogi. Dzięki tym
 metodom, stosunkowo proste staje się obliczenie najdłuższej drogi
 znajdującej się na planszy.
 
-Najprostszym sposobem wyjaśnienia mechanizmu obliczania najdłuższej
-drogi będzie rozpatrzenie go na konkretnym przykładzie. Na
-\imref{road} został przedstawiony wycinek planszy do gry, na którym
+Na \imref{road} został przedstawiony wycinek planszy do gry, na którym
 znajdują się osady i drogi należące do dwóch graczy. Gracz o kolorze
 pomarańczowym posiada dwie osady oraz dwie drogi, połączone w jedną
 ścieżkę o długości 2. W przypadku gracza niebieskiego sytuacja jest
@@ -1565,28 +1563,37 @@ rekurencyjnej. Pierwszym parametrem metody jest
 \texttt{visited\_roads} - zbiór odwiedzonych już wierzchołków, których
 nie należy brać pod uwagę przy przeszukiwaniu. Rezultatem wywołania
 metody jest para elementów: najdłuższa znaleziona droga oraz
-uzupełniony zbiór odwiedzonych wierzchołków. Dodatkowy parametr
-\texttt{skip\_roads} służy do ...
+uzupełniony zbiór odwiedzonych wierzchołków. W dodatkowym parametrze
+\texttt{skip\_roads} przekazywany jest zbiór krawędzi sąsiadujących z
+tą, na której wywołana została metoda
+\texttt{longest\_road}. Krawędzie te są pomijane tylko przy pierwszym
+wywołaniu rekurencyjnym. Dzięki temu krawędzie te zostaną uwzględnione
+jedynie w przypadku wystąpienia cyklu. Dla danej krawędzi $e$,
+posiadającej dwie drogi $l_1$ i $l_2$ sąsiadujące z lewej strony oraz
+$r_1$ i $r_2$ z prawej strony, długość najdłuższej drogi można zapisać
+w postaci równania \ref{equation:longest-road}.
 
-Każda droga może posiadać maksymalnie cztery sąsiadujące drogi - dwie
-lewe i dwie prawe. W pierwszej kolejności liczone są długości dróg
-znajdujących się po lewej stronie, z pominięciem krawędzi już
-odwiedzonych.
+\begin{equation}
+  \begin{aligned}
+    \text{longest\_road}(e) = \text{max}(\text{longest\_road}(l_1),
+    \text{longest\_road}(l_2)) \\
+    + \text{max}(\text{longest\_road}(r_1), \text{longest\_road}(r_2))
+    + 1
+  \end{aligned}
+  \label{equation:longest-road}
+\end{equation}
+
+Przykładowa kolejność odwiedzania krawędzi została przedstawiona na
+\imref{longest-road}. Krawędź oznaczona numerem 1 posiada trzy
+sąsiadujące drogi: 2, 7 i 9. % TODO
 
 \begin{figure}[ht]
   \begin{center}
     \includegraphics[width=0.5\linewidth]{longest-road.pdf}
   \end{center}
   \caption{Przykładowa kolejność odwiedzania krawędzi}
-  \label{road}
+  \label{longest-road}
 \end{figure}
-
-%%
-
-%% skip_roads służy do pominięcia drugiej drogi jedynie w pierwszym
-%% wywołaniu metody. Gwarantuje to, że droga ta nie zostanie pominięta
-%% w przypadku wystąpienia cyklu.
-
 
 \begin{listing}
   \input{edge}
@@ -1594,12 +1601,103 @@ odwiedzonych.
   \label{listing:edge}
 \end{listing}
 
-
-% algorytm liczenia najdłuższej drogi
-% wywołanie road_built!
+Podobnie jak w przypadku budowania osad czy miast, po zbudowaniu
+drogi, w maszynie stanowej ,,fazy gry'' wywoływane jest zdarzenie
+\texttt{road\_built!}.
 
 \subsubsection{Gracz}
+Informacje o uczestnikach rozgrywki przechowywane są w obiektach klasy
+\texttt{Player}. Każda gra posiada uporządkowaną listę graczy,
+składającą się zgodnie z zasadami gry z 3-4 elementów, posortowaną
+względem atrybutu \texttt{number}. Oprócz tego atrybutu, obiekty klasy
+\texttt{Player} przechowują następujące informacje:
+
+\begin{itemize}
+\item ilość posiadanych kart surowców poszczególnych typów (atrybuty
+  \texttt{bricks}, \texttt{grain}, \texttt{lumber}, \texttt{ore} i
+  \texttt{wool})
+\item kursy wymian poszczególnych surowców, stosowane przy handlu z
+  bankiem (\texttt{bricks\_exchange\_rate},
+  \texttt{grain\_exchange\_rate}, \texttt{lumber\_exchange\_rate},
+  \texttt{ore\_exchange\_rate} i \texttt{wool\_exchange\_rate})
+\item ilość posiadanych figur osad, miast i dróg
+  (\texttt{settlements}, \texttt{cities} i \texttt{roads}).
+\item ilość posiadanych punktów, rozdzielonych na punkty jawne i
+  niejawne (\texttt{visible\_points}, \texttt{hidden\_points})
+\item rozmiar armii - ilość wykorzystanych kart ,,rycerza''
+  (\texttt{army\_size})
+\end{itemize}
+
+Aby uniemożliwić zapisanie w bazie niepoprawnych obiektów, klasa
+zawiera zbiór walidatorów, sprawdzających czy wymienione wyżej
+atrybuty są liczbami nieujemnymi (w przypadku kursów wymian muszą być
+to liczby dodatnie). Ponadto wymagana jest unikalność pary atrybutów
+\texttt{game\_id} i \texttt{user\_id}. Dzięki temu nie jest możliwe
+stworzenie, w obrębie jednej gry, więcej niż jednego gracza,
+należącego do tego samego użytkownika.
+
+Obiekty klasy \texttt{Player} posiadają także prostą maszynę
+stanową. Po utworzeniu obiektu gracza (dołączeniu się użytkownika do
+gry), znajduje się on w stanie \texttt{preparing}. W każdej chwili
+może on zmienić stan na \texttt{ready}, co powoduje wywołanie
+zdarzenia \texttt{start\_game} w maszynie stanowej ,,stanu
+gry''. Zdarzenie to powoduje rozpoczęcie rozgrywki tylko wówczas, gdy
+wszyscy gracze znajdują się w stanie \texttt{ready}. Maszyna stanowa
+gracza została przedstawiona na listingu \ref{listing:player}.
+
+\begin{listing}
+  \input{player}
+  \caption{Maszyna stanowa gracza}
+  \label{listing:player}
+\end{listing}
+
 \subsubsection{Karta rozwoju}
+Informacje o zakupionych przez graczy kartach rozwoju znajdują się w
+obiektach klasy \texttt{Card}. W związku z tym, że w grze występuje
+pięć rodzajów kart postępu, do ich implementacji wykorzystany został
+mechanizm \emph{STI}. Różnice w działaniu poszczególnych rodzajów kart
+są dość znaczne, dlatego zastosowanie tego mechanizmu pozwoliło na
+wydzielenie logiki do osobnych klas:
+
+\begin{itemize}
+\item karty ,,rycerza'' - klasa \texttt{Card::Army}
+\item karty ,,punkt zwycięstwa'' - \texttt{Card::VictoryPoint}
+\item karty postępu ,,monopol'' - \texttt{Card::Monopoly}
+\item karty postępu ,,budowy dróg'' - \texttt{Card::RoadBuilding}
+\item karty postępu ,,wynalazek'' - \texttt{Card::YearOfPlenty}
+\end{itemize}
+
+Karta rozwoju nie może zostać zagrana przez gracza, bezpośrednio po
+jej zakupie, lecz dopiero w następnej rundzie. Ponadto każda karta
+może zostać zagrana tylko raz. Do implementacji tych zasad po raz
+kolejny została wykorzystana maszyna stanowa. Składa się ona z trzech
+stanów: \texttt{tapped}, \texttt{untapped} i \texttt{graveyard} oraz
+dwóch zdarzeń: \texttt{untap} i \texttt{play}. Jej kod został
+przedstawiony na listingu \ref{listing:card}.
+
+\begin{listing}
+  \input{card}
+  \caption{Maszyna stanowa karty rozwoju}
+  \label{listing:card}
+\end{listing}
+
+Po utworzeniu obiektu klasy \texttt{Card}, niezbędne jest ustalenie
+właściwego typu karty (atrybutu \texttt{type}). Odbywa się to poprzez
+wywołanie metody \texttt{take\_random\_card} w powiązanym obiekcie
+\texttt{Game}. Metoda ta z pozostałych w grze kart zwraca losową lub
+\texttt{nil} w przypadku, gdy wszystkie karty zostały już wykupione. W
+drugim przypadku utworzenie obiektu klasy \texttt{Card} nie jest
+możliwe. Odejmowana jest także odpowiednia ilość surowców w powiązanym
+obiekcie klasy \texttt{Player}. Jeśli udało się ustalić typ karty, a
+obiekt gracza spełnia warunki walidacji, to wykonywany jest zapis
+karty i wszystkich powiązanych rekordów. Analogicznie jak przy
+tworzeniu obiektów innych klas, po utworzeniu wywoływane jest
+zdarzenie \texttt{card\_bought!} w maszynie stanowej ,,fazy gry''. Od
+tego momentu dalsze zachowanie obiektu, zależy od wylosowanego typu
+karty rozwoju.
+
+
+
 \subsubsection{Rzut kością}
 \subsubsection{Odrzucenie zasobów}
 \subsubsection{Wymiana z bankiem}

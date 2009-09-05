@@ -12,7 +12,7 @@ class Edge < ActiveRecord::Base
       lenght, new_visited_roads =
         road.longest_road(visited_roads, unvisited_left_roads)
 
-      visited_roads = visited_roads + new_visited_roads
+      visited_roads += new_visited_roads
       lenght
     end
 
@@ -24,7 +24,7 @@ class Edge < ActiveRecord::Base
       lenght, new_visited_roads =
         road.longest_road(visited_roads, unvisited_right_roads)
 
-      visited_roads = visited_roads + new_visited_roads
+      visited_roads += new_visited_roads
       lenght
     end
 

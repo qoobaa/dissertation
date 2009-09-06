@@ -151,6 +151,7 @@ Przy handlu z innymi uczestnikami nie ma żadnych narzuconych z góry
 musi to być wymiana - zabronione jest pozbywanie się surowców.
 
 \subsubsection{Walka}
+\label{sec:fight}
 Ostatnim istotnym elementem gry jest ,,walka''. Zagranie karty armii
 oraz wyrzucenie siódemki daje możliwość przesunięcia pionka,
 tzw. ,,rozbójnika''. Pole zajmowane przez ,,rozbójnika'' nie przynosi
@@ -1764,10 +1765,50 @@ gracza. Aby to umożliwić, po utworzeniu obiektu klasy \texttt{Offer}
 wywoływane jest zdarzenie \texttt{offer\_created} w maszynie stanowej
 ,,fazy gry''. Powoduje ono przejście do fazy \texttt{offer}, w której
 pozostali gracze mogą odpowiadać na złożoną ofertę handlu. Odpowiedzi
-te przechowywane są w obiektach klasy \texttt{OfferResponse}.
+te przechowywane są w obiektach klasy \texttt{OfferResponse}, każda z
+nich zawiera informację o akceptacji (atrybut \texttt{agreed}). W
+przypadku odpowiedzi pozytywnych, weryfikowany jest fakt, czy ilość
+zasobów odpowiadającego na ofertę gracza, zezwala na wymianę. W
+dowolnej chwili twórca oferty może ją odwołać, lub w przypadku
+odpowiedzi pozytywnych -- zaakceptować, wybierając drugą stronę
+wymiany spośród pozytywnych odpowiedzi. Po wygaśnięciu oferty handlu
+wywoływane jest w maszynie stanowej ,,fazy gry'' zdarzenie
+\texttt{offer\_expired}.
+
+W obu przypadkach handlu, przechowywana jest również informacja o
+twórcy oferty (atrybut \texttt{player\_id} w przypadku klasy
+\texttt{Exchange}, \texttt{sender\_id} w klasie \texttt{Offer}). Jeśli
+handel pomiędzy graczami doszedł do skutku, zapisywana jest także
+informacja o drugiej stronie transakcji (atrybut
+\texttt{recipient\_id}).
+
+\subsubsection{Rabunek}
+Obiekty klasy \texttt{Robbery} tworzone są przy przesuwaniu pionka
+,,rozbójnika''. Oprócz obowiązkowych parametrów w postaci numeru
+wiersza i kolumny (atrybuty \texttt{row} i \texttt{col}), możliwe jest
+przekazanie także numeru gracza, od którego zabierana jest losowa
+karta zasobu (\texttt{sender\_id}). Walidacja obiektu polega na
+sprawdzeniu, czy pozycja pionka uległa zmianie na inną poprawną
+pozycję i czy osada lub miasto wybranego gracza znajduje się w
+sąsiedztwie wskazanej pozycji. Wraz z tymi informacjami zapisywane są
+również: rodzaj wylosowanego zasobu, oraz identyfikator gracza, który
+go otrzymuje (\texttt{recipient\_id}). Po utworzeniu obiektu w
+maszynie stanowej ,,fazy gry'' wywoływane jest zdarzenie
+\texttt{robbed}.
 
 \subsubsection{Odrzucenie zasobów}
-\subsubsection{Rabunek}
+Jak zostało już nadmienione w rozdziale \ref{sec:fight}, wyrzucenie
+kośćmi do gry wyniku 7 oczek powoduje przejście do fazy przesuwania
+,,rozbójnika''. Zanim to jednak nastąpi, wszyscy gracze posiadający
+więcej niż 7 kart zasobów zmuszeni są pozbyć się części z nich. W
+każdym takim przypadku gracz ma obowiązek zredukowania ilości
+posiadanych kart zasobów do połowy, zaokrąglanej w górę (w przypadku
+posiadania 9 kart, musi on odłożyć 4 z nich). Do tego celu
+zaimplementowana została klasa \texttt{Discard}. Walidacja obiektów
+polega na sprawdzeniu, czy gracz odrzuca dokładnie taką ilość zasobów,
+jaka wynika z powyższego wyliczenia. Po utworzeniu obiektu wywoływane
+jest zdarzenie \texttt{discarded}, powodujące odpowiednie przejście w
+maszynie stanowej ,,fazy gry''.
 
 \subsubsection{Użytkownik i sesja}
 Do uwierzytelniania użytkowników użyta została biblioteka

@@ -1,0 +1,29 @@
+\begin{Verbatim}[commandchars=@\[\],numbers=left,firstnumber=1,stepnumber=1]
+@PYay[class] @PYaO[User] @PYbd[<] @PYaq[ActiveRecord]@PYbd[::]@PYaq[Base]
+  acts_as_authentic
+@PYay[end]
+
+@PYay[class] @PYaO[UserSession] @PYbd[<] @PYaq[Authlogic]@PYbd[::]@PYaq[Session]@PYbd[::]@PYaq[Base]
+@PYay[end]
+
+@PYaf[# Utworzenie użytkownika bjohnson]
+@PYaq[User]@PYbd[.]create(@PYau[:login] @PYbd[=]@PYbd[>] @PYaW["]@PYaW[bjohnson]@PYaW["],
+            @PYau[:password] @PYbd[=]@PYbd[>] @PYaW["]@PYaW[my password]@PYaW["],
+            @PYau[:password_confirmation] @PYbd[=]@PYbd[>] @PYaW["]@PYaW[my password]@PYaW["],
+            @PYau[:email] @PYbd[=]@PYbd[>] @PYaW["]@PYaW[bjohnson@at[]example.com]@PYaW["])
+
+
+@PYaf[# Utworzenie sesji użytkownika na podstawie nazwy]
+@PYaf[# użytkownika i hasła]
+@PYaq[UserSession]@PYbd[.]create(@PYau[:login] @PYbd[=]@PYbd[>] @PYaW["]@PYaW[bjohnson]@PYaW["],
+                   @PYau[:password] @PYbd[=]@PYbd[>] @PYaW["]@PYaW[my password]@PYaW["],
+                   @PYau[:remember_me] @PYbd[=]@PYbd[>] @PYaj[true])
+
+@PYaf[# Odnalezienie sesji na podstawie danych zawartych]
+@PYaf[# w żądaniu HTTP]
+session @PYbd[=] @PYaq[UserSession]@PYbd[.]find
+
+@PYaf[# Wylogowanie użytkownika, usunięcie informacji]
+@PYaf[# o sesji]
+session@PYbd[.]destroy
+\end{Verbatim}

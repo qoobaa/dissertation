@@ -1583,9 +1583,9 @@ w postaci równania \ref{equation:longest-road}.
   \label{equation:longest-road}
 \end{equation}
 
-Przykładowa kolejność odwiedzania krawędzi została przedstawiona na
-\imref{longest-road}. Krawędź oznaczona numerem 1 posiada trzy
-sąsiadujące drogi: 2, 7 i 9. % TODO
+% Przykładowa kolejność odwiedzania krawędzi została przedstawiona na
+% \imref{longest-road}. Krawędź oznaczona numerem 1 posiada trzy
+% sąsiadujące drogi: 2, 7 i 9. % TODO
 
 \begin{figure}[ht]
   \begin{center}
@@ -1633,7 +1633,7 @@ zawiera zbiór walidatorów, sprawdzających czy wymienione wyżej
 atrybuty są liczbami nieujemnymi (w przypadku kursów wymian muszą być
 to liczby dodatnie). Ponadto wymagana jest unikalność pary atrybutów
 \texttt{game\_id} i \texttt{user\_id}. Dzięki temu nie jest możliwe
-stworzenie, w obrębie jednej gry, więcej niż jednego gracza,
+utworzenie, w obrębie jednej gry, więcej niż jednego gracza,
 należącego do tego samego użytkownika.
 
 Obiekty klasy \texttt{Player} posiadają także prostą maszynę
@@ -1692,20 +1692,124 @@ obiekcie klasy \texttt{Player}. Jeśli udało się ustalić typ karty, a
 obiekt gracza spełnia warunki walidacji, to wykonywany jest zapis
 karty i wszystkich powiązanych rekordów. Analogicznie jak przy
 tworzeniu obiektów innych klas, po utworzeniu wywoływane jest
-zdarzenie \texttt{card\_bought!} w maszynie stanowej ,,fazy gry''. Od
-tego momentu dalsze zachowanie obiektu, zależy od wylosowanego typu
-karty rozwoju.
+zdarzenie \texttt{card\_bought!} w maszynie stanowej ,,fazy
+gry''. Dalsze zachowanie obiektu, zależy od wylosowanego typu karty
+rozwoju.
 
+Zgodnie z zasadami gry, karta rozwoju ,,punkt zwycięstwa'' nie może
+zostać ,,zagrana'' -- ma ona natychmiastowy efekt. Dla uproszczenia
+implementacji przyjęto, że należny punkt zwycięstwa jest przyznawany
+wraz ze zdarzeniem \texttt{untap}. Nie ma to żadnego wpływu na
+rozgrywkę, wymusza jedynie na graczu zakończenie tury, w celu
+otrzymania punktu. Aby uniemożliwić zagranie karty, przeciążona metoda
+\texttt{before\_play} zwraca wartość \texttt{false}, przez co
+przejście ze stanu \texttt{untapped} do \texttt{graveyard} nie jest
+możliwe.
 
+Do zagrania kart ,,wynalazek'' i ,,monopol'' niezbędne jest
+przekazanie dodatkowych parametrów. Klasa \texttt{Card::YearOfPlenty}
+posiada walidator, czy suma atrybutów \texttt{bricks}, \texttt{grain},
+\texttt{lumber}, \texttt{ore} i \texttt{wool} jest równa 2, oraz czy
+każdy z nich jest liczbą nieujemną. Po zapisie obiektu wybrane zasoby
+są dodawane do puli zasobów gracza. Podobne działanie ma również karta
+,,monopol'', która do zagrania wymaga przekazania jednego typu surowca
+(atrybut \texttt{resource\_type}). Po walidacji obiektu, zasób ten
+jest zabierany wszystkim graczom, a jego suma trafia do
+zagrywającego. Wszystkie przekazane parametry są zapisywane w bazie
+danych, co może zostać wykorzystane w celu wygenerowania statystyk po
+zakończeniu rozgrywki.
+
+Działanie kart ,,rycerza'' i ,,budowy drogi'' polega na wywołaniu
+odpowiednich zdarzeń w maszynie stanowej fazy gry. Są to zdarzenia
+\texttt{army\_card\_played!} i
+\texttt{road\_building\_card\_played!}. Ponadto zagranie karty
+,,rycerza'' powoduje zwiększenie o jeden atrybutu \texttt{army\_size}
+u zagrywającego gracza.
 
 \subsubsection{Rzut kością}
+
+Wszystkie rzuty kością są przechowywane w bazie danych. Dzięki temu
+możliwe jest wygenerowanie statystyk rzutów po zakończeniu rozgrywki,
+a także zweryfikowanie rozkładu generatora liczb pseudolosowych. Wraz
+z wynikiem rzutu (\texttt{value}) przechowywane są: identyfikator gry
+(\texttt{game\_id}) oraz numer tury (\texttt{turn}). Klasa
+\texttt{DiceRoll} posiada jeden walidator, który sprawdza unikalność
+numeru tury w obrębie gry. Uniemożliwia to kilkukrotny rzut kośćmi w
+ciągu tej samej tury.
+
+\subsubsection{Handel}
+Podobnie jak w poprzednich przypadkach, wszystkie oferty handlu i
+wymiany przechowywane są w bazie danych. Po zakończeniu rozgrywki
+możliwe jest więc uzyskanie z nich dość szczegółowych
+statystyk.
+
+Za handel gracza z bankiem odpowiedzialna jest klasa
+\texttt{Exchange}. Posiada ona zestaw walidatorów, które sprawdzają,
+czy przesłane przez gracza parametry wymiany (ilości wymienianych
+zasobów) są zgodne z jego kursami wymian. Sprawdzane jest również, czy
+ilość zasobów gracza pozwala na wymianę. Po zweryfikowaniu i
+utworzeniu obiektu, wywoływane jest zdarzenie \texttt{exchanged} w
+maszynie stanowej ,,fazy gry''. Dzięki temu nie jest możliwe
+utworzenie wymiany w dowolnym momencie, a jedynie w przeznaczonych do
+tego fazach gry.
+
+Handel między graczami realizowany jest poprzez klasę
+\texttt{Offer}. Walidacja obiektów tej klasy polega na stwierdzeniu,
+czy gracz posiada odpowiednią ilość zasobów, oraz czy tworzona oferta
+jest obustronna -- niedozwolone jest zarówno rozdawanie zasobów, jak i
+otrzymywanie ich ,,za darmo''. Samo utworzenie oferty handlu nie
+oznacza, że doszło do jakiejkolwiek wymiany. Do zaakceptowania oferty
+wymagane jest wyrażenie zainteresowania nią przez przynajmniej jednego
+gracza. Aby to umożliwić, po utworzeniu obiektu klasy \texttt{Offer}
+wywoływane jest zdarzenie \texttt{offer\_created} w maszynie stanowej
+,,fazy gry''. Powoduje ono przejście do fazy \texttt{offer}, w której
+pozostali gracze mogą odpowiadać na złożoną ofertę handlu. Odpowiedzi
+te przechowywane są w obiektach klasy \texttt{OfferResponse}.
+
 \subsubsection{Odrzucenie zasobów}
-\subsubsection{Wymiana z bankiem}
-\subsubsection{Oferta handlu}
-\subsubsection{Odpowiedź na ofertę handlu}
 \subsubsection{Rabunek}
-\subsubsection{Użytkownik}
-\subsubsection{Sesja użytkownika}
+
+\subsubsection{Użytkownik i sesja}
+Do uwierzytelniania użytkowników użyta została biblioteka
+\emph{Authlogic} stworzona przez Bena Johnsona, właściciela firmy
+Binary Logic. Wykorzystano ją przy implementacji dwóch klas:
+\texttt{User} i \texttt{UserSession}. Pierwsza z nich odpowiedzialna
+jest za przechowywanie informacji o użytkownikach w bazie
+danych. Najważniejsze zalety wynikające z użycia tego rozwiązania, to:
+
+\begin{itemize}
+\item walidacja danych użytkownika, takich jak login, email, hasło,
+  potwierdzenie hasła
+\item przechowywanie ,,posolonego''\footnote{,,solenie hasła'' polega
+    na dodaniu do niego pseudolosowego ciągu znaków przed wykonaniem
+    skrótu. Ciąg znaków, nazywany także ,,solą'', zapisywany jest wraz
+    z wyliczonym skrótem. Technika ta utrudnia odzyskiwanie
+    pierwotnego hasła na podstawie jego skrótu.} skrótu hasła użytkownika,
+  domyślnie hasło skracane jest dziesięciokrotnie funkcją
+  \emph{SHA1}\footnote{ang. Secure Hash Algorithm}
+\item automatycznq obsługa dodatkowych pól,
+  m.in. \texttt{failed\_login\_count} - licznik nieudanych logowań,
+  \texttt{last\_request\_at} - czas ostatniego żądania,
+  \texttt{current\_login\_ip} - adres \emph{IP} komputera, z którego
+  dokonano logowania
+\end{itemize}
+
+Przykładowym sposobem wykorzystania pola \texttt{last\_request\_at},
+jest sygnalizacja nieobecności użytkownika podczas gry. Jeśli
+użytkownik podczas rozgrywki nie wywoła żadnego żądania \emph{HTTP}
+przez np. 30 sekund, można przyjąć, iż został on rozłączony. Dodatkową
+korzyścią płynącą z zastosowania biblioteki \emph{Authlogic} jest
+uproszczenie obsługi sesji, obudowanej przez klasę
+\texttt{UserSession}. Podstawowa implementację systemu
+uwierzytelniania użytkowników została przedstawiona na listingu
+\ref{listing:usersession}.
+
+\begin{listing}
+  \input{usersession}
+  \caption{Implementacja i obsługa mechanizmu uwierzytelniania
+    użytkowników}
+  \label{listing:usersession}
+\end{listing}
 
 \subsection{Kontrolery}
 

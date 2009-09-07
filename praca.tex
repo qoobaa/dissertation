@@ -384,11 +384,7 @@ główne to:
   e-mail, np. poprzez zewnętrzne serwery \emph{SMTP}
 \item \emph{ActiveResource} - biblioteka umożliwiająca mapowanie
   zasobów \emph{REST}\footnote{REST - ang. Representational State
-    Transfer, styl architektury zakładający traktowanie informacji
-    udostępnianych przez aplikacje webowe jako zasoby, na których
-    wywoływane są działania takie jak: tworzenie zasobu, odczyt,
-    aktualizacja i usuwanie (ang. create, read, update,
-    delete)\cite{rest}} na modele w aplikacji
+    Transfer} na modele w aplikacji
 \end{itemize}
 
 Uproszczony diagram przedstawiający interakcje pomiędzy poszczególnymi
@@ -678,6 +674,34 @@ poprawiające użyteczność samego
 \emph{JavaScriptu}. Najpopularniejszymi bibliotekami tego typu są:
 \emph{jQuery}, \emph{Prototype}, \emph{DOJO Toolkit}, \emph{Yahoo!
   User Interface Library} oraz \emph{Google Web Toolkit}.
+
+\subsection{REST}
+\emph{REST} to styl architektury oprogramowania systemów
+rozproszonych. Skrót ten pochodzi od ang. \emph{Representational State
+  Transfer}, został wprowadzony w pracy doktorskiej Roya Fieldinga
+pt. ,,Architectural Styles and the Design of Network-based Software
+Architectures''\cite{rest}. Jednym z założeń \emph{REST}, jest
+komunikacja serwera z klientem przy pomocy bezstanowych
+połączeń. Wszystkie informacje przechowywane na serwerze udostępniane
+są w postaci zasobów, posiadających ściśle określone
+identyfikatory. Na każdym z zasobów możliwe jest wykonanie
+podstawowych operacji: utworzenia, odczytania, aktualizacji i
+usunięcia (tzw. \emph{CRUD}\footnote{ang. create, read, update and
+  delete}). W przypadku protokołu \emph{HTTP} akcje te, mapowane są na
+odpowiadające im metody \emph{HTTP}, zwykle są to: \emph{POST},
+\emph{GET}, \emph{PUT} i \emph{DELETE}\cite{agile}.
+
+Główną cechą mającą silny wpływ na rosnącą popularność \emph{REST}
+jest prostota użytkowania, przez co stopniowo wypierane są rozwiązania
+oparte o \emph{XML-RPC} czy \emph{SOAP}. Dobrym przykładem ukazania
+tego faktu jest \emph{Amazon Web Services}. Klienci tych usług mają
+swobodny wybór pomiędzy dostępem do nich poprzez interfejs \emph{REST}
+i \emph{SOAP}, jednak 80\% z nich decyduje się na użycie
+\emph{REST}\cite{awsblog}.
+
+Począwszy od wersji 1.2, framework \emph{Ruby on Rails} w pełni
+wspiera \emph{REST}. Od wersji 2.0 jest to domyślny i zalecany sposób
+tworzenia aplikacji w tym frameworku.
 
 \clearpage
 
@@ -1853,6 +1877,53 @@ uwierzytelniania użytkowników została przedstawiona na listingu
 \end{listing}
 
 \subsection{Kontrolery}
+
+\subsubsection{REST}
+
+
+
+\subsubsection{Ścieżki}
+
+\begin{listing}
+  \input{routes}
+  \caption{Zdefiniowanie ścieżek}
+  \label{listing:routes}
+\end{listing}
+
+
+% ścieżki
+% REST
+
+% *** games
+% **** tworzenie gry
+% **** wyświetlenie gry
+% **** lista gier
+% **** kończenie tury
+% *** cards
+% **** tworzenie karty rozwoju
+% **** używanie karty rozwoju
+% *** dice_rolls
+% **** rzut kością
+% *** discards
+% **** odrzucanie kart zasobów
+% *** edges
+% **** tworzenie krawędzi (drogi)
+% *** nodes
+% **** tworzenie wierzchołka (osady)
+% **** rozwój osady do miasta
+% *** exchanges
+% **** tworzenie wymiany z bankiem
+% *** offers
+% **** tworzenie oferty
+% **** akceptowanie/odrzucenie oferty
+% *** offer_responses
+% **** tworzenie odpowiedzi na ofertę
+% *** players
+% **** tworzenie gracza
+% **** zmiana stanu gracza (ready)
+% **** usuwanie gracza
+% *** robberies
+% **** tworzenie rabunku (robbery)
 
 \subsection{Widoki}
 

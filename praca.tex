@@ -1852,7 +1852,7 @@ danych. Najważniejsze zalety wynikające z użycia tego rozwiązania, to:
     pierwotnego hasła na podstawie jego skrótu.} skrótu hasła użytkownika,
   domyślnie hasło skracane jest dziesięciokrotnie funkcją
   \emph{SHA1}\footnote{ang. Secure Hash Algorithm}
-\item automatycznq obsługa dodatkowych pól,
+\item automatyczna obsługa dodatkowych pól,
   m.in. \texttt{failed\_login\_count} - licznik nieudanych logowań,
   \texttt{last\_request\_at} - czas ostatniego żądania,
   \texttt{current\_login\_ip} - adres \emph{IP} komputera, z którego
@@ -1878,11 +1878,9 @@ uwierzytelniania użytkowników została przedstawiona na listingu
 
 \subsection{Kontrolery}
 
-\subsubsection{REST}
-
-
-
 \subsubsection{Ścieżki}
+
+
 
 \begin{listing}
   \input{routes}
@@ -1890,40 +1888,153 @@ uwierzytelniania użytkowników została przedstawiona na listingu
   \label{listing:routes}
 \end{listing}
 
+\begin{table}[ht]
+  \begin{tabular}{|l|l|l|l|l|}
+    \hline
+    \textbf{metoda} & \textbf{ścieżka} & \textbf{kontroler} & \textbf{akcja} \\ \hline
+    \texttt{GET} & \texttt{/user\_session/new} & \texttt{user\_sessions} & \texttt{new} \\
+    \texttt{DELETE} & \texttt{/user\_session} & \texttt{user\_sessions} & \texttt{destroy} \\
+    \texttt{POST} & \texttt{/user\_session} & \texttt{user\_sessions} & \texttt{create} \\
+    \texttt{GET} & \texttt{/games} & \texttt{games} & \texttt{index} \\
+    \texttt{POST} & \texttt{/games} & \texttt{games} & \texttt{create} \\
+    \texttt{GET} & \texttt{/games/:id} & \texttt{games} & \texttt{show} \\
+    \texttt{PUT} & \texttt{/games/:id} & \texttt{games} & \texttt{update} \\
+    \texttt{PUT} & \texttt{/games/:game\_id/offer} & \texttt{offers} & \texttt{update} \\
+    \texttt{POST} & \texttt{/games/:game\_id/offer} & \texttt{offers} & \texttt{create} \\
+    \texttt{POST} & \texttt{/games/:game\_id/offer\_response} & \texttt{offer\_responses} & \texttt{create} \\
+    \texttt{PUT} & \texttt{/games/:game\_id/player} & \texttt{players} & \texttt{update} \\
+    \texttt{DELETE} & \texttt{/games/:game\_id/player} & \texttt{players} & \texttt{destroy} \\
+    \texttt{POST} & \texttt{/games/:game\_id/player} & \texttt{players} & \texttt{create} \\
+    \texttt{GET} & \texttt{/games/:game\_id/cards} & \texttt{cards} & \texttt{index} \\
+    \texttt{POST} & \texttt{/games/:game\_id/cards} & \texttt{cards} & \texttt{create} \\
+    \texttt{PUT} & \texttt{/games/:game\_id/cards/:id} & \texttt{cards} & \texttt{update} \\
+    \texttt{POST} & \texttt{/games/:game\_id/dice\_rolls} & \texttt{dice\_rolls} & \texttt{create} \\
+    \texttt{POST} & \texttt{/games/:game\_id/discards} & \texttt{discards} & \texttt{create} \\
+    \texttt{POST} & \texttt{/games/:game\_id/edges} & \texttt{edges} & \texttt{create} \\
+    \texttt{POST} & \texttt{/games/:game\_id/exchanges} & \texttt{exchanges} & \texttt{create} \\
+    \texttt{POST} & \texttt{/games/:game\_id/nodes} & \texttt{nodes} & \texttt{create} \\
+    \texttt{PUT} & \texttt{/games/:game\_id/nodes/:id} & \texttt{nodes} & \texttt{update} \\
+    \texttt{POST} & \texttt{/games/:game\_id/robberies} & \texttt{robberies} & \texttt{create} \\
+    \texttt{GET} & \texttt{/} & \texttt{games} & \texttt{index} \\
+    \hline
+  \end{tabular}
+  \caption{Mapowanie poszczególnych ścieżek na odpowiadające im
+    kontrolery i akcje (niewykorzystywane ścieżki zostały pominięte)}
+  \label{table:routes}
+\end{table}
 
-% ścieżki
-% REST
-
-% *** games
-% **** tworzenie gry
-% **** wyświetlenie gry
-% **** lista gier
-% **** kończenie tury
-% *** cards
-% **** tworzenie karty rozwoju
-% **** używanie karty rozwoju
-% *** dice_rolls
-% **** rzut kością
-% *** discards
-% **** odrzucanie kart zasobów
-% *** edges
-% **** tworzenie krawędzi (drogi)
-% *** nodes
-% **** tworzenie wierzchołka (osady)
-% **** rozwój osady do miasta
-% *** exchanges
-% **** tworzenie wymiany z bankiem
-% *** offers
-% **** tworzenie oferty
-% **** akceptowanie/odrzucenie oferty
-% *** offer_responses
-% **** tworzenie odpowiedzi na ofertę
-% *** players
-% **** tworzenie gracza
-% **** zmiana stanu gracza (ready)
-% **** usuwanie gracza
-% *** robberies
-% **** tworzenie rabunku (robbery)
+\begin{itemize}
+\item tworzenie gry
+\begin{verbatim}
+POST /games/1/nodes
+\end{verbatim}
+\item wyświetlenie gry w domyślnym formacie (\emph{HTML})
+\begin{verbatim}
+GET /games/1
+\end{verbatim}
+\item wyświetlenie gry w formacie \emph{JSON}
+\begin{verbatim}
+GET /games/1.json
+\end{verbatim}
+\item wyświetlenie listy gier
+\begin{verbatim}
+GET /games
+\end{verbatim}
+\item zakończenie tury
+\begin{verbatim}
+PUT /games/1
+game[state_event]=end_turn
+\end{verbatim}
+\item kupowanie karty rozwoju
+\begin{verbatim}
+POST /games/1/cards
+\end{verbatim}
+\item zagrywanie karty rozwoju
+\begin{verbatim}
+PUT /games/1/cards/1
+card[state_event]=play
+\end{verbatim}
+\item rzut kośćmi
+\begin{verbatim}
+POST /games/1/dice_rolls
+\end{verbatim}
+\item odrzucenie kart zasobów
+\begin{verbatim}
+POST /games/1/discards
+discard[bricks]=0
+discard[grain]=1
+discard[lumber]=2
+discard[ore]=0
+discard[wool]=2
+\end{verbatim}
+\item budowanie drogi
+\begin{verbatim}
+POST /games/1/edges
+edge[row]=4
+edge[col]=14
+\end{verbatim}
+\item budowa osady
+\begin{verbatim}
+POST /games/1/nodes
+node[row]=1
+node[col]=5
+node[state_event]=settle
+\end{verbatim}
+\item budowa miasta
+\begin{verbatim}
+PUT /games/1/nodes/1,5
+node[state_event]=expand
+\end{verbatim}
+\item wymiana zasobów z bankiem
+\begin{verbatim}
+POST /games/1/exchanges
+exchange[bricks]=0
+exchange[grain]=-4
+exchange[lumber]=0
+exchange[ore]=1
+exchange[wool]=0
+\end{verbatim}
+\item tworzenie oferty handlu
+\begin{verbatim}
+POST /games/1/offers
+offer[bricks]=-1
+offer[grain]=1
+offer[lumber]=0
+offer[ore]=0
+offer[wool]=-1
+\end{verbatim}
+\item akceptowanie oferty handlu
+\begin{verbatim}
+PUT /games/1/offer
+offer[state_event]=accept
+offer[recipient_number]=3
+\end{verbatim}
+\item odrzucanie oferty handlu
+\begin{verbatim}
+PUT /games/1/offer
+offer[state_event]=decline
+\end{verbatim}
+\item tworzenie odpowiedzi na ofertę handlu
+\begin{verbatim}
+POST /games/1/offer_response
+offer_response[agreed]=true
+\end{verbatim}
+\item dołączanie do gry
+\begin{verbatim}
+POST /games/1/player
+\end{verbatim}
+\item odłączanie się z gry
+\begin{verbatim}
+DELETE /games/1/player
+\end{verbatim}
+\item tworzenie ,,rabunku''
+\begin{verbatim}
+POST /games/1/robberies
+robbery[row]=4
+robbery[col]=2
+robbery[sender_number]=1
+\end{verbatim}
+\end{itemize}
 
 \subsection{Widoki}
 

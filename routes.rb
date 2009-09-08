@@ -11,7 +11,6 @@ ActionController::Routing::Routes.draw do |map|
     games.resources :discards
     games.resources :edges
     games.resources :exchanges
-    games.resources :hexes
     games.resources :nodes
     games.resources :robberies
   end

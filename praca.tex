@@ -2000,41 +2000,49 @@ nazwę użytej metody, adres, a także listę parametrów, wymaganych do
 wywołania akcji.
 
 \begin{itemize}
-\item tworzenie gry
+\item tworzenie gry (kontroler: \texttt{UsersController}, akcja \texttt{create})
 \begin{verbatim}
 POST /games
 \end{verbatim}
-\item wyświetlenie gry w domyślnym formacie (\emph{HTML})
+\item wyświetlenie gry w formacie \emph{HTML}, (kontroler:
+  \texttt{UsersController}, akcja \texttt{show})
 \begin{verbatim}
 GET /games/1
 \end{verbatim}
-\item wyświetlenie gry w formacie \emph{JSON}
+\item wyświetlenie gry w formacie \emph{JSON} (kontroler:
+  \texttt{UsersController}, akcja \texttt{show})
 \begin{verbatim}
 GET /games/1.json
 \end{verbatim}
-\item wyświetlenie listy gier
+\item wyświetlenie listy gier (kontroler: \texttt{UsersController},
+  akcja \texttt{index})
 \begin{verbatim}
 GET /games
 \end{verbatim}
-\item zakończenie tury
+\item zakończenie tury (kontroler: \texttt{UsersController}, akcja
+  \texttt{update})
 \begin{verbatim}
 PUT /games/1
 game[state_event]=end_turn
 \end{verbatim}
-\item kupowanie karty rozwoju
+\item kupowanie karty rozwoju (kontroler: \texttt{CardsController}, akcja
+  \texttt{create})
 \begin{verbatim}
 POST /games/1/cards
 \end{verbatim}
-\item zagrywanie karty rozwoju
+\item zagrywanie karty rozwoju (kontroler: \texttt{CardsController}, akcja
+  \texttt{update})
 \begin{verbatim}
 PUT /games/1/cards/1
 card[state_event]=play
 \end{verbatim}
-\item rzut kośćmi
+\item rzut kośćmi (kontroler: \texttt{DiceRollsController}, akcja
+  \texttt{create})
 \begin{verbatim}
 POST /games/1/dice_rolls
 \end{verbatim}
-\item odrzucenie kart zasobów
+\item odrzucenie kart zasobów (kontroler: \texttt{DiscardsController},
+  akcja \texttt{create})
 \begin{verbatim}
 POST /games/1/discards
 discard[bricks]=0
@@ -2043,25 +2051,29 @@ discard[lumber]=2
 discard[ore]=0
 discard[wool]=2
 \end{verbatim}
-\item budowanie drogi
+\item budowanie drogi (kontroler: \texttt{EdgesController}, akcja
+  \texttt{create})
 \begin{verbatim}
 POST /games/1/edges
 edge[row]=4
 edge[col]=14
 \end{verbatim}
-\item budowa osady
+\item budowa osady (kontroler: \texttt{NodesController}, akcja
+  \texttt{create})
 \begin{verbatim}
 POST /games/1/nodes
 node[row]=1
 node[col]=5
 node[state_event]=settle
 \end{verbatim}
-\item budowa miasta
+\item budowa miasta (kontroler: \texttt{NodesController}, akcja
+  \texttt{update})
 \begin{verbatim}
 PUT /games/1/nodes/1,5
 node[state_event]=expand
 \end{verbatim}
-\item wymiana zasobów z bankiem
+\item wymiana zasobów z bankiem (kontroler: \texttt{ExchangesController}, akcja
+  \texttt{create})
 \begin{verbatim}
 POST /games/1/exchanges
 exchange[bricks]=0
@@ -2070,7 +2082,8 @@ exchange[lumber]=0
 exchange[ore]=1
 exchange[wool]=0
 \end{verbatim}
-\item tworzenie oferty handlu
+\item tworzenie oferty handlu (kontroler: \texttt{OffersController},
+  akcja \texttt{create})
 \begin{verbatim}
 POST /games/1/offers
 offer[bricks]=-1
@@ -2079,31 +2092,37 @@ offer[lumber]=0
 offer[ore]=0
 offer[wool]=-1
 \end{verbatim}
-\item akceptowanie oferty handlu
+\item akceptowanie oferty handlu (kontroler:
+  \texttt{OffersController}, akcja \texttt{update})
 \begin{verbatim}
 PUT /games/1/offer
 offer[state_event]=accept
 offer[recipient_number]=3
 \end{verbatim}
-\item odrzucanie oferty handlu
+\item odrzucanie oferty handlu (kontroler: \texttt{OffersController},
+  akcja \texttt{update})
 \begin{verbatim}
 PUT /games/1/offer
 offer[state_event]=decline
 \end{verbatim}
-\item tworzenie odpowiedzi na ofertę handlu
+\item tworzenie odpowiedzi na ofertę handlu (kontroler:
+  \texttt{OfferResponsesController}, akcja \texttt{create})
 \begin{verbatim}
 POST /games/1/offer_response
 offer_response[agreed]=true
 \end{verbatim}
-\item dołączanie do gry
+\item dołączanie do gry (kontroler: \texttt{PlayersController}, akcja
+  \texttt{create})
 \begin{verbatim}
 POST /games/1/player
 \end{verbatim}
-\item odłączanie się z gry
+\item odłączanie się z gry (kontroler: \texttt{PlayersController}, akcja
+  \texttt{destroy})
 \begin{verbatim}
 DELETE /games/1/player
 \end{verbatim}
-\item tworzenie ,,rabunku''
+\item tworzenie ,,rabunku'' (kontroler: \texttt{RobberiesController}, akcja
+  \texttt{create})
 \begin{verbatim}
 POST /games/1/robberies
 robbery[row]=4
@@ -2113,6 +2132,25 @@ robbery[sender_number]=1
 \end{itemize}
 
 \subsection{Widoki}
+Domyślnym silnikiem renderowania szablonów we frameworku \emph{Ruby on
+  Rails} jest \emph{ERB}\footnote{ERB (ang. Embedded Ruby) - system
+  szablonów pozwalający na zagnieżdżanie kodu języka \emph{Ruby} w
+  dokumencie tekstowym.}. Największą zaletą tego rozwiązania jest jego
+uniwersalność, równie dobrze nadaje się do generowania kodu
+\emph{HTML} jak i treści wiadomości e-mail. Okazuje się jednak, że w
+przypadku opisu dokumentów \emph{HTML}, \emph{ERB} staje się nieco
+zbyt nadmiarowy. Aby usprawnić tworzenie kodu stron powstała
+biblioteka \emph{Haml}\footnote{HTML Abstraction Markup Language},
+której twórcą jest Nathan Weizenbaum. Język \emph{Haml} oferuje
+zwięzły i przejrzysty sposób zapisu dokumentów \emph{HTML} i
+\emph{XHTML}, nie jest to język uniwersalny. Do opisu struktury
+dokumentu używa on wcięć, dzięki czemu zbędne staje się np. zamykanie
+znaczników. Podobnie jak w przypadku \emph{ERB}, \emph{Haml} umożliwia
+zagnieżdżanie kodu języka \emph{Ruby} w tworzonym dokumencie.
+
+Razem z biblioteką \emph{Haml} dostarczany jest także
+\emph{Sass}\footnote{Syntactically Awesome Stylesheets}. Język \emph{Sass}
+
 
 \clearpage
 

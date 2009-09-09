@@ -187,9 +187,9 @@ koniecznością przepisania całej aplikacji.
 Pierwotna nazwa tej aplikacji brzmiała \emph{gnocatan}. Aplikacja
 została udostępniona w 2000 roku na licencji GNU GPL. Gra została
 napisana całości w języku \emph{C}, podzielona jest na serwer i część
-kliencką. Na stronie projektu \cite{pioneers} możemy znaleźć kod
-źródłowy i wersje binarne, skompilowane na wszystkie popularne
-platformy sprzętowe. Zrzut ekranu z gry \emph{Pioneers} został
+kliencką. Na stronie projektu możemy znaleźć kod źródłowy i wersje
+binarne, skompilowane na wszystkie popularne platformy
+sprzętowe\cite{pioneers}. Zrzut ekranu z gry \emph{Pioneers} został
 przedstawiony na \imref{pioneers}.
 
 \begin{figure}[ht]
@@ -201,10 +201,10 @@ przedstawiony na \imref{pioneers}.
 \end{figure}
 
 \subsection{JSettlers}
-Aplikacja napisana w całości w Javie, rozwijana od początku 2004 roku
-\cite{jsettlers}, dostępna na licencji GNU GPL. Aplikacja
-przystosowana do uruchamiania w przeglądarce internetowej z
-zainstalowanym środowiskiem uruchomieniowym Javy (\emph{ang. Java Runtime
+Aplikacja napisana w całości w Javie, rozwijana od początku 2004 roku,
+dostępna na licencji GNU GPL\cite{jsettlers}. Aplikacja przystosowana
+do uruchamiania w przeglądarce internetowej z zainstalowanym
+środowiskiem uruchomieniowym Javy (\emph{ang. Java Runtime
   Environment}). Na \imref{jsettlers} został przedstawiony zrzut
 ekranu z gry \emph{JSettlers}.
 
@@ -258,8 +258,8 @@ Matsumoto. Inspirowany jest on w głównej mierze językami, takimi jak:
 \emph{Lisp}, \emph{Perl}, \emph{Python}, \emph{Smalltalk}, a także
 \emph{CLU} i \emph{Eiffel}. Jest to wieloparadygmatowy, dynamicznie
 typowany, interpretowany język programowania bardzo wysokiego poziomu
-(ang. \emph{VHLL}\footnote{VHLL - very high-level programming language
-  \cite{vhll}})\cite{ruby}. Najważniejszymi cechami języka są:
+(ang. \emph{VHLL}\footnote{VHLL - very high-level programming
+  language})\cite{ruby}. Najważniejszymi cechami języka są:
 
 \begin{itemize}
 \item pełna obiektowość - nie ma podziału na typy proste (wbudowane) i
@@ -267,26 +267,24 @@ typowany, interpretowany język programowania bardzo wysokiego poziomu
   lambda, itp.
 \item pseudoklasyczny mechanizm dziedziczenia jednobazowego
 \item moduły oferujące mechanizm zastępujący dziedziczenie wielobazowe
-  (ang. \emph{mixin} \cite{mixin})
+  (ang. \emph{mixin})
 \item otwarte klasy, pozwalające na zmianę w dowolnym momencie
   wykonywania programu właściwości zdefiniowanych już klas (włącznie z
   klasami pochodzącymi z biblioteki standardowej języka)
 \item \emph{monkey patching} - wykorzystanie mechanizmu otwartych klas
   do zmiany działania już istniejącego kodu w czasie wykonywania
-  programu \cite{monkeypatch}
+  programu
 \item metaprogramowanie - mechanizm ten umożliwia tworzenie kodu,
   który generuje kod w czasie wykonywania programu
-  \cite{metaprogramming}
 \item ,,kacze typowanie'' - typy obiektów przekazywanych jako
   argumenty funkcji nie są w żaden sposób sprawdzane. Dzięki temu nie
   jest konieczne tworzenie skomplikowanych hierarchii dziedziczenia
   klas, wystarczy jedynie zaimplementować w klasach pewien wspólny
   podzbiór właściwości wymaganych przez wywoływaną na nich funkcję
-  \cite{ducktyping}
 \item domknięcia - mechanizm wiązania tworzonych funkcji z ich
   otoczeniem. Podczas wywołania funkcji ma ona dostęp do zmiennych,
   które zostały dowiązane do niej podczas jej tworzenia (nawet jeśli
-  są one niedostępne podczas jej wywołania) \cite{closures}
+  są one niedostępne podczas jej wywołania)
 \item przejrzysta, czytelna składnia
 \item bogata biblioteka standardowa
 \end{itemize}
@@ -297,9 +295,9 @@ najbardziej dojrzałe są:
 \begin{itemize}
 \item \emph{Matz's Ruby Interpreter} (\emph{MRI}) - intepreter
   napisany w języku \emph{C}, uznawany \emph{de facto} za
-  implementację referencyjną\cite{mri}
+  implementację referencyjną
 \item \emph{JRuby} - interpreter napisany w języku Java, uruchamiany w
-  \emph{wirtualnej maszynie Javy}\cite{jruby}
+  \emph{wirtualnej maszynie Javy}
 \end{itemize}
 
 Głównym wskaźnikiem świadczącym o dojrzałości interpretera jest
@@ -346,13 +344,13 @@ internetowych w oparciu o wzorzec \emph{MVC}\footnote{MVC -
   projektowy, którego założeniem jest podział aplikacji na modele,
   widoki i kontrolery. Podział jest realizowany w taki sposób, aby
   modyfikacja jednego elementu miała jak najmniejszy wpływ na
-  działanie pozostałych\cite{mvc}}. \emph{Ruby on Rails} obsługuje
-wszystkie popularne silniki bazodanowe poprzez bibliotekę mapowania
-obiektowo-relacyjnego \emph{ActiveRecord} \cite{orm}. Aplikacje
-napisane przy użyciu frameworka mogą być uruchamiane na serwerach
-webowych, takich jak \emph{Apache}, \emph{Lighttpd}, \emph{Abyss},
-\emph{Thin}, \emph{Mongrel}. W przypadku zastosowania \emph{JRuby},
-mogą być to m.in. serwery aplikacji \emph{JBoss}, \emph{GlassFish} lub
+  działanie pozostałych}. \emph{Ruby on Rails} obsługuje wszystkie
+popularne silniki bazodanowe poprzez bibliotekę mapowania
+obiektowo-relacyjnego \emph{ActiveRecord}. Aplikacje napisane przy
+użyciu frameworka mogą być uruchamiane na serwerach webowych, takich
+jak \emph{Apache}, \emph{Lighttpd}, \emph{Abyss}, \emph{Thin},
+\emph{Mongrel}. W przypadku zastosowania \emph{JRuby}, mogą być to
+m.in. serwery aplikacji \emph{JBoss}, \emph{GlassFish} lub
 \emph{Apache Geronimo}.
 
 Cały framework jest udostępniony na zasadach licencji \emph{MIT}
@@ -365,14 +363,13 @@ główne to:
 \begin{itemize}
 \item \emph{ActiveRecord} - biblioteka mapowania
   obiektowo-relacyjnego, która powstała na podstawie wzorca
-  projektowego o tej samej nazwie\cite{activerecord}. Biblioteka ta
-  oferuje znacznie więcej, niż wynika z implementowanego wzorca,
-  m.in. różne rodzaje asocjacji (w tym asocjacje
-  polimorficzne\cite{polymorphic}), mechanizm dziedziczenia
+  projektowego o tej samej nazwie. Biblioteka ta oferuje znacznie
+  więcej, niż wynika z implementowanego wzorca, m.in. różne rodzaje
+  asocjacji (w tym asocjacje polimorficzne), mechanizm dziedziczenia
   jednotabelowego (\emph{STI}\footnote{STI - dziedziczenie
     jednotabelowe (ang. Single Table Inheritance) - technika
     umożliwiająca odzwierciedlenie w jednej tabeli relacyjnej bazy
-    danych obiektów wielu dziedziczących po sobie klas\cite{sti}})
+    danych obiektów wielu dziedziczących po sobie klas})
   oraz walidatory
 \item \emph{ActionPack} - biblioteka umożliwiająca tworzenie
   kontrolerów i widoków, odpowiada również za kierowanie zapytań do
@@ -423,22 +420,21 @@ jest standaryzowany przez \emph{ECMA International}\footnote{ECMA -
   Europejskie Stowarzyszenie na rzecz Standaryzacji Systemów
   Informacyjnych i Komunikacyjnych (ang. European association for
   standardizing information and communication systems), organizacja
-  zajmująca się standaryzacją systemów informatycznych w
-  Europie\cite{ecma}} jako \emph{ECMAScript}.
+  zajmująca się standaryzacją systemów informatycznych w Europie} jako
+\emph{ECMAScript}.
 \label{javascript}
 
 Pomimo swojej nazwy jasno kojarzącej się z językiem \emph{Java}, język
 \emph{JavaScript} jest (z wyjątkiem kilku elementów) językiem
 diametralnie od \emph{Javy} różnym. Największy wpływ na jego rozwój
 miały języki takie jak: \emph{Self}, \emph{C}, \emph{Scheme},
-\emph{Perl} oraz \emph{Python}\cite{javascript}. Aby upodobnić język
-do błyskawicznie zyskującej wówczas popularność \emph{Javy},
-zapożyczony został zestaw słów kluczowych i składnia. Ta prosta
-marketingowa sztuczka zaowocowała całkowitym niezrozumieniem tego
-języka przez programistów, którzy przez wiele lat traktowali go jako
-pewien podzbiór języka \emph{Java}. W rzeczywistości, język
-\emph{JavaScript} jest znacznie bliżej spokrewniony z językami
-funkcyjnymi, takimi jak \emph{Lisp}.
+\emph{Perl} oraz \emph{Python}. Aby upodobnić język do błyskawicznie
+zyskującej wówczas popularność \emph{Javy}, zapożyczony został zestaw
+słów kluczowych i składnia. Ta prosta marketingowa sztuczka
+zaowocowała całkowitym niezrozumieniem tego języka przez programistów,
+którzy przez wiele lat traktowali go jako pewien podzbiór języka
+\emph{Java}. W rzeczywistości, język \emph{JavaScript} jest znacznie
+bliżej spokrewniony z językami funkcyjnymi, takimi jak \emph{Lisp}.
 
 Interpreter \emph{JavaScriptu} wbudowany jest w niemal każdą
 współczesną przeglądarkę internetową, co czyni go jednym z najbardziej
@@ -460,7 +456,7 @@ Najważniejszymi cechami języka, odróżniającymi go od języków
   obiektów jest posiadanie przez nie wspólnego prototypu
 \end{itemize}
 
-Główne implementacje \emph{JavaScriptu} to\cite{javascript}:
+Główne implementacje \emph{JavaScriptu} to:
 
 \begin{itemize}
 \item \emph{SpiderMonkey} - pierwszy interpreter, napisany przez
@@ -514,25 +510,25 @@ z serwerem\footnote{w rzeczywistości jednak, żaden z wymienionych
   elementów nie jest wymagany. W niektórych przeglądarkach zamiast
   \emph{JavaScriptu} można użyć innego języka (np. \emph{VBScript}),
   zamiast \emph{XML}-a często jest używany \emph{JSON} lub zwykły
-  tekst, a zapytania wcale nie muszą być asynchroniczne\cite{ajax}}.
+  tekst, a zapytania wcale nie muszą być asynchroniczne}.
 
 W związku z ograniczeniami narzucanymi przez przeglądarki internetowe,
 wszystkie zapytania wykonywane przy pomocy skryptów muszą odwoływać
-się do domeny, z której pobrany został dokument \emph{HTML} (ang. same
-origin policy\cite{origin}). Dla aplikacji wymagających komunikacji z
-różnymi domenami (np. ściągającymi dane z innych aplikacji) powstało
-rozwiązanie nazwane \emph{JSONP}. W uproszczeniu polega ono na
-dodawaniu do kodu dokumentu \emph{HTML} tagu \texttt{<script>}. Tag
-ten może zostać dodany z wnętrza działającego w przeglądarce skryptu,
-spowoduje on załadowanie i zinterpretowanie przez przeglądarkę kodu
-pochodzącego z dowolnej domeny\cite{json}. Rozwiązanie to jest używane
-do przesyłania danych w formacie \emph{JSON}. Przesyłany obiekt musi
-być otoczony wywołaniem funkcji zwrotnej (ang. callback), w celu
-poinformowania skryptu o otrzymaniu danych. Podobne rozwiązanie jest
-używane również do tzw. leniwego ładowania kodu aplikacji (dynamiczne
-ładowanie zależności). Należy zaznaczyć, że ładowanie kodu z innych
-domen jest potencjalnie niebezpiecznym działaniem i powinno być
-wykorzystywane z dużą rozwagą.
+się do domeny, z której pobrany został dokument
+\emph{HTML}\cite{origin} (ang. same origin policy). Dla aplikacji
+wymagających komunikacji z różnymi domenami (np. ściągającymi dane z
+innych aplikacji) powstało rozwiązanie nazwane \emph{JSONP}. W
+uproszczeniu polega ono na dodawaniu do kodu dokumentu \emph{HTML}
+tagu \texttt{<script>}. Tag ten może zostać dodany z wnętrza
+działającego w przeglądarce skryptu, spowoduje on załadowanie i
+zinterpretowanie przez przeglądarkę kodu pochodzącego z dowolnej
+domeny. Rozwiązanie to jest używane do przesyłania danych w formacie
+\emph{JSON}. Przesyłany obiekt musi być otoczony wywołaniem funkcji
+zwrotnej (ang. callback), w celu poinformowania skryptu o otrzymaniu
+danych. Podobne rozwiązanie jest używane również do tzw. leniwego
+ładowania kodu aplikacji (dynamiczne ładowanie zależności). Należy
+zaznaczyć, że ładowanie kodu z innych domen jest potencjalnie
+niebezpiecznym działaniem i powinno być wykorzystywane z dużą rozwagą.
 
 \subsubsection{HTTP Push (Comet)}
 W przypadku standardowego wykorzystania technologii \emph{Ajax},
@@ -642,25 +638,24 @@ Wszystkie opisywane w tym rozdziale techniki noszą wspólną nazwę
 \emph{Comet}\cite{comet}. W 2007 roku organizacja \emph{DOJO
   Foundation}\footnote{DOJO Foundation - niedochodowa
   (ang. non-profit) organizacja zajmująca się promocją biblioteki
-  \emph{Dojo Toolkit}\cite{dojo}} podjęła się również próby
-ustandaryzowania tych rozwiązań pod nazwą \emph{protokołu
-  Bayeux}\cite{bayeux}. Alternatywą dla \emph{Cometa} jest stosowanie
-rozwiązań pochodzących z apletów \emph{Javy} lub aplikacji \emph{Adobe
-  Flash}, które mogą samodzielnie nawiązywać połączenia \emph{TCP}
-(bez udziału przeglądarki internetowej). Powstająca specyfikacja
-języka \emph{HTML 5} zawiera również rozwiązanie nazwane \emph{Web
-  Sockets API}, które umożliwia dwustronną komunikację z serwerem
-\emph{HTTP}\cite{websockets}.
+  \emph{Dojo Toolkit}} podjęła się również próby ustandaryzowania tych
+rozwiązań pod nazwą \emph{protokołu Bayeux}\cite{bayeux}. Alternatywą
+dla \emph{Cometa} jest stosowanie rozwiązań pochodzących z apletów
+\emph{Javy} lub aplikacji \emph{Adobe Flash}, które mogą samodzielnie
+nawiązywać połączenia \emph{TCP} (bez udziału przeglądarki
+internetowej). Powstająca specyfikacja języka \emph{HTML 5} zawiera
+również rozwiązanie nazwane \emph{Web Sockets API}, które umożliwia
+dwustronną komunikację z serwerem \emph{HTTP}\cite{websockets}.
 
 \subsubsection{DOM}
 Obiektowy model dokumentu(ang. Document Object Model) jest konwencją
 reprezentacji dokumentów \emph{XML}, \emph{XHTML} i \emph{XML} w
 postaci modelu obiektowego. Jest on wymagany przez język
 \emph{JavaScript} do odczytywania i modyfikowania struktury dokumentu
-z poziomu kodu\cite{dom}. Jest to zdecydowanie najbardziej niespójny
-element współczesnych przeglądarek. Ma to związek m.in. z tym, że
-pierwsze próby ustandaryzowania tego rozwiązania odbyły się w 1997
-roku, a standard wszedł w powszechne użycie dopiero około roku
+z poziomu kodu. Jest to zdecydowanie najbardziej niespójny element
+współczesnych przeglądarek. Ma to związek m.in. z tym, że pierwsze
+próby ustandaryzowania tego rozwiązania odbyły się w 1997 roku, a
+standard wszedł w powszechne użycie dopiero około roku
 2000. Niespójności te są na tyle duże, że pisząc nawet prosty skrypt
 odwołujący się bezpośrednio do \emph{DOM-u} przeglądarki, możemy
 spodziewać się, że nie będzie on przenośny. Dostosowywanie kodu do
@@ -1878,15 +1873,90 @@ uwierzytelniania użytkowników została przedstawiona na listingu
 
 \subsection{Kontrolery}
 
+Główne zadania kontrolerów w aplikacjach \emph{Ruby on Rails} to
+obsługa parametrów żądania \emph{HTTP}, komunikacja z bazą danych za
+pomocą modeli, oraz tworzenie odpowiedzi, zwykle w postaci
+wyrenderowanych widoków. Każdy kontroler składa się z zestawu metod,
+tzw. akcji, do których kierowane są żądania. Dodatkowym elementem
+stosowanym w kontrolerach są tzw. filtry. Filtry służą do wykonywania
+odpowiednich działań bezpośrednio przed lub po wykonaniu
+akcji. Najczęstszym przykładem wykorzystania filtra jest blokowanie
+dostępu do niektórych akcji dla niezalogowanych
+użytkowników. Implementacja przykładowej klasy-kontrolera została
+przedstawiona na listingu \ref{listing:filter}.
+
+\begin{listing}
+  \input{filter}
+  \caption{Implementacja klasy \texttt{EdgesController}}
+  \label{listing:filter}
+\end{listing}
+
+Przed wywołaniem dowolnej akcji kontrolera \texttt{EdgesController},
+wywoływane są metody \texttt{require\_user} i
+\texttt{fetch\_game}. Pierwsza z nich, pochodząca z klasy bazowej,
+jest odpowiedzialna za odnalezienie obiektu zalogowanego użytkownika,
+na podstawie danych zawartych w sesji. Podobnie, jak w przypadku
+wywołań zwrotnych klasy \texttt{ActiveRecord}, akcja kontrolera nie
+jest wywoływana jeśli którykolwiek z filtrów zwróci wartość
+\texttt{false}. Dzieję się tak np. wówczas, gdy niezalogowany
+użytkownik próbuje wywołać akcję poprzedzoną filtrem
+\texttt{require\_user}. Metoda \texttt{fetch\_game} jest przykładem
+stosowania filtrów, w celu uniknięcia powtórzeń w kodzie. W związku z
+tym, że wszystkie akcje kontrolera \texttt{EdgesController} wywoływane
+są w kontekście określonego parametrem \texttt{game\_id} obiektu gry,
+wyciągnięcie go z bazy zostało wydzielone do metody
+\texttt{fetch\_game}. Zadaniem akcji \texttt{create}, jest zbudowanie
+i zapisanie obiektu klasy \emph{Edge}, na podstawie przekazanych w
+żądaniu parametrów. Po udanym zapisie utworzonego w ten sposób
+obiektu, tworzona jest odpowiedź, w postaci przekierowania do akcji
+\texttt{show} kontrolera \texttt{GamesController}. Jeśli nie udało się
+zapisać obiektu renderowana jest pusta odpowiedź z kodem błędu
+\texttt{422} (\emph{Unprocessable Entity}).
+
+W każdej akcji mamy dostęp m.in. do następujących obiektów:
+
+\begin{itemize}
+\item \texttt{params} - tablicy asocjacyjnej z odpowiednio
+  przetworzonymi parametrami żądania \emph{HTTP}
+\item \texttt{session} - tablicy asocjacyjnej danych sesji, uzyskanej
+  z danych pochodzących z żądania i wybranego mechanizmu
+  przechowywania sesji\footnote{domyślnie dane sesji są przechowywane
+    jako ,,ciasteczka'' podpisane odpowiednią funkcją skrótu, w celu
+    uniemożliwienia edycji. Możliwe jest także przechowywanie sesji w
+    bazie danych, serwerach \emph{MemCache} czy \emph{DRb}}
+\item \texttt{cookies} - tablicy asocjacyjnej z ,,ciasteczkami''
+\item \texttt{request} - obiektu obudowującego żądanie \emph{HTTP}
+\item \texttt{response} - obiektu budowanej odpowiedzi
+\end{itemize}
+
 \subsubsection{Ścieżki}
 
-
+Aby możliwe było wywołanie metody kontrolera z przeglądarki
+internetowej, niezbędne jest zrzutowanie adresów URL na odpowiadające
+im akcje i kontrolery. Przekształcaniem adresów żądań \emph{HTTP} na
+nazwy kontrolerów i akcji, zajmuje się
+tzw. \emph{Router}. Konfiguracja \emph{Routera} została przedstawiona
+na listingu \ref{listing:routes}.
 
 \begin{listing}
   \input{routes}
   \caption{Zdefiniowanie ścieżek}
   \label{listing:routes}
 \end{listing}
+
+Do tworzenia ścieżek zgodnych z wymogami \emph{REST}, służą metody
+\texttt{resource} i \texttt{resources}. Pierwsza z nich generuje
+zestaw ścieżek dla pojedynczego zasobu, charakteryzującego się
+m.in. brakiem akcji \texttt{index}. W przypadku metody
+\texttt{resources}, aby odwołać się do konkretnego zasobu, wymagane
+jest podanie unikalnego identyfikatora (\texttt{id}). W liniach 6-15
+listingu \ref{listing:routes} zdefiniowane zostały tzw. zasoby
+zagnieżdżone. W celu utworzenia np. nowego zasobu w postaci obiektu
+gracza, niezbędne jest podanie identyfikatora gry, w kontekście której
+jest tworzony zasób. Do wyświetlenia listy wygenerowanych przez
+\emph{Router} ścieżek, służy polecenie \texttt{rake routes}. W wyniku
+działania polecenia otrzymujemy tablicę ścieżek, podobną do tej,
+przedstawionej w tabeli \ref{table:routes}.
 
 \begin{table}[ht]
   \begin{tabular}{|l|l|l|l|l|}
@@ -1923,10 +1993,16 @@ uwierzytelniania użytkowników została przedstawiona na listingu
   \label{table:routes}
 \end{table}
 
+Poniżej przedstawiona została lista przykładowych żądań, używanych
+podczas gry. Każde żądanie jest opatrzone słownym opisem działania,
+oraz nazwą kontrolera i akcji do których się odnosi. Zawiera także
+nazwę użytej metody, adres, a także listę parametrów, wymaganych do
+wywołania akcji.
+
 \begin{itemize}
 \item tworzenie gry
 \begin{verbatim}
-POST /games/1/nodes
+POST /games
 \end{verbatim}
 \item wyświetlenie gry w domyślnym formacie (\emph{HTML})
 \begin{verbatim}
@@ -2041,7 +2117,6 @@ robbery[sender_number]=1
 \clearpage
 
 \section{Implementacja klienta}
-
 
 \clearpage
 

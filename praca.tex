@@ -2136,21 +2136,39 @@ Domyślnym silnikiem renderowania szablonów we frameworku \emph{Ruby on
   Rails} jest \emph{ERB}\footnote{ERB (ang. Embedded Ruby) - system
   szablonów pozwalający na zagnieżdżanie kodu języka \emph{Ruby} w
   dokumencie tekstowym.}. Największą zaletą tego rozwiązania jest jego
-uniwersalność, równie dobrze nadaje się do generowania kodu
+uniwersalność -- równie dobrze nadaje się do generowania kodu
 \emph{HTML} jak i treści wiadomości e-mail. Okazuje się jednak, że w
-przypadku opisu dokumentów \emph{HTML}, \emph{ERB} staje się nieco
-zbyt nadmiarowy. Aby usprawnić tworzenie kodu stron powstała
-biblioteka \emph{Haml}\footnote{HTML Abstraction Markup Language},
-której twórcą jest Nathan Weizenbaum. Język \emph{Haml} oferuje
-zwięzły i przejrzysty sposób zapisu dokumentów \emph{HTML} i
-\emph{XHTML}, nie jest to język uniwersalny. Do opisu struktury
-dokumentu używa on wcięć, dzięki czemu zbędne staje się np. zamykanie
-znaczników. Podobnie jak w przypadku \emph{ERB}, \emph{Haml} umożliwia
-zagnieżdżanie kodu języka \emph{Ruby} w tworzonym dokumencie.
+przypadku opisu dokumentów \emph{HTML}, \emph{ERB} wymusza dużą liczbę
+powtórzeń, co zmniejsza czytelność kodu. Aby usprawnić tworzenie kodu
+stron powstała biblioteka \emph{Haml}\footnote{HTML Abstraction Markup
+  Language}, której twórcami są Nathan Weizenbaum i Hampton
+Catlin. Język \emph{Haml} oferuje zwięzły i przejrzysty sposób zapisu
+dokumentów \emph{HTML} i \emph{XHTML} -- nie jest to język
+uniwersalny. Do opisu struktury dokumentu używa on wcięć, dzięki czemu
+zbędne staje się np. zamykanie znaczników. Podobnie jak w przypadku
+\emph{ERB}, \emph{Haml} umożliwia zagnieżdżanie kodu języka
+\emph{Ruby} w tworzonym dokumencie.
 
-Razem z biblioteką \emph{Haml} dostarczany jest także
-\emph{Sass}\footnote{Syntactically Awesome Stylesheets}. Język \emph{Sass}
+Razem z biblioteką \emph{Haml} dostarczany jest także kompilator
+języka \emph{Sass}\footnote{Syntactically Awesome Stylesheets}. Język
+\emph{Sass} jest metajęzykiem, służącym do opisu kaskadowych arkuszy
+stylów \emph{CSS}. Najważniejsze zalety języka \emph{Sass} to:
 
+\begin{itemize}
+%\item zmniejszenie liczby powtórzeń w kodzie
+\item wykorzystywanie wcięć do odzwierciedlenia struktury selektorów
+\item mechanizm \emph{mixinów} - powtarzające się elementy można
+  wydzielić jako moduły i używać ich wielokrotnie
+\item możliwość definiowania zmiennych - zamiast powtarzać nic nie
+  mówiące liczby czy kolory, możemy korzystać z nazwanych
+  zmiennych
+\item możliwość wykonywania operacji arytmetycznych na liczbach i
+  kolorach
+\item możliwość tworzenia prostych pętli i warunków
+\end{itemize}
+
+Dzięki dwóm ostatnim cechom języka, możliwe stało się wyświetlenie
+planszy do gry wyłącznie za pomocą arkuszy stylów.
 
 \clearpage
 

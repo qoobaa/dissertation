@@ -2150,13 +2150,14 @@ zbędne staje się np. zamykanie znaczników. Podobnie jak w przypadku
 \emph{Ruby} w tworzonym dokumencie.
 
 Razem z biblioteką \emph{Haml} dostarczany jest także kompilator
-języka \emph{Sass}\footnote{Syntactically Awesome Stylesheets}. Język
+języka \emph{Sass}\footnote{Syntactically Awesome Style Sheets}. Język
 \emph{Sass} jest metajęzykiem, służącym do opisu kaskadowych arkuszy
-stylów \emph{CSS}. Najważniejsze zalety języka \emph{Sass} to:
+stylów (\emph{CSS}\footnote{Cascading Style Sheets}). Najważniejsze
+zalety języka \emph{Sass} to:
 
 \begin{itemize}
-%\item zmniejszenie liczby powtórzeń w kodzie
-\item wykorzystywanie wcięć do odzwierciedlenia struktury selektorów
+\item wykorzystywanie wcięć do odzwierciedlenia struktury selektorów -
+  zmniejsza to liczbę powtórzeń w kodzie
 \item mechanizm \emph{mixinów} - powtarzające się elementy można
   wydzielić jako moduły i używać ich wielokrotnie
 \item możliwość definiowania zmiennych - zamiast powtarzać nic nie
@@ -2168,7 +2169,14 @@ stylów \emph{CSS}. Najważniejsze zalety języka \emph{Sass} to:
 \end{itemize}
 
 Dzięki dwóm ostatnim cechom języka, możliwe stało się wyświetlenie
-planszy do gry wyłącznie za pomocą arkuszy stylów.
+planszy do gry bez użycia \emph{JavaScriptu}. Takie rozwiązanie
+znacząco przyspiesza i ułatwia wyświetlanie planszy.
+
+\begin{listing}
+  \input{boardtable}
+  \caption{Plansza do gry}
+  \label{listing:boardtable}
+\end{listing}
 
 \clearpage
 

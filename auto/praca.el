@@ -3,6 +3,7 @@
     (LaTeX-add-bibliographies)
     (LaTeX-add-labels
      "dice"
+     "sec:fight"
      "pioneers"
      "jsettlers"
      "railsarchitecture"
@@ -14,6 +15,7 @@
      "board"
      "nodes"
      "edges"
+     "sec:calculations"
      "hexhexes"
      "hexnodes"
      "hexedges"
@@ -25,11 +27,30 @@
      "edgeedges"
      "statemachine-phase"
      "statemachine-state"
-     "erd")
+     "erd"
+     "listing:statemachine"
+     "listing:statemachine-phase"
+     "selectfirst"
+     "checkconditions"
+     "callbacks"
+     "listing:board"
+     "listing:hex"
+     "listing:find"
+     "listing:node"
+     "road"
+     "equation:longest-road"
+     "longest-road"
+     "listing:edge"
+     "listing:player"
+     "listing:card"
+     "listing:usersession"
+     "listing:routes"
+     "table:routes")
     (TeX-add-symbols
      '("imref" 1)
      "UrlFont")
     (TeX-run-style-hooks
+     "float"
      "amsmath"
      "amsfonts"
      "url"
@@ -45,5 +66,15 @@
      "a4paper"
      "12pt"
      "pygments"
-     "statemachine")))
+     "statemachine"
+     "statemachine-phase"
+     "board"
+     "hex"
+     "find"
+     "node"
+     "edge"
+     "player"
+     "card"
+     "usersession"
+     "routes")))
 

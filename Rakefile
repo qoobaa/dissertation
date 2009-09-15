@@ -6,6 +6,7 @@ SRC = "praca.tex"
 IMG_SRC = FileList["*.dia"]
 RUBY_SRC = FileList["*.rb"]
 HTML_SRC = FileList["*.html"]
+SASS_SRC = FileList["*.sass"]
 SVG_IMG =  FileList["*.svg"]
 AGR_IMG =  FileList["*.agr"]
 
@@ -14,7 +15,8 @@ CLEAN.include(%w(*.toc *.aux *.log *.lof *.bbl *.blg *.out *.snm *.vrb *.nav *.e
               SVG_IMG.ext("png"),
               AGR_IMG.ext("ps"),
               AGR_IMG.ext("pdf"),
-              HTML_SRC.ext("tex"))
+              HTML_SRC.ext("tex"),
+              SASS_SRC.ext("tex"))
 
 CLOBBER.include(%w(pdf dvi ps).collect { |e| SRC.ext(e) })
 
@@ -50,6 +52,12 @@ rule ".tex" => ".html" do |t|
   sh "pygmentize -f latex -O linenos=True -o #{t.name} #{t.source}"
 end
 
+rule ".tex" => ".sass" do |t|
+  sh "echo '\\\\begin{Verbatim}[numbers=left,firstnumber=1,stepnumber=1]' > #{t.name}"
+  sh "cat #{t.source} >> #{t.name}"
+  sh "echo '\\end{Verbatim}' >> #{t.name}"
+end
+
 rule ".ps" => ".agr" do |t|
   sh "grace -hdevice PostScript -hardcopy #{t.source} -print #{t.name}"
 end
@@ -61,7 +69,7 @@ rule ".pdf" => ".tex" do |t|
   pdflatex(t.source)
 end
 
-file SRC.ext("pdf") => [SRC] + RUBY_SRC.ext("tex") + SVG_IMG.ext("png") + IMG_SRC.ext("pdf") + AGR_IMG.ext("pdf") + HTML_SRC.ext("tex")
+file SRC.ext("pdf") => [SRC] + RUBY_SRC.ext("tex") + SVG_IMG.ext("png") + IMG_SRC.ext("pdf") + AGR_IMG.ext("pdf") + HTML_SRC.ext("tex") + SASS_SRC.ext("tex")
 
 desc "Compile PDF"
 task :pdf => SRC.ext("pdf")

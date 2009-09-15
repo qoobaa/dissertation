@@ -1,0 +1,29 @@
+!board_height = 10
+!board_width = 10
+!board_hex_width = 95px
+!board_hex_width2 = !board_hex_width / 2
+!board_hex_height = 80px
+!board_hex_height2 = !board_hex_height / 2
+!board_hex_x_offset = 15px
+!board_hex_y_offset = 10px
+!board_hex_offset = !board_hex_x_offset + !board_hex_y_offset
+
+=board
+  .yui-board-hex
+    :width= !board_hex_width
+    :height= !board_hex_height
+    :text-align center
+    :line-height= !board_hex_height
+    :position absolute
+
+  @for !row from 0 to !board_height + 1
+    .yui-board-hexes-row-#{!row}
+      :position absolute
+      :top= !row * !board_hex_height
+
+  @for !col from 0 to !board_width + 1
+    .yui-board-hexes-col-#{!col}
+      :top= !col * !board_hex_height2
+      :left= !col * (!board_hex_width - !board_hex_offset)
+
+  / ...

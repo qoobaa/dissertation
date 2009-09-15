@@ -2172,11 +2172,59 @@ Dzięki dwóm ostatnim cechom języka, możliwe stało się wyświetlenie
 planszy do gry bez użycia \emph{JavaScriptu}. Takie rozwiązanie
 znacząco przyspiesza i ułatwia wyświetlanie planszy.
 
+W języku \emph{HTML} plansza do gry została opisana za pomocą tabeli
+(znacznika \texttt{<table>}), zawierającej trzy elementy
+\texttt{<tbody>}. Są to właściwie trzy nałożone na siebie tabele,
+odpowiadające za wyświetlanie sześciokątów, wierzchołków i
+krawędzi. Każdy wiersz tabeli posiada klasę zawierającą jego numer
+(np. \texttt{yui-board-hexes-row-0}), a każda komórka posiada klasę z
+numerem kolumny. W wygenerowanym arkuszu stylów zawarte są wyliczone
+pozycje (własności \texttt{top} i \texttt{left}) dla każdego
+zestawienia wartości tych atrybutów. Maksymalny rozmiar pozycjonowanej
+w ten sposób planszy można dowolnie zmieniać (wymagane jest oczywiście
+przekompilowanie arkusza), domyślnie jest to 10x10
+sześciokątów. Struktura znaczników w przykładowej planszy do gry
+została przedstawiona na listingu \ref{listing:boardtable}. Część kodu
+źródłowego omawianego arkusza stylów została przedstawiona na
+\ref{listing:hexes}. Oprócz maksymalnych rozmiarów planszy, w
+pierwszych liniach listingu zadeklarowane są zmienne opisujące
+rozmiary sześciokątów, zależne od zastosowanych plików graficznych. W
+kolejnych liniach przedstawiony został kod odpowiedzialny za
+pozycjonowanie sześciokątów. Rozmiar wygenerowanego w ten sposób
+arkusza stylów, pozycjonującego wszystkie elementy planszy, to około
+30 kB. Na \imref{fig:boardunstyled} i \imref{fig:board} została
+przedstawiona przykładowa plansza do gry, przy odpowiednio:
+wyłączonych i włączonych stylach \emph{CSS}.
+
 \begin{listing}
   \input{boardtable}
-  \caption{Plansza do gry}
+  \caption{Struktura znaczników \emph{HTML} tabeli -- planszy do gry}
   \label{listing:boardtable}
 \end{listing}
+
+\begin{listing}
+  \input{hexes}
+  \caption{Fragment kodu źródłowego w języku \emph{Sass},
+    odpowiedzialnego za ustalanie pozycji sześciokątów na planszy}
+  \label{listing:hexes}
+\end{listing}
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[width=\linewidth]{boardunstyled.png}
+  \end{center}
+  \caption{Przykładowa plansza do gry z wyłączonymi stylami
+    \emph{CSS}}
+  \label{fig:boardunstyled}
+\end{figure}
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[width=\linewidth]{board.png}
+  \end{center}
+  \caption{Ta sama plansza, po włączeniu stylów \emph{CSS}}
+  \label{fig:board}
+\end{figure}
 
 \clearpage
 

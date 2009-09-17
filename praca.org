@@ -284,6 +284,7 @@ end
 - wersja beta
 - dużo możliwości reużywania kodu
 - brak pluginów (praktycznie nic jeszcze nie istnieje)
+- głównie chęć poznania biblioteki
 ** komunikacja
 - dane o planszy pobierane okresowo
 - po wysłaniu żądania (np. rzutu kością) dane otrzymujemy od razu -

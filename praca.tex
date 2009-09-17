@@ -2220,30 +2220,53 @@ planszy do gry z włączonymi stylami \emph{CSS}
 \clearpage
 
 \section{Implementacja klienta}
-% jquery, jquery ui
 
-Zgodnie z założeniami projektowymi, część kliencka aplikacji została
-napisana wyłącznie w języku \emph{JavaScript}. W pierwszym podejściu
-do implementacji kodu klienta wykorzystana została biblioteka
-\emph{jQuery}, wraz z \emph{jQuery UI}, której twórcą jest John
-Resig. Głównymi cechami \emph{jQuery} są: minimalizm i łatwa
-rozszerzalność za pomocą ,,wtyczek''. W związku z tym, że biblioteka
-cieszy się ogromną popularnością, powstało do niej bardzo wiele
-rozszerzeń. Na bazie \emph{jQuery} powstała również biblioteka
-\emph{jQuery UI}, która udostępnia podstawowe elementy interfejsu
-użytkownika, takie jak: okna dialogowe, kalendarze, itp.
+Początkowo do implementacji części klienckiej wykorzystana została
+biblioteka \emph{jQuery}, wraz z \emph{jQuery UI}. Biblioteka
+\emph{jQuery} została stworzona przez Johna Resiga w 2006
+roku. Głównymi cechami \emph{jQuery} są: minimalizm i łatwa
+rozszerzalność za pomocą ,,wtyczek''. Na bazie \emph{jQuery} powstała
+również biblioteka \emph{jQuery UI}, która udostępnia podstawowe
+elementy interfejsu użytkownika, takie jak: okna dialogowe,
+kalendarze, itp. Przy implementacji okazało się jednak, że niewielka
+liczba funkcji pomocniczych jest dość uciążliwa i powoduje konieczność
+korzystania z zewnętrznych rozszerzeń. Pomimo pozornie dużego wyboru
+dostępnych ,,wtyczek'', w wielu przypadkach niezbędne jest
+wprowadzenie do nich własnych poprawek.
 
-Po zaimplementowaniu sporej części kodu klienta okazało się, że
-wspomniany już wcześniej minimalizm nie ułatwia pisania większych
-aplikacji typu \emph{RIA}. W wielu przypadkach niezbędne jest
-korzystanie z zewnętrznych rozszerzeń.
+Inną ciekawą biblioteką \emph{JavaScript} jest \emph{YUI}, rozwijana
+przez firmę \emph{Yahoo! Inc.}. Najważniejszym czynnikiem, który
+wpłynął na decyzję o zmianie biblioteki na \emph{YUI} było wydanie
+wersji 3.0.0 beta 1, dnia 24 czerwca 2009 roku. W porównaniu do
+poprzednich wersji, biblioteka \emph{YUI3} została przeprojektowana i
+w większości zaimplementowana od początku. Jej twórcy zapożyczyli
+także najlepsze rozwiązania innych bibliotek, m.in. mechanizm
+selektorów \emph{jQuery}. \emph{YUI3} oferuje bardzo bogaty zestaw
+gotowych narzędzi, z których najważniejsze z punktu widzenia
+tworzonego projektu to:
 
-% yui3
+\begin{itemize}
+\item ,,klasa''\footnote{w języku \emph{JavaScript} formalnie nie
+    istnieje pojęcie klasy. W praktyce okazuje się jednak, że
+    zastosowany mechanizm bezklasowy wykorzystywany jest podobny
+    sposób do tradycyjnego} \texttt{Base} udostępniająca podstawowe
+  mechanizmy znane z klasycznych języków obiektowych, takie jak:
+  kontruktory i destruktory, atrybuty wraz z metodami dostępowymi
+  (\texttt{get} i \texttt{set})
+\item ,,klasa'' \texttt{Widget} będąca podstawą dla wszystkich
+  tworzonych kontrolek
+\item funkcje takie jak \texttt{augment}, \texttt{extend} i
+  \texttt{aggregate}, ułatwiające dziedziczenie obiektów (ponowne
+  wykorzystanie kodu)
+\item najważniejsze funkcje ułatwiające pracę z kolekcjami,
+  m.in. \texttt{map}, \texttt{reduce}, \texttt{find}
+\end{itemize}
+
+
+
 % logika gry
 % widgety
 % komunikacja
-
-
 
 \clearpage
 

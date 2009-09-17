@@ -275,6 +275,42 @@ end
 *** SASS
 **** wyświetlanie planszy
 * implementacja klienta
+** początkowo jQuery i jQuery UI
+- niewielka biblioteka standardowa
+- małe możliwości reużywania kodu (niewielkie wsparcie)
+- duża ilość pluginów, lecz ich jakość stawia wiele do życzenia
+** YUI3
+- bardzo bogata biblioteka standardowa (wszystko na starcie)
+- wersja beta
+- dużo możliwości reużywania kodu
+- brak pluginów (praktycznie nic jeszcze nie istnieje)
+** komunikacja
+- dane o planszy pobierane okresowo
+- po wysłaniu żądania (np. rzutu kością) dane otrzymujemy od razu -
+  dzięki temu użytkownik nie widzi większych opóźnień
+** logika gry
+- w zasadzie konieczność przeniesienia dużej części funkcji modeli z
+  serwera RoR do kodu JS
+** widgety
+- after-roll
+- before-roll
+- board
+- build
+- cards
+- discard
+- exchange
+- game
+- game-status
+- join
+- monopoly
+- offer
+- offer-received
+- offer-sent
+- players
+- resources
+- resource-spinner
+- user-player
+- year-of-plenty
 * uruchomienie i przeprowadzenie testów
 ** testy jednostkowe
 * dalszy rozwój aplikacji

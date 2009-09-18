@@ -2228,16 +2228,17 @@ roku. Głównymi cechami \emph{jQuery} są: minimalizm i łatwa
 rozszerzalność za pomocą ,,wtyczek''. Na bazie \emph{jQuery} powstała
 również biblioteka \emph{jQuery UI}, która udostępnia podstawowe
 elementy interfejsu użytkownika, takie jak: okna dialogowe,
-kalendarze, itp. Przy implementacji okazało się jednak, że niewielka
-liczba funkcji pomocniczych jest dość uciążliwa i powoduje konieczność
-korzystania z zewnętrznych rozszerzeń. Pomimo pozornie dużego wyboru
-dostępnych ,,wtyczek'', w wielu przypadkach niezbędne jest
-wprowadzenie do nich własnych poprawek.
+kalendarze, itp. Podczas implementacji kodu klienta okazało się
+jednak, że niewielka liczba funkcji bibliotecznych jest dość uciążliwa
+i powoduje konieczność korzystania z zewnętrznych rozszerzeń. Pomimo
+pozornie dużego wyboru dostępnych ,,wtyczek'', w wielu przypadkach
+niezbędne jest wprowadzenie do nich własnych poprawek, a jakość ich
+kodu pozostawia wiele do życzenia.
 
-Inną ciekawą biblioteką \emph{JavaScript} jest \emph{YUI}, rozwijana
-przez firmę \emph{Yahoo! Inc.}. Najważniejszym czynnikiem, który
-wpłynął na decyzję o zmianie biblioteki na \emph{YUI} było wydanie
-wersji 3.0.0 beta 1, dnia 24 czerwca 2009 roku. W porównaniu do
+Inną ciekawą biblioteką \emph{JavaScript} jest \emph{Yahoo! User
+  Interface Library}. Najważniejszym czynnikiem, który wpłynął na
+decyzję o zmianie biblioteki na \emph{YUI} było wydanie wersji
+\emph{3.0.0 beta 1}, dnia 24 czerwca 2009 roku. W porównaniu do
 poprzednich wersji, biblioteka \emph{YUI3} została przeprojektowana i
 w większości zaimplementowana od początku. Jej twórcy zapożyczyli
 także najlepsze rozwiązania innych bibliotek, m.in. mechanizm
@@ -2262,11 +2263,72 @@ tworzonego projektu to:
   m.in. \texttt{map}, \texttt{reduce}, \texttt{find}
 \end{itemize}
 
+Należy zaznaczyć fakt, że biblioteka \emph{YUI3} znajduje się ciągle w
+fazie intensywnego rozwoju -- niektóre jej elementy mogą ulec zmianie
+w wersji \emph{3.0.0 GA} (ang. General Availability). Do czasu wydania
+wersji \emph{GA}, nie jest zalecane wykorzystanie biblioteki w
+środowiskach produkcyjnych. Konsekwencją wyboru \emph{YUI3} jest
+również stosunkowo niewielka społeczność skupiona wokół biblioteki. Do
+tej pory dostępne są jedynie bardzo nieliczne przykłady wykorzystania
+\emph{YUI3} oraz jej rozszerzenia. Pomimo tych niedogodności
+biblioteka ta jest warta uwagi, gdyż zbudowana została na bardzo
+solidnych fundamentach. W niedalekiej przyszłości może ona okazać się
+poważnym konkurentem dla dominujących dzisiaj bibliotek, takich jak
+\emph{jQuery}.
+
+\subsection{Logika gry}
+W przypadku tradycyjnych aplikacji internetowych, niepoprawne dane
+wysyłane są do serwera, który zwraca w odpowiedzi błędy
+walidacji. Zastosowanie tego mechanizmu wprowadziłoby do gry
+niepotrzebne opóźnienia oraz stanowiłoby spore utrudnienie,
+szczególnie dla początkujących graczy.
 
 
-% logika gry
-% widgety
-% komunikacja
+Dla sprawnego działania gry niezbędna jest możliwość stwierdzenia
+poprawności generowanych zapytań, jeszcze przed wysłaniem ich do
+serwera. W tym celu konieczne okazało się zaimplementowanie po stronie
+klienta ,,klas'':
+
+\begin{itemize}
+\item \texttt{Game} - przechowuje podstawowe informacje o stanie gry,
+  listę graczy, aktualną ofertę oraz obiekt \texttt{Board}
+\item \texttt{Player} - informacje i stan gracza
+\item \texttt{Offer} - informacje o ofercie handlu złożonej przez
+  jednego z graczy, wraz z listą odpowiedzi
+\item \texttt{Board}, \texttt{Edge}, \texttt{Hex}, \texttt{Node} -
+  informacje o planszy do gry, wszystkich jej sześciokątach,
+  wierzchołkach i krawędziach
+\end{itemize}
+
+Oczywiście walidacja poszczególnych posunięć graczy nie może odbywać
+się wyłącznie po stronie klienta. Serwer jest w dalszym ciągu
+odpowiedzialny za ostateczne sprawdzenie poprawności działań graczy, w
+celu uniemożliwienia nieprzepisowych zagrań, np. poprzez fałszowanie
+zapytań.
+
+\subsection{Elementy interfejsu graficznego}
+
+\begin{itemize}
+\item \texttt{AfterRoll}
+\item \texttt{BeforeRoll}
+\item \texttt{Board}
+\item \texttt{Build}
+\item \texttt{Cards}
+\item \texttt{Discard}
+\item \texttt{Exchange}
+\item \texttt{Game}
+\item \texttt{GameStatus}
+\item \texttt{Join}
+\item \texttt{Monopoly}
+\item \texttt{Offer}
+\item \texttt{OfferReceived}
+\item \texttt{OfferSent}
+\item \texttt{Players}
+\item \texttt{UserPlayer}
+\item \texttt{YearOfPlenty}
+\end{itemize}
+
+\subsection{Komunikacja z serwerem}
 
 \clearpage
 

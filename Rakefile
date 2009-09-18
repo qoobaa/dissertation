@@ -53,9 +53,10 @@ rule ".tex" => ".html" do |t|
 end
 
 rule ".tex" => ".sass" do |t|
-  sh "echo '\\\\begin{Verbatim}[numbers=left,firstnumber=1,stepnumber=1]' > #{t.name}"
-  sh "cat #{t.source} >> #{t.name}"
-  sh "echo '\\end{Verbatim}' >> #{t.name}"
+  # sh "echo '\\\\begin{Verbatim}[numbers=left,firstnumber=1,stepnumber=1]' > #{t.name}"
+  # sh "cat #{t.source} >> #{t.name}"
+  # sh "echo '\\end{Verbatim}' >> #{t.name}"
+  sh "pygmentize -f latex -O linenos=True -o #{t.name} #{t.source}"
 end
 
 rule ".ps" => ".agr" do |t|

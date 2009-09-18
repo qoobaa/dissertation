@@ -2283,11 +2283,10 @@ walidacji. Zastosowanie tego mechanizmu wprowadziłoby do gry
 niepotrzebne opóźnienia oraz stanowiłoby spore utrudnienie,
 szczególnie dla początkujących graczy.
 
-
 Dla sprawnego działania gry niezbędna jest możliwość stwierdzenia
 poprawności generowanych zapytań, jeszcze przed wysłaniem ich do
 serwera. W tym celu konieczne okazało się zaimplementowanie po stronie
-klienta ,,klas'':
+klienta następujących ,,klas'':
 
 \begin{itemize}
 \item \texttt{Game} - przechowuje podstawowe informacje o stanie gry,
@@ -2304,28 +2303,36 @@ Oczywiście walidacja poszczególnych posunięć graczy nie może odbywać
 się wyłącznie po stronie klienta. Serwer jest w dalszym ciągu
 odpowiedzialny za ostateczne sprawdzenie poprawności działań graczy, w
 celu uniemożliwienia nieprzepisowych zagrań, np. poprzez fałszowanie
-zapytań.
+treści zapytań.
 
 \subsection{Elementy interfejsu graficznego}
 
 \begin{itemize}
-\item \texttt{AfterRoll}
-\item \texttt{BeforeRoll}
-\item \texttt{Board}
-\item \texttt{Build}
-\item \texttt{Cards}
+\item \texttt{Game} - odpowiedzialny za tworzenie pozostałych
+  kontrolek, przechwytywanie zdarzeń i komunikację z serwerem
+\item \texttt{GameStatus} - wyświetlanie informacji o stanie gry
+\item \texttt{Players} - wyświetlanie listy graczy i ogólnych
+  informacji o każdym z nich
+\item \texttt{UserPlayer} - szczegółowe informacje o zalogowanym graczu
+\item \texttt{Join} - dołączanie do rozgrywki
+
+\item \texttt{Board} - plansza do gry
+\item \texttt{AfterRoll} - kończenie tury
+\item \texttt{BeforeRoll} - rzut kośćmi do gry
+\item \texttt{Build} - budowanie osad, dróg i miast oraz kupowanie
+  kart rozwoju
+
+\item \texttt{Cards} - lista posiadanych kart
+\item \texttt{YearOfPlenty} - używany w przypadku zagrania karty
+  rozwoju ,,wynalazek''
+\item \texttt{Monopoly} - używany w przypadku zagrania karty
+  ,,monopol''
+
 \item \texttt{Discard}
 \item \texttt{Exchange}
-\item \texttt{Game}
-\item \texttt{GameStatus}
-\item \texttt{Join}
-\item \texttt{Monopoly}
 \item \texttt{Offer}
 \item \texttt{OfferReceived}
 \item \texttt{OfferSent}
-\item \texttt{Players}
-\item \texttt{UserPlayer}
-\item \texttt{YearOfPlenty}
 \end{itemize}
 
 \subsection{Komunikacja z serwerem}

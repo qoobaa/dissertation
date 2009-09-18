@@ -315,4 +315,5 @@ end
 * uruchomienie i przeprowadzenie testów
 ** testy jednostkowe
 * dalszy rozwój aplikacji
-** możliwość rozgrywania turniejów z takimi samymi rzutami
+** możliwość rozgrywania turniejów z takimi samymi rzutami?
+* licencja

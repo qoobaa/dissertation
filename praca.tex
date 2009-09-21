@@ -1930,8 +1930,7 @@ W każdej akcji mamy dostęp m.in. do następujących obiektów:
 \item \texttt{response} - obiektu budowanej odpowiedzi
 \end{itemize}
 
-\subsubsection{Ścieżki}
-
+\subsubsection{Ścieżki}\label{sec:routes}
 Aby możliwe było wywołanie metody kontrolera z przeglądarki
 internetowej, niezbędne jest zrzutowanie adresów URL na odpowiadające
 im akcje i kontrolery. Przekształcaniem adresów żądań \emph{HTTP} na
@@ -2396,44 +2395,36 @@ znaczników, wraz z przykładowymi nazwami klas przedstawiony został na
 
 \begin{figure}[ht]
   \begin{center}
-    \begin{tabular}{|c|c|}
-      \hline
-      \subfloat{\label{fig:afterrollwidget}}\includegraphics[scale=0.5]{afterrollwidget.png}
+    \begin{tabular}{cc}
+      \subfloat[Rzut kością]{\label{fig:beforerollwidget}}\includegraphics[scale=0.45]{beforerollwidget.png}
       &
-      \subfloat{\label{fig:beforerollwidget}}\includegraphics[scale=0.5]{beforerollwidget.png}
-      \\
-      \hline
-      \subfloat{\label{fig:buildwidget}}\includegraphics[scale=0.5]{buildwidget.png}
+      \subfloat[Kończenie tury]{\label{fig:afterrollwidget}}\includegraphics[scale=0.45]{afterrollwidget.png}
+      \\[40pt]
+      \subfloat[Budowa drogi, osady, miasta lub zakup karty rozwoju]{\label{fig:buildwidget}}\includegraphics[scale=0.45]{buildwidget.png}
       &
-      \subfloat{\label{fig:cardswidget}}\includegraphics[scale=0.5]{cardswidget.png}
-      \\
-      \hline
-      \subfloat{\label{fig:discardwidget}}\includegraphics[scale=0.5]{discardwidget.png}
+      \subfloat[Lista posiadanych kart rozwoju]{\label{fig:cardswidget}}\includegraphics[scale=0.45]{cardswidget.png}
+      \\[40pt]
+      \subfloat[Odrzucanie nadmiarowych zasobów w fazie ,,rozbójnika'']{\label{fig:discardwidget}}\includegraphics[scale=0.45]{discardwidget.png}
       &
-      \subfloat{\label{fig:exchangewidget}}\includegraphics[scale=0.5]{exchangewidget.png}
-      \\
-      \hline
-      \subfloat{\label{fig:offerwidget}}\includegraphics[scale=0.5]{offerwidget.png}
+      \subfloat[Tworzenie wymiany z bankiem]{\label{fig:exchangewidget}}\includegraphics[scale=0.45]{exchangewidget.png}
+      \\[40pt]
+      \subfloat[Tworzenie oferty handlu]{\label{fig:offerwidget}}\includegraphics[scale=0.45]{offerwidget.png}
       &
-      \subfloat{\label{fig:joinwidget}}\includegraphics[scale=0.5]{joinwidget.png}
-      \\
-      \hline
-      \subfloat{\label{fig:offerreceivedwidget}}\includegraphics[scale=0.5]{offerreceivedwidget.png}
+      \subfloat[Dołączanie do rozgrywki]{\label{fig:joinwidget}}\includegraphics[scale=0.45]{joinwidget.png}
+      \\[40pt]
+      \subfloat[Podgląd otrzymanej oferty handlu]{\label{fig:offerreceivedwidget}}\includegraphics[scale=0.45]{offerreceivedwidget.png}
       &
-      \subfloat{\label{fig:offersentwidget}}\includegraphics[scale=0.5]{offersentwidget.png}
-      \\
-      \hline
-      \subfloat{\label{fig:userplayerwidget}}\includegraphics[scale=0.5]{userplayerwidget.png}
+      \subfloat[Podgląd utworzonej oferty handlu]{\label{fig:offersentwidget}}\includegraphics[scale=0.45]{offersentwidget.png}
+      \\[40pt]
+      \subfloat[Podgląd gracza]{\label{fig:userplayerwidget}}\includegraphics[scale=0.45]{userplayerwidget.png}
       &
-      \subfloat{\label{fig:playerswidget}}\includegraphics[scale=0.5]{playerswidget.png}
-      \\
-      \hline
-      \subfloat{\label{fig:gamestatuswidget}}\includegraphics[scale=0.5]{gamestatuswidget.png}
+      \subfloat[Lista pozostałych graczy]{\label{fig:playerswidget}}\includegraphics[scale=0.45]{playerswidget.png}
+      \\[40pt]
+      \subfloat[Podgląd stanu gry]{\label{fig:gamestatuswidget}}\includegraphics[scale=0.45]{gamestatuswidget.png}
       & \\
-      \hline
     \end{tabular}
   \end{center}
-  \caption{Śmietnik}
+  \caption{Wygląd kontrolek}
   \label{fig:widgets}
 \end{figure}
 
@@ -2467,7 +2458,7 @@ Dodatkowo, jeżeli zalogowany użytkownik jest uczestnikiem rozgrywki,
 wysyłane są również informacje o:
 
 \begin{itemize}
-\item numerze gracza należącym do użytkownika
+\item numerze gracza należącego do użytkownika
 \item poszczególnych kartach rozwoju, będących w jego posiadaniu
 \end{itemize}
 
@@ -2483,7 +2474,7 @@ analogiczny do zakrywania zagranych lew np. w grze w brydża. Jeżeli
 nie mamy możliwości kontrolowania zachowania gracza (co ma miejsce w
 przypadku gry na odległość), to może on notować wszystkie zagrane
 karty. Możliwe jest również napisanie prostego skryptu, który będzie
-automatyzostał tę czynność, wyświetlając żądane informacje. Sytuacja
+automatyzował tę czynność, wyświetlając żądane informacje. Sytuacja
 taka ma miejsce, ponieważ niemal wszystkie ,,przepływy'' surowców w
 grze są jawne\footnote{oryginalne zasady gry nie precyzują tej kwestii
   w kilku przypadkach, mają one jednak znikomy wpływ na przebieg
@@ -2496,9 +2487,26 @@ rozgrywki.
 
 Mogłoby się wydawać, że zastosowany mechanizm komunikacji jest
 nieoptymalny i powoduje niepotrzebny wzrost ilości przesyłanych
-informacji.
+informacji. Danych tych jest w rzeczywistości dość niewiele, a
+wykorzystanie formatu \emph{JSON} powoduje, że całkowity rozmiar
+pobieranych danych nie przekracza kilku kilobajtów\footnote{większość
+  danych przesyłanych pomiędzy przeglądarką a serwerem jest dodatkowo
+  kompresowana przez serwer \emph{HTTP} (zwykle wykorzystywany jest
+  \emph{gzip}. Jako, że dane w formacie \emph{JSON} zapisywane są
+  zwykłym tekstem, zastosowanie nawet prostego algorytmu kompresji
+  pozwala znacząco zmniejszyć ich objętość}.
 
-Zastosowanie formatu \emph{JSON}
+Po wykonaniu dowolnego działania przez gracza, w tle wysyłane jest
+żądanie \emph{HTTP}. Jeśli otrzymane żądanie jest poprawne,
+odpowiedzią serwera jest przekierowanie do akcji \texttt{show}
+kontrolera \texttt{GamesController} (a więc pobranie danych gry),
+dzięki czemu gracz widzi niemal natychmiastowy rezultat swojego
+działania. W przypadku pozostałych uczestników rozgrywki, rezultaty
+widoczne są po dopiero kilku sekundach. Dopóki jednak pomiędzy
+poszczególnymi pobraniami danych nie zostanie wywołana więcej niż
+jedna akcja, pozostali gracze odnoszą wrażenie płynności gry. Takie
+rozwiązanie znacząco poprawia komfort rozgrywki i znakomicie sprawdza
+się w przypadku gier turowych, takich jak ,,Osadnicy z Catanu''.
 
 \clearpage
 

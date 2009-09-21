@@ -2337,6 +2337,67 @@ treści zapytań.
 
 \subsection{Komunikacja z serwerem}
 
+Jako, że jednym z głównych założeń projektowych jest możliwość
+dostosowania aplikacji do wymagań stawianych przez urządzenia mobilne,
+komunikacja z serwerem została oparta o tradycyjny \emph{Ajax}
+(\emph{HTTP Pull}). Opóźnienia wynikające z użycia tego rozwiązania
+nie stanowią większego problemu w przypadku implementacji gier
+turowych. Cykliczne pobieranie danych gry w kilkusekundowych odstępach
+jest zupełnie wystarczające z punktu widzenia użytkownika, nie
+wprowadza również nadmiernego obciążenia serwera gry.
+
+Aby uniknąć problemów z niespójnością danych i konieczności
+synchronizowania klientów, każdorazowo pobierane są kompletne dane o
+rozgrywce, zawierające m.in.:
+
+\begin{itemize}
+\item informacje o grze - stan, fazę, numer aktualnego gracza,
+  aktualny wynik rzutu kością, itp.
+\item informacje o planszy, wszystkich jej sześciokątach,
+  wierzchołkach i krawędziach
+\item listę graczy, informacje o liczbie poszczególnych kart zasobów,
+  jawnych punktów, liczbie posiadanych kart rozwoju
+\item informacje o aktualnej ofercie handlowej oraz zagranej karcie
+  rozwoju
+\end{itemize}
+
+Dodatkowo, jeżeli zalogowany użytkownik jest uczestnikiem rozgrywki,
+wysyłane są również informacje o:
+
+\begin{itemize}
+\item numerze gracza należącym do użytkownika
+\item poszczególnych kartach rozwoju, będących w jego posiadaniu
+\end{itemize}
+
+Jeśli zalogowany użytkownik nie jest uczestnikiem rozgrywki, otrzymuje
+jedynie ogólne informacje o grze. W takim przypadku wyświetlany jest
+tylko podstawowy interfejs graficzny, umożliwiający śledzenie
+gry. Wydawać by się mogło, że przesyłanie informacji o liczbie
+poszczególnych kart zasobów graczy jest sprzeczne z zasadami gry.
+Zgodnie z zasadami, pozostali gracze mają dostęp jedynie do informacji
+o liczbie wszystkich kart zasobów posiadanych przez danego gracza. Po
+przeanalizowaniu tego problemu można dojść do wniosku, że jest on
+analogiczny do zakrywania zagranych lew np. w grze w brydża. Jeżeli
+nie mamy możliwości kontrolowania zachowania gracza (co ma miejsce w
+przypadku gry na odległość), to może on notować wszystkie zagrane
+karty. Możliwe jest również napisanie prostego skryptu, który będzie
+automatyzostał tę czynność, wyświetlając żądane informacje. Sytuacja
+taka ma miejsce, ponieważ niemal wszystkie ,,przepływy'' surowców w
+grze są jawne\footnote{oryginalne zasady gry nie precyzują tej kwestii
+  w kilku przypadkach, mają one jednak znikomy wpływ na przebieg
+  rozgrywki}. W celu zachowania zgodności z zasadami gry, wyświetlana
+jest jedynie sumaryczna liczba kart zasobów poszczególnych
+graczy. Jedyną prawdziwie ,,utajnioną'' informacją jest informacja o
+rodzajach posiadanych przez graczy kart zasobów. W tym przypadku żadne
+uproszczenia nie były możliwe, gdyż jest to bardzo istotny element
+rozgrywki.
+
+Mogłoby się wydawać, że zastosowany mechanizm komunikacji jest
+nieoptymalny i powoduje niepotrzebny wzrost ilości przesyłanych
+informacji.
+
+Zastosowanie formatu \emph{JSON}
+
 \clearpage
 
 \bibliographystyle{plain}

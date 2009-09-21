@@ -8,6 +8,7 @@
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{float}
+\usepackage{subfig}
 
 \input{pygments}
 
@@ -1212,7 +1213,7 @@ kośćmi).
 
 \section{Implementacja serwera}
 
-\subsection{Modele}
+\subsection{Modele}\label{sec:models}
 
 \subsubsection{Gra}
 Model \texttt{Game} jest głównym elementem kontrolującym przebieg
@@ -2273,7 +2274,7 @@ tej pory dostępne są jedynie bardzo nieliczne przykłady wykorzystania
 \emph{YUI3} oraz jej rozszerzenia. Pomimo tych niedogodności
 biblioteka ta jest warta uwagi, gdyż zbudowana została na bardzo
 solidnych fundamentach. W niedalekiej przyszłości może ona okazać się
-poważnym konkurentem dla dominujących dzisiaj bibliotek, takich jak
+poważnym konkurentem dla dominujących dzisiaj rozwiązań, takich jak
 \emph{jQuery}.
 
 \subsection{Logika gry}
@@ -2299,6 +2300,17 @@ klienta następujących ,,klas'':
   wierzchołkach i krawędziach
 \end{itemize}
 
+Wszystkie powyższe ,,klasy'' dziedziczą po ,,klasie'' \texttt{Base}. W
+celu uniknięcia kolizji nazw, umieszczone zostały one w przestrzeni
+nazw \texttt{Pioneers}. Po uruchomieniu skryptu (otworzeniu strony z
+grą) pobierane są dane gry w formacie \emph{JSON}. Po sparsowaniu
+danych przekazywane są one do konstruktora obiektu \texttt{Game},
+który odpowiedzialny jest za utworzenie wszystkich powiązanych
+obiektów. W trakcie trwania rozgrywki niezbędne jest aktualizowanie
+danych dotyczących gry, poprzez metodę \texttt{setAttrs} obiektu
+\texttt{Game}. Opisywane ,,klasy'' stanowią uproszczoną wersję klas
+modeli, opisywanych w rozdziale \ref{sec:models}.
+
 Oczywiście walidacja poszczególnych posunięć graczy nie może odbywać
 się wyłącznie po stronie klienta. Serwer jest w dalszym ciągu
 odpowiedzialny za ostateczne sprawdzenie poprawności działań graczy, w
@@ -2306,6 +2318,51 @@ celu uniemożliwienia nieprzepisowych zagrań, np. poprzez fałszowanie
 treści zapytań.
 
 \subsection{Elementy interfejsu graficznego}
+
+,,Klasą'' bazową dla elementów interfejsu graficznego w bibliotece
+\emph{YUI} jest ,,klasa'' \texttt{Widget}. W przeciwieństwie do
+biblioteki \emph{jQuery UI}, wprowadzone zostały pewne konwencje
+tworzenia kontrolek. Zastosowanie się do nich znakomicie upraszcza
+implementację, a tworzony kod aplikacji staje się bardziej
+spójny. Proces renderowania kontrolki podzielony jest na następujące
+etapy:
+
+\begin{enumerate}
+\item \texttt{renderUI} - utworzenie wszystkich dodatkowych elementów
+  strony (przycisków, etykiet, itp.)
+\item \texttt{bindUI} - powiązanie zdarzeń interfejsu użytkownika z
+  odpowiednimi funkcjami, odpowiedzialnymi za ich obsługę
+\item \texttt{syncUI} - synchronizacja stanu wewnętrznego kontrolki z
+  treścią znajdującą się na stronie
+\end{enumerate}
+
+Aby ułatwić nanoszenie stylów \emph{CSS} na kontrolki, składają się
+one przynajmniej z dwóch, zagnieżdżonych znaczników
+\texttt{<div>}. Pierwszy z nich, nazwany z ang. \emph{Bounding Box},
+ułatwia tworzenie efektów, takich jak zaokrąglone krawędzie i
+cienie. Drugi, tzw. \emph{Content Box} obejmuje właściwą zawartość
+kontrolki. Ujednolicone zostało także nazewnictwo klas, nadawanych
+poszczególnym elementom składowym kontrolki. W celu uniknięcia kolizji
+oznaczeń, nazwy klas elementów znajdujących się wewnątrz kontrolki
+poprzedzone są odpowiednim prefiksem. Schemat zagnieżdżenia
+znaczników, wraz z przykładowymi nazwami klas przedstawiony został na
+\imref{fig:widget}.
+
+\begin{figure}[ht]
+  \begin{center}
+    \includegraphics[width=\linewidth]{widget}
+  \end{center}
+  \caption{Schemat zagnieżdżenia znaczników \emph{HTML} kontrolki
+    \texttt{Game} wraz z przykładowymi oznaczeniami klas}
+  \label{fig:widget}
+\end{figure}
+
+
+% dziedziczą z Widget
+% zawierają inne widgety (Game, Cards)
+% korzystają z danych zawartych w poprzednich klasach
+% wywołują eventy przechwytywane przez Game, który odpowiedzialny jest
+% za komunikację z serwerem
 
 \begin{itemize}
 \item \texttt{Game} - odpowiedzialny za tworzenie pozostałych
@@ -2328,12 +2385,57 @@ treści zapytań.
 \item \texttt{Monopoly} - używany w przypadku zagrania karty
   ,,monopol''
 
-\item \texttt{Discard}
-\item \texttt{Exchange}
-\item \texttt{Offer}
-\item \texttt{OfferReceived}
-\item \texttt{OfferSent}
+\item \texttt{Discard} - odrzucanie kart zasobów w fazie rozbójnika
+\item \texttt{Exchange} - wymiana zasobów z bankiem
+\item \texttt{Offer} - tworzenie ofert handlu
+\item \texttt{OfferReceived} - wyświetlenie oferty utworzonej przez
+  innego gracza z możliwością akceptacji lub odrzucenia
+\item \texttt{OfferSent} - podgląd wysłanej oferty handlu i
+  otrzymanych odpowiedzi
 \end{itemize}
+
+\begin{figure}[ht]
+  \begin{center}
+    \begin{tabular}{|c|c|}
+      \hline
+      \subfloat{\label{fig:afterrollwidget}}\includegraphics[scale=0.5]{afterrollwidget.png}
+      &
+      \subfloat{\label{fig:beforerollwidget}}\includegraphics[scale=0.5]{beforerollwidget.png}
+      \\
+      \hline
+      \subfloat{\label{fig:buildwidget}}\includegraphics[scale=0.5]{buildwidget.png}
+      &
+      \subfloat{\label{fig:cardswidget}}\includegraphics[scale=0.5]{cardswidget.png}
+      \\
+      \hline
+      \subfloat{\label{fig:discardwidget}}\includegraphics[scale=0.5]{discardwidget.png}
+      &
+      \subfloat{\label{fig:exchangewidget}}\includegraphics[scale=0.5]{exchangewidget.png}
+      \\
+      \hline
+      \subfloat{\label{fig:offerwidget}}\includegraphics[scale=0.5]{offerwidget.png}
+      &
+      \subfloat{\label{fig:joinwidget}}\includegraphics[scale=0.5]{joinwidget.png}
+      \\
+      \hline
+      \subfloat{\label{fig:offerreceivedwidget}}\includegraphics[scale=0.5]{offerreceivedwidget.png}
+      &
+      \subfloat{\label{fig:offersentwidget}}\includegraphics[scale=0.5]{offersentwidget.png}
+      \\
+      \hline
+      \subfloat{\label{fig:userplayerwidget}}\includegraphics[scale=0.5]{userplayerwidget.png}
+      &
+      \subfloat{\label{fig:playerswidget}}\includegraphics[scale=0.5]{playerswidget.png}
+      \\
+      \hline
+      \subfloat{\label{fig:gamestatuswidget}}\includegraphics[scale=0.5]{gamestatuswidget.png}
+      & \\
+      \hline
+    \end{tabular}
+  \end{center}
+  \caption{Śmietnik}
+  \label{fig:widgets}
+\end{figure}
 
 \subsection{Komunikacja z serwerem}
 

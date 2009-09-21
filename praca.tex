@@ -1988,8 +1988,8 @@ przedstawionej w tabeli \ref{table:routes}.
     \texttt{GET} & \texttt{/} & \texttt{games} & \texttt{index} \\
     \hline
   \end{tabular}
-  \caption{Mapowanie poszczególnych ścieżek na odpowiadające im
-    kontrolery i akcje (niewykorzystywane ścieżki zostały pominięte)}
+  \caption{Mapowanie ścieżek na odpowiadające im kontrolery i
+    akcje (niewykorzystywane ścieżki zostały pominięte)}
   \label{table:routes}
 \end{table}
 
@@ -2337,9 +2337,9 @@ etapy:
 
 Aby ułatwić nanoszenie stylów \emph{CSS} na kontrolki, składają się
 one przynajmniej z dwóch, zagnieżdżonych znaczników
-\texttt{<div>}. Pierwszy z nich, nazwany z ang. \emph{Bounding Box},
-ułatwia tworzenie efektów, takich jak zaokrąglone krawędzie i
-cienie. Drugi, tzw. \emph{Content Box} obejmuje właściwą zawartość
+\texttt{<div>}. Pierwszy z nich, nazwany \emph{Bounding Box}, ułatwia
+tworzenie efektów, takich jak zaokrąglone krawędzie i cienie. Drugi,
+tzw. \emph{Content Box} obejmuje właściwą zawartość
 kontrolki. Ujednolicone zostało także nazewnictwo klas, nadawanych
 poszczególnym elementom składowym kontrolki. W celu uniknięcia kolizji
 oznaczeń, nazwy klas elementów znajdujących się wewnątrz kontrolki
@@ -2356,34 +2356,25 @@ znaczników, wraz z przykładowymi nazwami klas przedstawiony został na
   \label{fig:widget}
 \end{figure}
 
-
-% dziedziczą z Widget
-% zawierają inne widgety (Game, Cards)
-% korzystają z danych zawartych w poprzednich klasach
-% wywołują eventy przechwytywane przez Game, który odpowiedzialny jest
-% za komunikację z serwerem
+Interfejs graficzny użytkownika składa się z zestawu niezależnych od
+siebie kontrolek, komunikujących się ze sobą przeważnie za pomocą
+zdarzeń. Z reguły kontrolki te przystosowane są do realizacji prostych
+zadań, będąc częściami składowymi większych elementów. Najważniejszą
+kontrolką jest \texttt{Game}, odpowiedzialna za utworzenie i obsługę
+zdarzeń następujących obiektów:
 
 \begin{itemize}
-\item \texttt{Game} - odpowiedzialny za tworzenie pozostałych
-  kontrolek, przechwytywanie zdarzeń i komunikację z serwerem
 \item \texttt{GameStatus} - wyświetlanie informacji o stanie gry
 \item \texttt{Players} - wyświetlanie listy graczy i ogólnych
   informacji o każdym z nich
 \item \texttt{UserPlayer} - szczegółowe informacje o zalogowanym graczu
 \item \texttt{Join} - dołączanie do rozgrywki
-
 \item \texttt{Board} - plansza do gry
 \item \texttt{AfterRoll} - kończenie tury
 \item \texttt{BeforeRoll} - rzut kośćmi do gry
 \item \texttt{Build} - budowanie osad, dróg i miast oraz kupowanie
   kart rozwoju
-
 \item \texttt{Cards} - lista posiadanych kart
-\item \texttt{YearOfPlenty} - używany w przypadku zagrania karty
-  rozwoju ,,wynalazek''
-\item \texttt{Monopoly} - używany w przypadku zagrania karty
-  ,,monopol''
-
 \item \texttt{Discard} - odrzucanie kart zasobów w fazie rozbójnika
 \item \texttt{Exchange} - wymiana zasobów z bankiem
 \item \texttt{Offer} - tworzenie ofert handlu
@@ -2392,6 +2383,23 @@ znaczników, wraz z przykładowymi nazwami klas przedstawiony został na
 \item \texttt{OfferSent} - podgląd wysłanej oferty handlu i
   otrzymanych odpowiedzi
 \end{itemize}
+
+Obiekt \texttt{Game} odpowiedzialny jest także za komunikację z
+serwerem.
+
+\begin{itemize}
+\item \texttt{YearOfPlenty} - używany w przypadku zagrania karty
+  rozwoju ,,wynalazek''
+\item \texttt{Monopoly} - używany w przypadku zagrania karty
+  ,,monopol''
+\end{itemize}
+
+% TODO
+% zawierają inne widgety (Game, Cards)
+% korzystają z danych zawartych w poprzednich klasach
+% wywołują eventy przechwytywane przez Game, który odpowiedzialny jest
+% za komunikację z serwerem
+
 
 \begin{figure}[ht]
   \begin{center}
@@ -2430,14 +2438,14 @@ znaczników, wraz z przykładowymi nazwami klas przedstawiony został na
 
 \subsection{Komunikacja z serwerem}
 
-Jako, że jednym z głównych założeń projektowych jest możliwość
-dostosowania aplikacji do wymagań stawianych przez urządzenia mobilne,
-komunikacja z serwerem została oparta o tradycyjny \emph{Ajax}
-(\emph{HTTP Pull}). Opóźnienia wynikające z użycia tego rozwiązania
-nie stanowią większego problemu w przypadku implementacji gier
-turowych. Cykliczne pobieranie danych gry w kilkusekundowych odstępach
-jest zupełnie wystarczające z punktu widzenia użytkownika, nie
-wprowadza również nadmiernego obciążenia serwera gry.
+W związku z tym, że jednym z głównych założeń projektowych jest
+możliwość dostosowania aplikacji do wymagań stawianych przez
+urządzenia mobilne, komunikacja z serwerem została oparta o tradycyjny
+\emph{Ajax} (\emph{HTTP Pull}). Opóźnienia wynikające z użycia tego
+rozwiązania nie stanowią większego problemu w przypadku implementacji
+gier turowych. Cykliczne pobieranie danych gry w kilkusekundowych
+odstępach jest zupełnie wystarczające z punktu widzenia użytkownika,
+nie wprowadza również nadmiernego obciążenia serwera gry.
 
 Aby uniknąć problemów z niespójnością danych i konieczności
 synchronizowania klientów, każdorazowo pobierane są kompletne dane o
@@ -2492,7 +2500,7 @@ wykorzystanie formatu \emph{JSON} powoduje, że całkowity rozmiar
 pobieranych danych nie przekracza kilku kilobajtów\footnote{większość
   danych przesyłanych pomiędzy przeglądarką a serwerem jest dodatkowo
   kompresowana przez serwer \emph{HTTP} (zwykle wykorzystywany jest
-  \emph{gzip}. Jako, że dane w formacie \emph{JSON} zapisywane są
+  \emph{gzip}). Jako, że dane w formacie \emph{JSON} zapisywane są
   zwykłym tekstem, zastosowanie nawet prostego algorytmu kompresji
   pozwala znacząco zmniejszyć ich objętość}.
 

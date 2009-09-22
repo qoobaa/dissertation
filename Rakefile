@@ -16,6 +16,7 @@ CLEAN.include(%w(*.toc *.aux *.log *.lof *.bbl *.blg *.out *.snm *.vrb *.nav *.e
               SVG_IMG.ext("png"),
               AGR_IMG.ext("ps"),
               AGR_IMG.ext("pdf"),
+              IMG_SRC.ext("pdf"),
               HTML_SRC.ext("tex"),
               SH_SRC.ext("tex"),
               SASS_SRC.ext("tex"))

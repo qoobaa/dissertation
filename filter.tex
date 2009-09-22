@@ -1,0 +1,21 @@
+\begin{Verbatim}[commandchars=@\[\],numbers=left,firstnumber=1,stepnumber=1]
+@PYay[class] @PYaO[EdgesController] @PYbd[<] @PYaq[ApplicationController]
+  before_filter @PYau[:require_user], @PYau[:fetch_game]
+
+  @PYay[def] @PYaL[create]
+    @PYaS[@at[]edge] @PYbd[=] @PYaS[@at[]game]@PYbd[.]board_edges@PYbd[.]build(params@PYbd[@lb[]]@PYau[:edge]@PYbd[@rb[]])
+    @PYaS[@at[]edge]@PYbd[.]user @PYbd[=] @PYaS[@at[]current_user]
+    @PYay[if] @PYaS[@at[]edge]@PYbd[.]save
+      redirect_to game_path(@PYaS[@at[]game], @PYau[:format] @PYbd[=]@PYbd[>] @PYau[:json])
+    @PYay[else]
+      render @PYau[:nothing] @PYbd[=]@PYbd[>] @PYaj[true], @PYau[:status] @PYbd[=]@PYbd[>] @PYau[:unprocessable_entity]
+    @PYay[end]
+  @PYay[end]
+
+  @PYaj[protected]
+
+  @PYay[def] @PYaL[fetch_game]
+    @PYaS[@at[]game] @PYbd[=] @PYaq[Game]@PYbd[.]find(params@PYbd[@lb[]]@PYau[:game_id]@PYbd[@rb[]])
+  @PYay[end]
+@PYay[end]
+\end{Verbatim}

@@ -1,0 +1,21 @@
+\begin{Verbatim}[commandchars=@\[\],numbers=left,firstnumber=1,stepnumber=1]
+state_machine @PYau[:initial] @PYbd[=]@PYbd[>] @PYau[:preparing] @PYay[do]
+  event @PYau[:start_game] @PYay[do]
+    transition @PYau[:preparing] @PYbd[=]@PYbd[>] @PYau[:playing]
+  @PYay[end]
+
+  event @PYau[:end_game] @PYay[do]
+    transition @PYau[:playing] @PYbd[=]@PYbd[>] @PYau[:ended], @PYau[:if] @PYbd[=]@PYbd[>] @PYau[:winner?]
+  @PYay[end]
+
+  state @PYau[:playing] @PYay[do]
+    validates_length_of @PYau[:players], @PYau[:in] @PYbd[=]@PYbd[>] @PYag[3]@PYbd[.].@PYag[4]
+    validates_presence_of @PYau[:board]
+    validate @PYau[:players_ready]
+  @PYay[end]
+
+  before_transition @PYau[:on] @PYbd[=]@PYbd[>] @PYau[:start_game] @PYay[do] @PYbd[|]game@PYbd[|]
+    @PYaf[# ...]
+  @PYay[end]
+@PYay[end]
+\end{Verbatim}

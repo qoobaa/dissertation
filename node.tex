@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=@\[\],numbers=left,firstnumber=1,stepnumber=1]
+@PYay[class] @PYaO[Node] @PYbd[<] @PYaq[ActiveRecord]@PYbd[::]@PYaq[Base]
+  state_machine @PYay[do]
+    event @PYau[:settle] @PYay[do]
+      transition @PYaj[nil] @PYbd[=]@PYbd[>] @PYau[:settlement]
+    @PYay[end]
+
+    event @PYau[:expand] @PYay[do]
+      transition @PYau[:settlement] @PYbd[=]@PYbd[>] @PYau[:city]
+    @PYay[end]
+
+    before_transition @PYau[:on] @PYbd[=]@PYbd[>] @PYau[:settle], @PYau[:do] @PYbd[=]@PYbd[>] @PYau[:build_settlement]
+    before_transition @PYau[:on] @PYbd[=]@PYbd[>] @PYau[:expand], @PYau[:do] @PYbd[=]@PYbd[>] @PYau[:build_city]
+  @PYay[end]
+
+  @PYaf[# ...]
+@PYay[end]
+\end{Verbatim}

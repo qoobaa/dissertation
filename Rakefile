@@ -9,6 +9,7 @@ HTML_SRC = FileList["*.html"]
 SASS_SRC = FileList["*.sass"]
 SVG_IMG =  FileList["*.svg"]
 AGR_IMG =  FileList["*.agr"]
+SH_SRC = FileList["*.sh"]
 
 CLEAN.include(%w(*.toc *.aux *.log *.lof *.bbl *.blg *.out *.snm *.vrb *.nav *.eps),
               RUBY_SRC.ext("tex"),
@@ -16,6 +17,7 @@ CLEAN.include(%w(*.toc *.aux *.log *.lof *.bbl *.blg *.out *.snm *.vrb *.nav *.e
               AGR_IMG.ext("ps"),
               AGR_IMG.ext("pdf"),
               HTML_SRC.ext("tex"),
+              SH_SRC.ext("tex"),
               SASS_SRC.ext("tex"))
 
 CLOBBER.include(%w(pdf dvi ps).collect { |e| SRC.ext(e) })
@@ -53,9 +55,10 @@ rule ".tex" => ".html" do |t|
 end
 
 rule ".tex" => ".sass" do |t|
-  # sh "echo '\\\\begin{Verbatim}[numbers=left,firstnumber=1,stepnumber=1]' > #{t.name}"
-  # sh "cat #{t.source} >> #{t.name}"
-  # sh "echo '\\end{Verbatim}' >> #{t.name}"
+  sh "pygmentize -f latex -O linenos=True -o #{t.name} #{t.source}"
+end
+
+rule ".tex" => ".sh" do |t|
   sh "pygmentize -f latex -O linenos=True -o #{t.name} #{t.source}"
 end
 
@@ -70,7 +73,7 @@ rule ".pdf" => ".tex" do |t|
   pdflatex(t.source)
 end
 
-file SRC.ext("pdf") => [SRC] + RUBY_SRC.ext("tex") + SVG_IMG.ext("png") + IMG_SRC.ext("pdf") + AGR_IMG.ext("pdf") + HTML_SRC.ext("tex") + SASS_SRC.ext("tex")
+file SRC.ext("pdf") => [SRC] + RUBY_SRC.ext("tex") + SVG_IMG.ext("png") + IMG_SRC.ext("pdf") + AGR_IMG.ext("pdf") + HTML_SRC.ext("tex") + SASS_SRC.ext("tex") + SH_SRC.ext("tex")
 
 desc "Compile PDF"
 task :pdf => SRC.ext("pdf")

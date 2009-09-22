@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=@\[\],numbers=left,firstnumber=1,stepnumber=1]
+@PYaE[# skopiowanie przykładowej konfiguracji]
+cp config/database.yml.sample config/database.yml
+@PYaE[# instalacja Ruby on Rails 2.3.3]
+gem install rails -v 2.3.3
+@PYaE[# instalacja dowiązań do bazy danych SQLite3]
+gem install sqlite3-ruby
+@PYaE[# dodanie serwera GitHub do dostępnych źródeł]
+gem sources -a http://gems.github.com
+@PYaE[# instalacja używanych gemów]
+rake gems:install
+@PYaE[# utworzenie bazy danych]
+rake db:migrate
+@PYaE[# załadowanie przykładowych danych]
+rake db:seed
+\end{Verbatim}

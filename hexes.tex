@@ -1,0 +1,31 @@
+\begin{Verbatim}[commandchars=@\[\],numbers=left,firstnumber=1,stepnumber=1]
+@PYai[!board_height] @PYbd[=] @PYaR[10]
+@PYai[!board_width] @PYbd[=] @PYaR[10]
+@PYai[!board_hex_width] @PYbd[=] @PYaR[95]@PYay[px]
+@PYai[!board_hex_width2] @PYbd[=] @PYai[!board_hex_width] @PYbd[/] @PYaR[2]
+@PYai[!board_hex_height] @PYbd[=] @PYaR[80]@PYay[px]
+@PYai[!board_hex_height2] @PYbd[=] @PYai[!board_hex_height] @PYbd[/] @PYaR[2]
+@PYai[!board_hex_x_offset] @PYbd[=] @PYaR[15]@PYay[px]
+@PYai[!board_hex_y_offset] @PYbd[=] @PYaR[10]@PYay[px]
+@PYai[!board_hex_offset] @PYbd[=] @PYai[!board_hex_x_offset] @PYbd[+] @PYai[!board_hex_y_offset]
+
+@PYay[=]@PYaO[board]
+  @PYaO[.yui-board-hex]
+    @PYaQ[:width]= @PYai[!board_hex_width]
+    @PYaQ[:height]= @PYai[!board_hex_height]
+    @PYaQ[:text-align] center
+    @PYaQ[:line-height]= @PYai[!board_hex_height]
+    @PYaQ[:position] absolute
+
+  @PYay[@at[]for] @PYai[!row]@PYay[ from] @PYaR[0]@PYay[ to] @PYai[!board_height] @PYbd[+] @PYaR[1]
+    @PYaO[.yui-board-hexes-row-]@PYaB[#]{@PYai[!row]}
+      @PYaQ[:position] absolute
+      @PYaQ[:top]= @PYai[!row] @PYbd[*] @PYai[!board_hex_height]
+
+  @PYay[@at[]for] @PYai[!col]@PYay[ from] @PYaR[0]@PYay[ to] @PYai[!board_width] @PYbd[+] @PYaR[1]
+    @PYaO[.yui-board-hexes-col-]@PYaB[#]{@PYai[!col]}
+      @PYaQ[:top]= @PYai[!col] @PYbd[*] @PYai[!board_hex_height2]
+      @PYaQ[:left]= @PYai[!col] @PYbd[*] (@PYai[!board_hex_width] @PYbd[-] @PYai[!board_hex_offset])
+
+  / ...
+\end{Verbatim}

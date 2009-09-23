@@ -2517,7 +2517,7 @@ się w przypadku gier turowych.
 
 \clearpage
 
-\section{Testowanie i uruchamianie aplikacji}
+\section{Testowanie i uruchamianie}
 
 \subsection{Testy jednostkowe}
 % test unit
@@ -2532,8 +2532,49 @@ się w przypadku gier turowych.
 \clearpage
 
 \subsection{Instalowanie i uruchamianie aplikacji}
-% instalacja środowiska
-% tworzenie bazy - migracje
+Instalacja środowiska uruchomieniowego aplikacji nie jest zadaniem
+skomplikowanym. Najpopularniejszym środowiskiem produkcyjnym dla
+aplikacji napisanych we frameworku \emph{Ruby on Rails} jest system
+operacyjny \emph{GNU/Linux}. Najczęściej wykorzystywane serwery
+aplikacji to:
+
+\begin{itemize}
+\item \emph{WEBrick} - serwer będący częścią biblioteki standardowej
+  języka, w całości napisany w języku \emph{Ruby}
+\item \emph{Mongrel}, \emph{Thin}, \emph{Ebb} - dodatkowe serwery,
+  częściowo zaimplementowane w języku \emph{C}, dzięki czemu cechują
+  się one większą wydajnością
+\item \emph{Phusion Passenger} - biblioteka udostępniająca moduł
+  serwera \emph{Apache} oraz możliwość wkompilowania w serwer
+  \emph{Nginx}
+\end{itemize}
+
+Ostatnie z wymienionych wyżej rozwiązań jest rozwiązaniem
+rekomendowanym do środowisk produkcyjnych. Dzięki prostocie
+użytkowania zdobywa ono coraz większą popularność, wypierając
+serwery takie jak \emph{Mongrel} czy \emph{Thin}. \emph{Phusion
+  Passenger} pozwala na uruchamianie aplikacji \emph{Ruby} zgodnych z
+interfejsem \emph{Rack}, w szczególności wykorzystujących frameworki
+takie jak: \emph{Ruby on Rails}, \emph{Merb}, \emph{Sinatra}.
+
+Okazuje się jednak, że do uruchomienia aplikacji \emph{Ruby on Rails}
+nie potrzebujemy żadnych dodatkowych serwerów \emph{HTTP} ani serwerów
+bazodanowych. Mając do dyspozycji wbudowany serwer \emph{WEBrick} i
+plikową bazę danych \emph{SQLite}, unikamy konieczności instalowania i
+konfigurowania dodatkowego oprogramowania. Zestaw ten doskonale nadaje
+się do środowisk rozwojowych, gdzie kwestia wydajności nie jest
+priorytetowa.
+
+Proces instalacji środowiska uruchomieniowego przeprowadzony został z
+wykorzystaniem dystrybucji \emph{Ubuntu 9.04}. Analogicznie można
+wykonać go wykorzystując inną dystrybucję, pod warunkiem dostarczenia
+narzędzi i bibliotek wymaganych do skompilowania kodu źródłowego
+interpretera \emph{Ruby} i dowiązań do biblioteki \emph{SQLite}. W
+dystrybucji \emph{Ubuntu 9.04} kompilacja ze źródeł jest
+koniecznością, ze względu na nieaktualne pakiety \texttt{ruby} i
+\texttt{rubygems} znajdujące się w oficjalnym repozytorium. Proces
+instalacji interpretera języka \emph{Ruby}, wraz z objaśnieniami,
+został przedstawiony na listingu \ref{listing:ruby}.
 
 \begin{listing}
   \input{ruby}
@@ -2541,11 +2582,31 @@ się w przypadku gier turowych.
   \label{listing:ruby}
 \end{listing}
 
+Kolejnym krokiem jest pobranie kodu aplikacji z repozytorium
+znajdującego się na serwerze \emph{GitHub}. Do tego celu niezbędne
+jest posiadanie podstawowych narzędzi systemu kontroli wersji
+\emph{Git}. Do utworzenia lokalnej kopii repozytorium służy polecenie
+\texttt{git clone}. W przeciwieństwie do systemów scentralizowanych
+tj. \emph{Subversion}, lokalna kopia utworzona w wyniku działania
+polecenia jest dokładnym klonem repozytorium, zawierającym całą jego
+historię (\emph{Subversion} umożliwia pobranie wyłącznie jednej wersji
+kodu). Listing \ref{listing:git} przedstawia proces instalacji
+narzędzi i tworzenia kopii zdalnego repozytorium.
+
 \begin{listing}
   \input{git}
   \caption{Pobranie kodu z repozytorium \emph{Git}}
   \label{listing:git}
 \end{listing}
+
+W następnych krokach niezbędne jest zainstalowanie frameworka
+\emph{Ruby on Rails} i wymaganych przez niego bibliotek. Przed
+uruchomieniem aplikacji konieczne jest także utworzenie konfiguracji
+bazy danych i zainstalowanie dodatkowych bibliotek, wymaganych przez
+aplikację. Po utworzeniu bazy danych i załadowaniu do niej
+przykładowych danych możliwe jest uruchomienie testów
+jednostkowych. Opisywane czynności przedstawione zostały na listingu
+\ref{listing:application}.
 
 \begin{listing}
   \input{application}
@@ -2554,11 +2615,38 @@ się w przypadku gier turowych.
   \label{listing:application}
 \end{listing}
 
+Jeżeli podsumowanie testów jednostkowych nie wykazało błędów, możemy
+przystąpić do uruchomienia serwera aplikacji. Do tego celu niezbędne
+jest wykonanie polecenia przedstawionego na listingu
+\ref{listing:server}.
+
 \begin{listing}
   \input{script_server}
   \caption{Uruchomienie serwera aplikacji}
   \label{listing:server}
 \end{listing}
+
+Po uruchomieniu serwera, możemy połączyć się z aplikacją otwierając w
+przeglądarce internetowej adres
+\texttt{http://localhost:3000/}. Wykonanie niektórych czynności wymaga
+zalogowania się na jedno z kont, których dane uwierzytelniające
+przedstawione zostały w tabeli \ref{table:credentials}.
+
+\begin{table}[ht]
+  \begin{center}
+    \begin{tabular}[center]{|l|l|}
+      \hline
+      \textbf{nazwa użytkownika} & \textbf{hasło} \\
+      \hline
+      alice & secret \\
+      bob & secret \\
+      darth & secret \\
+      \hline
+    \end{tabular}
+  \end{center}
+  \label{table:credentials}
+  \caption{Dane uwierzytelniające przykładowych kont użytkowników}
+\end{table}
 
 \clearpage
 

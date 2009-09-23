@@ -1,4 +1,4 @@
-# instalacja Gita
+# instalacja narzędzi kontroli wersji Git
 sudo apt-get install git-core
 # pobranie aktualnej wersji kodu
 git clone git://github.com/qoobaa/pioneers.git

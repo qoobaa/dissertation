@@ -2394,7 +2394,7 @@ serwerem.
   ,,monopol''
 \end{itemize}
 
-% TODO
+\textbf{TODO!}
 % zawierają inne widgety (Game, Cards)
 % korzystają z danych zawartych w poprzednich klasach
 % wywołują eventy przechwytywane przez Game, który odpowiedzialny jest
@@ -2570,16 +2570,17 @@ utworzone zostały testy jednostkowe najważniejszych modeli,
 m.in. \texttt{Hex}, \texttt{Edge}, \texttt{Node} i \texttt{Player}.
 
 \subsection{Testy integracyjne}
-Społeczność \emph{Ruby on Rails} położyła duży nacisk na zwiększenie
-czytelności testów integracyjnych. Jest to spowodowane faktem, iż
-często kod testów, pisany zwykle przed właściwym kodem, wykorzystywany
-jest jako jego specyfikacja. Jednym z ciekawszych rozwiązań, służących
-do pisania testów integracyjnych, jest biblioteka
-\emph{Cucumber}. Testy zapisywane są w postaci historyjek użytkownika
-w zwykłym tekście, który następnie przetwarzany jest przy pomocy
-wyrażeń regularnych. Po zdefiniowaniu wyrażeń regularnych i kodu
-odpowiedzialnego za wykonywanie tzw. kroków, testy uruchamiane są w
-jednym z następujących środowisk:
+Społeczność skupiona wokół frameworka \emph{Ruby on Rails} położyła
+duży nacisk na zwiększenie użyteczności i czytelności testów
+integracyjnych. Jest to spowodowane faktem, iż często kod testów,
+pisany zwykle przed właściwym kodem, wykorzystywany jest jako jego
+specyfikacja. Jednym z ciekawszych rozwiązań, służących do pisania
+testów integracyjnych, jest biblioteka \emph{Cucumber}. Testy
+zapisywane są w postaci scenariuszy w zwykłym tekście, który następnie
+przetwarzany jest przy pomocy wyrażeń regularnych. Po zdefiniowaniu
+wyrażeń regularnych i kodu odpowiedzialnego za wykonywanie
+poszczególnych kroków, testy uruchamiane są w jednym z następujących
+środowisk:
 
 \begin{itemize}
 \item \emph{Webrat} - najszybsze z dostępnych rozwiązań, polegające na
@@ -2604,9 +2605,9 @@ rozbieżnościami w sposobie interpretacji kodu języka \emph{JavaScript}
 (a w szczególności zachowania \emph{DOM-u}) i tym, że wykorzystana w
 projekcie biblioteka \emph{YUI} nie została przystosowana do pracy w
 \emph{HtmlUnit}. Najlepszym rozwiązaniem w tej sytuacji jest
-wykorzystanie do testów tradycyjnej przeglądarki
-internetowej. Zastosowanie bibliotek \emph{Selenium} lub \emph{Watir},
-pociąga za sobą następujące konsekwencje:
+wykorzystanie do testów tradycyjnej przeglądarki internetowej. Jednak
+zastosowanie bibliotek \emph{Selenium} lub \emph{Watir}, pociąga za
+sobą następujące konsekwencje:
 
 \begin{itemize}
 \item konieczność uruchamiania procesu przeglądarki internetowej przed
@@ -2618,8 +2619,9 @@ pociąga za sobą następujące konsekwencje:
   danych po wykonaniu każdego zestawu testów)
 \end{itemize}
 
-% przysłaniają korzyści płynące z zastosowania testów
-% zrezygnowano z testów integracyjnych aplikacji
+Wyżej opisane problemy przysłaniają korzyści płynące z użycia testów
+integracyjnych. W rezultacie w projekcie zostały one zastąpione
+testowaniem ręcznym.
 
 \clearpage
 

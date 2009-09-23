@@ -2509,11 +2509,62 @@ odpowiedzią serwera jest przekierowanie do akcji \texttt{show}
 kontrolera \texttt{GamesController} (a więc pobranie danych gry),
 dzięki czemu gracz widzi niemal natychmiastowy rezultat swojego
 działania. W przypadku pozostałych uczestników rozgrywki, rezultaty
-widoczne są po dopiero kilku sekundach. Dopóki jednak pomiędzy
-poszczególnymi pobraniami danych nie zostanie wywołana więcej niż
+widoczne są po dopiero kilku sekundach. Do momentu, w którym pomiędzy
+poszczególnymi pobraniami danych, nie zostanie wywołana więcej niż
 jedna akcja, pozostali gracze odnoszą wrażenie płynności gry. Takie
 rozwiązanie znacząco poprawia komfort rozgrywki i znakomicie sprawdza
-się w przypadku gier turowych, takich jak ,,Osadnicy z Catanu''.
+się w przypadku gier turowych.
+
+\clearpage
+
+\section{Testowanie i uruchamianie aplikacji}
+
+\subsection{Testy jednostkowe}
+% test unit
+% testy jednostkowe
+% transactional fixtures
+% fabryki - factory girl
+
+\subsection{Testy integracyjne}
+% cucumber
+% watir sellenium webrat culerity (html unit)
+
+\clearpage
+
+\subsection{Instalowanie i uruchamianie aplikacji}
+% instalacja środowiska
+% tworzenie bazy - migracje
+
+\begin{listing}
+  \input{ruby}
+  \caption{Kompilacja i instalacja interpretera języka \emph{Ruby}}
+  \label{listing:ruby}
+\end{listing}
+
+\begin{listing}
+  \input{git}
+  \caption{Pobranie kodu z repozytorium \emph{Git}}
+  \label{listing:git}
+\end{listing}
+
+\begin{listing}
+  \input{application}
+  \caption{Instalacja wymaganych bibliotek, konfiguracja i
+    uruchamianie aplikacji}
+  \label{listing:application}
+\end{listing}
+
+\begin{listing}
+  \input{script_server}
+  \caption{Uruchomienie serwera aplikacji}
+  \label{listing:server}
+\end{listing}
+
+\clearpage
+
+\section{Podsumowanie}
+
+% blablabla
 
 \clearpage
 

@@ -2570,24 +2570,55 @@ utworzone zostały testy jednostkowe najważniejszych modeli,
 m.in. \texttt{Hex}, \texttt{Edge}, \texttt{Node} i \texttt{Player}.
 
 \subsection{Testy integracyjne}
-% cucumber - testy w postaci historyjek użytkownika, ciekawe podejście
-% do testowania. historyjki zapisane w zwykłym tekście, przetwarzane
-% następnie za pomocą wyrażeń regularnych. cucumber przeznaczony jest
-% do zautomatyzowania testów wykonywanych zwykle przez człowieka i
-% zwykłą przeglądarkę.
+Społeczność \emph{Ruby on Rails} położyła duży nacisk na zwiększenie
+czytelności testów integracyjnych. Jest to spowodowane faktem, iż
+często kod testów, pisany zwykle przed właściwym kodem, wykorzystywany
+jest jako jego specyfikacja. Jednym z ciekawszych rozwiązań, służących
+do pisania testów integracyjnych, jest biblioteka
+\emph{Cucumber}. Testy zapisywane są w postaci historyjek użytkownika
+w zwykłym tekście, który następnie przetwarzany jest przy pomocy
+wyrażeń regularnych. Po zdefiniowaniu wyrażeń regularnych i kodu
+odpowiedzialnego za wykonywanie tzw. kroków, testy uruchamiane są w
+jednym z następujących środowisk:
 
-% webrat - nie korzysta z przeglądarki internetowej, jedynie parsuje
-% HTML i tworzy zapytania na podstawie treści formularzy w HTML. nie
-% nadaje się do tej aplikacji
+\begin{itemize}
+\item \emph{Webrat} - najszybsze z dostępnych rozwiązań, polegające na
+  przetwarzaniu kodu \emph{HTML} ,,otwieranych'' stron i generowaniu
+  żądań na podstawie kodu strony. Pomijane są wszystkie dodatkowe
+  elementy, w szczególności \emph{JavaScript}
+\item \emph{Culerity} - wykorzystuje przeglądarkę \emph{HtmlUnit},
+  która interpretuje wszystkie elementy strony (włącznie z
+  \emph{JavaScriptem}), pomijając jej wyświetlanie
+\item \emph{Selenium}, \emph{Watir} - rozwiązania te wykorzystują
+  tradycyjne przeglądarki internetowe (m.in. \emph{Internet Explorer},
+  \emph{Firefox}). Umożliwiają one ,,zdalne'' kontrolowanie zachowania
+  przeglądarki przez inny proces
+\end{itemize}
 
-% sellenium, watir, testowanie w dwóch różnych procesach,
-% często jest problem z synchronizacją procesów. Sellenium i watir
-% korzystają z normalnych przeglądarek, więc testy są wolne
+Ze względu na dużą ilość \emph{JavaScriptu}, zastosowanie pierwszego z
+wymienionych środowisk nie jest możliwe. W związku z tym, że
+przeglądarka \emph{HtmlUnit} dysponuje własnym interpreterem języka
+\emph{JavaScript}, można spodziewać się problemów z uruchamianiem na
+nim większych aplikacji napisanych w tym języku. Jest to spowodowane
+rozbieżnościami w sposobie interpretacji kodu języka \emph{JavaScript}
+(a w szczególności zachowania \emph{DOM-u}) i tym, że wykorzystana w
+projekcie biblioteka \emph{YUI} nie została przystosowana do pracy w
+\emph{HtmlUnit}. Najlepszym rozwiązaniem w tej sytuacji jest
+wykorzystanie do testów tradycyjnej przeglądarki
+internetowej. Zastosowanie bibliotek \emph{Selenium} lub \emph{Watir},
+pociąga za sobą następujące konsekwencje:
 
-% html unit jest "bezgłową przeglądarką", nie traci czasu na
-% renderowanie zawartości stron, jest szybka. Żadne biblioteki
-% javascriptowe nie są przystosowane do działania na jej silniku,
-% możliwe nieścisłości w wykorzystaniu DOM-u, ajaksa itp.
+\begin{itemize}
+\item konieczność uruchamiania procesu przeglądarki internetowej przed
+  wykonaniem testów, przedłuża to znacznie start środowiska testowego
+\item konieczność synchronizacji procesów - proces wykonujący testy
+  musi czekać na załadowanie strony przez przeglądarkę internetową
+\item konieczność zrezygnowania z mechanizmu transakcyjnego do
+  czyszczenia bazy danych (wymagane jest ręczne czyszczenie bazy
+  danych po wykonaniu każdego zestawu testów)
+\end{itemize}
+
+% zrezygnowano z testów integracyjnych aplikacji
 
 \clearpage
 

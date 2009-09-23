@@ -2526,8 +2526,24 @@ się w przypadku gier turowych.
 % fabryki - factory girl
 
 \subsection{Testy integracyjne}
-% cucumber
-% watir sellenium webrat culerity (html unit)
+% cucumber - testy w postaci historyjek użytkownika, ciekawe podejście
+% do testowania. historyjki zapisane w zwykłym tekście, przetwarzane
+% następnie za pomocą wyrażeń regularnych. cucumber przeznaczony jest
+% do zautomatyzowania testów wykonywanych zwykle przez człowieka i
+% zwykłą przeglądarkę.
+
+% webrat - nie korzysta z przeglądarki internetowej, jedynie parsuje
+% HTML i tworzy zapytania na podstawie treści formularzy w HTML. nie
+% nadaje się do tej aplikacji
+
+% sellenium, watir, testowanie w dwóch różnych procesach,
+% często jest problem z synchronizacją procesów. Sellenium i watir
+% korzystają z normalnych przeglądarek, więc testy są wolne
+
+% html unit jest "bezgłową przeglądarką", nie traci czasu na
+% renderowanie zawartości stron, jest szybka. Żadne biblioteki
+% javascriptowe nie są przystosowane do działania na jej silniku,
+% możliwe nieścisłości w wykorzystaniu DOM-u, ajaksa itp.
 
 \clearpage
 

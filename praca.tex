@@ -2520,10 +2520,54 @@ się w przypadku gier turowych.
 \section{Testowanie i uruchamianie}
 
 \subsection{Testy jednostkowe}
-% test unit
-% testy jednostkowe
-% transactional fixtures
-% fabryki - factory girl
+Domyślnym narzędziem pozwalającym na tworzenie testów jednostkowych we
+frameworku \emph{Ruby on Rails} jest biblioteka
+\emph{Test::Unit}. Pojęciem ,,testów jednostkowych'' określa
+testowanie modeli odseparowanych od pozostałych komponentów
+aplikacji. Stosowane są także pojęcia testów funkcjonalnych
+(pojedynczych kontrolerów w połączeniu z modelami, czasem również z
+widokami), integracyjnych (testowanie wielu kontrolerów, interakcji
+pomiędzy nimi) i wydajnościowych.
+
+Tworzenie testów jednostkowych jest bardzo istotnym elementem pracy z
+frameworkiem \emph{Ruby on Rails}. Testy te weryfikują działanie
+modeli, w których zawarta jest tzw. logika biznesowa aplikacji. Często
+pozwalają one wykryć błędy, których znalezienie w tradycyjny sposób
+(np. przez ręczne testowanie gotowej aplikacji) jest niezwykle
+trudne. Bardzo często do testów jednostkowych wykorzystywana jest
+tradycyjna baza danych, dzięki czemu możliwe jest zweryfikowanie
+poprawności jej schematu lub wykonywanych zapytań. Wadą takiego
+rozwiązania jest znaczne spowolnienie procesu uruchamiania testów. Aby
+przyspieszyć nieco wykonywanie testów, wykorzystany został mechanizm
+transakcyjny -- każdy test objęty jest oddzielną transakcją, a po jego
+zakończeniu dokonane modyfikacje bazy danych są cofane
+(ang. rollback).
+
+Częstym problemem podczas tworzenia testów jest przygotowanie danych
+testowych. Framework \emph{Ruby on Rails} oferuje w tym celu mechanizm
+tzw. \emph{fixtures}. Polega on na zapisywaniu zestawów danych
+testowych w plikach \emph{YAML} i ładowanie ich do bazy danych przed
+uruchomieniem testów. Największym problemem tego mechanizmu jest
+ładowanie danych bezpośrednio do bazy danych, z pominięciem modeli, w
+celu zwiększenia wydajności. Pominięcie procesu walidacji powoduje, że
+baza może zawierać nieprawidłowe dane, co może skutkować pojawieniem
+się trudnych do zlokalizowania błędów. Problematyczne bywa również
+odzwierciedlanie w plikach tekstowych skomplikowanych asocjacji.
+
+Innym rozwiązaniem służącym do przygotowywania danych testowych jest
+biblioteka \emph{Factory Girl}, stworzona przez firmę
+\emph{Thoughtbot}. Biblioteka ta pozwala w prosty sposób zdefiniować
+fabrykę obiektów danej klasy, poprzez ustalenie początkowych wartości
+poszczególnych atrybutów. Jako atrybuty mogą być używane inne fabryki,
+co umożliwia tworzenie połączonych ze sobą struktur danych. W
+przeciwieństwie do mechanizmu \emph{fixtures}, \emph{Factory Girl}
+dokonuje zapisu do bazy pośrednio -- wykorzystując modele. Dzięki temu
+każdy obiekt przed zapisaniem w bazie przechodzi standardowy proces
+walidacji.
+
+Dzięki wykorzystaniu bibliotek \emph{Test::Unit} i \emph{Factory Girl}
+utworzone zostały testy jednostkowe najważniejszych modeli,
+m.in. \texttt{Hex}, \texttt{Edge}, \texttt{Node} i \texttt{Player}.
 
 \subsection{Testy integracyjne}
 % cucumber - testy w postaci historyjek użytkownika, ciekawe podejście

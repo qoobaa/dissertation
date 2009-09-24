@@ -1237,10 +1237,10 @@ Początkowym stanem jest stan \texttt{preparing}.  Maszyna ta posiada
 dwa zdarzenia: \texttt{start\_game} i \texttt{end\_game}, powodujące
 przejścia do stanów \texttt{playing} oraz \texttt{ended}. Każde
 przejście może posiadać także proste warunki, które muszą zostać
-spełnione aby możliwa była zmiana stanu. W przypadku zdarzenia
-\texttt{end\_game} i przejścia z \texttt{playing} do \texttt{ended},
-metoda \texttt{winner?} musi zwrócić prawdę (dzieje się tak w
-przypadku, gdy zwycięzca gry jest już znany). Dodatkowo każdy z
+spełnione aby możliwa była zmiana stanu. Aby doszło do przejścia z
+\texttt{playing} do \texttt{ended} w zdarzeniu \texttt{end\_game},
+metoda \texttt{winner?} musi zwrócić wartość \texttt{true} (dzieje się
+tak w przypadku, gdy zwycięzca gry jest już znany). Dodatkowo każdy z
 wymienionych stanów może posiadać własne zestawy walidatorów. Aby
 można było zapisać obiekt w stanie \texttt{playing}, spełnione muszą
 zostać trzy warunki:
@@ -1270,7 +1270,7 @@ dyspozycji następujące przejścia:
   numeru aktualnego gracza. Jeśli warunek nie jest spełniony,
   wybierane jest bezwarunkowe przejście do \texttt{second\_settlement}
 \item z \texttt{second\_road} do \texttt{second\_settlement} -
-  analogicznie jak w poprzednim przypadku, przejście jest możliwe tylko
+  analogicznie jak w poprzednim przypadku, przejście jest możliwe tylko%,
   jeśli istnieje gracz o numerze niższym od numeru aktualnego
   gracza. W przeciwnym wypadku wybierane jest bezwarunkowe przejście
   do \texttt{before\_roll}
@@ -1350,9 +1350,9 @@ Do przechowywania stanu opisywanych maszyn stanowych, służą kolumny
 stanów w postaci ciągu znaków\footnote{nic nie stoi na przeszkodzie,
   aby w razie problemów wydajnościowych, stany były przechowywane w
   postaci liczbowej. Do tego celu można wykorzystać bibliotekę
-  \emph{enumerate\_by}, autorstwa Aarona Pfeifera}. Oprócz
-stanów, konieczne jest przechowanie szeregu dodatkowych informacji o
-rozgrywce, m.in.:
+  \emph{enumerate\_by}, autorstwa Aarona Pfeifera}. Oprócz stanów,
+konieczne jest przechowanie szeregu dodatkowych informacji o
+rozgrywce, w tym o:
 
 \begin{itemize}
 \item aktualnym graczu (kolumna \texttt{current\_player\_id})
@@ -1361,7 +1361,7 @@ rozgrywce, m.in.:
   gracza o numerze 1 może nastąpić po wyrzuceniu 7 oczek przez gracza
   o numerze 2, podczas trwania jego tury (kolumna
   \texttt{current\_discard\_player\_id})
-\item najdłuższej drodze i największej armii, oraz graczach, które są
+\item najdłuższej drodze i największej armii, oraz graczach, którzy są
   w ich posiadaniu (kolumny \texttt{longest\_road\_length},
   \texttt{longest\_road\_player\_id}, \texttt{largest\_army\_size}
   oraz \texttt{largest\_army\_player\_id})
@@ -1455,10 +1455,14 @@ informacji. Każdy wierzchołek musi posiadać właściciela,
 tj. identyfikator gracza, do którego należy (kolumna
 \texttt{player\_id}), identyfikator planszy na której się znajduje
 (\texttt{board\_id}) oraz pozycję (kolumny \texttt{row} i
-\texttt{col}). W związku z tym, że zasiedlony wierzchołek może być
+\texttt{col}).  W związku z tym, że zasiedlony wierzchołek może być
 ,,osadą'' lub ,,miastem'', konieczne jest przechowanie stanu, w jakim
 się znajduje. W tym celu zaimplementowana została prosta maszyna
 stanowa przedstawiona na listingu \ref{listing:node}.
+
+% TODO
+% ZASTANAWIAM SIE CZY MUSI BYC TEN TEKST Z NAWIASU PRZEDZIELONY
+% LISTINGIEM 4 I 5
 
 \begin{listing}
   \input{node}
@@ -1469,12 +1473,11 @@ stanowa przedstawiona na listingu \ref{listing:node}.
 Początkowy stan maszyny stanowej wierzchołka to \texttt{nil}. Możemy z
 niego przejść wyłącznie do stanu \texttt{settlement}. Taka konstrukcja
 uniemożliwia utworzenie nowego wierzchołka w stanie \texttt{city}, co
-byłoby możliwe przy stanie początkowym \texttt{settlement}
-odpowiedniej manipulacji atrybutem
+byłoby możliwe przy stanie początkowym \texttt{settlement}, w
+przypadku odpowiedniej manipulacji atrybutem
 \texttt{state\_event}\footnote{atrybut \texttt{state\_event} służy do
-  wywoływania zdarzenia maszyny stanowej przy aktualizacji innych
-  atrybutów, np. z poziomu formularza na stronie. Element ten zostanie
-  dokładniej omówiony przy opisywaniu zasobów \emph{REST}}.
+  wywołania zdarzenia maszyny stanowej wraz z aktualizacją innych
+  atrybutów, np. z poziomu formularza na stronie}.
 
 Przy tworzeniu ,,osady'' przez gracza, sprawdzane są następujące
 elementy:
@@ -1604,9 +1607,10 @@ w postaci równania \ref{equation:longest-road}.
   \label{equation:longest-road}
 \end{equation}
 
+% TODO
 % Przykładowa kolejność odwiedzania krawędzi została przedstawiona na
 % \imref{longest-road}. Krawędź oznaczona numerem 1 posiada trzy
-% sąsiadujące drogi: 2, 7 i 9. % TODO
+% sąsiadujące drogi: 2, 7 i 9.
 
 \begin{figure}[ht]
   \begin{center}
@@ -1689,12 +1693,14 @@ wydzielenie logiki do osobnych klas:
 \end{itemize}
 
 Karta rozwoju nie może zostać zagrana przez gracza, bezpośrednio po
-jej zakupie, lecz dopiero w następnej rundzie. Ponadto każda karta
+jej zakupie, lecz dopiero w następnej rundzie. Ponadto%, każda karta
 może zostać zagrana tylko raz. Do implementacji tych zasad po raz
 kolejny została wykorzystana maszyna stanowa. Składa się ona z trzech
 stanów: \texttt{tapped}, \texttt{untapped} i \texttt{graveyard} oraz
 dwóch zdarzeń: \texttt{untap} i \texttt{play}. Jej kod został
 przedstawiony na listingu \ref{listing:card}.
+
+%DLACZEGO NIEKTORE LISTINGI SA CIASNO OPLECIONE TEKSTEM np 9, A INNE SA NA OSOBNYCH STRONACH np 8?
 
 \begin{listing}
   \input{card}
@@ -1712,10 +1718,10 @@ możliwe. Odejmowana jest także odpowiednia ilość surowców w powiązanym
 obiekcie klasy \texttt{Player}. Jeśli udało się ustalić typ karty, a
 obiekt gracza spełnia warunki walidacji, to wykonywany jest zapis
 karty i wszystkich powiązanych rekordów. Analogicznie jak przy
-tworzeniu obiektów innych klas, po utworzeniu wywoływane jest
-zdarzenie \texttt{card\_bought!} w maszynie stanowej ,,fazy
-gry''. Dalsze zachowanie obiektu, zależy od wylosowanego typu karty
-rozwoju.
+tworzeniu obiektów innych klas, po utworzeniu obiektu klasy
+\texttt{Card} wywoływane jest zdarzenie \texttt{card\_bought!} w
+maszynie stanowej ,,fazy gry''. Dalsze zachowanie obiektu, zależy od
+wylosowanego typu karty rozwoju.
 
 Zgodnie z zasadami gry, karta rozwoju ,,punkt zwycięstwa'' nie może
 zostać ,,zagrana'' -- ma ona natychmiastowy efekt. Dla uproszczenia
@@ -1731,7 +1737,7 @@ Do zagrania kart ,,wynalazek'' i ,,monopol'' niezbędne jest
 przekazanie dodatkowych parametrów. Klasa \texttt{Card::YearOfPlenty}
 posiada walidator, czy suma atrybutów \texttt{bricks}, \texttt{grain},
 \texttt{lumber}, \texttt{ore} i \texttt{wool} jest równa 2, oraz czy
-każdy z nich jest liczbą nieujemną. Po zapisie obiektu wybrane zasoby
+każdy z nich jest liczbą nieujemną. Po zapisie obiektu, wybrane zasoby
 są dodawane do puli zasobów gracza. Podobne działanie ma również karta
 ,,monopol'', która do zagrania wymaga przekazania jednego typu surowca
 (atrybut \texttt{resource\_type}). Po walidacji obiektu, zasób ten
@@ -1788,8 +1794,8 @@ pozostali gracze mogą odpowiadać na złożoną ofertę handlu. Odpowiedzi
 te przechowywane są w obiektach klasy \texttt{OfferResponse}, każda z
 nich zawiera informację o akceptacji (atrybut \texttt{agreed}). W
 przypadku odpowiedzi pozytywnych, weryfikowany jest fakt, czy ilość
-zasobów odpowiadającego na ofertę gracza, zezwala na wymianę. W
-dowolnej chwili twórca oferty może ją odwołać, lub w przypadku
+zasobów odpowiadającego na ofertę gracza zezwala na wymianę. W
+dowolnej chwili twórca oferty może ją odwołać lub, w przypadku
 odpowiedzi pozytywnych -- zaakceptować, wybierając drugą stronę
 wymiany spośród pozytywnych odpowiedzi. Po wygaśnięciu oferty handlu
 wywoływane jest w maszynie stanowej ,,fazy gry'' zdarzenie
@@ -1822,7 +1828,7 @@ kośćmi do gry wyniku 7 oczek powoduje przejście do fazy przesuwania
 ,,rozbójnika''. Zanim to jednak nastąpi, wszyscy gracze posiadający
 więcej niż 7 kart zasobów zmuszeni są pozbyć się części z nich. W
 każdym takim przypadku gracz ma obowiązek zredukowania ilości
-posiadanych kart zasobów do połowy, zaokrąglanej w górę (w przypadku
+posiadanych kart zasobów do połowy, zaokrąglając w górę (w przypadku
 posiadania 9 kart, musi on odłożyć 4 z nich). Do tego celu
 zaimplementowana została klasa \texttt{Discard}. Walidacja obiektów
 polega na sprawdzeniu, czy gracz odrzuca dokładnie taką ilość zasobów,
@@ -1895,23 +1901,23 @@ przedstawiona na listingu \ref{listing:filter}.
 Przed wywołaniem dowolnej akcji kontrolera \texttt{EdgesController},
 wywoływane są metody \texttt{require\_user} i
 \texttt{fetch\_game}. Pierwsza z nich, pochodząca z klasy bazowej,
-jest odpowiedzialna za odnalezienie obiektu zalogowanego użytkownika,
+jest odpowiedzialna za odnalezienie obiektu zalogowanego użytkownika%
 na podstawie danych zawartych w sesji. Podobnie, jak w przypadku
 wywołań zwrotnych klasy \texttt{ActiveRecord}, akcja kontrolera nie
 jest wywoływana jeśli którykolwiek z filtrów zwróci wartość
 \texttt{false}. Dzieję się tak np. wówczas, gdy niezalogowany
 użytkownik próbuje wywołać akcję poprzedzoną filtrem
 \texttt{require\_user}. Metoda \texttt{fetch\_game} jest przykładem
-stosowania filtrów, w celu uniknięcia powtórzeń w kodzie. W związku z
+stosowania filtrów w celu uniknięcia powtórzeń w kodzie. W związku z
 tym, że wszystkie akcje kontrolera \texttt{EdgesController} wywoływane
 są w kontekście określonego parametrem \texttt{game\_id} obiektu gry,
 wyciągnięcie go z bazy zostało wydzielone do metody
-\texttt{fetch\_game}. Zadaniem akcji \texttt{create}, jest zbudowanie
-i zapisanie obiektu klasy \emph{Edge}, na podstawie przekazanych w
+\texttt{fetch\_game}. Zadaniem akcji \texttt{create} jest zbudowanie i
+zapisanie obiektu klasy \emph{Edge}, na podstawie przekazanych w
 żądaniu parametrów. Po udanym zapisie utworzonego w ten sposób
-obiektu, tworzona jest odpowiedź, w postaci przekierowania do akcji
+obiektu, tworzona jest odpowiedź w postaci przekierowania do akcji
 \texttt{show} kontrolera \texttt{GamesController}. Jeśli nie udało się
-zapisać obiektu renderowana jest pusta odpowiedź z kodem błędu
+zapisać obiektu, tworzona jest pusta odpowiedź z kodem błędu
 \texttt{422} (\emph{Unprocessable Entity}).
 
 W każdej akcji mamy dostęp m.in. do następujących obiektów:
@@ -1934,9 +1940,8 @@ W każdej akcji mamy dostęp m.in. do następujących obiektów:
 Aby możliwe było wywołanie metody kontrolera z przeglądarki
 internetowej, niezbędne jest zrzutowanie adresów URL na odpowiadające
 im akcje i kontrolery. Przekształcaniem adresów żądań \emph{HTTP} na
-nazwy kontrolerów i akcji, zajmuje się
-tzw. \emph{Router}. Konfiguracja \emph{Routera} została przedstawiona
-na listingu \ref{listing:routes}.
+nazwy kontrolerów i akcji zajmuje się tzw. \emph{Router}. Konfiguracja
+\emph{Routera} została przedstawiona na listingu \ref{listing:routes}.
 
 \begin{listing}
   \input{routes}
@@ -1954,7 +1959,7 @@ listingu \ref{listing:routes} zdefiniowane zostały tzw. zasoby
 zagnieżdżone. W celu utworzenia np. nowego zasobu w postaci obiektu
 gracza, niezbędne jest podanie identyfikatora gry, w kontekście której
 jest tworzony zasób. Do wyświetlenia listy wygenerowanych przez
-\emph{Router} ścieżek, służy polecenie \texttt{rake routes}. W wyniku
+\emph{Router} ścieżek służy polecenie \texttt{rake routes}. W wyniku
 działania polecenia otrzymujemy tablicę ścieżek, podobną do tej,
 przedstawionej w tabeli \ref{table:routes}.
 
@@ -1993,10 +1998,10 @@ przedstawionej w tabeli \ref{table:routes}.
   \label{table:routes}
 \end{table}
 
-Poniżej przedstawiona została lista przykładowych żądań, używanych
-podczas gry. Każde żądanie jest opatrzone słownym opisem działania,
+Poniżej przedstawiona została lista przykładowych żądań używanych
+podczas gry. Każde żądanie jest opatrzone słownym opisem działania
 oraz nazwą kontrolera i akcji do których się odnosi. Zawiera także
-nazwę użytej metody, adres, a także listę parametrów, wymaganych do
+nazwę użytej metody, adres, a także listę parametrów wymaganych do
 wywołania akcji.
 
 \begin{itemize}
@@ -2140,8 +2145,8 @@ uniwersalność -- równie dobrze nadaje się do generowania kodu
 \emph{HTML} jak i treści wiadomości e-mail. Okazuje się jednak, że w
 przypadku opisu dokumentów \emph{HTML}, \emph{ERB} wymusza dużą liczbę
 powtórzeń, co zmniejsza czytelność kodu. Aby usprawnić tworzenie kodu
-stron powstała biblioteka \emph{Haml}\footnote{HTML Abstraction Markup
-  Language}, której twórcami są Nathan Weizenbaum i Hampton
+stron, powstała biblioteka \emph{Haml}\footnote{HTML Abstraction
+  Markup Language}, której twórcami są Nathan Weizenbaum i Hampton
 Catlin. Język \emph{Haml} oferuje zwięzły i przejrzysty sposób zapisu
 dokumentów \emph{HTML} i \emph{XHTML} -- nie jest to język
 uniwersalny. Do opisu struktury dokumentu używa on wcięć, dzięki czemu
@@ -2185,7 +2190,7 @@ w ten sposób planszy można dowolnie zmieniać (wymagane jest oczywiście
 przekompilowanie arkusza), domyślnie jest to 10x10
 sześciokątów. Struktura znaczników w przykładowej planszy do gry
 została przedstawiona na listingu \ref{listing:boardtable}. Część kodu
-źródłowego omawianego arkusza stylów została przedstawiona na
+źródłowego omawianego arkusza stylów została przedstawiona na listingu
 \ref{listing:hexes}. Oprócz maksymalnych rozmiarów planszy, w
 pierwszych liniach listingu zadeklarowane są zmienne opisujące
 rozmiary sześciokątów, zależne od zastosowanych plików graficznych. W
@@ -2238,7 +2243,7 @@ kodu pozostawia wiele do życzenia.
 Inną ciekawą biblioteką \emph{JavaScript} jest \emph{Yahoo! User
   Interface Library}. Najważniejszym czynnikiem, który wpłynął na
 decyzję o zmianie biblioteki na \emph{YUI} było wydanie wersji
-\emph{3.0.0 beta 1}, dnia 24 czerwca 2009 roku. W porównaniu do
+\emph{3.0.0 beta 1} w dniu 24 czerwca 2009 roku. W porównaniu do
 poprzednich wersji, biblioteka \emph{YUI3} została przeprojektowana i
 w większości zaimplementowana od początku. Jej twórcy zapożyczyli
 także najlepsze rozwiązania innych bibliotek, m.in. mechanizm
@@ -2270,7 +2275,7 @@ wersji \emph{GA}, nie jest zalecane wykorzystanie biblioteki w
 środowiskach produkcyjnych. Konsekwencją wyboru \emph{YUI3} jest
 również stosunkowo niewielka społeczność skupiona wokół biblioteki. Do
 tej pory dostępne są jedynie bardzo nieliczne przykłady wykorzystania
-\emph{YUI3} oraz jej rozszerzenia. Pomimo tych niedogodności
+\emph{YUI3} oraz jej rozszerzenia. Pomimo tych niedogodności%,
 biblioteka ta jest warta uwagi, gdyż zbudowana została na bardzo
 solidnych fundamentach. W niedalekiej przyszłości może ona okazać się
 poważnym konkurentem dla dominujących dzisiaj rozwiązań, takich jak
@@ -2302,13 +2307,13 @@ klienta następujących ,,klas'':
 Wszystkie powyższe ,,klasy'' dziedziczą po ,,klasie'' \texttt{Base}. W
 celu uniknięcia kolizji nazw, umieszczone zostały one w przestrzeni
 nazw \texttt{Pioneers}. Po uruchomieniu skryptu (otworzeniu strony z
-grą) pobierane są dane gry w formacie \emph{JSON}. Po sparsowaniu
+grą), pobierane są dane gry w formacie \emph{JSON}. Po przetworzeniu
 danych przekazywane są one do konstruktora obiektu \texttt{Game},
 który odpowiedzialny jest za utworzenie wszystkich powiązanych
 obiektów. W trakcie trwania rozgrywki niezbędne jest aktualizowanie
 danych dotyczących gry, poprzez metodę \texttt{setAttrs} obiektu
 \texttt{Game}. Opisywane ,,klasy'' stanowią uproszczoną wersję klas
-modeli, opisywanych w rozdziale \ref{sec:models}.
+modeli wymienionych w rozdziale \ref{sec:models}.
 
 Oczywiście walidacja poszczególnych posunięć graczy nie może odbywać
 się wyłącznie po stronie klienta. Serwer jest w dalszym ciągu
@@ -2336,11 +2341,11 @@ etapy:
 \end{enumerate}
 
 Aby ułatwić nanoszenie stylów \emph{CSS} na kontrolki, składają się
-one przynajmniej z dwóch, zagnieżdżonych znaczników
+one przynajmniej z dwóch zagnieżdżonych znaczników
 \texttt{<div>}. Pierwszy z nich, nazwany \emph{Bounding Box}, ułatwia
-tworzenie efektów, takich jak zaokrąglone krawędzie i cienie. Drugi,
-tzw. \emph{Content Box} obejmuje właściwą zawartość
-kontrolki. Ujednolicone zostało także nazewnictwo klas, nadawanych
+tworzenie efektów takich jak zaokrąglone krawędzie i cienie. Drugi,
+tzw. \emph{Content Box}, obejmuje właściwą zawartość
+kontrolki. Ujednolicone zostało także nazewnictwo klas nadawanych
 poszczególnym elementom składowym kontrolki. W celu uniknięcia kolizji
 oznaczeń, nazwy klas elementów znajdujących się wewnątrz kontrolki
 poprzedzone są odpowiednim prefiksem. Schemat zagnieżdżenia
@@ -2401,36 +2406,35 @@ serwerem.
 % za komunikację z serwerem
 
 \begin{figure}[ht]
-  \begin{center}
-    \begin{tabular}{cc}
-      \subfloat[Rzut kością]{\label{fig:beforerollwidget}}\includegraphics[scale=0.45]{beforerollwidget.png}
-      &
-      \subfloat[Kończenie tury]{\label{fig:afterrollwidget}}\includegraphics[scale=0.45]{afterrollwidget.png}
-      \\[40pt]
-      \subfloat[Budowa drogi, osady, miasta lub zakup karty rozwoju]{\label{fig:buildwidget}}\includegraphics[scale=0.45]{buildwidget.png}
-      &
-      \subfloat[Lista posiadanych kart rozwoju]{\label{fig:cardswidget}}\includegraphics[scale=0.45]{cardswidget.png}
-      \\[40pt]
-      \subfloat[Odrzucanie nadmiarowych zasobów w fazie ,,rozbójnika'']{\label{fig:discardwidget}}\includegraphics[scale=0.45]{discardwidget.png}
-      &
-      \subfloat[Tworzenie wymiany z bankiem]{\label{fig:exchangewidget}}\includegraphics[scale=0.45]{exchangewidget.png}
-      \\[40pt]
-      \subfloat[Tworzenie oferty handlu]{\label{fig:offerwidget}}\includegraphics[scale=0.45]{offerwidget.png}
-      &
-      \subfloat[Dołączanie do rozgrywki]{\label{fig:joinwidget}}\includegraphics[scale=0.45]{joinwidget.png}
-      \\[40pt]
-      \subfloat[Podgląd otrzymanej oferty handlu]{\label{fig:offerreceivedwidget}}\includegraphics[scale=0.45]{offerreceivedwidget.png}
-      &
-      \subfloat[Podgląd utworzonej oferty handlu]{\label{fig:offersentwidget}}\includegraphics[scale=0.45]{offersentwidget.png}
-      \\[40pt]
-      \subfloat[Podgląd gracza]{\label{fig:userplayerwidget}}\includegraphics[scale=0.45]{userplayerwidget.png}
-      &
-      \subfloat[Lista pozostałych graczy]{\label{fig:playerswidget}}\includegraphics[scale=0.45]{playerswidget.png}
-      \\[40pt]
-      \subfloat[Podgląd stanu gry]{\label{fig:gamestatuswidget}}\includegraphics[scale=0.45]{gamestatuswidget.png}
-      & \\
-    \end{tabular}
-  \end{center}
+  \centering
+  \begin{tabular}{cc}
+    \subfloat[Rzut kością]{\label{fig:beforerollwidget}\includegraphics[scale=0.45]{beforerollwidget.png}}
+    &
+    \subfloat[Kończenie tury]{\label{fig:afterrollwidget}\includegraphics[scale=0.45]{afterrollwidget.png}}
+    \\
+    \subfloat[Budowa drogi, osady, miasta lub zakup karty rozwoju]{\label{fig:buildwidget}\includegraphics[scale=0.45]{buildwidget.png}}
+    &
+    \subfloat[Lista posiadanych kart rozwoju]{\label{fig:cardswidget}\includegraphics[scale=0.45]{cardswidget.png}}
+    \\
+    \subfloat[Odrzucanie nadmiarowych zasobów w fazie ,,rozbójnika'']{\label{fig:discardwidget}\includegraphics[scale=0.45]{discardwidget.png}}
+    &
+    \subfloat[Tworzenie wymiany z bankiem]{\label{fig:exchangewidget}\includegraphics[scale=0.45]{exchangewidget.png}}
+    \\
+    \subfloat[Tworzenie oferty handlu]{\label{fig:offerwidget}\includegraphics[scale=0.45]{offerwidget.png}}
+    &
+    \subfloat[Dołączanie do rozgrywki]{\label{fig:joinwidget}\includegraphics[scale=0.45]{joinwidget.png}}
+    \\
+    \subfloat[Podgląd otrzymanej oferty handlu]{\label{fig:offerreceivedwidget}\includegraphics[scale=0.45]{offerreceivedwidget.png}}
+    &
+    \subfloat[Podgląd utworzonej oferty handlu]{\label{fig:offersentwidget}\includegraphics[scale=0.45]{offersentwidget.png}}
+    \\
+    \subfloat[Podgląd gracza]{\label{fig:userplayerwidget}\includegraphics[scale=0.45]{userplayerwidget.png}}
+    &
+    \subfloat[Lista pozostałych graczy]{\label{fig:playerswidget}\includegraphics[scale=0.45]{playerswidget.png}}
+    \\
+    \subfloat[Podgląd stanu gry]{\label{fig:gamestatuswidget}\includegraphics[scale=0.45]{gamestatuswidget.png}}
+    &
+  \end{tabular}
   \caption{Wygląd kontrolek}
   \label{fig:widgets}
 \end{figure}
@@ -2510,11 +2514,13 @@ kontrolera \texttt{GamesController} (a więc pobranie danych gry),
 dzięki czemu gracz widzi niemal natychmiastowy rezultat swojego
 działania. W przypadku pozostałych uczestników rozgrywki, rezultaty
 widoczne są po dopiero kilku sekundach. Do momentu, w którym pomiędzy
-poszczególnymi pobraniami danych, nie zostanie wywołana więcej niż
+poszczególnymi pobraniami danych nie zostanie wywołana więcej niż
 jedna akcja, pozostali gracze odnoszą wrażenie płynności gry. Takie
 rozwiązanie znacząco poprawia komfort rozgrywki i znakomicie sprawdza
 się w przypadku gier turowych.
 
+% TODO
+% PRZEFORMATUJ SOBIE STRONE 74, BO TE WCIECIA Z PRAWEJ SA OKROPNE
 \clearpage
 
 \section{Testowanie i uruchamianie}
@@ -2522,7 +2528,7 @@ się w przypadku gier turowych.
 \subsection{Testy jednostkowe}
 Domyślnym narzędziem pozwalającym na tworzenie testów jednostkowych we
 frameworku \emph{Ruby on Rails} jest biblioteka
-\emph{Test::Unit}. Pojęciem ,,testów jednostkowych'' określa
+\emph{Test::Unit}. Pojęciem ,,testów jednostkowych'' określa się
 testowanie modeli odseparowanych od pozostałych komponentów
 aplikacji. Stosowane są także pojęcia testów funkcjonalnych
 (pojedynczych kontrolerów w połączeniu z modelami, czasem również z
@@ -2557,7 +2563,7 @@ odzwierciedlanie w plikach tekstowych skomplikowanych asocjacji.
 Innym rozwiązaniem służącym do przygotowywania danych testowych jest
 biblioteka \emph{Factory Girl}, stworzona przez firmę
 \emph{Thoughtbot}. Biblioteka ta pozwala w prosty sposób zdefiniować
-fabrykę obiektów danej klasy, poprzez ustalenie początkowych wartości
+fabrykę obiektów danej klasy poprzez ustalenie początkowych wartości
 poszczególnych atrybutów. Jako atrybuty mogą być używane inne fabryki,
 co umożliwia tworzenie połączonych ze sobą struktur danych. W
 przeciwieństwie do mechanizmu \emph{fixtures}, \emph{Factory Girl}
@@ -2565,7 +2571,7 @@ dokonuje zapisu do bazy pośrednio -- wykorzystując modele. Dzięki temu
 każdy obiekt przed zapisaniem w bazie przechodzi standardowy proces
 walidacji.
 
-Dzięki wykorzystaniu bibliotek \emph{Test::Unit} i \emph{Factory Girl}
+Dzięki wykorzystaniu bibliotek \emph{Test::Unit} i \emph{Factory Girl}%,
 utworzone zostały testy jednostkowe najważniejszych modeli,
 m.in. \texttt{Hex}, \texttt{Edge}, \texttt{Node} i \texttt{Player}.
 
@@ -2574,8 +2580,8 @@ Społeczność skupiona wokół frameworka \emph{Ruby on Rails} położyła
 duży nacisk na zwiększenie użyteczności i czytelności testów
 integracyjnych. Jest to spowodowane faktem, iż często kod testów,
 pisany zwykle przed właściwym kodem, wykorzystywany jest jako jego
-specyfikacja. Jednym z ciekawszych rozwiązań, służących do pisania
-testów integracyjnych, jest biblioteka \emph{Cucumber}. Testy
+specyfikacja. Jednym z ciekawszych rozwiązań służących do tworzenia
+testów integracyjnych jest biblioteka \emph{Cucumber}. Testy
 zapisywane są w postaci scenariuszy w zwykłym tekście, który następnie
 przetwarzany jest przy pomocy wyrażeń regularnych. Po zdefiniowaniu
 wyrażeń regularnych i kodu odpowiedzialnego za wykonywanie
@@ -2696,9 +2702,9 @@ narzędzi i tworzenia kopii zdalnego repozytorium.
 W następnych krokach niezbędne jest zainstalowanie frameworka
 \emph{Ruby on Rails} i wymaganych przez niego bibliotek. Przed
 uruchomieniem aplikacji konieczne jest także utworzenie konfiguracji
-bazy danych i zainstalowanie dodatkowych bibliotek, wymaganych przez
+bazy danych i zainstalowanie dodatkowych bibliotek wymaganych przez
 aplikację. Po utworzeniu bazy danych i załadowaniu do niej
-przykładowych danych możliwe jest uruchomienie testów
+przykładowych danych, możliwe jest uruchomienie testów
 jednostkowych. Opisywane czynności przedstawione zostały na listingu
 \ref{listing:application}.
 

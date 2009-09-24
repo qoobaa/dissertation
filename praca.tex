@@ -1,5 +1,6 @@
-\documentclass[a4paper,11pt]{report}
+\documentclass[11pt,twoside]{report}
 
+\usepackage[a4paper, left=3cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage{polski}
 \usepackage[polish]{babel}
@@ -9,26 +10,20 @@
 \usepackage{amsmath}
 \usepackage{float}
 \usepackage{subfig}
+\usepackage{fancyhdr}
 
 \input{pygments}
 
-\textwidth\paperwidth
-\advance\textwidth -55mm
-\oddsidemargin-1in
-\advance\oddsidemargin 30mm
-\evensidemargin-1in
-\advance\evensidemargin 25mm
-\topmargin -1in
-\advance\topmargin 25mm
-\setlength\textheight{48\baselineskip}
-\addtolength\textheight{\topskip}
-\marginparwidth15mm
+\setlength{\headheight}{15pt}
 
-\widowpenalty999999
-\tolerance450
-\pretolerance250
-\hfuzz=1.5pt
-\hbadness1450
+\fancypagestyle{plain}{
+\fancyfoot{}
+\fancyhead{}
+\renewcommand{\headrulewidth}{0pt}
+}
+
+\newfloat{listing}{thp}{lol}
+\floatname{listing}{Listing}
 
 \providecommand{\imref}[1]{Rys. \ref{#1}} % referencja do obrazka
 
@@ -45,27 +40,33 @@
 
 \begin{document}
 
-\renewcommand\maketitle{
-  \begin{titlepage}
-    \begin{center}
-      \includegraphics[width=80pt]{godlo.pdf}\\[30pt]
-      \Large\textsc{Politechnika Śląska}\\[0.5em]
-      \textsc{Wydział Automatyki, Elektroniki i Informatyki}\\[100pt]
-      \LARGE Praca dyplomowa magisterska\\[50pt]
-      Pioneers - internetowa implementacja gry \\[0.5em]
-      ,,Osadnicy z Catanu'' w oparciu o
-      framework\\[0.5em]
-      Ruby on Rails\\[80pt]
-    \end{center}
-    \Large\textbf{Autor}: Jakub Kuźma\\
-    \Large\textbf{Kierujący pracą}: dr inż. Paweł Kasprowski\\
-    \vfill
-    \normalsize\centering Gliwice, \today
-  \end{titlepage}
-}
+\pagestyle{fancy}
+\lhead{\nouppercase{\rightmark}}
+\rhead{\nouppercase{\leftmark}}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername \ \thechapter. \ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}{}}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[LO]{\rightmark}
+\fancyhead[RE]{\leftmark}
+\fancyhead[LE]{\thepage}
+\fancyhead[RO]{\thepage}
 
 \begin{titlepage}
-  \maketitle
+  \begin{center}
+    \includegraphics[width=80pt]{godlo.pdf}\\[30pt]
+    \Large\textsc{Politechnika Śląska}\\[0.5em]
+    \textsc{Wydział Automatyki, Elektroniki i Informatyki}\\[100pt]
+    \LARGE Praca dyplomowa magisterska\\[50pt]
+    Pioneers - internetowa implementacja gry \\[0.5em]
+    ,,Osadnicy z Catanu'' w oparciu o
+    framework\\[0.5em]
+    Ruby on Rails\\[80pt]
+  \end{center}
+  \Large\textbf{Autor}: Jakub Kuźma\\
+  \Large\textbf{Kierujący pracą}: dr inż. Paweł Kasprowski\\
+  \vfill
+  \normalsize\centering Gliwice, \today
 \end{titlepage}
 
 \tableofcontents
@@ -80,6 +81,7 @@
 % flash czy silverlight jako technologie przejściowe, wsparcie dla
 % elementów których nie posiadają starsze przeglądarki, nowe będą
 % miały video, audio, svg, websockets, etc.
+
 
 \cleardoublepage
 
@@ -309,23 +311,21 @@ typowany, interpretowany język programowania bardzo wysokiego poziomu
 \item pełna obiektowość - nie ma podziału na typy proste (wbudowane) i
   złożone. Pełnoprawnymi obiektami są także klasy, metody, wyrażenia
   lambda, itp.
-\item pseudoklasyczny mechanizm dziedziczenia jednobazowego
-\item moduły oferujące mechanizm zastępujący dziedziczenie wielobazowe
-  (ang. \emph{mixin})
+\item pseudoklasyczne dziedziczenie jednobazowe
+\item moduły zastępujące dziedziczenie wielobazowe (ang. \emph{mixin})
 \item otwarte klasy, pozwalające na zmianę w dowolnym momencie
   wykonywania programu właściwości zdefiniowanych już klas (włącznie z
   klasami pochodzącymi z biblioteki standardowej języka)
-\item \emph{monkey patching} - wykorzystanie mechanizmu otwartych klas
-  do zmiany działania już istniejącego kodu w czasie wykonywania
-  programu
-\item metaprogramowanie - mechanizm ten umożliwia tworzenie kodu,
-  który generuje kod w czasie wykonywania programu
+\item \emph{monkey patching} - wykorzystanie otwartych klas do zmiany
+  działania już istniejącego kodu w czasie wykonywania programu
+\item metaprogramowanie - umożliwia tworzenie kodu, który generuje kod
+  w czasie wykonywania programu
 \item ,,kacze typowanie'' - typy obiektów przekazywanych jako
   argumenty funkcji nie są w żaden sposób sprawdzane. Dzięki temu nie
   jest konieczne tworzenie skomplikowanych hierarchii dziedziczenia
   klas, wystarczy jedynie zaimplementować w klasach pewien wspólny
   podzbiór właściwości wymaganych przez wywoływaną na nich funkcję
-\item domknięcia - mechanizm wiązania tworzonych funkcji z ich
+\item domknięcia - wiązanie tworzonych funkcji z ich
   otoczeniem. Podczas wywołania funkcji ma ona dostęp do zmiennych,
   które zostały dowiązane do niej podczas jej tworzenia (nawet jeśli
   są one niedostępne podczas jej wywołania)
@@ -409,12 +409,12 @@ główne to:
   obiektowo-relacyjnego, która powstała na podstawie wzorca
   projektowego o tej samej nazwie. Biblioteka ta oferuje znacznie
   więcej, niż wynika z implementowanego wzorca, m.in. różne rodzaje
-  asocjacji (w tym asocjacje polimorficzne), mechanizm dziedziczenia
+  asocjacji (w tym asocjacje polimorficzne), sposób dziedziczenia
   jednotabelowego (\emph{STI}\footnote{STI - dziedziczenie
     jednotabelowe (ang. Single Table Inheritance) - technika
     umożliwiająca odzwierciedlenie w jednej tabeli relacyjnej bazy
-    danych obiektów wielu dziedziczących po sobie klas})
-  oraz walidatory
+    danych obiektów wielu dziedziczących po sobie klas}) oraz
+  walidatory
 \item \emph{ActionPack} - biblioteka umożliwiająca tworzenie
   kontrolerów i widoków, odpowiada również za kierowanie zapytań do
   odpowiednich akcji kontrolerów (tzw. \emph{routing})
@@ -493,9 +493,8 @@ Najważniejszymi cechami języka, odróżniającymi go od języków
 \item prawie całkowita obiektowość - występuje podział na typy proste
   i obiekty. Obiekty są tablicami asocjacyjnymi, ich właściwości można
   dowolnie modyfikować podczas wykonania programu (w praktyce
-  mechanizm ten jest bardzo podobny do ,,otwierania klas'' w języku
-  \emph{Ruby}).
-\item dziedziczenie prototypowe - mechanizm dziedziczenia
+  przypomina to ,,otwieranie klas'' w języku \emph{Ruby}).
+\item dziedziczenie prototypowe - rodzaj dziedziczenia
   bezklasowego. Jedyną cechą umożliwiającą stwierdzenie pokrewieństwa
   obiektów jest posiadanie przez nie wspólnego prototypu
 \end{itemize}
@@ -539,15 +538,15 @@ rodzaju dodatkiem, ułatwiającym korzystanie ze stron.
 Sytuacja zaczęła się zmieniać po wprowadzeniu przez firmę
 \emph{Microsoft} obiektu \emph{ActiveX} nazwanego \emph{XMLHTTP} w
 przeglądarce \emph{Microsoft Internet Explorer 5}. Najważniejszą cechą
-tego mechanizmu była możliwość komunikacji z serwerem bez konieczności
-przeładowywania całego dokumentu. W krótkim czasie podobne rozwiązania
-zostały zaimplementowane w konkurencyjnych przeglądarkach, m.in.w
-\emph{Mozilli} i \emph{Safari}. Pomimo tego, że funkcje te były
-dostępne w przeglądarkach od końca 1999 roku, pierwsze duże aplikacje
-zaczęły z nich korzystać dopiero w 2004 roku. Najważniejszymi
-aplikacjami, które spopularyzowały opisywany mechanizm były
-\emph{Gmail} i \emph{Google Maps}, należące do firmy \emph{Google
-  Inc.} W 2005 roku wprowadzony został termin \emph{Ajax}
+tego rozwiązania była możliwość komunikacji z serwerem bez
+konieczności przeładowywania całego dokumentu. W krótkim czasie
+podobne funkcje zostały zaimplementowane w konkurencyjnych
+przeglądarkach, m.in.w \emph{Mozilli} i \emph{Safari}. Pomimo tego, że
+techniki te były dostępne w przeglądarkach od końca 1999 roku,
+pierwsze duże aplikacje zaczęły z nich korzystać dopiero w 2004
+roku. Najważniejszymi aplikacjami, które spopularyzowały opisywane
+rozwiązanie były \emph{Gmail} i \emph{Google Maps}, należące do firmy
+\emph{Google Inc.} W 2005 roku wprowadzony został termin \emph{Ajax}
 (ang. asynchronous JavaScript and XML), oznaczający wykorzystanie
 języków \emph{JavaScript} i \emph{XML} do asynchronicznej komunikacji
 z serwerem\footnote{w rzeczywistości jednak, żaden z wymienionych
@@ -577,7 +576,7 @@ niebezpiecznym działaniem i powinno być wykorzystywane z dużą rozwagą.
 \subsection{HTTP Push (Comet)}
 W przypadku standardowego wykorzystania technologii \emph{Ajax},
 przesyłanie danych odbywa się na żądanie przeglądarki internetowej. W
-niektórych rozwiązaniach taki mechanizm jest zbyt mało wydajny i
+niektórych aplikacjach takie rozwiązanie jest zbyt mało wydajne i
 wprowadza w komunikacji niepożądane opóźnienia. Najprostszym
 przykładem takiej aplikacji jest czat. W klasycznym rozwiązaniu każdy
 klient musi co pewien czas odpytywać serwer o to, czy pojawiły się na
@@ -603,17 +602,17 @@ Jeśli przyjrzeć się bliżej aplikacji takiej jak \emph{Gmail}, okazuje
 się, że nie wykonuje ona cyklicznego odpytywania serwera, a wszystkie
 dane przesyłane są do klienta niemalże bez opóźnień. Najprostszym
 sposobem na uniknięcie częstego odpytywania serwera jest zastosowanie
-mechanizmu wydłużonego odpytywania (ang. long polling). Polega on na
-wydłużaniu czasu trwania zapytań poprzez opóźnianie reakcji
-serwera. Jeśli po otrzymaniu zapytania na serwerze nie ma żadnych
-danych do pobrania, zamiast wysyłać informację o braku danych serwer
-wstrzymuje się z odpowiedzią do czasu ich nadejścia. W przypadku, gdy
-na serwerze pojawią się dane, są one natychmiast wysyłane do klienta
-poprzez otwarte połączenie. W przypadku, gdy zostanie przekroczony
-maksymalny czas trwania połączenia (ang. timeout) jest ono zamykane. W
-obu przypadkach klient natychmiastowo wywołuje kolejne zapytanie,
-które ponownie oczekuje na pojawienie się danych. Schemat działania
-takiego mechanizmu został przedstawiony na \imref{longpolling}.
+wydłużonego odpytywania (ang. long polling), poprzez opóźnianie
+reakcji serwera. Jeśli po otrzymaniu zapytania na serwerze nie ma
+żadnych danych do pobrania, zamiast wysyłać informację o braku danych
+serwer wstrzymuje się z odpowiedzią do czasu ich nadejścia. W
+przypadku, gdy na serwerze pojawią się dane, są one natychmiast
+wysyłane do klienta poprzez otwarte połączenie. W przypadku, gdy
+zostanie przekroczony maksymalny czas trwania połączenia
+(ang. timeout) jest ono zamykane. W obu przypadkach klient
+natychmiastowo wywołuje kolejne zapytanie, które ponownie oczekuje na
+pojawienie się danych. Schemat działania takiego rozwiązania został
+przedstawiony na \imref{longpolling}.
 
 \begin{figure}[ht]
   \begin{center}
@@ -626,10 +625,9 @@ takiego mechanizmu został przedstawiony na \imref{longpolling}.
 Niewątpliwą wadą przedstawionego rozwiązania jest fakt, iż w
 przypadku, gdy dane pojawiają się na serwerze z dużą częstotliwością,
 wywoływanych jest dużo pojedynczych zapytań. Skutkuje to oczywiście
-wzrostem obciążenia serwera. W mechanizmie wydłużonego odpytywania
-wykorzystywane są asynchroniczne zapytania \emph{XMLHttpRequest}. W
-przypadku pobierania danych z innych domen wykorzystywany jest
-mechanizm \emph{JSONP}.
+wzrostem obciążenia serwera. Wydłużone odpytywanie wykorzystuje
+asynchroniczne zapytania \emph{XMLHttpRequest}. Pobieranie danych z
+innych domen realizowane jest poprzez \emph{JSONP}.
 
 Innym, bardziej wyrafinowanym sposobem komunikacji poprzez \emph{HTTP
   Push} jest strumieniowanie danych. Do strumieniowania danych
@@ -649,8 +647,7 @@ odebrać. Dodatkowo całość musi zostać otoczona znacznikiem
 (interpretowany) przez przeglądarkę zaraz po jego otrzymaniu. W
 przypadku, gdy na serwerze nie ma żadnych danych, wysyłany jest co
 pewien czas pusty znacznik, w celu utrzymania połączenia. Schemat
-działania mechanizmu strumieniowania został przedstawiony na
-\imref{streaming}.
+działania strumieniowania został przedstawiony na \imref{streaming}.
 
 \begin{figure}[ht]
   \begin{center}
@@ -660,7 +657,7 @@ działania mechanizmu strumieniowania został przedstawiony na
   \label{streaming}
 \end{figure}
 
-W związku z tym, że opisywane mechanizmy wykorzystują techniki
+W związku z tym, że opisywane rozwiązania wykorzystują techniki
 nieobjęte żadną specyfikacją, ich działanie jest w dużej mierze
 zależne od implementacji poszczególnych przeglądarek
 internetowych. Największym wyzwaniem jest przystosowanie wymienionych
@@ -1193,12 +1190,12 @@ przedstawiony na \imref{statemachine-state}.
 
 Po przeanalizowaniu dostępnych rozwiązań, opisanych w rozdziale
 \ref{javascript}, do komunikacji wybrany został \emph{HTTP
-  Pull}. Opóźnienia, wynikające z zastosowania tego mechanizmu nie
-mają większego wpływu na rozgrywkę. Istotnym elementem przemawiającym
-za wykorzystaniem \emph{HTTP Pull} jest prostota użytkowania. Nie
-wymusza on posiadania dodatkowych serwerów i domen. Ponadto, większość
-dostępnych bibliotek \emph{JavaScriptowych} udostępnia wygodne
-mechanizmy umożliwiające proste tworzenie wywołań \emph{Ajax}.
+  Pull}. Opóźnienia, wynikające z zastosowania tego rozwiązania
+komunikacji nie mają większego wpływu na rozgrywkę. Istotnym elementem
+przemawiającym za wykorzystaniem \emph{HTTP Pull} jest prostota
+użytkowania. Nie wymusza on posiadania dodatkowych serwerów i
+domen. Ponadto, większość dostępnych bibliotek \emph{JavaScriptowych}
+udostępnia wygodne sposoby tworzenia wywołań \emph{Ajax}.
 
 Jako format wymiany danych wybrany został \emph{JSON}. Główną zaletą
 tego formatu jest fakt, że do parsowania zapisanych w nim danych, w
@@ -1562,7 +1559,7 @@ wyjątek. Dzięki temu, że wszystkie operacje bazodanowe, wykonywane
 przed lub po zapisie właściwego obiektu, są objęte jedną transakcją,
 to po rzuceniu wyjątku baza danych nie jest w żaden sposób
 modyfikowana, a transakcja zostaje wycofana
-(ang. \emph{rollback}). Taki mechanizm zapewnia, że wszystkie akcje
+(ang. \emph{rollback}). Takie rozwiązanie zapewnia, że wszystkie akcje
 graczy muszą być wywoływane wyłącznie w przeznaczonych dla nich fazach
 gry.
 
@@ -1722,10 +1719,10 @@ gracza została przedstawiona na listingu \ref{listing:player}.
 \subsection{Karta rozwoju}
 Informacje o zakupionych przez graczy kartach rozwoju znajdują się w
 obiektach klasy \texttt{Card}. W związku z tym, że w grze występuje
-pięć rodzajów kart postępu, do ich implementacji wykorzystany został
-mechanizm \emph{STI}. Różnice w działaniu poszczególnych rodzajów kart
-są dość znaczne, dlatego zastosowanie tego mechanizmu pozwoliło na
-wydzielenie logiki do osobnych klas:
+pięć rodzajów kart postępu, do ich implementacji wykorzystany zostało
+\emph{STI}. Różnice w działaniu poszczególnych rodzajów kart są dość
+znaczne, dlatego zastosowanie tej techniki pozwoliło na wydzielenie
+logiki do osobnych klas:
 
 \begin{itemize}
 \item karty ,,rycerza'' - klasa \texttt{Card::Army}
@@ -1916,8 +1913,7 @@ uwierzytelniania użytkowników została przedstawiona na listingu
 
 \begin{listing}
   \input{usersession}
-  \caption{Implementacja i obsługa mechanizmu uwierzytelniania
-    użytkowników}
+  \caption{Implementacja i obsługa uwierzytelniania użytkowników}
   \label{listing:usersession}
 \end{listing}
 
@@ -1969,9 +1965,9 @@ W każdej akcji mamy dostęp m.in. do następujących obiektów:
 \item \texttt{params} - tablicy asocjacyjnej z odpowiednio
   przetworzonymi parametrami żądania \emph{HTTP}
 \item \texttt{session} - tablicy asocjacyjnej danych sesji, uzyskanej
-  z danych pochodzących z żądania i wybranego mechanizmu
-  przechowywania sesji\footnote{domyślnie dane sesji są przechowywane
-    jako ,,ciasteczka'' podpisane odpowiednią funkcją skrótu, w celu
+  z danych pochodzących z żądania i wybranego sposobu przechowywania
+  sesji\footnote{domyślnie dane sesji są przechowywane jako
+    ,,ciasteczka'' podpisane odpowiednią funkcją skrótu, w celu
     uniemożliwienia edycji. Możliwe jest także przechowywanie sesji w
     bazie danych, serwerach \emph{MemCache} czy \emph{DRb}}
 \item \texttt{cookies} - tablicy asocjacyjnej z ,,ciasteczkami''
@@ -2207,7 +2203,7 @@ zalety języka \emph{Sass} to:
 \begin{itemize}
 \item wykorzystywanie wcięć do odzwierciedlenia struktury selektorów -
   zmniejsza to liczbę powtórzeń w kodzie
-\item mechanizm \emph{mixinów} - powtarzające się elementy można
+\item \emph{mixiny} - powtarzające się elementy można
   wydzielić jako moduły i używać ich wielokrotnie
 \item możliwość definiowania zmiennych - zamiast powtarzać nic nie
   mówiące liczby czy kolory, możemy korzystać z nazwanych
@@ -2290,19 +2286,19 @@ decyzję o zmianie biblioteki na \emph{YUI} było wydanie wersji
 \emph{3.0.0 beta 1} w dniu 24 czerwca 2009 roku. W porównaniu do
 poprzednich wersji, biblioteka \emph{YUI3} została przeprojektowana i
 w większości zaimplementowana od początku. Jej twórcy zapożyczyli
-także najlepsze rozwiązania innych bibliotek, m.in. mechanizm
-selektorów \emph{jQuery}. \emph{YUI3} oferuje bardzo bogaty zestaw
-gotowych narzędzi, z których najważniejsze z punktu widzenia
-tworzonego projektu to:
+także najlepsze rozwiązania innych bibliotek, m.in. selektory węzłów
+modelu \emph{DOM} zaczerpnięte z \emph{jQuery}. \emph{YUI3} oferuje
+bardzo bogaty zestaw gotowych narzędzi, z których najważniejsze z
+punktu widzenia tworzonego projektu to:
 
 \begin{itemize}
 \item ,,klasa''\footnote{w języku \emph{JavaScript} formalnie nie
     istnieje pojęcie klasy. W praktyce okazuje się jednak, że
-    zastosowany mechanizm bezklasowy wykorzystywany jest podobny
-    sposób do tradycyjnego} \texttt{Base} udostępniająca podstawowe
-  mechanizmy znane z klasycznych języków obiektowych, takie jak:
-  kontruktory i destruktory, atrybuty wraz z metodami dostępowymi
-  (\texttt{get} i \texttt{set})
+    dziedziczenie bezklasowe wykorzystywane jest podobny sposób do
+    tradycyjnego} \texttt{Base} udostępniająca podstawowe rozwiązania
+  znane z klasycznych języków obiektowych, takie jak: kontruktory i
+  destruktory, atrybuty wraz z metodami dostępowymi (\texttt{get} i
+  \texttt{set})
 \item ,,klasa'' \texttt{Widget} będąca podstawą dla wszystkich
   tworzonych kontrolek
 \item funkcje takie jak \texttt{augment}, \texttt{extend} i
@@ -2328,7 +2324,7 @@ poważnym konkurentem dla dominujących dzisiaj rozwiązań, takich jak
 \section{Logika gry}
 W przypadku tradycyjnych aplikacji internetowych, niepoprawne dane
 wysyłane są do serwera, który zwraca w odpowiedzi błędy
-walidacji. Zastosowanie tego mechanizmu wprowadziłoby do gry
+walidacji. Zastosowanie tego rozwiązania wprowadziłoby do gry
 niepotrzebne opóźnienia oraz stanowiłoby spore utrudnienie,
 szczególnie dla początkujących graczy.
 
@@ -2541,7 +2537,7 @@ rodzajach posiadanych przez graczy kart zasobów. W tym przypadku żadne
 uproszczenia nie były możliwe, gdyż jest to bardzo istotny element
 rozgrywki.
 
-Mogłoby się wydawać, że zastosowany mechanizm komunikacji jest
+Mogłoby się wydawać, że zastosowany sposób komunikacji jest
 nieoptymalny i powoduje niepotrzebny wzrost ilości przesyłanych
 informacji. Danych tych jest w rzeczywistości dość niewiele, a
 wykorzystanie formatu \emph{JSON} powoduje, że całkowity rozmiar
@@ -2586,17 +2582,16 @@ pozwalają one wykryć błędy, których znalezienie w tradycyjny sposób
 trudne. Bardzo często do testów jednostkowych wykorzystywana jest
 tradycyjna baza danych, dzięki czemu możliwe jest zweryfikowanie
 poprawności jej schematu lub wykonywanych zapytań. Wadą takiego
-rozwiązania jest znaczne spowolnienie procesu uruchamiania testów. Aby
-przyspieszyć nieco wykonywanie testów, wykorzystany został mechanizm
-transakcyjny -- każdy test objęty jest oddzielną transakcją, a po jego
-zakończeniu dokonane modyfikacje bazy danych są cofane
-(ang. rollback).
+rozwiązania jest znaczne spowolnienie procesu uruchamiania testów. Do
+przyspieszenia wykonywania testów, wykorzystane zostały transakcje --
+każdy test objęty jest oddzielną transakcją, a po jego zakończeniu
+dokonane modyfikacje bazy danych są cofane (ang. rollback).
 
 Częstym problemem podczas tworzenia testów jest przygotowanie danych
-testowych. Framework \emph{Ruby on Rails} oferuje w tym celu mechanizm
+testowych. Framework \emph{Ruby on Rails} oferuje w tym celu
 tzw. \emph{fixtures}. Polega on na zapisywaniu zestawów danych
 testowych w plikach \emph{YAML} i ładowanie ich do bazy danych przed
-uruchomieniem testów. Największym problemem tego mechanizmu jest
+uruchomieniem testów. Największym problemem tego rozwiązania jest
 ładowanie danych bezpośrednio do bazy danych, z pominięciem modeli, w
 celu zwiększenia wydajności. Pominięcie procesu walidacji powoduje, że
 baza może zawierać nieprawidłowe dane, co może skutkować pojawieniem
@@ -2609,9 +2604,9 @@ biblioteka \emph{Factory Girl}, stworzona przez firmę
 fabrykę obiektów danej klasy poprzez ustalenie początkowych wartości
 poszczególnych atrybutów. Jako atrybuty mogą być używane inne fabryki,
 co umożliwia tworzenie połączonych ze sobą struktur danych. W
-przeciwieństwie do mechanizmu \emph{fixtures}, \emph{Factory Girl}
-dokonuje zapisu do bazy pośrednio -- wykorzystując modele. Dzięki temu
-każdy obiekt przed zapisaniem w bazie przechodzi standardowy proces
+przeciwieństwie do \emph{fixtures}, \emph{Factory Girl} dokonuje
+zapisu do bazy pośrednio -- wykorzystując modele. Dzięki temu każdy
+obiekt przed zapisaniem w bazie przechodzi standardowy proces
 walidacji.
 
 Dzięki wykorzystaniu bibliotek \emph{Test::Unit} i \emph{Factory Girl},
@@ -2663,9 +2658,9 @@ sobą następujące konsekwencje:
   wykonaniem testów, przedłuża to znacznie start środowiska testowego
 \item konieczność synchronizacji procesów - proces wykonujący testy
   musi czekać na załadowanie strony przez przeglądarkę internetową
-\item konieczność zrezygnowania z mechanizmu transakcyjnego do
-  czyszczenia bazy danych (wymagane jest ręczne czyszczenie bazy
-  danych po wykonaniu każdego zestawu testów)
+\item konieczność zrezygnowania z transakcji w celu czyszczenia bazy
+  danych (wymagane jest ręczne czyszczenie bazy danych po wykonaniu
+  każdego zestawu testów)
 \end{itemize}
 
 Wyżej opisane problemy przysłaniają korzyści płynące z użycia testów

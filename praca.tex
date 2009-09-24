@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,11pt]{report}
 
 \usepackage[utf8]{inputenc}
 \usepackage{polski}
@@ -11,6 +11,24 @@
 \usepackage{subfig}
 
 \input{pygments}
+
+\textwidth\paperwidth
+\advance\textwidth -55mm
+\oddsidemargin-1in
+\advance\oddsidemargin 30mm
+\evensidemargin-1in
+\advance\evensidemargin 25mm
+\topmargin -1in
+\advance\topmargin 25mm
+\setlength\textheight{48\baselineskip}
+\addtolength\textheight{\topskip}
+\marginparwidth15mm
+
+\widowpenalty999999
+\tolerance450
+\pretolerance250
+\hfuzz=1.5pt
+\hbadness1450
 
 \providecommand{\imref}[1]{Rys. \ref{#1}} % referencja do obrazka
 
@@ -27,26 +45,47 @@
 
 \begin{document}
 
-\author{Jakub Kuźma}
-\title{Pioneers - internetowa implementacja gry ,,Osadnicy z Catanu''
-  w oparciu o framework Ruby on Rails}
-\date{\today}
+\renewcommand\maketitle{
+  \begin{titlepage}
+    \begin{center}
+      \includegraphics[width=80pt]{godlo.pdf}\\[30pt]
+      \Large\textsc{Politechnika Śląska}\\[0.5em]
+      \textsc{Wydział Automatyki, Elektroniki i Informatyki}\\[100pt]
+      \LARGE Praca dyplomowa magisterska\\[50pt]
+      Pioneers - internetowa implementacja gry \\[0.5em]
+      ,,Osadnicy z Catanu'' w oparciu o
+      framework\\[0.5em]
+      Ruby on Rails\\[80pt]
+    \end{center}
+    \Large\textbf{Autor}: Jakub Kuźma\\
+    \Large\textbf{Kierujący pracą}: dr inż. Paweł Kasprowski\\
+    \vfill
+    \normalsize\centering Gliwice, \today
+  \end{titlepage}
+}
 
 \begin{titlepage}
-\maketitle
+  \maketitle
 \end{titlepage}
 
 \tableofcontents
 
-\clearpage
+\cleardoublepage
 
-\section{Wstęp}
+\chapter{Wstęp}
 
-\clearpage
+% aplikacje webowe zdobywają coraz większą popularność
+% przeglądarki mają coraz większe możliwości
+% microsoft office 2010, bez silverlight
+% flash czy silverlight jako technologie przejściowe, wsparcie dla
+% elementów których nie posiadają starsze przeglądarki, nowe będą
+% miały video, audio, svg, websockets, etc.
 
-\section{Analiza zagadnienia}
+\cleardoublepage
 
-\subsection{Osadnicy z Catanu}
+\chapter{Analiza zagadnienia}
+
+\section{Osadnicy z Catanu}
 Gra planszowa ,,Osadnicy z Catanu'' została opracowana przez
 niemieckiego matematyka Klausa Teubera. Po raz pierwszy została ona
 wydana w 1995 roku w Niemczech pod nazwą \emph{Die Siedler von
@@ -56,19 +95,19 @@ polski. Na całym świecie organizowane są turnieje gry, a począwszy od
 roku 2000 organizowane są corocznie mistrzostwa świata. Pierwsze
 polskie wydanie gry przypada na rok 2005. Od tego czasu każdego roku
 organizowane są Mistrzostwa Polski w grze ,,Osadnicy z Catanu'', które
-w 2009 roku odbędą się w Gliwicach.
+w 2009 roku odbyły się w Gliwicach\cite{pionek}.
 
-\subsection{Elementy gry}
+\section{Elementy gry}
 Pierwotna wersja gry jest przeznaczona dla 3-4 graczy. Słowo
 ,,pierwotna'' jest tutaj szczególnie warte podkreślenia, gdyż, ze
 względu na swą ogromną popularność, gra doczekała się bardzo dużej
-ilości dodatków i modyfikacji zasad. W tym podrozdziale postaram się
+liczby dodatków i modyfikacji zasad. W tym podrozdziale postaram się
 omówić wszystkie elementy wchodzące w skład podstawowej wersji
 gry. Jednakże, moim celem nie jest tłumaczenie zasad gry, a jedynie
 ukazanie najważniejszych jej aspektów, które musiały zostać
 uwzględnione przy implementacji.
 
-\subsubsection{Plansza}
+\subsection{Plansza}
 Rozgrywka toczy się na planszy złożonej z 37 sześciokątów
 oznaczających różne rodzaje terenu oraz przypisanych do nich wartości
 liczbowych. Poszczególne rodzaje pól mogą mieć także określony rodzaj
@@ -95,7 +134,7 @@ pod budowę dróg, które łączą osady i miasta. Drogi nie przynoszą
 Wszystkie karty surowców znajdujące się w posiadaniu poszczególnych
 graczy są zakryte dla pozostałych uczestników gry.
 
-\subsubsection{Element losowy - kości do gry}
+\subsection{Element losowy - kości do gry}
 Gra ,,Osadnicy z Catanu'' jest grą umysłowo-losową. Głównym elementem
 wprowadzającym do gry losowość są dwie sześciościenne kości do
 gry. Dla sumy dwóch rzutów kością prawdopodobieństwo uzyskania
@@ -119,7 +158,7 @@ grze.
   \label{dice}
 \end{figure}
 
-\subsubsection{Karty rozwoju}
+\subsection{Karty rozwoju}
 Kolejnym czynnikiem wprowadzającym w niewielkim stopniu losowość są
 karty rozwoju. Za określoną ilość kart surowców gracz może nabyć kartę
 rozwoju, ciągnąc ją z wierzchu potasowanego i zakrytego stosu. W grze
@@ -142,7 +181,7 @@ rezultacie gracz posiadający np. trzy karty rozwoju, może potencjalnie
 posiadać trzy dodatkowe punkty zwycięstwa, które umożliwią mu znacznie
 szybsze zakończenie gry.
 
-\subsubsection{Handel}
+\subsection{Handel}
 Podczas rozgrywki gracze mają możliwość wymiany posiadanych surowców z
 innymi graczami lub z bankiem.
 
@@ -155,7 +194,7 @@ Przy handlu z innymi uczestnikami nie ma żadnych narzuconych z góry
 ,,kursów wymiany'' (zależą one wyłącznie od graczy). Zawsze jednak
 musi to być wymiana - zabronione jest pozbywanie się surowców.
 
-\subsubsection{Walka}
+\subsection{Walka}
 \label{sec:fight}
 Ostatnim istotnym elementem gry jest ,,walka''. Zagranie karty armii
 oraz wyrzucenie siódemki daje możliwość przesunięcia pionka,
@@ -164,7 +203,7 @@ graczom żadnego dochodu. Dodatkowo, po przesunięciu pionka, gracz ma
 możliwość ,,obrabowania'' jednej z sąsiadujących z nim osad lub miast,
 zabierając losowo wybraną kartę surowca od ich właściciela.
 
-\subsubsection{Cel gry}
+\subsection{Cel gry}
 Celem gry jest zdobycie 10 punktów zwycięstwa, które są przyznawane
 za:
 
@@ -176,9 +215,9 @@ za:
 \item kartę rozwoju ,,punkt zwycięstwa'' - 1 punkt
 \end{itemize}
 
-\clearpage
+\cleardoublepage
 
-\section{Analiza istniejących rozwiązań}
+\chapter{Analiza istniejących rozwiązań}
 W tym rozdziale przedstawionych zostało kilka powszechnie dostępnych,
 działających rozwiązań. Wszystkie zaprezentowane implementacje gry
 wymagają od użytkownika posiadania dodatkowego oprogramowania (poza
@@ -188,7 +227,7 @@ Windows). Wadą tego typu rozwiązań jest to, że przystosowanie ich dla
 innych platform (np. dla urządzeń mobilnych) często wiąże się z
 koniecznością przepisania całej aplikacji.
 
-\subsection{Pioneers}
+\section{Pioneers}
 Pierwotna nazwa tej aplikacji brzmiała \emph{gnocatan}. Aplikacja
 została udostępniona w 2000 roku na licencji GNU GPL. Gra została
 napisana całości w języku \emph{C}, podzielona jest na serwer i część
@@ -205,7 +244,7 @@ przedstawiony na \imref{pioneers}.
   \label{pioneers}
 \end{figure}
 
-\subsection{JSettlers}
+\section{JSettlers}
 Aplikacja napisana w całości w Javie, rozwijana od początku 2004 roku,
 dostępna na licencji GNU GPL\cite{jsettlers}. Aplikacja przystosowana
 do uruchamiania w przeglądarce internetowej z zainstalowanym
@@ -221,7 +260,7 @@ ekranu z gry \emph{JSettlers}.
   \label{jsettlers}
 \end{figure}
 
-\subsection{Solito Server, MSN Games, PlayCatan.com}
+\section{Solito Server, MSN Games, PlayCatan.com}
 Wszystkie te rozwiązania są oprogramowaniem własnościowym, w przypadku
 dwóch ostatnich tytułów, płatnym. \emph{Solito Server} napisany został
 przy użyciu technologii \emph{Adobe Flash}, dlatego jest w pewnym
@@ -231,7 +270,7 @@ wszystkich platformach, na których dostępny jest \emph{Adobe
 kontrolą systemu operacyjnego \emph{Microsoft Windows}, wymagające
 dodatkowo instalacji.
 
-\subsection{Catan - The First Island}
+\section{Catan - The First Island}
 Jest to prawdopodobnie jedyna implementacja gry dedykowana urządzeniom
 mobilnym. Pierwotnie aplikacja napisana została w Javie dla urządzeń
 mobilnych, przez niemiecką firmę \emph{Exozet Games}. W połowie 2009
@@ -242,9 +281,9 @@ roku pojawiła się także wersja przeznaczona dla konsoli \emph{Nintendo
 serwera. Obie opisywane wersje są płatnym oprogramowaniem
 własnościowym.
 
-\clearpage
+\cleardoublepage
 
-\section{Określenie funkcji aplikacji i wybór technologii}
+\chapter{Określenie funkcji aplikacji i wybór technologii}
 Projektowana aplikacja składać się będzie z dwóch części: serwera i
 klienta. Aplikacja w założeniu będzie wymagać bardzo dużego nakładu
 pracy, w tym zaprojektowania interfejsu graficznego. Aby umożliwić
@@ -257,7 +296,7 @@ język \emph{Ruby} i framework \emph{Ruby on Rails}. Wybór można
 uzasadnić bardzo dobrym wsparciem frameworka dla architektury
 \emph{REST}, która zostanie wykorzystana do utworzenia \emph{API}.
 
-\subsection{Ruby}
+\section{Ruby}
 Język \emph{Ruby} został stworzony w 1995 roku przez Yukihiro
 Matsumoto. Inspirowany jest on w głównej mierze językami, takimi jak:
 \emph{Lisp}, \emph{Perl}, \emph{Python}, \emph{Smalltalk}, a także
@@ -333,7 +372,7 @@ tworzenia aplikacji okienkowych, serwerów sieciowych, jak i skryptów
 systemowych. Nie zmienia to jednak faktu, że popularność języka wiąże
 się nierozłącznie z frameworkiem \emph{Ruby on Rails}.
 
-\subsection{Ruby on Rails}
+\section{Ruby on Rails}
 Twórcą frameworka \emph{Ruby on Rails} jest duński programista David
 Heinemeier Hansson. Framework powstał w wyniku prac nad aplikacją
 \emph{Basecamp}, został udostępniony w połowie 2004 roku. Wzrost
@@ -361,7 +400,7 @@ m.in. serwery aplikacji \emph{JBoss}, \emph{GlassFish} lub
 Cały framework jest udostępniony na zasadach licencji \emph{MIT}
 \cite{mit}.
 
-\subsubsection{Architektura Ruby on Rails}
+\subsection{Architektura Ruby on Rails}
 Framework \emph{Ruby on Rails} składa się z komponentów, z których
 główne to:
 
@@ -401,7 +440,7 @@ elementami frameworka został przedstawiony na
   \label{railsarchitecture}
 \end{figure}
 
-\subsubsection{Rozwój Ruby on Rails}
+\subsection{Rozwój Ruby on Rails}
 Na początku roku 2008 światło dzienne ujrzał nowy framework do
 tworzenia aplikacji webowych o nazwie \emph{Merb}, silnie inspirowany
 przez \emph{Ruby on Rails}. Został on stworzony z inicjatywy Ezry
@@ -416,7 +455,7 @@ się zająć połączeniem powstającego \emph{Merba 2} i \emph{Ruby on
   Rails 3}. Zgodnie z ustaleniami, pierwsze wydania \emph{Ruby on
   Rails 3} mają się pojawić pod koniec 2009 roku.
 
-\subsection{JavaScript}
+\section{JavaScript}
 Język \emph{JavaScript} powstał pod koniec 1995 roku w firmie
 \emph{Netscape Communications Corporation} jako alternatywa dla
 uruchamianych w przeglądarce apletów \emph{Javy}. Jego twórcą jest
@@ -491,7 +530,7 @@ internetowymi. Wśród nich wyróżnić można m.in.:
     Systems}, wykorzystywany w środowisku \emph{Adobe Flash}
 \end{itemize}
 
-\subsubsection{XMLHttpRequest (Ajax)}
+\subsection{XMLHttpRequest (Ajax)}
 Po rozpowszechnieniu się \emph{JavaScriptu} w przeglądarkach
 internetowych, był on używany głównie do ,,upiększania'' stron
 \emph{HTML} i dodawania do nich dynamicznych elementów. Stał się swego
@@ -535,7 +574,7 @@ danych. Podobne rozwiązanie jest używane również do tzw. leniwego
 zaznaczyć, że ładowanie kodu z innych domen jest potencjalnie
 niebezpiecznym działaniem i powinno być wykorzystywane z dużą rozwagą.
 
-\subsubsection{HTTP Push (Comet)}
+\subsection{HTTP Push (Comet)}
 W przypadku standardowego wykorzystania technologii \emph{Ajax},
 przesyłanie danych odbywa się na żądanie przeglądarki internetowej. W
 niektórych rozwiązaniach taki mechanizm jest zbyt mało wydajny i
@@ -652,7 +691,7 @@ internetowej). Powstająca specyfikacja języka \emph{HTML 5} zawiera
 również rozwiązanie nazwane \emph{Web Sockets API}, które umożliwia
 dwustronną komunikację z serwerem \emph{HTTP}\cite{websockets}.
 
-\subsubsection{DOM}
+\subsection{DOM}
 Obiektowy model dokumentu(ang. Document Object Model) jest konwencją
 reprezentacji dokumentów \emph{XML}, \emph{XHTML} i \emph{XML} w
 postaci modelu obiektowego. Jest on wymagany przez język
@@ -675,7 +714,7 @@ poprawiające użyteczność samego
 \emph{jQuery}, \emph{Prototype}, \emph{DOJO Toolkit}, \emph{Yahoo!
   User Interface Library} oraz \emph{Google Web Toolkit}.
 
-\subsection{REST}
+\section{REST}
 \emph{REST} to styl architektury oprogramowania systemów
 rozproszonych. Skrót ten pochodzi od ang. \emph{Representational State
   Transfer}, został wprowadzony w pracy doktorskiej Roya Fieldinga
@@ -703,11 +742,11 @@ Począwszy od wersji 1.2, framework \emph{Ruby on Rails} w pełni
 wspiera \emph{REST}. Od wersji 2.0 jest to domyślny i zalecany sposób
 tworzenia aplikacji w tym frameworku.
 
-\clearpage
+\cleardoublepage
 
-\section{Projektowanie aplikacji}
+\chapter{Projektowanie aplikacji}
 
-\subsection{Plansza}\label{sec:board}
+\section{Plansza}\label{sec:board}
 Jednym z podstawowych problemów, jakie należy rozwiązać projektując
 aplikację, jest przechowywanie planszy w relacyjnej bazie
 danych. Naturalnie, pierwszym pomysłem było wykorzystanie mechanizmu z
@@ -759,7 +798,7 @@ Oprócz zbioru sześciokątów, wierzchołków i krawędzi, plansza do gry
 powinna zawierać informacje o jej rozmiarze (ilości wierszy i kolumn)
 oraz o aktualnym położeniu ,,rozbójnika''.
 
-\subsubsection{Sześciokąty}
+\subsection{Sześciokąty}
 Podobnie jak w implementacji gry \emph{Pioneers}, sześciokąty zostały
 ułożone w dwuwymiarową tablicę. Każdy z nich ma przypisaną pozycję,
 składającą się z numeru wiersza $x$ i kolumny $y$. Sposób numeracji
@@ -784,7 +823,7 @@ sześciokąt powinien zawierać następujące informacje:
   \label{board}
 \end{figure}
 
-\subsubsection{Wierzchołki}
+\subsection{Wierzchołki}
 Numerowanie wierzchołków jest nieco bardziej skomplikowanym
 zadaniem. Wykorzystany został tutaj fakt, iż, przy numeracji
 sześciokątów przedstawionej na \imref{board}, w każdym z nich można
@@ -807,7 +846,7 @@ dodatkową informację o tym, czy jest osadą, czy miastem.
   \label{nodes}
 \end{figure}
 
-\subsubsection{Krawędzie}
+\subsection{Krawędzie}
 Krawędzie numerowane są na podobnej zasadzie co wierzchołki. Również
 niezbędne okazało się wprowadzenie niepowiązanych z sześciokątami
 pozycji. Sposób numeracji krawędzi został przedstawiony na
@@ -824,7 +863,7 @@ musi należeć do jednego z graczy.
   \label{edges}
 \end{figure}
 
-\subsubsection{Obliczanie pozycji elementów dołączonych}
+\subsection{Obliczanie pozycji elementów dołączonych}
 \label{sec:calculations}
 Po wprowadzeniu przedstawionych schematów numeracji, możliwe staje się
 wyznaczenie pozycji elementów sąsiadujących z ponumerowanymi
@@ -1042,7 +1081,7 @@ zostały przedstawione w równaniach \ref{edgehexes}, \ref{edgenodes} i
   \label{edgeedges}
 \end{equation}
 
-\subsection{Gra}
+\section{Gra}
 Głównym zadaniem obiektów tej klasy będzie przechowywanie informacji o
 stanie gry. Każda gra musi posiadać trzech lub czterech graczy oraz
 planszę, na której toczy się rozgrywka. Ze względu na to, że przebieg
@@ -1051,7 +1090,7 @@ konieczne będzie zaimplementowanie maszyny stanowej. Dzięki maszynie
 stanowej ,,fazy gry'', możliwe będzie sprawdzanie poprawności ruchów
 wykonywanych przez graczy, oraz sterowanie przebiegiem gry.
 
-\subsubsection{Maszyna stanowa ,,fazy gry''}
+\subsection{Maszyna stanowa ,,fazy gry''}
 Gra ,,Osadnicy z Catanu'' podzielona jest na dwa etapy. Pierwszym
 etapem gry jest etap zasiedlenia wyspy, podczas którego gracze kolejno
 stawiają na planszy po jednej osadzie i drodze. Następnie każdy z
@@ -1115,7 +1154,7 @@ rzucie.
 Schemat przejść w maszynie stanowej fazy gry został przedstawiony na
 \imref{statemachine-phase}.
 
-\subsubsection{Maszyna stanowa ,,stanu gry''}
+\subsection{Maszyna stanowa ,,stanu gry''}
 
 Dodatkowo, gra może znajdować się w jednym z następujących stanów:
 
@@ -1150,7 +1189,7 @@ przedstawiony na \imref{statemachine-state}.
   \label{statemachine-state}
 \end{figure}
 
-\subsection{Komunikacja}
+\section{Komunikacja}
 
 Po przeanalizowaniu dostępnych rozwiązań, opisanych w rozdziale
 \ref{javascript}, do komunikacji wybrany został \emph{HTTP
@@ -1171,7 +1210,7 @@ narzędzi\footnote{JSON (ang. JavaScript Object Notation) - prosty
 jest również jednym z głównych formatów serializacji danych, używanych
 we frameworku \emph{Ruby on Rails}.
 
-\subsection{Baza danych}
+\section{Baza danych}
 Główną tabelą w bazie danych, z którą w różnej liczebności łączą się
 wszystkie pozostałe, jest tabela \texttt{games}. Oprócz opisywanej już
 w \ref{sec:board} planszy (tabele \texttt{board}, \texttt{hexes},
@@ -1213,13 +1252,13 @@ kośćmi).
   \label{erd}
 \end{figure}
 
-\clearpage
+\cleardoublepage
 
-\section{Implementacja serwera}
+\chapter{Implementacja serwera}
 
-\subsection{Modele}\label{sec:models}
+\section{Modele}\label{sec:models}
 
-\subsubsection{Gra}
+\subsection{Gra}
 Model \texttt{Game} jest głównym elementem kontrolującym przebieg
 rozgrywki. Posiada on implementację dwóch maszyn stanowych
 przedstawionych na \imref{statemachine-state} i
@@ -1377,7 +1416,7 @@ rozgrywce, w tym o:
 \item numerze tury (\texttt{current\_turn})
 \end{itemize}
 
-\subsubsection{Plansza}
+\subsection{Plansza}
 
 Model \texttt{Board} odpowiedzialny jest za tworzenie i walidację
 powiązanych z nim sześciokątów. Przed zapisaniem obiektu planszy do
@@ -1400,7 +1439,7 @@ Rozmiar planszy jest przechowywany w kolumnach \texttt{height} i
 \texttt{robber\_col}. Każda plansza posiada identyfikator gry, do
 której należy, przechowywany w kolumnie \texttt{game\_id}.
 
-\subsubsection{Sześciokąt}
+\subsection{Sześciokąt}
 Zadaniem modelu \texttt{Hex} jest przechowywanie informacji o
 sześciokątach znajdujących się na planszy do gry. Każdy z nich posiada
 określony typ (\texttt{hex\_type}), tj. \texttt{hill}, \texttt{field},
@@ -1448,7 +1487,7 @@ krawędzie.
   \label{listing:find}
 \end{listing}
 
-\subsubsection{Wierzchołek}
+\subsection{Wierzchołek}
 
 Wierzchołki reprezentowane są przez obiekty klasy \texttt{Node}. Są
 one tworzone dopiero wówczas, gdy jeden z graczy buduje osadę na
@@ -1527,7 +1566,7 @@ modyfikowana, a transakcja zostaje wycofana
 graczy muszą być wywoływane wyłącznie w przeznaczonych dla nich fazach
 gry.
 
-\subsubsection{Krawędź}
+\subsection{Krawędź}
 
 Podobnie jak w przypadku wierzchołków, obiekty klasy \texttt{Edge}
 tworzone są tylko wówczas, gdy jeden z graczy buduje drogę. Przy
@@ -1634,7 +1673,7 @@ Podobnie jak w przypadku budowania osad czy miast, po zbudowaniu
 drogi, w maszynie stanowej ,,fazy gry'' wywoływane jest zdarzenie
 \texttt{road\_built!}.
 
-\subsubsection{Gracz}
+\subsection{Gracz}
 Informacje o uczestnikach rozgrywki przechowywane są w obiektach klasy
 \texttt{Player}. Każda gra posiada uporządkowaną listę graczy,
 składającą się zgodnie z zasadami gry z 3-4 elementów, posortowaną
@@ -1680,7 +1719,7 @@ gracza została przedstawiona na listingu \ref{listing:player}.
   \label{listing:player}
 \end{listing}
 
-\subsubsection{Karta rozwoju}
+\subsection{Karta rozwoju}
 Informacje o zakupionych przez graczy kartach rozwoju znajdują się w
 obiektach klasy \texttt{Card}. W związku z tym, że w grze występuje
 pięć rodzajów kart postępu, do ich implementacji wykorzystany został
@@ -1757,7 +1796,7 @@ odpowiednich zdarzeń w maszynie stanowej fazy gry. Są to zdarzenia
 ,,rycerza'' powoduje zwiększenie o jeden atrybutu \texttt{army\_size}
 u zagrywającego gracza.
 
-\subsubsection{Rzut kością}
+\subsection{Rzut kością}
 
 Wszystkie rzuty kością są przechowywane w bazie danych. Dzięki temu
 możliwe jest wygenerowanie statystyk rzutów po zakończeniu rozgrywki,
@@ -1768,7 +1807,7 @@ z wynikiem rzutu (\texttt{value}) przechowywane są: identyfikator gry
 numeru tury w obrębie gry. Uniemożliwia to kilkukrotny rzut kośćmi w
 ciągu tej samej tury.
 
-\subsubsection{Handel}
+\subsection{Handel}
 Podobnie jak w poprzednich przypadkach, wszystkie oferty handlu i
 wymiany przechowywane są w bazie danych. Po zakończeniu rozgrywki
 możliwe jest więc uzyskanie z nich dość szczegółowych
@@ -1812,7 +1851,7 @@ handel pomiędzy graczami doszedł do skutku, zapisywana jest także
 informacja o drugiej stronie transakcji (atrybut
 \texttt{recipient\_id}).
 
-\subsubsection{Rabunek}
+\subsection{Rabunek}
 Obiekty klasy \texttt{Robbery} tworzone są przy przesuwaniu pionka
 ,,rozbójnika''. Oprócz obowiązkowych parametrów w postaci numeru
 wiersza i kolumny (atrybuty \texttt{row} i \texttt{col}), możliwe jest
@@ -1826,7 +1865,7 @@ go otrzymuje (\texttt{recipient\_id}). Po utworzeniu obiektu w
 maszynie stanowej ,,fazy gry'' wywoływane jest zdarzenie
 \texttt{robbed}.
 
-\subsubsection{Odrzucenie zasobów}
+\subsection{Odrzucenie zasobów}
 Jak zostało już nadmienione w rozdziale \ref{sec:fight}, wyrzucenie
 kośćmi do gry wyniku 7 oczek powoduje przejście do fazy przesuwania
 ,,rozbójnika''. Zanim to jednak nastąpi, wszyscy gracze posiadający
@@ -1840,7 +1879,7 @@ jaka wynika z powyższego wyliczenia. Po utworzeniu obiektu wywoływane
 jest zdarzenie \texttt{discarded}, powodujące odpowiednie przejście w
 maszynie stanowej ,,fazy gry''.
 
-\subsubsection{Użytkownik i sesja}
+\subsection{Użytkownik i sesja}
 Do uwierzytelniania użytkowników użyta została biblioteka
 \emph{Authlogic} stworzona przez Bena Johnsona, właściciela firmy
 Binary Logic. Wykorzystano ją przy implementacji dwóch klas:
@@ -1882,7 +1921,7 @@ uwierzytelniania użytkowników została przedstawiona na listingu
   \label{listing:usersession}
 \end{listing}
 
-\subsection{Kontrolery}
+\section{Kontrolery}
 
 Główne zadania kontrolerów w aplikacjach \emph{Ruby on Rails} to
 obsługa parametrów żądania \emph{HTTP}, komunikacja z bazą danych za
@@ -1940,7 +1979,7 @@ W każdej akcji mamy dostęp m.in. do następujących obiektów:
 \item \texttt{response} - obiektu budowanej odpowiedzi
 \end{itemize}
 
-\subsubsection{Ścieżki}\label{sec:routes}
+\subsection{Ścieżki}\label{sec:routes}
 Aby możliwe było wywołanie metody kontrolera z przeglądarki
 internetowej, niezbędne jest zrzutowanie adresów URL na odpowiadające
 im akcje i kontrolery. Przekształcaniem adresów żądań \emph{HTTP} na
@@ -1968,6 +2007,7 @@ działania polecenia otrzymujemy tablicę ścieżek, podobną do tej,
 przedstawionej w tabeli \ref{table:routes}.
 
 \begin{table}[ht]
+  \centering
   \begin{tabular}{|l|l|l|l|l|}
     \hline
     \textbf{metoda} & \textbf{ścieżka} & \textbf{kontroler} & \textbf{akcja} \\ \hline
@@ -2140,7 +2180,7 @@ robbery[sender_number]=1
 \end{verbatim}
 \end{itemize}
 
-\subsection{Widoki}
+\section{Widoki}
 Domyślnym silnikiem renderowania szablonów we frameworku \emph{Ruby on
   Rails} jest \emph{ERB}\footnote{ERB (ang. Embedded Ruby) - system
   szablonów pozwalający na zagnieżdżanie kodu języka \emph{Ruby} w
@@ -2226,9 +2266,9 @@ planszy do gry z włączonymi stylami \emph{CSS}
   \label{fig:board}
 \end{figure}
 
-\clearpage
+\cleardoublepage
 
-\section{Implementacja klienta}
+\chapter{Implementacja klienta}
 
 Początkowo do implementacji części klienckiej wykorzystana została
 biblioteka \emph{jQuery}, wraz z \emph{jQuery UI}. Biblioteka
@@ -2285,7 +2325,7 @@ solidnych fundamentach. W niedalekiej przyszłości może ona okazać się
 poważnym konkurentem dla dominujących dzisiaj rozwiązań, takich jak
 \emph{jQuery}.
 
-\subsection{Logika gry}
+\section{Logika gry}
 W przypadku tradycyjnych aplikacji internetowych, niepoprawne dane
 wysyłane są do serwera, który zwraca w odpowiedzi błędy
 walidacji. Zastosowanie tego mechanizmu wprowadziłoby do gry
@@ -2325,7 +2365,7 @@ odpowiedzialny za ostateczne sprawdzenie poprawności działań graczy, w
 celu uniemożliwienia nieprzepisowych zagrań, np. poprzez fałszowanie
 treści zapytań.
 
-\subsection{Elementy interfejsu graficznego}
+\section{Elementy interfejsu graficznego}
 
 ,,Klasą'' bazową dla elementów interfejsu graficznego w bibliotece
 \emph{YUI} jest ,,klasa'' \texttt{Widget}. W przeciwieństwie do
@@ -2358,7 +2398,7 @@ znaczników, wraz z przykładowymi nazwami klas przedstawiony został na
 
 \begin{figure}[ht]
   \begin{center}
-    \includegraphics[width=\linewidth]{widget}
+    \includegraphics[width=0.8\linewidth]{widget}
   \end{center}
   \caption{Schemat zagnieżdżenia znaczników \emph{HTML} kontrolki
     \texttt{Game} wraz z przykładowymi oznaczeniami klas}
@@ -2444,7 +2484,7 @@ serwerem. Wygląd opisanych wyżej kontrolek przedstawiony został na
   \label{fig:widgets}
 \end{figure}
 
-\subsection{Komunikacja z serwerem}
+\section{Komunikacja z serwerem}
 
 W związku z tym, że jednym z głównych założeń projektowych jest
 możliwość dostosowania aplikacji do wymagań stawianych przez
@@ -2524,11 +2564,11 @@ jedna akcja, pozostali gracze odnoszą wrażenie płynności gry. Takie
 rozwiązanie znacząco poprawia komfort rozgrywki i znakomicie sprawdza
 się w przypadku gier turowych.
 
-\clearpage
+\cleardoublepage
 
-\section{Testowanie i uruchamianie}
+\chapter{Testowanie i uruchamianie}
 
-\subsection{Testy jednostkowe}
+\section{Testy jednostkowe}
 Domyślnym narzędziem pozwalającym na tworzenie testów jednostkowych we
 frameworku \emph{Ruby on Rails} jest biblioteka
 \emph{Test::Unit}. Pojęciem ,,testów jednostkowych'' określa się
@@ -2578,7 +2618,7 @@ Dzięki wykorzystaniu bibliotek \emph{Test::Unit} i \emph{Factory Girl},
 utworzone zostały testy jednostkowe najważniejszych modeli,
 m.in. \texttt{Hex}, \texttt{Edge}, \texttt{Node} i \texttt{Player}.
 
-\subsection{Testy integracyjne}
+\section{Testy integracyjne}
 Społeczność skupiona wokół frameworka \emph{Ruby on Rails} położyła
 duży nacisk na zwiększenie użyteczności i czytelności testów
 integracyjnych. Jest to spowodowane faktem, iż często kod testów,
@@ -2632,9 +2672,9 @@ Wyżej opisane problemy przysłaniają korzyści płynące z użycia testów
 integracyjnych. W rezultacie w projekcie zostały one zastąpione
 testowaniem ręcznym.
 
-\clearpage
+\cleardoublepage
 
-\subsection{Instalowanie i uruchamianie aplikacji}
+\section{Instalowanie i uruchamianie aplikacji}
 Instalacja środowiska uruchomieniowego aplikacji nie jest zadaniem
 skomplikowanym. Najpopularniejszym środowiskiem produkcyjnym dla
 aplikacji napisanych we frameworku \emph{Ruby on Rails} jest system
@@ -2751,9 +2791,9 @@ przedstawione zostały w tabeli \ref{table:credentials}.
   \caption{Dane uwierzytelniające przykładowych kont użytkowników}
 \end{table}
 
-\clearpage
+\cleardoublepage
 
-\section{Podsumowanie}
+\chapter{Podsumowanie}
 
 % blablabla
 

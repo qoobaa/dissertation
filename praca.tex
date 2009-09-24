@@ -74,21 +74,19 @@
 \cleardoublepage
 
 \chapter{Wstęp}
-Powszechny dostęp do internetu odgrywa coraz większą rolę naszym
-codziennym życiu.
-
-W początkowo całkowicie statycznych stronach \emph{WWW} stopniowo
-pojawiały się dynamiczne elementy. Stało się tak dzięki wprowadzeniu
-do przeglądarek interpreterów języka \emph{JavaScript}. Dzięki
-rosnącej popularności języka \emph{PHP}, treść stron dostępnych w
-internecie zaczęła być generowana na żądanie, przez serwery
-\emph{HTTP}. Do pierwotnie bezstanowego protokołu \emph{HTTP} dodano
-obsługę tzw. ,,ciasteczek'', które pozwoliły serwerowi identyfikować
-użytkownika i przechowywać powiązane z nim informacje. Były to
-podstawy niezbędne do stworzenia pierwszych dużych serwisów, takich
-jak \emph{Yahoo!}. Wkrótce po tym pojawiły się pierwsze przeglądarki
-oferujące możliwość komunikacji z serwerem bez konieczności
-przeładowania strony. Umożliwiło to tworzenie bardziej
+Początki sieci \emph{World Wide Web} sięgają lat 90 XX
+wieku. Gwałtownie rosnąca popularność \emph{WWW} oraz zwiększająca się
+liczba udostępnianych w nim dokumentów, spowodowały konieczność
+katalogowania treści. Pojawiły się pierwsze wyszukiwarki internetowe i
+portale. W celu zwiększenia interaktywności i ulepszenia interfejsu
+stron powstał język \emph{JavaScript}. Do pierwotnie bezstanowego
+protokołu \emph{HTTP} dodano obsługę tzw. ,,ciasteczek'', które
+pozwoliły serwerowi identyfikować użytkownika i przechowywać powiązane
+z nim informacje. Pojawienie się języka \emph{PHP} znakomicie
+uprościło tworzenie aplikacji webowych i sprawiło, że coraz częściej
+zastępowały one tradycyjne rozwiązania. Wkrótce po tym pojawiły się
+pierwsze przeglądarki oferujące możliwość komunikacji z serwerem bez
+konieczności przeładowania strony. Umożliwiło to tworzenie bardziej
 skomplikowanych, a zarazem przyjaźniejszych w obsłudze
 aplikacji. Rosnąca popularność technologii \emph{Ajax}, bo o niej
 mowa, była jednym z powodów okrzyknięcia nowopowstających aplikacji
@@ -96,34 +94,49 @@ terminem \emph{Web 2.0}. Niezależnie od tego, czy opisywany przełom
 nastąpił czy też nie, oczywistym jest fakt, iż dzisiejsze aplikacje
 internetowe znacząco różnią się od swoich poprzedników.
 
-Ta krótka historia rozwoju sieci \emph{WWW} ukazuje, w jaki sposób
-statyczne strony internetowe wyewoluowały do pełnowymiarowych
-aplikacji, które konkurują dzisiaj z tradycyjnym oprogramowaniem
-zainstalowanym w komputerze użytkownika. Można również zaobserwować,
-że możliwości oferowane przez dodatkowe technologie, takie jak aplety
-\emph{Javy} czy \emph{Adobe Flash} są stopniowo ,,wchłaniane'' przez
-współczesne przeglądarki internetowe. Tak samo, jak w przypadku
-apletów \emph{Javy}, w przyszłości wyparta może zostać technologia
-\emph{Adobe Flash}, która dzisiaj używana jest głównie do odtwarzania
-filmów\footnote{trwają prace nad wprowadzeniem do piątej specyfikacji
-  języka \emph{HTML} znaczników \texttt{<audio>} i \texttt{<video>}
-  oraz zintegrowaniu dekoderów z przeglądarkami internetowymi} oraz
-animacji i grafiki wektorowej\footnote{podobne możliwości oferuje
-  standard \emph{Scalable Vector Graphics (SVG)} w połączeniu z
-  językiem \emph{JavaScript}}. Przekonywujący w tej sprawie jest
-również fakt ogłoszenia przez \emph{Microsoft} rozpoczęcia prac nad
-\emph{Office Web Apps}. Aplikacje opracowywane w ramach tego projektu
-w założeniu mają wymagać od klienta posiadania wyłącznie przeglądarki
+To krótkie streszczenie historii rozwoju sieci \emph{WWW} ukazuje, w
+jaki sposób statyczne strony internetowe wyewoluowały do
+pełnowymiarowych aplikacji, które konkurują dzisiaj z tradycyjnym
+oprogramowaniem zainstalowanym w komputerze użytkownika. Można również
+zaobserwować, że możliwości oferowane przez dodatkowe technologie,
+takie jak aplety \emph{Javy} czy \emph{Adobe Flash} są stopniowo
+,,wchłaniane'' przez współczesne przeglądarki internetowe. Tak samo,
+jak w przypadku rzadko wykorzystywanych już dziś apletów \emph{Javy},
+w przyszłości wyparta może zostać technologia \emph{Adobe Flash},
+która używana jest głównie do odtwarzania multimediów\footnote{trwają
+  prace nad wprowadzeniem do piątej specyfikacji języka \emph{HTML}
+  znaczników \texttt{<audio>} i \texttt{<video>} oraz zintegrowaniu
+  dekoderów z przeglądarkami internetowymi} oraz animacji i grafiki
+wektorowej\footnote{podobne możliwości oferuje standard \emph{Scalable
+    Vector Graphics (SVG)} w połączeniu z językiem
+  \emph{JavaScript}}. Przekonywujący w tej sprawie jest również fakt
+ogłoszenia przez \emph{Microsoft} rozpoczęcia prac nad \emph{Office
+  Web Apps}. Aplikacje opracowywane w ramach tego projektu w założeniu
+mają wymagać od klienta posiadania wyłącznie przeglądarki
 internetowej. Uzasadnieniem takiej decyzji jest fakt, iż nie można
 wymagać posiadania dodatkowego oprogramowania od klienta
 korzystającego z komputera w publicznej bibliotece lub na
 lotnisku\cite{microsoft}.
 
-Jest to dość obrazowe przedstawienie zmieniającego się modelu rozwoju
-oprogramowania, które coraz częściej oferowane jest klientowi w formie
-usługi. Najważniejszymi korzyściami płynącymi z zastosowania takiego
-podejścia jest przerzucenie obowiązków zarządzania, pielęgnowania i
-aktualizowania oprogramowania na jego dostawcę.
+Na rynku dostępna jest szeroka gama urządzeń mobilnych pracujących pod
+kontrolą rozmaitych platform. Wiele z tych platform nie oferuje
+wsparcia dla technologii takich jak \emph{Java} czy \emph{Adobe
+  Flash}. Tworzenie aplikacji webowych to zdecydowanie najtańszy i
+najszybszy sposób dotarcia do szerokiej grupy odbiorców i
+uniezależniania tworzonego oprogramowania od platform
+sprzętowych. Zmianie ulega model rozwoju oprogramowania, które coraz
+częściej oferowane jest klientowi w formie usługi. Najważniejszymi
+korzyściami płynącymi z zastosowania takiego podejścia jest
+przerzucenie obowiązków zarządzania, pielęgnowania i aktualizowania
+oprogramowania na jego dostawcę.
+
+Wiele popularnych serwisów oferujących gry sieciowe, takie jak szachy
+czy brydż, wymaga do działania \emph{Javy} lub \emph{Flasha}. Celem
+tej pracy dyplomowej jest pokazanie, że możliwe jest zaimplementowanie
+nawet skomplikowanej gry sieciowej, mając do dyspozycji wyłącznie
+funkcje współczesnych przeglądarek internetowych. Dzięki takiemu
+podejściu, dużo prostsze jest przystosowanie gry do działania w
+urządzeniach mobilnych.
 
 \cleardoublepage
 

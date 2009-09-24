@@ -40,6 +40,10 @@
 
 \clearpage
 
+\section{Wstęp}
+
+\clearpage
+
 \section{Analiza zagadnienia}
 
 \subsection{Osadnicy z Catanu}
@@ -1270,7 +1274,7 @@ dyspozycji następujące przejścia:
   numeru aktualnego gracza. Jeśli warunek nie jest spełniony,
   wybierane jest bezwarunkowe przejście do \texttt{second\_settlement}
 \item z \texttt{second\_road} do \texttt{second\_settlement} -
-  analogicznie jak w poprzednim przypadku, przejście jest możliwe tylko%,
+  analogicznie jak w poprzednim przypadku, przejście jest możliwe tylko,
   jeśli istnieje gracz o numerze niższym od numeru aktualnego
   gracza. W przeciwnym wypadku wybierane jest bezwarunkowe przejście
   do \texttt{before\_roll}
@@ -1693,7 +1697,7 @@ wydzielenie logiki do osobnych klas:
 \end{itemize}
 
 Karta rozwoju nie może zostać zagrana przez gracza, bezpośrednio po
-jej zakupie, lecz dopiero w następnej rundzie. Ponadto%, każda karta
+jej zakupie, lecz dopiero w następnej rundzie. Ponadto, każda karta
 może zostać zagrana tylko raz. Do implementacji tych zasad po raz
 kolejny została wykorzystana maszyna stanowa. Składa się ona z trzech
 stanów: \texttt{tapped}, \texttt{untapped} i \texttt{graveyard} oraz
@@ -1901,7 +1905,7 @@ przedstawiona na listingu \ref{listing:filter}.
 Przed wywołaniem dowolnej akcji kontrolera \texttt{EdgesController},
 wywoływane są metody \texttt{require\_user} i
 \texttt{fetch\_game}. Pierwsza z nich, pochodząca z klasy bazowej,
-jest odpowiedzialna za odnalezienie obiektu zalogowanego użytkownika%
+jest odpowiedzialna za odnalezienie obiektu zalogowanego użytkownika
 na podstawie danych zawartych w sesji. Podobnie, jak w przypadku
 wywołań zwrotnych klasy \texttt{ActiveRecord}, akcja kontrolera nie
 jest wywoływana jeśli którykolwiek z filtrów zwróci wartość
@@ -2275,7 +2279,7 @@ wersji \emph{GA}, nie jest zalecane wykorzystanie biblioteki w
 środowiskach produkcyjnych. Konsekwencją wyboru \emph{YUI3} jest
 również stosunkowo niewielka społeczność skupiona wokół biblioteki. Do
 tej pory dostępne są jedynie bardzo nieliczne przykłady wykorzystania
-\emph{YUI3} oraz jej rozszerzenia. Pomimo tych niedogodności%,
+\emph{YUI3} oraz jej rozszerzenia. Pomimo tych niedogodności,
 biblioteka ta jest warta uwagi, gdyż zbudowana została na bardzo
 solidnych fundamentach. W niedalekiej przyszłości może ona okazać się
 poważnym konkurentem dla dominujących dzisiaj rozwiązań, takich jak
@@ -2390,16 +2394,17 @@ zdarzeń następujących obiektów:
 \end{itemize}
 
 Obiekt \texttt{Game} odpowiedzialny jest także za komunikację z
-serwerem.
+serwerem. Wygląd opisanych wyżej kontrolek przedstawiony został na
+\imref{fig:widgets}.
 
-\begin{itemize}
-\item \texttt{YearOfPlenty} - używany w przypadku zagrania karty
-  rozwoju ,,wynalazek''
-\item \texttt{Monopoly} - używany w przypadku zagrania karty
-  ,,monopol''
-\end{itemize}
+% \begin{itemize}
+% \item \texttt{YearOfPlenty} - używany w przypadku zagrania karty
+%   rozwoju ,,wynalazek''
+% \item \texttt{Monopoly} - używany w przypadku zagrania karty
+%   ,,monopol''
+% \end{itemize}
 
-\textbf{TODO!}
+% \textbf{TODO!}
 % zawierają inne widgety (Game, Cards)
 % korzystają z danych zawartych w poprzednich klasach
 % wywołują eventy przechwytywane przez Game, który odpowiedzialny jest
@@ -2422,15 +2427,15 @@ serwerem.
     \\
     \subfloat[Tworzenie oferty handlu]{\label{fig:offerwidget}\includegraphics[scale=0.45]{offerwidget.png}}
     &
-    \subfloat[Dołączanie do rozgrywki]{\label{fig:joinwidget}\includegraphics[scale=0.45]{joinwidget.png}}
+    \subfloat[Dołączanie do rozgrywki]{\hspace{2cm}\label{fig:joinwidget}\includegraphics[scale=0.45]{joinwidget.png}\hspace{2cm}}
     \\
-    \subfloat[Podgląd otrzymanej oferty handlu]{\label{fig:offerreceivedwidget}\includegraphics[scale=0.45]{offerreceivedwidget.png}}
+    \subfloat[Podgląd otrzymanej oferty handlu]{\hspace{2cm}\label{fig:offerreceivedwidget}\includegraphics[scale=0.45]{offerreceivedwidget.png}\hspace{2cm}}
     &
-    \subfloat[Podgląd utworzonej oferty handlu]{\label{fig:offersentwidget}\includegraphics[scale=0.45]{offersentwidget.png}}
+    \subfloat[Podgląd utworzonej oferty handlu]{\hspace{2cm}\label{fig:offersentwidget}\includegraphics[scale=0.45]{offersentwidget.png}\hspace{2cm}}
     \\
     \subfloat[Podgląd gracza]{\label{fig:userplayerwidget}\includegraphics[scale=0.45]{userplayerwidget.png}}
     &
-    \subfloat[Lista pozostałych graczy]{\label{fig:playerswidget}\includegraphics[scale=0.45]{playerswidget.png}}
+    \subfloat[Lista pozostałych graczy]{\hspace{2cm}\label{fig:playerswidget}\includegraphics[scale=0.45]{playerswidget.png}\hspace{2cm}}
     \\
     \subfloat[Podgląd stanu gry]{\label{fig:gamestatuswidget}\includegraphics[scale=0.45]{gamestatuswidget.png}}
     &
@@ -2519,8 +2524,6 @@ jedna akcja, pozostali gracze odnoszą wrażenie płynności gry. Takie
 rozwiązanie znacząco poprawia komfort rozgrywki i znakomicie sprawdza
 się w przypadku gier turowych.
 
-% TODO
-% PRZEFORMATUJ SOBIE STRONE 74, BO TE WCIECIA Z PRAWEJ SA OKROPNE
 \clearpage
 
 \section{Testowanie i uruchamianie}
@@ -2571,7 +2574,7 @@ dokonuje zapisu do bazy pośrednio -- wykorzystując modele. Dzięki temu
 każdy obiekt przed zapisaniem w bazie przechodzi standardowy proces
 walidacji.
 
-Dzięki wykorzystaniu bibliotek \emph{Test::Unit} i \emph{Factory Girl}%,
+Dzięki wykorzystaniu bibliotek \emph{Test::Unit} i \emph{Factory Girl},
 utworzone zostały testy jednostkowe najważniejszych modeli,
 m.in. \texttt{Hex}, \texttt{Edge}, \texttt{Node} i \texttt{Player}.
 

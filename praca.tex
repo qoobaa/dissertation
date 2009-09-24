@@ -74,20 +74,60 @@
 \cleardoublepage
 
 \chapter{Wstęp}
+Powszechny dostęp do internetu odgrywa coraz większą rolę naszym
+codziennym życiu.
 
-% aplikacje webowe zdobywają coraz większą popularność
-% przeglądarki mają coraz większe możliwości
-% microsoft office 2010, bez silverlight
-% flash czy silverlight jako technologie przejściowe, wsparcie dla
-% elementów których nie posiadają starsze przeglądarki, nowe będą
-% miały video, audio, svg, websockets, etc.
+W początkowo całkowicie statycznych stronach \emph{WWW} stopniowo
+pojawiały się dynamiczne elementy. Stało się tak dzięki wprowadzeniu
+do przeglądarek interpreterów języka \emph{JavaScript}. Dzięki
+rosnącej popularności języka \emph{PHP}, treść stron dostępnych w
+internecie zaczęła być generowana na żądanie, przez serwery
+\emph{HTTP}. Do pierwotnie bezstanowego protokołu \emph{HTTP} dodano
+obsługę tzw. ,,ciasteczek'', które pozwoliły serwerowi identyfikować
+użytkownika i przechowywać powiązane z nim informacje. Były to
+podstawy niezbędne do stworzenia pierwszych dużych serwisów, takich
+jak \emph{Yahoo!}. Wkrótce po tym pojawiły się pierwsze przeglądarki
+oferujące możliwość komunikacji z serwerem bez konieczności
+przeładowania strony. Umożliwiło to tworzenie bardziej
+skomplikowanych, a zarazem przyjaźniejszych w obsłudze
+aplikacji. Rosnąca popularność technologii \emph{Ajax}, bo o niej
+mowa, była jednym z powodów okrzyknięcia nowopowstających aplikacji
+terminem \emph{Web 2.0}. Niezależnie od tego, czy opisywany przełom
+nastąpił czy też nie, oczywistym jest fakt, iż dzisiejsze aplikacje
+internetowe znacząco różnią się od swoich poprzedników.
 
+Ta krótka historia rozwoju sieci \emph{WWW} ukazuje, w jaki sposób
+statyczne strony internetowe wyewoluowały do pełnowymiarowych
+aplikacji, które konkurują dzisiaj z tradycyjnym oprogramowaniem
+zainstalowanym w komputerze użytkownika. Można również zaobserwować,
+że możliwości oferowane przez dodatkowe technologie, takie jak aplety
+\emph{Javy} czy \emph{Adobe Flash} są stopniowo ,,wchłaniane'' przez
+współczesne przeglądarki internetowe. Tak samo, jak w przypadku
+apletów \emph{Javy}, w przyszłości wyparta może zostać technologia
+\emph{Adobe Flash}, która dzisiaj używana jest głównie do odtwarzania
+filmów\footnote{trwają prace nad wprowadzeniem do piątej specyfikacji
+  języka \emph{HTML} znaczników \texttt{<audio>} i \texttt{<video>}
+  oraz zintegrowaniu dekoderów z przeglądarkami internetowymi} oraz
+animacji i grafiki wektorowej\footnote{podobne możliwości oferuje
+  standard \emph{Scalable Vector Graphics (SVG)} w połączeniu z
+  językiem \emph{JavaScript}}. Przekonywujący w tej sprawie jest
+również fakt ogłoszenia przez \emph{Microsoft} rozpoczęcia prac nad
+\emph{Office Web Apps}. Aplikacje opracowywane w ramach tego projektu
+w założeniu mają wymagać od klienta posiadania wyłącznie przeglądarki
+internetowej. Uzasadnieniem takiej decyzji jest fakt, iż nie można
+wymagać posiadania dodatkowego oprogramowania od klienta
+korzystającego z komputera w publicznej bibliotece lub na
+lotnisku\cite{microsoft}.
+
+Jest to dość obrazowe przedstawienie zmieniającego się modelu rozwoju
+oprogramowania, które coraz częściej oferowane jest klientowi w formie
+usługi. Najważniejszymi korzyściami płynącymi z zastosowania takiego
+podejścia jest przerzucenie obowiązków zarządzania, pielęgnowania i
+aktualizowania oprogramowania na jego dostawcę.
 
 \cleardoublepage
 
 \chapter{Analiza zagadnienia}
-
-\section{Osadnicy z Catanu}
 Gra planszowa ,,Osadnicy z Catanu'' została opracowana przez
 niemieckiego matematyka Klausa Teubera. Po raz pierwszy została ona
 wydana w 1995 roku w Niemczech pod nazwą \emph{Die Siedler von
@@ -99,14 +139,13 @@ polskie wydanie gry przypada na rok 2005. Od tego czasu każdego roku
 organizowane są Mistrzostwa Polski w grze ,,Osadnicy z Catanu'', które
 w 2009 roku odbyły się w Gliwicach\cite{pionek}.
 
-\section{Elementy gry}
 Pierwotna wersja gry jest przeznaczona dla 3-4 graczy. Słowo
 ,,pierwotna'' jest tutaj szczególnie warte podkreślenia, gdyż, ze
 względu na swą ogromną popularność, gra doczekała się bardzo dużej
-liczby dodatków i modyfikacji zasad. W tym podrozdziale postaram się
-omówić wszystkie elementy wchodzące w skład podstawowej wersji
-gry. Jednakże, moim celem nie jest tłumaczenie zasad gry, a jedynie
-ukazanie najważniejszych jej aspektów, które musiały zostać
+liczby dodatków i modyfikacji zasad. W dalszej części rozdziału
+omówione zostaną najważniejsze elementy wchodzące w skład podstawowej
+wersji gry. Jednakże, moim celem nie jest tłumaczenie zasad gry, a
+jedynie ukazanie najważniejszych jej aspektów, które musiały zostać
 uwzględnione przy implementacji.
 
 \subsection{Plansza}
@@ -289,9 +328,9 @@ własnościowym.
 Projektowana aplikacja składać się będzie z dwóch części: serwera i
 klienta. Aplikacja w założeniu będzie wymagać bardzo dużego nakładu
 pracy, w tym zaprojektowania interfejsu graficznego. Aby umożliwić
-rozwój aplikacji, zdecydowałem się udostępnić całość kodu jako wolne
-oprogramowanie na zasadach Powszechnej Licencji Publicznej GNU Affero
-w wersji 3\cite{affero}.
+rozwój aplikacji, cały kod aplikacji dostępny jest wolnym
+oprogramowaniem, dostępnym na zasadach Powszechnej Licencji Publicznej
+GNU Affero w wersji 3\cite{affero}.
 
 Do zaimplementowania części serwerowej aplikacji zostanie wykorzystany
 język \emph{Ruby} i framework \emph{Ruby on Rails}. Wybór można
@@ -397,8 +436,8 @@ jak \emph{Apache}, \emph{Lighttpd}, \emph{Abyss}, \emph{Thin},
 m.in. serwery aplikacji \emph{JBoss}, \emph{GlassFish} lub
 \emph{Apache Geronimo}.
 
-Cały framework jest udostępniony na zasadach licencji \emph{MIT}
-\cite{mit}.
+Cały framework jest udostępniony na zasadach licencji
+\emph{MIT}\cite{mit}.
 
 \subsection{Architektura Ruby on Rails}
 Framework \emph{Ruby on Rails} składa się z komponentów, z których
@@ -602,14 +641,13 @@ Jeśli przyjrzeć się bliżej aplikacji takiej jak \emph{Gmail}, okazuje
 się, że nie wykonuje ona cyklicznego odpytywania serwera, a wszystkie
 dane przesyłane są do klienta niemalże bez opóźnień. Najprostszym
 sposobem na uniknięcie częstego odpytywania serwera jest zastosowanie
-wydłużonego odpytywania (ang. long polling), poprzez opóźnianie
-reakcji serwera. Jeśli po otrzymaniu zapytania na serwerze nie ma
-żadnych danych do pobrania, zamiast wysyłać informację o braku danych
-serwer wstrzymuje się z odpowiedzią do czasu ich nadejścia. W
-przypadku, gdy na serwerze pojawią się dane, są one natychmiast
-wysyłane do klienta poprzez otwarte połączenie. W przypadku, gdy
-zostanie przekroczony maksymalny czas trwania połączenia
-(ang. timeout) jest ono zamykane. W obu przypadkach klient
+wydłużonego odpytywania (ang. long polling). Jeśli po otrzymaniu
+zapytania na serwerze nie ma żadnych danych do pobrania, zamiast
+wysyłać informację o braku danych serwer wstrzymuje się z odpowiedzią
+do czasu ich nadejścia. W przypadku, gdy na serwerze pojawią się dane,
+są one natychmiast wysyłane do klienta poprzez otwarte połączenie. W
+przypadku, gdy zostanie przekroczony maksymalny czas trwania
+połączenia (ang. timeout) jest ono zamykane. W obu przypadkach klient
 natychmiastowo wywołuje kolejne zapytanie, które ponownie oczekuje na
 pojawienie się danych. Schemat działania takiego rozwiązania został
 przedstawiony na \imref{longpolling}.
@@ -742,6 +780,8 @@ tworzenia aplikacji w tym frameworku.
 \cleardoublepage
 
 \chapter{Projektowanie aplikacji}
+
+% TODO
 
 \section{Plansza}\label{sec:board}
 Jednym z podstawowych problemów, jakie należy rozwiązać projektując
@@ -1253,7 +1293,18 @@ kośćmi).
 
 \chapter{Implementacja serwera}
 
+Zgodnie z przyjętymi założeniami, serwer aplikacji zaimplementowany
+został w języku \emph{Ruby} z wykorzystaniem frameworka \emph{Ruby on
+  Rails}.
+
 \section{Modele}\label{sec:models}
+
+Najważniejszą częścią każdej aplikacji korzystającej z frameworka
+\emph{Ruby on Rails} są modele. To właśnie w modelach znajduje się
+większość logiki biznesowej aplikacji. Najczęstszym zadaniem modeli,
+jest mapowanie relacji bazy danych na obiekty języka \emph{Ruby}. Do
+tego celu wykorzystywana jest biblioteka \emph{ActiveRecord},
+wchodząca w skład użytego frameworka.
 
 \subsection{Gra}
 Model \texttt{Game} jest głównym elementem kontrolującym przebieg
@@ -1279,11 +1330,11 @@ przejścia do stanów \texttt{playing} oraz \texttt{ended}. Każde
 przejście może posiadać także proste warunki, które muszą zostać
 spełnione aby możliwa była zmiana stanu. Aby doszło do przejścia z
 \texttt{playing} do \texttt{ended} w zdarzeniu \texttt{end\_game},
-metoda \texttt{winner?} musi zwrócić wartość \texttt{true} (dzieje się
-tak w przypadku, gdy zwycięzca gry jest już znany). Dodatkowo każdy z
-wymienionych stanów może posiadać własne zestawy walidatorów. Aby
-można było zapisać obiekt w stanie \texttt{playing}, spełnione muszą
-zostać trzy warunki:
+metoda \texttt{winner?}  musi zwrócić wartość \texttt{true} (dzieje
+się tak w przypadku, gdy zwycięzca gry jest już znany). Dodatkowo
+każdy z wymienionych stanów może posiadać własne zestawy
+walidatorów. Aby można było zapisać obiekt w stanie \texttt{playing},
+spełnione muszą zostać trzy warunki:
 
 \begin{itemize}
 \item gra musi posiadać 3-4 graczy
@@ -2217,8 +2268,8 @@ Dzięki dwóm ostatnim cechom języka, możliwe stało się wyświetlenie
 planszy do gry bez użycia \emph{JavaScriptu}. Takie rozwiązanie
 znacząco przyspiesza i ułatwia wyświetlanie planszy.
 
-W języku \emph{HTML} plansza do gry została opisana za pomocą tabeli
-(znacznika \texttt{<table>}), zawierającej trzy elementy
+Do opisu planszy do gry w dokumencie \emph{HTML} wykorzystana została
+tabela (znacznik \texttt{<table>}), zawierająca trzy elementy
 \texttt{<tbody>}. Są to właściwie trzy nałożone na siebie tabele,
 odpowiadające za wyświetlanie sześciokątów, wierzchołków i
 krawędzi. Każdy wiersz tabeli posiada klasę zawierającą jego numer
@@ -2563,6 +2614,16 @@ się w przypadku gier turowych.
 \cleardoublepage
 
 \chapter{Testowanie i uruchamianie}
+Do uruchomienia aplikacji i testów, niezbędne jest posiadanie
+odpowiednich narzędzi i bibliotek. Oprócz interpretera języka
+\emph{Ruby} i frameworka \emph{Ruby on Rails}, aplikacja wymaga także
+bazy danych. Dostęp do bazy danych realizowany jest poprzez bibliotekę
+\emph{ActiveRecord}. W aplikacji nie są wykorzystywane żadne
+specyficzne dla jednego silnika bazodanowego cechy, dzięki czemu
+możliwe jest użycie dowolnej, obsługiwanej przez \emph{ActiveRecord}
+bazy danych (w szczególności mogą to być \emph{MySQL}, \emph{Postgres}
+i \emph{SQLite}). W dalszej części rozdziału omówione zostały sposoby
+testowania aplikacji i instalacji środowiska uruchomieniowego.
 
 \section{Testy jednostkowe}
 Domyślnym narzędziem pozwalającym na tworzenie testów jednostkowych we

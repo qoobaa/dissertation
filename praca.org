@@ -10,10 +10,6 @@ Pioneers - internetowa implementacja gry "Osadnicy z Catanu" w oparciu o framewo
 ** tworzenie natywnych aplikacji jest trudne i czasochłonne (czasem niemożliwe)
 ** strona napisana zgodnie ze standardami powinna działać na jeszcze nieistniejących urządzeniach
 ** niezależność od platform (a od przeglądarek, różnice minimalizują biblioteki JS)
-* licencja
-** potrzebnych jest wiele elementów, których zrobienie przekracza możliwości jednego programisty
-** umożliwienie dalszego rozwoju gry, zaimplementowana została podstawowa wersja, możliwość dodania dodatków
-** możliwość podpatrzenia i ponownego wykorzystania niektórych rozwiązań
 * analiza zagadnienia
 
 ** Settlers of Catan
@@ -329,7 +325,12 @@ end
 - year-of-plenty
 * uruchomienie i przeprowadzenie testów
 ** testy jednostkowe
-* dalszy rozwój aplikacji
+* podsumowanie
+** osiągnięte zostały najważniejsze cele
 ** konieczność przystosowania aplikacji do stabilnej YUI 3 GA
 ** layout, design, interface, grafika
-** statystyki, usprawnienia interfejsu użytkownika
+** dodanie czatu, statystyki, usprawnienia interfejsu użytkownika
+** przystosowanie aplikacji do urządzeń mobilnych
+** potrzebnych jest wiele elementów, których zrobienie przekracza możliwości jednego programisty
+** umożliwienie dalszego rozwoju gry, zaimplementowana została podstawowa wersja, możliwość dodania dodatków
+** możliwość podpatrzenia i ponownego wykorzystania niektórych rozwiązań

@@ -85,8 +85,8 @@ odebrać lub wysłać nawet niewielką ilość danych, konieczne było
 przeładowanie całego dokumentu \emph{HTML}. Sytuacja ta sprawiła, iż
 język \emph{JavaScript} od samego początku postrzegany był bardziej
 jako dodatek, niż podstawowe narzędzie mogące posłużyć do budowy
-aplikacji. Pierwsze ,,jednoekranowe'' aplikacje, nie wymagające od
-użytkownika przeładowywania dokumentu, wykorzystywały dodatkowe
+aplikacji. Pierwsze ,,jednoekranowe'' aplikacje webowe, nie wymagające
+od użytkownika przeładowywania dokumentu, wykorzystywały dodatkowe
 technologie, z których najpopularniejszą do dzisiaj jest \emph{Adobe
   Flash} (wówczas \emph{Macromedia Flash}). To właśnie w firmie
 \emph{Macromedia} powstało określenie tego typu aplikacji jako
@@ -109,19 +109,19 @@ takie jak aplety \emph{Javy} czy \emph{Adobe Flash} są stopniowo
 ,,wchłaniane'' przez współczesne przeglądarki internetowe. Tak samo,
 jak w przypadku rzadko wykorzystywanych już dziś apletów \emph{Javy},
 w przyszłości wyparta może zostać technologia \emph{Adobe Flash},
-która używana jest głównie do odtwarzania multimediów\footnote{trwają
-  prace nad wprowadzeniem do piątej specyfikacji języka \emph{HTML}
-  znaczników \texttt{<audio>} i \texttt{<video>} oraz zintegrowaniu
-  dekoderów z przeglądarkami internetowymi} oraz animacji i grafiki
-wektorowej\footnote{podobne możliwości oferuje standard \emph{Scalable
-    Vector Graphics (SVG)} w połączeniu z językiem
-  \emph{JavaScript}}. Przekonywujący w tej sprawie jest również fakt
-ogłoszenia przez \emph{Microsoft} rozpoczęcia prac nad \emph{Office
-  Web Apps}. Pomimo promowania przez firmę \emph{Microsoft}
-rozwiązania konkurencyjnego dla \emph{Adobe Flash} -- technologii
-\emph{Microsoft Silverlight}, wszystkie aplikacje opracowywane w
-ramach projektu \emph{Microsoft Office Web Apps} w założeniu mają
-wymagać od użytkownika wyłącznie przeglądarki
+która dziś używana jest głównie do odtwarzania
+multimediów\footnote{trwają prace nad wprowadzeniem do piątej
+  specyfikacji języka \emph{HTML} znaczników \texttt{<audio>} i
+  \texttt{<video>} oraz zintegrowaniu dekoderów z przeglądarkami
+  internetowymi} oraz animacji i grafiki wektorowej\footnote{podobne
+  możliwości oferuje standard \emph{Scalable Vector Graphics (SVG)} w
+  połączeniu z językiem \emph{JavaScript}}. Przekonywujący w tej
+sprawie jest również fakt ogłoszenia przez \emph{Microsoft}
+rozpoczęcia prac nad \emph{Office Web Apps}. Pomimo promowania przez
+firmę \emph{Microsoft} rozwiązania konkurencyjnego dla \emph{Adobe
+  Flash} -- technologii \emph{Silverlight}, wszystkie aplikacje
+opracowywane w ramach projektu \emph{Microsoft Office Web Apps} w
+założeniu mają wymagać od użytkownika wyłącznie przeglądarki
 internetowej. Uzasadnieniem takiej decyzji jest fakt, iż nie można
 wymagać posiadania dodatkowego oprogramowania od użytkownika
 korzystającego z komputera w publicznej bibliotece lub na
@@ -140,28 +140,27 @@ usługi. Najważniejszymi korzyściami płynącymi z zastosowania takiego
 podejścia jest przerzucenie obowiązków zarządzania, pielęgnowania i
 aktualizowania oprogramowania na jego dostawcę.
 
+\section{Cel pracy}
 Wiele popularnych dziś serwisów oferujących gry sieciowe, takie jak
 szachy czy brydż, wymaga do działania \emph{Javy} lub
 \emph{Flasha}. Celem niniejszej pracy dyplomowej jest ukazanie, że
-możliwe jest zaimplementowanie nawet skomplikowanej gry sieciowej,
-mając do dyspozycji wyłącznie funkcje współczesnych przeglądarek
-internetowych. Dzięki takiemu podejściu, dużo prostsze jest
+możliwe jest zaimplementowanie nawet dość skomplikowanej gry
+sieciowej, mając do dyspozycji wyłącznie funkcje współczesnych
+przeglądarek internetowych.
+
+Zaprojektowany i zaimplementowany zostanie serwis umożliwiający
+rozgrywanie wieloosobowych partii gry planszowej ,,Osadnicy z
+Catanu''. Aplikacja ma umożliwiać prowadzenie wielu rozgrywek w tym
+samym czasie, dzięki tworzeniu tzw. stołów, podobnie jak w serwisie
+\url{kurnik.pl}. Część serwerowa aplikacji będzie wykorzystywać
+framework \emph{Ruby on Rails}. Komunikacja serwera z klientem ma się
+odbywać zgodnie z zasadami \emph{REST}\footnote{REST -
+  ang. Representational State Transfer}. Zastosowanie \emph{REST} nie
+wprowadza żadnych ograniczeń dla technologii użytej w części
+klienckiej, jednakże jej podstawowa implementacja wykorzystywać ma
+wyłącznie możliwości przeglądarek internetowych, w szczególności język
+\emph{JavaScript}. Dzięki takiemu podejściu, dużo prostsze będzie
 przystosowanie gry do działania np. w urządzeniach mobilnych.
-
-\section{Cel pracy}
-Celem pracy jest stworzenie serwisu umożliwiającego rozgrywanie
-wieloosobowych partii w grę planszową ,,Osadnicy z Catanu''. Aplikacja
-ma umożliwiać prowadzenie wielu rozgrywek w tym samym czasie, dzięki
-tworzeniu tzw. stołów, podobnie jak w serwisie \url{kurnik.pl}. Część
-serwerowa aplikacji ma być stworzona w oparciu o framework \emph{Ruby
-  on Rails}. Komunikacja serwera z klientem ma się odbywać zgodnie z
-zasadami \emph{REST}\footnote{REST - ang. Representational State
-  Transfer}, co nie wprowadza żadnych ograniczeń dla technologii
-użytej w części klienckiej. Jednakże jej podstawowa implementacja
-wykorzystywać ma wyłącznie możliwości współczesnych przeglądarek
-internetowych, bez użycia dodatkowych technologii, takich jak
-\emph{Adobe Flash} czy \emph{Java}.
-
 
 \cleardoublepage
 
@@ -210,9 +209,6 @@ pod budowę dróg, które łączą osady i miasta. Drogi nie przynoszą
 żadnych dochodów, umożliwiają natomiast ekspansję terytorialną
 (budowanie nowych osad).
 
-Wszystkie karty surowców znajdujące się w posiadaniu poszczególnych
-graczy są zakryte dla pozostałych uczestników gry.
-
 \section{Element losowy - kości do gry}
 Gra ,,Osadnicy z Catanu'' jest grą umysłowo-losową. Głównym elementem
 wprowadzającym do gry losowość są dwie sześciościenne kości do
@@ -249,16 +245,16 @@ grze występuje pięć rodzajów kart:
 \item karta ,,punkt zwycięstwa''
 \end{itemize}
 
-Karta rycerza stanowi element walki, element ten zostanie omówiony
-później. Karty postępu w różny sposób przyspieszają rozwój
-gracza. Ciekawym elementem jest jednak karta ,,punkt zwycięstwa'',
-która stanowi istotny element zaskoczenia w grze. W związku z tym, że
-po ,,zakupie'' karty rozwoju jest ona zakryta dla pozostałych graczy,
-nie znają oni rodzaju karty dopóki ta nie zostanie zagrana. Karty
-,,punkt zwycięstwa'' ujawniane są bezpośrednio przed końcem gry. W
-rezultacie gracz posiadający np. trzy karty rozwoju, może potencjalnie
-posiadać trzy dodatkowe punkty zwycięstwa, które umożliwią mu znacznie
-szybsze zakończenie gry.
+Karta rycerza stanowi element walki, aspekt ten został dokładniej
+omówiony w rozdziale \ref{sec:fight}. Karty postępu w różny sposób
+przyspieszają rozwój gracza. Jedną z ciekawszych kart rozwoju
+jest,,punkt zwycięstwa'', karta stanowiąca istotny element zaskoczenia
+w grze. W związku z tym, że po ,,zakupie'' karty rozwoju jest ona
+zakryta dla pozostałych graczy, nie znają oni jej rodzaju dopóki nie
+zostanie zagrana. Karty ,,punkt zwycięstwa'' ujawniane są bezpośrednio
+przed końcem gry. W rezultacie gracz posiadający np. trzy karty
+rozwoju, może potencjalnie posiadać trzy dodatkowe punkty zwycięstwa,
+które umożliwią mu znacznie szybsze zakończenie gry.
 
 \section{Handel}
 Podczas rozgrywki gracze mają możliwość wymiany posiadanych surowców z
@@ -273,8 +269,7 @@ Przy handlu z innymi uczestnikami nie ma żadnych narzuconych z góry
 ,,kursów wymiany'' (zależą one wyłącznie od graczy). Zawsze jednak
 musi to być wymiana - zabronione jest pozbywanie się surowców.
 
-\section{Walka}
-\label{sec:fight}
+\section{Walka}\label{sec:fight}
 Ostatnim istotnym elementem gry jest ,,walka''. Zagranie karty armii
 oraz wyrzucenie siódemki daje możliwość przesunięcia pionka,
 tzw. ,,rozbójnika''. Pole zajmowane przez ,,rozbójnika'' nie przynosi
@@ -306,12 +301,12 @@ Windows). Wadą tego typu rozwiązań jest to, że przystosowanie ich dla
 innych platform (np. dla urządzeń mobilnych) często wiąże się z
 koniecznością przepisania całej aplikacji.
 
-\section{Pioneers}
+\section{Pioneers}\label{sec:pioneers}
 Pierwotna nazwa tej aplikacji brzmiała \emph{gnocatan}. Aplikacja
-została udostępniona w 2000 roku na licencji GNU GPL. Gra została
-napisana całości w języku \emph{C}, podzielona jest na serwer i część
+została udostępniona w 2000 roku na zasadach licencji GNU GPL. Gra
+została napisana w języku \emph{C}, podzielona jest na serwer i część
 kliencką. Na stronie projektu możemy znaleźć kod źródłowy i wersje
-binarne, skompilowane na wszystkie popularne platformy
+skompilowane na wszystkie popularne platformy
 sprzętowe\cite{pioneers}. Zrzut ekranu z gry \emph{Pioneers} został
 przedstawiony na \imref{pioneers}.
 
@@ -324,12 +319,13 @@ przedstawiony na \imref{pioneers}.
 \end{figure}
 
 \section{JSettlers}
-Aplikacja napisana w całości w Javie, rozwijana od początku 2004 roku,
-dostępna na licencji GNU GPL\cite{jsettlers}. Aplikacja przystosowana
-do uruchamiania w przeglądarce internetowej z zainstalowanym
-środowiskiem uruchomieniowym Javy (\emph{ang. Java Runtime
-  Environment}). Na \imref{jsettlers} został przedstawiony zrzut
-ekranu z gry \emph{JSettlers}.
+Aplikacja została napisana w Javie, rozwijana jest od początku 2004
+roku. Podobnie jak w przypadku gry \emph{Pioneers}, została ona
+udostępniona na zasadach licencji GNU GPL\cite{jsettlers}. Aplikacja
+przystosowana do uruchamiania w przeglądarce internetowej z
+zainstalowanym środowiskiem uruchomieniowym Javy (ang. \emph{Java
+  Runtime Environment}). Na \imref{jsettlers} został przedstawiony
+zrzut ekranu z gry \emph{JSettlers}.
 
 \begin{figure}[ht]
   \begin{center}
@@ -341,7 +337,7 @@ ekranu z gry \emph{JSettlers}.
 
 \section{Solito Server, MSN Games, PlayCatan.com}
 Wszystkie te rozwiązania są oprogramowaniem własnościowym, w przypadku
-dwóch ostatnich tytułów, płatnym. \emph{Solito Server} napisany został
+dwóch ostatnich tytułów -- płatnym. \emph{Solito Server} napisany został
 przy użyciu technologii \emph{Adobe Flash}, dlatego jest w pewnym
 stopniu uniezależniony od platformy sprzętowej (można go używać na
 wszystkich platformach, na których dostępny jest \emph{Adobe
@@ -356,9 +352,8 @@ mobilnych, przez niemiecką firmę \emph{Exozet Games}. W połowie 2009
 roku pojawiła się także wersja przeznaczona dla konsoli \emph{Nintendo
   DS}. Oba rozwiązania umożliwiają rozgrywkę z graczem komputerowym
 (\emph{AI}) oraz z innymi graczami poprzez \emph{Bluetooth} lub
-\emph{WiFi}. Nie posiadają one niestety żadnego centralnego
-serwera. Obie opisywane wersje są płatnym oprogramowaniem
-własnościowym.
+\emph{WiFi}. Nie posiadają one niestety żadnego centralnego serwera
+gier. Obie opisywane wersje są płatnym oprogramowaniem własnościowym.
 
 \cleardoublepage
 
@@ -366,12 +361,11 @@ własnościowym.
 Projektowana aplikacja składać się będzie z dwóch części: serwera i
 klienta. Aplikacja w założeniu będzie wymagać bardzo dużego nakładu
 pracy, w tym zaprojektowania interfejsu graficznego. Aby umożliwić
-rozwój aplikacji, cały kod aplikacji dostępny jest wolnym
-oprogramowaniem, dostępnym na zasadach Powszechnej Licencji Publicznej
-GNU Affero w wersji 3\cite{affero}.
+rozwój aplikacji, cały jej kod dostępny jest na zasadach Powszechnej
+Licencji Publicznej GNU Affero w wersji 3\cite{affero}.
 
 Do zaimplementowania części serwerowej aplikacji zostanie wykorzystany
-język \emph{Ruby} i framework \emph{Ruby on Rails}. Wybór można
+język \emph{Ruby} i framework \emph{Ruby on Rails}. Wybór ten można
 uzasadnić bardzo dobrym wsparciem frameworka dla architektury
 \emph{REST}, która zostanie wykorzystana do utworzenia \emph{API}.
 
@@ -445,7 +439,7 @@ Yukihiro Matsumoto było stworzenie języka, który byłby
 niż \emph{Python}''\cite{matzinterview}. Język \emph{Ruby} posiada
 bardzo bogatą bibliotekę standardową, a także dużą liczbę bibliotek
 zewnętrznych (tzw. \emph{gemów}). Równie dobrze nadaje się do
-tworzenia aplikacji okienkowych, serwerów sieciowych, jak i skryptów
+tworzenia aplikacji użytkowych, serwerów sieciowych, jak i skryptów
 systemowych. Nie zmienia to jednak faktu, że popularność języka wiąże
 się nierozłącznie z frameworkiem \emph{Ruby on Rails}.
 
@@ -525,11 +519,11 @@ oprogramowanie miało być szybsze i bardziej modularne niż jego
 pierwowzór. Spory pomiędzy zwolennikami nowopowstałego frameworka a
 dotychczasową społecznością spowodowały powstanie w niej pewnego
 rodzaju rozłamu. Przy narastającej fali krytyki z obu stron, niedługo
-po wydaniu \emph{Merba 1.0}, David Heinemeier Hansson ogłosił
-połączenie obu grup programistów\cite{merge}. Utworzony zespół miał
-się zająć połączeniem powstającego \emph{Merba 2} i \emph{Ruby on
-  Rails 3}. Zgodnie z ustaleniami, pierwsze wydania \emph{Ruby on
-  Rails 3} mają się pojawić pod koniec 2009 roku.
+po wydaniu \emph{Merba 1.0}, ogłoszone zostało połączenie obu grup
+programistów\cite{merge}. Utworzony w ten sposób zespół zajmuje się
+połączeniem powstającego \emph{Merba 2} i \emph{Ruby on Rails
+  3}. Zgodnie z ustaleniami, pierwsze wydania \emph{Ruby on Rails 3}
+mają się pojawić pod koniec 2009 roku.
 
 \section{JavaScript}
 Język \emph{JavaScript} powstał pod koniec 1995 roku w firmie
@@ -803,11 +797,11 @@ odpowiadające im metody \emph{HTTP}, zwykle są to: \emph{POST},
 \emph{GET}, \emph{PUT} i \emph{DELETE}\cite{agile}.
 
 Główną cechą mającą silny wpływ na rosnącą popularność \emph{REST}
-jest prostota użytkowania, przez co stopniowo wypierane są rozwiązania
-oparte o \emph{XML-RPC} czy \emph{SOAP}. Dobrym przykładem ukazania
-tego faktu jest \emph{Amazon Web Services}. Klienci tych usług mają
-swobodny wybór pomiędzy dostępem do nich poprzez interfejs \emph{REST}
-i \emph{SOAP}, jednak 80\% z nich decyduje się na użycie
+jest prostota tego rozwiązania. Stopniowo wypiera ono protokoły takie
+jak \emph{XML-RPC} czy \emph{SOAP}, czego najlepszym dowodem są
+\emph{Amazon Web Services}. Klienci tych usług mają swobodny wybór
+pomiędzy dostępem do nich poprzez interfejs \emph{REST} i \emph{SOAP},
+jednak około 80\% z nich decyduje się na użycie
 \emph{REST}\cite{awsblog}.
 
 Począwszy od wersji 1.2, framework \emph{Ruby on Rails} w pełni
@@ -817,15 +811,15 @@ tworzenia aplikacji w tym frameworku.
 \cleardoublepage
 
 \chapter{Projektowanie aplikacji}
-
-% TODO
+Jednym z podstawowych problemów, jakie należy rozwiązać projektując
+aplikację, jest przechowywanie stanu gry w relacyjnej bazie
+danych. Konsekwencją tego faktu jest konieczność podziału aplikacji na
+modele odzwierciedlające relacje bazy danych. Przy projektowaniu
+niektórych modeli, w szczególności planszy i jej składników, wzorowano
+się na działającej implementacji -- grze \emph{Pioneers} opisywanej w
+rozdziale \ref{sec:pioneers}.
 
 \section{Plansza}\label{sec:board}
-Jednym z podstawowych problemów, jakie należy rozwiązać projektując
-aplikację, jest przechowywanie planszy w relacyjnej bazie
-danych. Naturalnie, pierwszym pomysłem było wykorzystanie mechanizmu z
-działającego rozwiązania, a mianowicie z gry \emph{Pioneers}.
-
 Plansza do gry w ,,Osadników'' składa się w pierwotnej wersji z 37
 połączonych ze sobą sześciokątów. Niektóre ich wierzchołki i krawędzie
 przeznaczone są pod budowę dróg i osad. Sytuację najbardziej
@@ -854,12 +848,12 @@ budowanej osady niezbędnych jest wykonanie kilku czynności:
   jest droga należąca do gracza - budowane osady muszą być połączone
   drogami
 \item sprawdzenie, czy jeden z sąsiadujących sześciokątów jest
-  lądem. Osady nie mogą być budowane na brzegach planszy (na
+  ,,lądem''. Osady nie mogą być budowane na brzegach planszy (na
   ,,morzu'')
 \end{itemize}
 
 Bardzo podobne czynności musimy wykonać, aby stwierdzić poprawność
-współrzędnych budowanej przez gracza drogi. Okazuje się więc, że
+współrzędnych budowanej przez gracza drogi. Okazuje się zatem, że
 najczęściej wykonywaną operacją jest pobranie sąsiadujących
 (dołączonych) elementów planszy. Najlepiej więc, gdyby na podstawie
 współrzędnych budowanej osady można było łatwo wyliczyć zbiór
@@ -926,8 +920,8 @@ niezbędne okazało się wprowadzenie niepowiązanych z sześciokątami
 pozycji. Sposób numeracji krawędzi został przedstawiony na
 \imref{edges}. Plansza o rozmiarach $x$ wierszy i $y$ kolumn, posiada
 tablicę krawędzi o wysokości $x+1$ wierszy i szerokości $3y+4$
-kolumn. Podobnie jak w przypadku wierzchołka -- zasiedlona krawędź
-musi należeć do jednego z graczy.
+kolumn. Podobnie jak w przypadku wierzchołka -- zajęta krawędź musi
+należeć do jednego z graczy.
 
 \begin{figure}[ht]
   \begin{center}
@@ -1315,7 +1309,7 @@ m.in. ofert, konieczne jest przechowanie informacji o obu uczestnikach
 transakcji (dwa powiązania z tabelą \texttt{players}). Niektóre
 informacje przechowywane w bazie danych wydają się być nieco
 nadmiarowe, mogą one jednak posłużyć do wygenerowania obszernych
-statystyk po zakończeniu rozgrywki (np. statystyka wyników rzutów
+statystyk po zakończeniu rozgrywki (np. statystyki wyników rzutów
 kośćmi).
 
 \begin{figure}[ht]
@@ -1348,7 +1342,7 @@ Model \texttt{Game} jest głównym elementem kontrolującym przebieg
 rozgrywki. Posiada on implementację dwóch maszyn stanowych
 przedstawionych na \imref{statemachine-state} i
 \imref{statemachine-phase}. Do implementacji maszyn stanowych
-wykorzystana została biblioteka \texttt{state\_machine}, autorstwa
+wykorzystana została biblioteka \emph{State Machine}, autorstwa
 Aarona Pfeifera. Udostępnia ona bardzo prosty \emph{DSL}\footnote{DSL
   (ang. Domain-specific language) - język dziedzinowy, przystosowany
   do rozwiązywania określonej dziedziny problemów} służący do opisu
@@ -1427,26 +1421,26 @@ przedstawiony na listingu \ref{listing:statemachine-phase}.
 \end{listing}
 
 Uproszczony algorytm wyboru przejść w maszynie stanowej opartej na
-bibliotece \texttt{state\_machine} jest następujący:
+bibliotece \emph{State Machine} jest następujący:
 
 \begin{enumerate}
-\item wybieramy z listy przejść pierwsze, które rozpoczyna się w
+\item Wybieramy z listy przejść pierwsze, które rozpoczyna się w
   aktualnym stanie (jeśli w danym zdarzeniu nie ma przejść
   rozpoczynających się w aktualnym stanie - kończymy
-  algorytm) \label{selectfirst}
-\item sprawdzamy, czy warunki przejścia (parametry \texttt{:if} i
+  algorytm)\label{selectfirst}.
+\item Sprawdzamy, czy warunki przejścia (parametry \texttt{:if} i
   \texttt{:unless}) są spełnione\label{checkconditions}. Jeśli tak, to
   próbujemy wykonać przejście zgodnie z punktem \ref{callbacks}. W
   przeciwnym wypadku wybieramy kolejne przejście, które rozpoczyna się
   w aktualnym stanie i wykonujemy ponownie punkt \ref{checkconditions}
-  (jeśli nie ma przejścia, to kończymy algorytm)
-\item sprawdzamy rezultaty wywołań zwrotnych (ang. callbacks)
+  (jeśli nie ma przejścia, to kończymy algorytm).
+\item Sprawdzamy rezultaty wywołań zwrotnych (ang. callbacks)
   przypisanych przez \texttt{before\_transition}. Jeśli którekolwiek z
   nich zwróci wartość \texttt{false}, to nie dokonujemy zmiany stanu i
   kończymy algorytm. W przeciwnym wypadku wykonujemy zmianę stanu
   wynikającą z wybranego przejścia, zapisujemy zmieniony obiekt w
   bazie danych i wywołujemy funkcje przypisane przez
-  \texttt{after\_transition} \label{callbacks}
+  \texttt{after\_transition}\label{callbacks}.
 \end{enumerate}
 
 Maszyna stanowa ,,fazy gry'' posiada zdefiniowany zestaw zdarzeń,
@@ -1478,7 +1472,7 @@ Do przechowywania stanu opisywanych maszyn stanowych, służą kolumny
 stanów w postaci ciągu znaków\footnote{nic nie stoi na przeszkodzie,
   aby w razie problemów wydajnościowych, stany były przechowywane w
   postaci liczbowej. Do tego celu można wykorzystać bibliotekę
-  \emph{enumerate\_by}, autorstwa Aarona Pfeifera}. Oprócz stanów,
+  \emph{Enumerate By}, autorstwa Aarona Pfeifera}. Oprócz stanów,
 konieczne jest przechowanie szeregu dodatkowych informacji o
 rozgrywce, w tym o:
 
@@ -1709,7 +1703,7 @@ otrzymujemy ścieżki o długościach: 2, 3, 4 oraz 5.
 \end{figure}
 
 Algorytm obliczania najdłuższej drogi został zaimplementowany w
-metodzie \texttt{longest\_road}, klasy \texttt{Edge}. Jest to
+metodzie \texttt{longest\_road} klasy \texttt{Edge}. Jest to
 zmodyfikowany algorytm przeszukiwania grafu w głąb w wersji
 rekurencyjnej. Pierwszym parametrem metody jest
 \texttt{visited\_roads} - zbiór odwiedzonych już wierzchołków, których
@@ -1851,8 +1845,8 @@ tworzeniu obiektów innych klas, po utworzeniu obiektu klasy
 maszynie stanowej ,,fazy gry''. Dalsze zachowanie obiektu, zależy od
 wylosowanego typu karty rozwoju.
 
-Zgodnie z zasadami gry, karta rozwoju ,,punkt zwycięstwa'' nie może
-zostać ,,zagrana'' -- ma ona natychmiastowy efekt. Dla uproszczenia
+Zgodnie z zasadami gry, karta rozwoju ,,punkt zwycięstwa'' ma
+natychmiastowy efekt (nie jest zagrywana). Dla uproszczenia
 implementacji przyjęto, że należny punkt zwycięstwa jest przyznawany
 wraz ze zdarzeniem \texttt{untap}. Nie ma to żadnego wpływu na
 rozgrywkę, wymusza jedynie na graczu zakończenie tury, w celu
@@ -1981,7 +1975,7 @@ danych. Najważniejsze zalety wynikające z użycia tego rozwiązania, to:
     z wyliczonym skrótem. Technika ta utrudnia odzyskiwanie
     pierwotnego hasła na podstawie jego skrótu.} skrótu hasła użytkownika,
   domyślnie hasło skracane jest dziesięciokrotnie funkcją
-  \emph{SHA1}\footnote{ang. Secure Hash Algorithm}
+  \emph{SHA-1}\footnote{ang. Secure Hash Algorithm}
 \item automatyczna obsługa dodatkowych pól,
   m.in. \texttt{failed\_login\_count} - licznik nieudanych logowań,
   \texttt{last\_request\_at} - czas ostatniego żądania,

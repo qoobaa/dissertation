@@ -11,6 +11,7 @@
 \usepackage{float}
 \usepackage{subfig}
 \usepackage{fancyhdr}
+\usepackage{hyperref}
 
 \input{pygments}
 
@@ -74,26 +75,30 @@
 \cleardoublepage
 
 \chapter{Wstęp}
-Początki sieci \emph{World Wide Web} sięgają lat 90 XX
-wieku. Gwałtownie rosnąca popularność \emph{WWW} oraz zwiększająca się
-liczba udostępnianych w niej dokumentów, spowodowały konieczność
-katalogowania treści. Pojawiły się pierwsze wyszukiwarki internetowe i
-portale. W celu zwiększenia interaktywności interfejsu stron powstał
-język \emph{JavaScript}. Do pierwotnie bezstanowego protokołu
-\emph{HTTP} dodano obsługę tzw. ,,ciasteczek'', które pozwoliły
-serwerowi identyfikować użytkownika i przechowywać powiązane z nim
-informacje. Pojawienie się języka \emph{PHP} znakomicie uprościło
-tworzenie aplikacji webowych i sprawiło, że coraz częściej zastępowały
-one tradycyjne rozwiązania. % aplikacje desktopowe
-Wkrótce po tym pojawiły się pierwsze przeglądarki oferujące możliwość
-komunikacji z serwerem bez konieczności przeładowania
-strony. Umożliwiło to tworzenie bardziej skomplikowanych, a zarazem
-przyjaźniejszych w obsłudze aplikacji. Rosnąca popularność technologii
-\emph{Ajax}, bo o niej mowa, była jednym z powodów okrzyknięcia
-nowopowstających aplikacji terminem \emph{Web 2.0}. Niezależnie od
-tego, czy opisywany przełom nastąpił czy też nie, oczywistym jest
-fakt, iż dzisiejsze aplikacje internetowe znacząco różnią się od
-swoich poprzedników.
+Początki sieci \emph{World Wide Web} sięgają lat 90 XX wieku. Na
+początkowo całkowicie statycznych stronach internetowych stopniowo
+zaczęły pojawiać się dynamiczne elementy. Stało się tak za sprawą
+wprowadzenia do przeglądarek internetowych obsługi języka
+\emph{JavaScript}. Główną przeszkodą w tworzeniu pełnowymiarowych
+aplikacji webowych w architekturze klient-serwer była komunikacja. Aby
+odebrać lub wysłać nawet niewielką ilość danych, konieczne było
+przeładowanie całego dokumentu \emph{HTML}. Sytuacja ta sprawiła, iż
+język \emph{JavaScript} od samego początku postrzegany był bardziej
+jako dodatek, niż podstawowe narzędzie mogące posłużyć do budowy
+aplikacji. Pierwsze ,,jednoekranowe'' aplikacje, nie wymagające od
+użytkownika przeładowywania dokumentu, wykorzystywały dodatkowe
+technologie, z których najpopularniejszą do dzisiaj jest \emph{Adobe
+  Flash} (wówczas \emph{Macromedia Flash}). To właśnie w firmie
+\emph{Macromedia} powstało określenie tego typu aplikacji jako
+,,bogatych aplikacji internetowych'' (ang. \emph{Rich Internet
+  Applications}). W międzyczasie pojawiły się pierwsze przeglądarki
+oferujące możliwość komunikacji z serwerem bez konieczności
+przeładowywania strony. Rosnąca popularność technologii \emph{Ajax},
+bo o niej mowa, była jednym z powodów okrzyknięcia nowopowstających
+aplikacji terminem \emph{Web 2.0}. Niezależnie od tego, czy przełom
+określany tym terminem nastąpił czy też nie, oczywistym jest fakt, iż
+dzisiejsze aplikacje internetowe znacząco różnią się od swoich
+poprzedników.
 
 To krótkie streszczenie historii rozwoju sieci \emph{WWW} ukazuje, w
 jaki sposób statyczne strony internetowe wyewoluowały do
@@ -112,32 +117,51 @@ wektorowej\footnote{podobne możliwości oferuje standard \emph{Scalable
     Vector Graphics (SVG)} w połączeniu z językiem
   \emph{JavaScript}}. Przekonywujący w tej sprawie jest również fakt
 ogłoszenia przez \emph{Microsoft} rozpoczęcia prac nad \emph{Office
-  Web Apps}. Aplikacje opracowywane w ramach tego projektu w założeniu
-mają wymagać od klienta posiadania wyłącznie przeglądarki
+  Web Apps}. Pomimo promowania przez firmę \emph{Microsoft}
+rozwiązania konkurencyjnego dla \emph{Adobe Flash} -- technologii
+\emph{Microsoft Silverlight}, wszystkie aplikacje opracowywane w
+ramach projektu \emph{Microsoft Office Web Apps} w założeniu mają
+wymagać od użytkownika wyłącznie przeglądarki
 internetowej. Uzasadnieniem takiej decyzji jest fakt, iż nie można
-wymagać posiadania dodatkowego oprogramowania od klienta
+wymagać posiadania dodatkowego oprogramowania od użytkownika
 korzystającego z komputera w publicznej bibliotece lub na
 lotnisku\cite{microsoft}.
 
-Na rynku dostępna jest szeroka gama urządzeń mobilnych pracujących pod
-kontrolą rozmaitych platform. Wiele z tych platform nie oferuje
-wsparcia dla technologii takich jak \emph{Java} czy \emph{Adobe
-  Flash}. Tworzenie aplikacji webowych to zdecydowanie najtańszy i
-najszybszy sposób dotarcia do szerokiej grupy odbiorców i
+Nie sposób również przecenić potencjału drzemiącego w rynku urządzeń
+mobilnych. Z miesiąca na miesiąc powiększa się gama dostępnych
+urządzeń, pracujących pod kontrolą rozmaitych platform. Wiele z tych
+platform nie oferuje wsparcia dla technologii takich jak \emph{Java}
+czy \emph{Adobe Flash}. Tworzenie aplikacji webowych to często
+najtańszy i najszybszy sposób dotarcia do szerokiej grupy odbiorców i
 uniezależniania tworzonego oprogramowania od platform
-sprzętowych. Zmianie ulega model rozwoju oprogramowania, które coraz
-częściej oferowane jest klientowi w formie usługi. Najważniejszymi
-korzyściami płynącymi z zastosowania takiego podejścia jest
-przerzucenie obowiązków zarządzania, pielęgnowania i aktualizowania
-oprogramowania na jego dostawcę.
+sprzętowych. Zauważalnej zmianie ulega również model rozwoju
+oprogramowania, które coraz częściej oferowane jest klientowi w formie
+usługi. Najważniejszymi korzyściami płynącymi z zastosowania takiego
+podejścia jest przerzucenie obowiązków zarządzania, pielęgnowania i
+aktualizowania oprogramowania na jego dostawcę.
 
-Wiele popularnych serwisów oferujących gry sieciowe, takie jak szachy
-czy brydż, wymaga do działania \emph{Javy} lub \emph{Flasha}. Celem
-tej pracy dyplomowej jest pokazanie, że możliwe jest zaimplementowanie
-nawet skomplikowanej gry sieciowej, mając do dyspozycji wyłącznie
-funkcje współczesnych przeglądarek internetowych. Dzięki takiemu
-podejściu, dużo prostsze jest przystosowanie gry do działania np. w
-urządzeniach mobilnych.
+Wiele popularnych dziś serwisów oferujących gry sieciowe, takie jak
+szachy czy brydż, wymaga do działania \emph{Javy} lub
+\emph{Flasha}. Celem niniejszej pracy dyplomowej jest ukazanie, że
+możliwe jest zaimplementowanie nawet skomplikowanej gry sieciowej,
+mając do dyspozycji wyłącznie funkcje współczesnych przeglądarek
+internetowych. Dzięki takiemu podejściu, dużo prostsze jest
+przystosowanie gry do działania np. w urządzeniach mobilnych.
+
+\section{Cel pracy}
+Celem pracy jest stworzenie serwisu umożliwiającego rozgrywanie
+wieloosobowych partii w grę planszową ,,Osadnicy z Catanu''. Aplikacja
+ma umożliwiać prowadzenie wielu rozgrywek w tym samym czasie, dzięki
+tworzeniu tzw. stołów, podobnie jak w serwisie \url{kurnik.pl}. Część
+serwerowa aplikacji ma być stworzona w oparciu o framework \emph{Ruby
+  on Rails}. Komunikacja serwera z klientem ma się odbywać zgodnie z
+zasadami \emph{REST}\footnote{REST - ang. Representational State
+  Transfer}, co nie wprowadza żadnych ograniczeń dla technologii
+użytej w części klienckiej. Jednakże jej podstawowa implementacja
+wykorzystywać ma wyłącznie możliwości współczesnych przeglądarek
+internetowych, bez użycia dodatkowych technologii, takich jak
+\emph{Adobe Flash} czy \emph{Java}.
+
 
 \cleardoublepage
 
@@ -162,7 +186,7 @@ wersji gry. Jednakże, moim celem nie jest tłumaczenie zasad gry, a
 jedynie ukazanie najważniejszych jej aspektów, które musiały zostać
 uwzględnione przy implementacji.
 
-\subsection{Plansza}
+\section{Plansza}
 Rozgrywka toczy się na planszy złożonej z 37 sześciokątów
 oznaczających różne rodzaje terenu oraz przypisanych do nich wartości
 liczbowych. Poszczególne rodzaje pól mogą mieć także określony rodzaj
@@ -189,7 +213,7 @@ pod budowę dróg, które łączą osady i miasta. Drogi nie przynoszą
 Wszystkie karty surowców znajdujące się w posiadaniu poszczególnych
 graczy są zakryte dla pozostałych uczestników gry.
 
-\subsection{Element losowy - kości do gry}
+\section{Element losowy - kości do gry}
 Gra ,,Osadnicy z Catanu'' jest grą umysłowo-losową. Głównym elementem
 wprowadzającym do gry losowość są dwie sześciościenne kości do
 gry. Dla sumy dwóch rzutów kością prawdopodobieństwo uzyskania
@@ -213,7 +237,7 @@ grze.
   \label{dice}
 \end{figure}
 
-\subsection{Karty rozwoju}
+\section{Karty rozwoju}
 Kolejnym czynnikiem wprowadzającym w niewielkim stopniu losowość są
 karty rozwoju. Za określoną liczbę kart surowców gracz może nabyć
 kartę rozwoju, ciągnąc ją z wierzchu potasowanego i zakrytego stosu. W
@@ -236,7 +260,7 @@ rezultacie gracz posiadający np. trzy karty rozwoju, może potencjalnie
 posiadać trzy dodatkowe punkty zwycięstwa, które umożliwią mu znacznie
 szybsze zakończenie gry.
 
-\subsection{Handel}
+\section{Handel}
 Podczas rozgrywki gracze mają możliwość wymiany posiadanych surowców z
 innymi graczami lub z bankiem.
 
@@ -249,7 +273,7 @@ Przy handlu z innymi uczestnikami nie ma żadnych narzuconych z góry
 ,,kursów wymiany'' (zależą one wyłącznie od graczy). Zawsze jednak
 musi to być wymiana - zabronione jest pozbywanie się surowców.
 
-\subsection{Walka}
+\section{Walka}
 \label{sec:fight}
 Ostatnim istotnym elementem gry jest ,,walka''. Zagranie karty armii
 oraz wyrzucenie siódemki daje możliwość przesunięcia pionka,
@@ -258,7 +282,7 @@ graczom żadnego dochodu. Dodatkowo, po przesunięciu pionka, gracz ma
 możliwość ,,obrabowania'' jednej z sąsiadujących z nim osad lub miast,
 zabierając losowo wybraną kartę surowca od ich właściciela.
 
-\subsection{Cel gry}
+\section{Cel gry}
 Celem gry jest zdobycie 10 punktów zwycięstwa, które są przyznawane
 za:
 
@@ -477,8 +501,7 @@ główne to:
 \item \emph{ActionMailer} - biblioteka służąca do wysyłania wiadomości
   e-mail, np. poprzez zewnętrzne serwery \emph{SMTP}
 \item \emph{ActiveResource} - biblioteka umożliwiająca mapowanie
-  zasobów \emph{REST}\footnote{REST - ang. Representational State
-    Transfer} na modele w aplikacji
+  zasobów \emph{REST} na modele w aplikacji
 \end{itemize}
 
 Uproszczony diagram przedstawiający interakcje pomiędzy poszczególnymi
@@ -766,7 +789,7 @@ poprawiające użyteczność samego
 \section{REST}
 \emph{REST} to styl architektury oprogramowania systemów
 rozproszonych. Skrót ten pochodzi od ang. \emph{Representational State
-  Transfer}, został wprowadzony w pracy doktorskiej Roya Fieldinga
+  Transfer}, został użyty w pracy doktorskiej Roya Fieldinga
 pt. ,,Architectural Styles and the Design of Network-based Software
 Architectures''\cite{rest}. Jednym z założeń \emph{REST}, jest
 komunikacja serwera z klientem przy pomocy bezstanowych

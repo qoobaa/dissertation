@@ -1,5 +1,7 @@
 Pioneers - internetowa implementacja gry "Osadnicy z Catanu" w oparciu o framework Ruby on Rails
 * wstęp
+** ewolucja WWW - od statycznych stron przez wyszukiwarki i portale do aplikacji użytkowych
+** to nie koniec zmian - coraz większą rolę będą odgrywały aplikacje przystosowane dla urządzeń mobilnych
 ** aplikacje webowe zdobywają coraz większą popularność, rośnie ich znaczenie
 ** upowszechnia się dostęp do internetu (włącznie z urządzeniami mobilnymi)
 ** przeglądarki mają coraz większe możliwości

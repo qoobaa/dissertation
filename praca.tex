@@ -1582,10 +1582,6 @@ tj. identyfikator gracza, do którego należy (kolumna
 się znajduje. W tym celu zaimplementowana została prosta maszyna
 stanowa przedstawiona na listingu \ref{listing:node}.
 
-% TODO
-% ZASTANAWIAM SIE CZY MUSI BYC TEN TEKST Z NAWIASU PRZEDZIELONY
-% LISTINGIEM 4 I 5
-
 \begin{listing}
   \input{node}
   \caption{Maszyna stanowa wierzchołka}
@@ -1728,11 +1724,6 @@ w postaci równania \ref{equation:longest-road}.
   \end{aligned}
   \label{equation:longest-road}
 \end{equation}
-
-% TODO
-% Przykładowa kolejność odwiedzania krawędzi została przedstawiona na
-% \imref{longest-road}. Krawędź oznaczona numerem 1 posiada trzy
-% sąsiadujące drogi: 2, 7 i 9.
 
 \begin{figure}[ht]
   \begin{center}
@@ -2881,13 +2872,53 @@ przedstawione zostały w tabeli \ref{table:credentials}.
 \cleardoublepage
 
 \chapter{Podsumowanie}
-Osiągnięte zostały najważniejsze cele projektowe. Pomimo ubogiego
-interfejsu graficznego,
+Osiągnięte zostały najważniejsze cele projektowe. Po zalogowaniu się
+do serwisu, użytkownik ma możliwość utworzenia nowej gry i dołączenia
+do niej. Do tworzenia losowych planszy zaimplementowany został również
+prosty generator plansz, którego algorytm działania zbliżony jest do
+oryginalnych zasad gry. Zalogowani użytkownicy mają oczywiście
+możliwość dołączenia do gier, które nie zostały jeszcze rozpoczęte. Po
+zgromadzeniu odpowiedniej liczby graczy możliwe jest przeprowadzenie
+rozgrywki.
 
+Zgodnie z oczekiwaniami, najtrudniejszym do wykonania elementem
+projektu okazało się zaimplementowanie części klienckiej
+aplikacji. Fakt ten spowodowany jest przez się kilka różnych
+czynników. Język \emph{JavaScript} jest dość specyficznym językiem
+programowania, który w pewnych kwestiach (w szczególności w kwestii
+dziedziczenia prototypowego) znacząco różni się od popularnych
+rozwiązań i często wymaga od programisty zmiany sposobu
+myślenia. Wykorzystana w projekcie biblioteka \emph{YUI3} znajduje się
+ciągle w fazie dynamicznego rozwoju, jest ona również stosunkowo mało
+popularna. Ponadto, testowanie kodu aplikacji napisanej w języku
+\emph{JavaScript} nie jest zadaniem prostym. Wszystkie te
+niedogodności wpłynęły niekorzystnie na jakość kodu tej części
+aplikacji. Z całą pewnością kod ten nie jest pozbawiony błędów, lecz
+jego konstrukcja powoduje, że błędy te nie uniemożliwiają
+przeprowadzenia rozgrywki. W każdym jej momencie (np. po wystąpieniu
+błędu) możliwe jest przeładowanie dokumentu, czego konsekwencją jest
+ponowne uruchomienie aplikacji.
 
-% blablabla
+\section{Dalszy rozwój aplikacji}
 
-\clearpage
+\begin{itemize}
+\item przystosowanie aplikacji do stabilnej wersji biblioteki
+  \emph{YUI3}
+\item zaprojektowanie przyjaznego dla użytkownika interfejsu
+  graficznego
+\item dodanie tzw. czatu, umożliwiającego komunikację między graczami
+\item
+\end{itemize}
+
+% ** konieczność przystosowania aplikacji do stabilnej YUI 3 GA
+% ** layout, design, interface, grafika
+% ** dodanie czatu, statystyki, usprawnienia interfejsu użytkownika
+
+% ** przystosowanie aplikacji do urządzeń mobilnych
+% ** umożliwienie dalszego rozwoju gry, zaimplementowana została podstawowa wersja, możliwość dodania dodatków
+% ** potrzebnych jest wiele elementów, których zrobienie przekracza możliwości jednego programisty
+
+\cleardoublepage
 
 \bibliographystyle{plain}
 \bibliography{praca}

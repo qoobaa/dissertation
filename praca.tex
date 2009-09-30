@@ -2357,10 +2357,10 @@ Inną ciekawą biblioteką \emph{JavaScript} jest \emph{Yahoo! User
   Interface Library}. Najważniejszym czynnikiem, który wpłynął na
 decyzję o zmianie biblioteki na \emph{YUI} było wydanie wersji
 \emph{3.0.0 beta 1} w dniu 24 czerwca 2009 roku. W porównaniu do
-poprzednich wersji, biblioteka \emph{YUI3} została przeprojektowana i
+poprzednich wersji, biblioteka \emph{YUI 3} została przeprojektowana i
 w większości zaimplementowana od początku. Jej twórcy zapożyczyli
 także najlepsze rozwiązania innych bibliotek, m.in. selektory węzłów
-modelu \emph{DOM} zaczerpnięte z \emph{jQuery}. \emph{YUI3} oferuje
+modelu \emph{DOM} zaczerpnięte z \emph{jQuery}. \emph{YUI 3} oferuje
 bardzo bogaty zestaw gotowych narzędzi, z których najważniejsze z
 punktu widzenia tworzonego projektu to:
 
@@ -2381,14 +2381,14 @@ punktu widzenia tworzonego projektu to:
   m.in. \texttt{map}, \texttt{reduce}, \texttt{find}
 \end{itemize}
 
-Należy zaznaczyć fakt, że biblioteka \emph{YUI3} znajduje się ciągle w
+Należy zaznaczyć fakt, że biblioteka \emph{YUI 3} znajduje się ciągle w
 fazie intensywnego rozwoju -- niektóre jej elementy mogą ulec zmianie
 w wersji \emph{3.0.0 GA} (ang. General Availability). Do czasu wydania
 wersji \emph{GA}, nie jest zalecane wykorzystanie biblioteki w
-środowiskach produkcyjnych. Konsekwencją wyboru \emph{YUI3} jest
+środowiskach produkcyjnych. Konsekwencją wyboru \emph{YUI 3} jest
 również stosunkowo niewielka społeczność skupiona wokół biblioteki. Do
 tej pory dostępne są jedynie bardzo nieliczne przykłady wykorzystania
-\emph{YUI3} oraz jej rozszerzenia. Pomimo tych niedogodności,
+\emph{YUI 3} oraz jej rozszerzenia. Pomimo tych niedogodności,
 biblioteka ta jest warta uwagi, gdyż zbudowana została na bardzo
 solidnych fundamentach. W niedalekiej przyszłości może ona okazać się
 poważnym konkurentem dla dominujących dzisiaj rozwiązań, takich jak
@@ -2872,24 +2872,24 @@ przedstawione zostały w tabeli \ref{table:credentials}.
 \cleardoublepage
 
 \chapter{Podsumowanie}
-Osiągnięte zostały najważniejsze cele projektowe. Po zalogowaniu się
-do serwisu, użytkownik ma możliwość utworzenia nowej gry i dołączenia
-do niej. Do tworzenia losowych planszy zaimplementowany został również
-prosty generator plansz, którego algorytm działania zbliżony jest do
-oryginalnych zasad gry. Zalogowani użytkownicy mają oczywiście
-możliwość dołączenia do gier, które nie zostały jeszcze rozpoczęte. Po
-zgromadzeniu odpowiedniej liczby graczy możliwe jest przeprowadzenie
-rozgrywki.
+Osiągnięte zostały najważniejsze cele projektowe. Użytkownik, po
+zalogowaniu się do serwisu, ma możliwość utworzenia nowej gry i
+dołączenia do niej. Do tworzenia losowych planszy zaimplementowany
+został również prosty generator plansz, którego algorytm działania
+zbliżony jest do oryginalnych zasad gry. Zalogowani użytkownicy mają
+oczywiście możliwość dołączenia do gier, które nie zostały jeszcze
+rozpoczęte. Po zgromadzeniu odpowiedniej liczby graczy możliwe jest
+przeprowadzenie rozgrywki.
 
 Zgodnie z oczekiwaniami, najtrudniejszym do wykonania elementem
-projektu okazało się zaimplementowanie części klienckiej
-aplikacji. Fakt ten spowodowany jest przez się kilka różnych
-czynników. Język \emph{JavaScript} jest dość specyficznym językiem
-programowania, który w pewnych kwestiach (w szczególności w kwestii
-dziedziczenia prototypowego) znacząco różni się od popularnych
-rozwiązań i często wymaga od programisty zmiany sposobu
-myślenia. Wykorzystana w projekcie biblioteka \emph{YUI3} znajduje się
-ciągle w fazie dynamicznego rozwoju, jest ona również stosunkowo mało
+projektu było zaimplementowanie części klienckiej aplikacji. Fakt ten
+spowodowany jest przez kilka różnych czynników. Język
+\emph{JavaScript} jest dość specyficznym językiem programowania, który
+w pewnych kwestiach (w szczególności w kwestii dziedziczenia
+prototypowego) znacząco różni się od popularnych rozwiązań i często
+wymaga od programisty zmiany sposobu myślenia. Wykorzystana w
+projekcie biblioteka \emph{YUI 3} znajduje się ciągle w fazie
+dynamicznego rozwoju, jest ona również stosunkowo mało
 popularna. Ponadto, testowanie kodu aplikacji napisanej w języku
 \emph{JavaScript} nie jest zadaniem prostym. Wszystkie te
 niedogodności wpłynęły niekorzystnie na jakość kodu tej części
@@ -2899,24 +2899,50 @@ przeprowadzenia rozgrywki. W każdym jej momencie (np. po wystąpieniu
 błędu) możliwe jest przeładowanie dokumentu, czego konsekwencją jest
 ponowne uruchomienie aplikacji.
 
+Mocną stroną aplikacji jest przechowywanie stanu gry w bazie danych,
+co w znaczącym stopniu uodparnia aplikację na błędy i awarie. Dzięki
+temu konieczność zrestartowania serwera aplikacji nie powoduje utraty
+danych o toczących się rozgrywkach. Może się to okazać niezwykle
+przydatne, np. w przypadku zaoferowania użytkownikom możliwości
+uczestnictwa w płatnych turniejach.
+
 \section{Dalszy rozwój aplikacji}
+Przed uruchomieniem ogólnodostępnego serwisu z grą ,,Osadnicy z
+Catanu'', niezbędne jest wykonanie następujących prac:
 
 \begin{itemize}
 \item przystosowanie aplikacji do stabilnej wersji biblioteki
-  \emph{YUI3}
+  \emph{YUI 3.0.0}
 \item zaprojektowanie przyjaznego dla użytkownika interfejsu
   graficznego
-\item dodanie tzw. czatu, umożliwiającego komunikację między graczami
-\item
+\item dodanie czatu, umożliwiającego komunikację między graczami
 \end{itemize}
 
-% ** konieczność przystosowania aplikacji do stabilnej YUI 3 GA
-% ** layout, design, interface, grafika
-% ** dodanie czatu, statystyki, usprawnienia interfejsu użytkownika
+Niezbędne może się także okazać wykonanie pewnych optymalizacji, z
+których najbardziej oczywistą wydaje się być przyspieszenie
+generowania stanu gry w formacie \emph{JSON}. Framework \emph{Ruby on
+  Rails} oferuje wiele gotowych rozwiązań, mogących posłużyć do
+zwiększenia wydajności tego fragmentu aplikacji, np. \emph{Rails
+  Metal}\footnote{dzięki temu rozwiązaniu możliwe jest obsłużenie
+  pewnej grupy zapytań jeszcze przed ich przetworzeniem i przekazaniem
+  do aplikacji \emph{Ruby on Rails}} lub
+\emph{Etags}\footnote{technika ta pozwala serwerowi \emph{HTTP} na
+  stwierdzenie, czy żądany przez przeglądarkę zasób został
+  zmodyfikowany od czasu ostatniego zapytania. Eliminuje to
+  konieczność ponownego wysyłania tych samych danych}. Po dostosowaniu
+aplikacji do tradycyjnych przeglądarek internetowych, możliwe jest
+także opracowanie wersji dedykowanych dla przeglądarek mobilnych. W
+przypadku wersji mobilnej konieczne jest dostosowanie interfejsu do
+niewielkiego ekranu oraz do różnic w obsłudze zdarzeń myszy.
 
-% ** przystosowanie aplikacji do urządzeń mobilnych
-% ** umożliwienie dalszego rozwoju gry, zaimplementowana została podstawowa wersja, możliwość dodania dodatków
-% ** potrzebnych jest wiele elementów, których zrobienie przekracza możliwości jednego programisty
+Możliwości dalszego rozwoju aplikacji są niemalże
+nieograniczone. Wynika to głównie z faktu istnienia bardzo dużej
+liczby dodatków i modyfikacji zasad gry. Użytkownikom przyszłego
+serwisu można także zaoferować wprowadzenie rozbudowanych statystyk i
+rankingów oraz możliwość organizowania turniejów. Zdecydowanie
+wykracza to poza możliwości jednego programisty. Jest to istotny
+powód, dla którego kod aplikacji udostępniony został na zasadach
+Powszechnej Licencji Publicznej \emph{GNU}.
 
 \cleardoublepage
 

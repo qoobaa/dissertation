@@ -1,5 +1,6 @@
 *.aux
 *.pdf
+!godlo.pdf
 *.dvi
 *.log
 *.bbl

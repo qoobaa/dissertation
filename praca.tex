@@ -9,6 +9,7 @@
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{float}
+\usepackage{tocloft}
 \usepackage{subfig}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
@@ -19,10 +20,21 @@
 
 \fancypagestyle{plain}{\fancyfoot{}\fancyhead{}\renewcommand{\headrulewidth}{0pt}}
 
+\newcommand{\listlistings}{Spis listingów}
+\newlistof[chapter]{listing}{lst}{\listlistings}
+
+\cftsetindents{listing}{1.5em}{3em}
+
+\newcommand{\listingcaption}[1]{
+  \refstepcounter{listing}
+  \par\noindent\caption{#1}
+  \addcontentsline{lst}{listing}{\protect\numberline{\thelisting} #1}\par
+}
+
 \newfloat{listing}{thp}{lol}
 \floatname{listing}{Listing}
 
-\providecommand{\imref}[1]{Rys. \ref{#1}} % referencja do obrazka
+\providecommand{\imref}[1]{rys. \ref{#1}}
 
 %% Define a new 'leo' style for the package that will use a smaller font.
 \makeatletter
@@ -30,9 +42,6 @@
 \makeatother
 %% Now actually use the newly defined style.
 \urlstyle{leo}
-
-\newfloat{listing}{thp}{lol}
-\floatname{listing}{Listing}
 
 \begin{document}
 
@@ -1346,7 +1355,7 @@ przedstawiony na listingu \ref{listing:statemachine}.
 
 \begin{listing}
   \input{statemachine}
-  \caption{Maszyna stanowa stanu gry}
+  \listingcaption{Maszyna stanowa stanu gry}
   \label{listing:statemachine}
 \end{listing}
 
@@ -1409,9 +1418,9 @@ już zakończona (stan \texttt{ended}), to nie jest możliwa zmiana fazy
 gry. Fragment kodu źródłowego maszyny stanowej ,,fazy gry'' został
 przedstawiony na listingu \ref{listing:statemachine-phase}.
 
-\begin{listing}
+\begin{listing}[h]
   \input{statemachine-phase}
-  \caption{Maszyna stanowa fazy gry}
+  \listingcaption{Maszyna stanowa fazy gry}
   \label{listing:statemachine-phase}
 \end{listing}
 
@@ -1504,7 +1513,7 @@ przykładowej planszy do gry został przedstawiony na listingu
 
 \begin{listing}
   \input{board}
-  \caption{Tworzenie przykładowej planszy do gry}
+  \listingcaption{Tworzenie przykładowej planszy do gry}
   \label{listing:board}
 \end{listing}
 
@@ -1551,13 +1560,13 @@ krawędzie.
 
 \begin{listing}
   \input{hex}
-  \caption{Wyciąganie sąsiadujących sześciokątów}
+  \listingcaption{Wyciąganie sąsiadujących sześciokątów}
   \label{listing:hex}
 \end{listing}
 
 \begin{listing}
   \input{find}
-  \caption{Przykładowe zapytanie \emph{SQL}}
+  \listingcaption{Przykładowe zapytanie \emph{SQL}}
   \label{listing:find}
 \end{listing}
 
@@ -1579,7 +1588,7 @@ stanowa przedstawiona na listingu \ref{listing:node}.
 
 \begin{listing}
   \input{node}
-  \caption{Maszyna stanowa wierzchołka}
+  \listingcaption{Maszyna stanowa wierzchołka}
   \label{listing:node}
 \end{listing}
 
@@ -1730,7 +1739,7 @@ w postaci równania \ref{equation:longest-road}.
 
 \begin{listing}
   \input{edge}
-  \caption{Implementacja algorytmu liczenia najdłuższej drogi}
+  \listingcaption{Implementacja algorytmu liczenia najdłuższej drogi}
   \label{listing:edge}
 \end{listing}
 
@@ -1780,7 +1789,7 @@ gracza została przedstawiona na listingu \ref{listing:player}.
 
 \begin{listing}
   \input{player}
-  \caption{Maszyna stanowa gracza}
+  \listingcaption{Maszyna stanowa gracza}
   \label{listing:player}
 \end{listing}
 
@@ -1808,11 +1817,9 @@ stanów: \texttt{tapped}, \texttt{untapped} i \texttt{graveyard} oraz
 dwóch zdarzeń: \texttt{untap} i \texttt{play}. Jej kod został
 przedstawiony na listingu \ref{listing:card}.
 
-%DLACZEGO NIEKTORE LISTINGI SA CIASNO OPLECIONE TEKSTEM np 9, A INNE SA NA OSOBNYCH STRONACH np 8?
-
 \begin{listing}
   \input{card}
-  \caption{Maszyna stanowa karty rozwoju}
+  \listingcaption{Maszyna stanowa karty rozwoju}
   \label{listing:card}
 \end{listing}
 
@@ -1981,7 +1988,7 @@ uwierzytelniania użytkowników została przedstawiona na listingu
 
 \begin{listing}
   \input{usersession}
-  \caption{Implementacja i obsługa uwierzytelniania użytkowników}
+  \listingcaption{Implementacja i obsługa uwierzytelniania użytkowników}
   \label{listing:usersession}
 \end{listing}
 
@@ -2001,7 +2008,7 @@ przedstawiona na listingu \ref{listing:filter}.
 
 \begin{listing}
   \input{filter}
-  \caption{Implementacja klasy \texttt{EdgesController}}
+  \listingcaption{Implementacja klasy \texttt{EdgesController}}
   \label{listing:filter}
 \end{listing}
 
@@ -2052,7 +2059,7 @@ nazwy kontrolerów i akcji zajmuje się tzw. \emph{Router}. Konfiguracja
 
 \begin{listing}
   \input{routes}
-  \caption{Zdefiniowanie ścieżek}
+  \listingcaption{Zdefiniowanie ścieżek}
   \label{listing:routes}
 \end{listing}
 
@@ -2310,13 +2317,13 @@ planszy do gry z włączonymi stylami \emph{CSS}
 
 \begin{listing}
   \input{boardtable}
-  \caption{Struktura znaczników \emph{HTML} tabeli -- planszy do gry}
+  \listingcaption{Struktura znaczników \emph{HTML} tabeli -- planszy do gry}
   \label{listing:boardtable}
 \end{listing}
 
 \begin{listing}
   \input{hexes}
-  \caption{Fragment kodu źródłowego w języku \emph{Sass},
+  \listingcaption{Fragment kodu źródłowego w języku \emph{Sass},
     odpowiedzialnego za ustalanie pozycji sześciokątów na planszy}
   \label{listing:hexes}
 \end{listing}
@@ -2793,7 +2800,7 @@ został przedstawiony na listingu \ref{listing:ruby}.
 
 \begin{listing}
   \input{ruby}
-  \caption{Kompilacja i instalacja interpretera języka \emph{Ruby}}
+  \listingcaption{Kompilacja i instalacja interpretera języka \emph{Ruby}}
   \label{listing:ruby}
 \end{listing}
 
@@ -2810,7 +2817,7 @@ narzędzi i tworzenia kopii zdalnego repozytorium.
 
 \begin{listing}
   \input{git}
-  \caption{Pobranie kodu z repozytorium \emph{Git}}
+  \listingcaption{Pobranie kodu z repozytorium \emph{Git}}
   \label{listing:git}
 \end{listing}
 
@@ -2825,7 +2832,7 @@ jednostkowych. Opisywane czynności przedstawione zostały na listingu
 
 \begin{listing}
   \input{application}
-  \caption{Instalacja wymaganych bibliotek, konfiguracja i
+  \listingcaption{Instalacja wymaganych bibliotek, konfiguracja i
     uruchamianie aplikacji}
   \label{listing:application}
 \end{listing}
@@ -2837,7 +2844,7 @@ jest wykonanie polecenia przedstawionego na listingu
 
 \begin{listing}
   \input{script_server}
-  \caption{Uruchomienie serwera aplikacji}
+  \listingcaption{Uruchomienie serwera aplikacji}
   \label{listing:server}
 \end{listing}
 
@@ -2941,6 +2948,18 @@ rankingów oraz możliwość organizowania turniejów. Zdecydowanie
 wykracza to poza możliwości jednego programisty. Jest to istotny
 powód, dla którego kod aplikacji udostępniony został na zasadach
 Powszechnej Licencji Publicznej \emph{GNU}.
+
+\cleardoublepage
+
+\listoffigures
+
+\cleardoublepage
+
+\listoftables
+
+\cleardoublepage
+
+\listoflisting
 
 \cleardoublepage
 

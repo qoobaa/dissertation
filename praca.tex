@@ -74,6 +74,8 @@
   \normalsize\centering Gliwice, \today
 \end{titlepage}
 
+\cleardoublepage
+
 \tableofcontents
 
 \cleardoublepage
@@ -371,7 +373,12 @@ Licencji Publicznej GNU Affero w wersji 3\cite{affero}.
 Do zaimplementowania części serwerowej aplikacji zostanie wykorzystany
 język \emph{Ruby} i framework \emph{Ruby on Rails}. Wybór ten można
 uzasadnić bardzo dobrym wsparciem frameworka dla architektury
-\emph{REST}, która zostanie wykorzystana do utworzenia \emph{API}.
+\emph{REST}, zgodnie z którą będą komunikować się obie części
+aplikacji.
+
+% która zostanie wykorzystana do komunikacji z częścią
+% kliencką.
+% utworzenia \emph{API}.
 
 \section{Ruby}
 Język \emph{Ruby} został stworzony w 1995 roku przez Yukihiro
@@ -647,7 +654,7 @@ danych. Podobne rozwiązanie jest używane również do tzw. leniwego
 zaznaczyć, że ładowanie kodu z innych domen jest potencjalnie
 niebezpiecznym działaniem i powinno być wykorzystywane z dużą rozwagą.
 
-\subsection{HTTP Push (Comet)}
+\subsection{HTTP Push (Comet)}\label{sec:push}
 W przypadku standardowego wykorzystania technologii \emph{Ajax},
 przesyłanie danych odbywa się na żądanie przeglądarki internetowej. W
 niektórych aplikacjach takie rozwiązanie jest zbyt mało wydajne i
@@ -1231,14 +1238,14 @@ Schemat przejść w maszynie stanowej fazy gry został przedstawiony na
 Dodatkowo, gra może znajdować się w jednym z następujących stanów:
 
 \begin{itemize}
-\item \emph{preparing} - początkowy stan, pozwalający na
+\item \texttt{preparing} - początkowy stan, pozwalający na
   dołączanie się do gry nowych graczy. Przejście do stanu
-  emph{playing} następuje po dołączeniu się przynajmniej trzech
+  \texttt{playing} następuje po dołączeniu się przynajmniej trzech
   graczy, jeśli wszyscy z nich są gotowi do gry
-\item \emph{playing} - gra znajdująca się w tym stanie została już
-  rozpoczęta. Przejście do stanu \emph{ended} następuje po uzyskaniu
+\item \texttt{playing} - gra znajdująca się w tym stanie została już
+  rozpoczęta. Przejście do stanu \texttt{ended} następuje po uzyskaniu
   przez jednego z graczy minimum 10 punktów zwycięstwa
-\item \emph{ended} - końcowy stan oznaczający grę zakończoną
+\item \texttt{ended} - końcowy stan oznaczający grę zakończoną
 \end{itemize}
 
 Do kontrolowania przejść pomiędzy powyższymi stanami gry, niezbędne
@@ -1265,12 +1272,17 @@ przedstawiony na \imref{statemachine-state}.
 
 Po przeanalizowaniu dostępnych rozwiązań, opisanych w rozdziale
 \ref{javascript}, do komunikacji wybrany został \emph{HTTP
-  Pull}. Opóźnienia, wynikające z zastosowania tego rozwiązania
-komunikacji nie mają większego wpływu na rozgrywkę. Istotnym elementem
+  Pull}. Opóźnienia, wynikające z zastosowania tego rozwiązania nie
+powinny mieć większego wpływu na rozgrywkę. Istotnym elementem
 przemawiającym za wykorzystaniem \emph{HTTP Pull} jest prostota
-użytkowania. Nie wymusza on posiadania dodatkowych serwerów i
+użytkowania. Nie wymusza ono posiadania dodatkowych serwerów i
 domen. Ponadto, większość dostępnych bibliotek \emph{JavaScriptowych}
-udostępnia wygodne sposoby tworzenia wywołań \emph{Ajax}.
+udostępnia wygodne sposoby tworzenia wywołań \emph{Ajax}. Rozwiązanie
+to upraszcza tworzenie i testowanie aplikacji, jego wydajność może
+jednak okazać się niewystarczająca aby obsłużyć dużą liczbę
+jednoczesnych połączeń. W środowisku ,,produkcyjnym'' konieczne może
+być wykorzystanie techniki \emph{HTTP Push}, opisanej w rozdziale
+\ref{sec:push}.
 
 Jako format wymiany danych wybrany został \emph{JSON}. Główną zaletą
 tego formatu jest fakt, że do parsowania zapisanych w nim danych, w
@@ -2019,7 +2031,7 @@ jest odpowiedzialna za odnalezienie obiektu zalogowanego użytkownika
 na podstawie danych zawartych w sesji. Podobnie, jak w przypadku
 wywołań zwrotnych klasy \texttt{ActiveRecord}, akcja kontrolera nie
 jest wywoływana jeśli którykolwiek z filtrów zwróci wartość
-\texttt{false}. Dzieję się tak np. wówczas, gdy niezalogowany
+\texttt{false}. Dzieje się tak np. wówczas, gdy niezalogowany
 użytkownik próbuje wywołać akcję poprzedzoną filtrem
 \texttt{require\_user}. Metoda \texttt{fetch\_game} jest przykładem
 stosowania filtrów w celu uniknięcia powtórzeń w kodzie. W związku z
@@ -2896,9 +2908,9 @@ popularna. Ponadto, testowanie kodu aplikacji napisanej w języku
 niedogodności wpłynęły niekorzystnie na jakość kodu tej części
 aplikacji. Z całą pewnością kod ten nie jest pozbawiony błędów, lecz
 jego konstrukcja powoduje, że błędy te nie uniemożliwiają
-przeprowadzenia rozgrywki. W każdym jej momencie (np. po wystąpieniu
-błędu) możliwe jest przeładowanie dokumentu, czego skutkiem jest
-ponowne uruchomienie aplikacji.
+przeprowadzenia rozgrywki. W każdym momencie (np. po wystąpieniu
+błędu) możliwe jest przeładowanie dokumentu, co skutkuje ponownym
+uruchomieniem aplikacji.
 
 Konsekwencją zastosowania frameworka \emph{Ruby on Rails} jest
 przechowywanie stanu gry w bazie danych. Rozwiązanie takie jest z całą

@@ -11,7 +11,7 @@ SVG_IMG =  FileList["*.svg"]
 AGR_IMG =  FileList["*.agr"]
 SH_SRC = FileList["*.sh"]
 
-CLEAN.include(%w(*.toc *.aux *.log *.lof *.bbl *.blg *.out *.snm *.vrb *.nav *.eps),
+CLEAN.include(%w(*.toc *.aux *.log *.lof *.bbl *.blg *.out *.snm *.vrb *.nav *.eps *.lot *.lst),
               RUBY_SRC.ext("tex"),
               SVG_IMG.ext("png"),
               AGR_IMG.ext("ps"),

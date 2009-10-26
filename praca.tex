@@ -45,18 +45,6 @@
 
 \begin{document}
 
-\pagestyle{fancy}
-\lhead{\nouppercase{\rightmark}}
-\rhead{\nouppercase{\leftmark}}
-\renewcommand{\chaptermark}[1]{\markboth{\chaptername \ \thechapter. \ #1}{}}
-\renewcommand{\sectionmark}[1]{\markright{#1}{}}
-\fancyhead{}
-\fancyfoot{}
-\fancyhead[LO]{\rightmark}
-\fancyhead[RE]{\leftmark}
-\fancyhead[LE]{\thepage}
-\fancyhead[RO]{\thepage}
-
 \begin{titlepage}
   \begin{center}
     \includegraphics[width=80pt]{godlo.pdf}\\[30pt]
@@ -74,7 +62,21 @@
   \normalsize\centering Gliwice, \today
 \end{titlepage}
 
+\thispagestyle{empty}
+
 \cleardoublepage
+
+\pagestyle{fancy}
+\lhead{\nouppercase{\rightmark}}
+\rhead{\nouppercase{\leftmark}}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername \ \thechapter. \ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}{}}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[LO]{\rightmark}
+\fancyhead[RE]{\leftmark}
+\fancyhead[LE]{\thepage}
+\fancyhead[RO]{\thepage}
 
 \tableofcontents
 
@@ -2862,7 +2864,7 @@ przeglądarce internetowej adres
 zalogowania się na jedno z kont, których dane uwierzytelniające
 przedstawione zostały w tabeli \ref{table:credentials}.
 
-\begin{table}[ht]
+\begin{table}[H]
   \begin{center}
     \begin{tabular}[center]{|l|l|}
       \hline

@@ -1,0 +1,40 @@
+\select@language {polish}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Prawdopodobie\IeC {\'n}stwa uzyskania poszczeg\IeC {\'o}lnych wynik\IeC {\'o}w dla rzutu dwiema szcze\IeC {\'s}cio\IeC {\'s}ciennymi ko\IeC {\'s}\IeC {\'c}mi do gry}}{8}{figure.2.1}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Zrzut ekranu z gry Pioneers}}{10}{figure.2.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Zrzut ekranu z gry JSettlers}}{11}{figure.2.3}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Architektura Ruby on Rails}}{15}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Schemat dzia\IeC {\l }ania mechanizmu odpytywania (\emph {HTTP Pull})}}{18}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Schemat dzia\IeC {\l }ania mechanizmu wyd\IeC {\l }u\IeC {\.z}onego odpytywania}}{19}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Schemat mechanizmu strumieniowania danych}}{20}{figure.3.4}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Zasada numerowania sze\IeC {\'s}ciok\IeC {\k a}t\IeC {\'o}w na planszy}}{30}{figure.4.1}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Zasada numerowania wierzcho\IeC {\l }k\IeC {\'o}w na planszy}}{31}{figure.4.2}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Zasada numerowania kraw\IeC {\k e}dzi na planszy}}{32}{figure.4.3}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Maszyna stanowa fazy gry}}{33}{figure.4.4}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Maszyna stanowa stanu gry}}{34}{figure.4.5}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Uproszczony diagram zwi\IeC {\k a}zk\IeC {\'o}w encji}}{34}{figure.4.6}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Przyk\IeC {\l }adowy uk\IeC {\l }ad dr\IeC {\'o}g na planszy. Droga niebieskiego gracza zosta\IeC {\l }a przeci\IeC {\k e}ta osad\IeC {\k a} gracza pomara\IeC {\'n}czowego}}{44}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Przyk\IeC {\l }adowa kolejno\IeC {\'s}\IeC {\'c} odwiedzania kraw\IeC {\k e}dzi}}{44}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Wygl\IeC {\k a}d przyk\IeC {\l }adowej planszy do gry z w\IeC {\l }\IeC {\k a}czonymi stylami \emph {CSS}}}{59}{figure.5.3}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Schemat zagnie\IeC {\.z}d\IeC {\.z}enia znacznik\IeC {\'o}w \emph {HTML} kontrolki \texttt {Game} wraz z przyk\IeC {\l }adowymi oznaczeniami klas}}{63}{figure.6.1}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Wygl\IeC {\k a}d kontrolek}}{64}{figure.6.2}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Rzut ko\IeC {\'s}ci\IeC {\k a}}}}{64}{subfigure.2.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Ko\IeC {\'n}czenie tury}}}{64}{subfigure.2.2}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Budowa drogi, osady, miasta lub zakup karty rozwoju}}}{64}{subfigure.2.3}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Lista posiadanych kart rozwoju}}}{64}{subfigure.2.4}
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {Odrzucanie nadmiarowych zasob\IeC {\'o}w w fazie ,,rozb\IeC {\'o}jnika''}}}{64}{subfigure.2.5}
+\contentsline {subfigure}{\numberline {(f)}{\ignorespaces {Tworzenie wymiany z bankiem}}}{64}{subfigure.2.6}
+\contentsline {subfigure}{\numberline {(g)}{\ignorespaces {Tworzenie oferty handlu}}}{64}{subfigure.2.7}
+\contentsline {subfigure}{\numberline {(h)}{\ignorespaces {Do\IeC {\l }\IeC {\k a}czanie do rozgrywki}}}{64}{subfigure.2.8}
+\contentsline {subfigure}{\numberline {(i)}{\ignorespaces {Podgl\IeC {\k a}d otrzymanej oferty handlu}}}{64}{subfigure.2.9}
+\contentsline {subfigure}{\numberline {(j)}{\ignorespaces {Podgl\IeC {\k a}d utworzonej oferty handlu}}}{64}{subfigure.2.10}
+\contentsline {subfigure}{\numberline {(k)}{\ignorespaces {Podgl\IeC {\k a}d gracza}}}{64}{subfigure.2.11}
+\contentsline {subfigure}{\numberline {(l)}{\ignorespaces {Lista pozosta\IeC {\l }ych graczy}}}{64}{subfigure.2.12}
+\contentsline {subfigure}{\numberline {(m)}{\ignorespaces {Podgl\IeC {\k a}d stanu gry}}}{64}{subfigure.2.13}
+\addvspace {10\p@ }
+\addvspace {10\p@ }

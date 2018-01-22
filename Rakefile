@@ -64,7 +64,7 @@ rule ".tex" => ".sh" do |t|
 end
 
 rule ".ps" => ".agr" do |t|
-  sh "grace -hdevice PostScript -hardcopy #{t.source} -print #{t.name}"
+  sh "gracebat -hdevice PostScript -hardcopy #{t.source} -print #{t.name}"
 end
 
 rule ".pdf" => ".tex" do |t|
